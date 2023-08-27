@@ -216,8 +216,6 @@ function exportToZip() {
             :close-on-select="true"
             placeholder="Select optional attributes"
             :canClear="false"
-            trackBy="name"
-            @deselect="console.log('deselect', $event);"
         >
           <template v-slot:option="{ option }">
             {{ option.label }}

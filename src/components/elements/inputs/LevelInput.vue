@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {LevelAttribute} from '@/stuff/Testing';
+import {LevelAttribute} from '@/stuff/attribute/LevelAttribute';
 interface Props {
   attribute: LevelAttribute,
   name: string
-  value: number
+  value: number | null
 }
 const props = defineProps<Props>()
 </script>
@@ -38,10 +38,9 @@ const props = defineProps<Props>()
   <label>
     <input
         type="radio"
-        checked
         :name="props.name"
-        value="1"
-        @input="$emit('update:value', Number.parseInt($event.target.value))"
+        :checked="value === 1"
+        @input="$emit('update:value', 1)"
     />
     Poor
   </label>
@@ -50,8 +49,8 @@ const props = defineProps<Props>()
     <input
         type="radio"
         :name="props.name"
-        value="2"
-        @input="$emit('update:value', Number.parseInt($event.target.value))"
+        :checked="value === 2"
+        @input="$emit('update:value', 2)"
     />
     Middle
   </label>
@@ -60,8 +59,8 @@ const props = defineProps<Props>()
     <input
         type="radio"
         :name="props.name"
-        value="3"
-        @input="$emit('update:value', Number.parseInt($event.target.value))"
+        :checked="value === 3"
+        @input="$emit('update:value', 3)"
     />
     Rich
   </label>

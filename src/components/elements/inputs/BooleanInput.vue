@@ -1,39 +1,32 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {BooleanAttribute} from '@/stuff/Testing';
-  interface Props {
-    attribute: BooleanAttribute,
-    name: string
-    value: boolean
-  }
-//$emit('update:value', $event.target.value)
-  const props = defineProps<Props>()
-  console.log(props.attribute)
+import {BooleanAttribute} from '@/stuff/attribute/BooleanAttribute';
+interface Props {
+  attribute: BooleanAttribute,
+  name: string
+  value: boolean | null,
 
-
-  function test(a, val, xd) {
-    console.log(typeof val)
-    console.log(val.target.value)
-
-    a('update:value', val.target.value === "true")
-  }
-
+  labelTrue?: string
+  labelFalse?: string
+}
+const props = defineProps<Props>()
 </script>
 
 <template>
   <input
       type="radio"
       :name="props.name"
-      value="true"
-      @input="test($emit, $event, true)"
+      :checked="value === true"
+      @input="$emit('update:value', true)"
   />
+  <label>{{ labelTrue || "True" }}</label>
   <input
       type="radio"
       :name="props.name"
-      value="false"
-      @input="test($emit, $event, false)"
-      checked
+      :checked="value === false"
+      @input="$emit('update:value', false)"
   />
+  <label>{{ labelFalse || "False" }}</label>
 </template>
 
 <style scoped>

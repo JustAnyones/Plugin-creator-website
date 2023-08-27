@@ -171,7 +171,7 @@ export class Draft {
         "ordinal",
         "Ordinal",
         "Position of the draft in category.",
-        false, 0
+        false, null
     )
     // TODO: improve description
     ordinalFrom = new StringAttribute(

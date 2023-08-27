@@ -33,7 +33,7 @@ export class BooleanAttribute extends Attribute {
         name: string,
         description: string,
         required: boolean = false,
-        defaultValue: boolean = false,
+        defaultValue: boolean | null = false,
     ) {
         super(id, name, description, required, defaultValue)
     }

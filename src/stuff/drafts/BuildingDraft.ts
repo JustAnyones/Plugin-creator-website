@@ -57,7 +57,7 @@ export class BuildingDraft extends ViewportDraft {
     level = new LevelAttribute(
         "level", "Level",
         "Residential/commercial/industrial building level.",
-        false, 1,
+        false, null,
         {minValue: 1, maxValue: 3}
     )
     density: number // float

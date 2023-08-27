@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {NumberAttribute} from '@/stuff/Testing';
+import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
   interface Props {
     attribute: NumberAttribute,
     name: string
-    value: number
+    value: number | null
   }
 //$emit('update:value', $event.target.value)
   const props = defineProps<Props>()
