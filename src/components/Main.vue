@@ -131,9 +131,6 @@ function exportToZip() {
     })
   })
 
-  //for (let i = 0; i < files.value.length; i++) {
-  //  zip.file(files.value[i].name, files.value[i])
-  //}
   zip.generateAsync({ type: 'blob' }).then(function (content) {
     FileSaver.saveAs(content, 'plugin.zip');
   });
@@ -142,130 +139,210 @@ function exportToZip() {
 </script>
 
 <template>
+  <div class="page-container">
 
-  <div class="flex-container">
+    <div class="main-content">
+      <div class="documentation-panel">
 
-    <div class="documentation">
-    </div>
-
-    <div class="generator">
-
-    <p class="bloody-disclaimer">
-      This is a preview version of plugin creator website V4, feature parity and compatibility
-      is not assured with the previous versions.
-    </p>
-
-    <p>To begin, please select the draft type</p>
-
-    <!-- Type selector for new draft object -->
-    <div class="flex-container2">
-      <multiselect
-          ref="typeSelector"
-          v-model="selected_type"
-          :options="Array.from(Object.keys(Types), (key) => Types[key])"
-          :show-labels="false"
-          :searchable="true"
-          placeholder="Select draft type"
-      >
-        <template v-slot:option="{ option }">
-          {{ capitalizeFirstLetter(option.label) }}
-        </template>
-      </multiselect>
-      <Button @click="createDraftFromType">Create</Button>
-    </div>
-
-
-
-
-    <div class="drafts">
-      <Draft v-bind:index="index" @pop="removeDraftAtIndex(index)" v-bind:object="obj" v-for="(obj, index) in data">
-        <div v-for="(attr) in obj.getRequiredAttributes()">
-          <Attribute v-bind:name="attr.name" v-bind:description="attr.description">
-            <component
-                v-bind:attribute="attr"
-                v-bind:name="attr.id+obj.id.value"
-                v-model:value="attr.value"
-                :is="Inputs[attr.element]"
-                @updateFiles="attr.internalFileList=$event"
-            />
-          </Attribute>
-        </div>
-
-        <h3>Optional attributes</h3>
-        <p>These are optional attributes</p>
-        <multiselect
-            ref="optionalAttributeSelector"
-            v-model="d[index]"
-            mode="multiple"
-            :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
-              value: attr.name, label: attr.name, attribute: attr
-            }))"
-            :object="true"
-            :show-labels="false"
-            :searchable="true"
-            :close-on-select="true"
-            placeholder="Select optional attributes"
-            :canClear="false"
-        >
-          <template v-slot:option="{ option }">
-            {{ option.label }}
-          </template>
-        </multiselect>
-
-        <div :key="item.attribute.id" v-for="item in d[index]">
-          <OptionalAttribute
-              v-bind:name="item.attribute.name"
-              v-bind:description="item.attribute.description"
-              @pop="deselectOptionalAttribute(index, item)"
-          >
-            <component
-                :attribute="item.attribute"
-                :name="item.attribute.id+obj.id.value"
-                v-model:value="item.attribute.value"
-                :is="Inputs[item.attribute.element]"
-            ></component>
-          </OptionalAttribute>
-        </div>
-      </Draft>
-    </div>
-
-      <div class="controls">
-        <Button @click="exportToJson()">Export JSON file</Button>
-        <Button>Export plugin.manifest file</Button>
-        <Button @click="exportToZip()">Export as a zip archive</Button>
       </div>
 
+      <div class="generator-panel">
+
+
+
+        <div class="generator-header">
+          <p class="bloody-disclaimer">
+            This is a preview version of plugin creator website V4, feature parity and compatibility
+            is not assured with the previous versions.
+          </p>
+
+          <p>To begin, please select the draft type</p>
+
+          <!-- Type selector for new draft object -->
+          <div class="type-selector">
+            <multiselect
+              ref="typeSelector"
+              v-model="selected_type"
+              :options="Array.from(Object.keys(Types), (key) => Types[key])"
+              :show-labels="false"
+              :searchable="true"
+              placeholder="Select draft type"
+            >
+              <template v-slot:option="{ option }">
+                {{ capitalizeFirstLetter(option.label) }}
+              </template>
+            </multiselect>
+            <Button @click="createDraftFromType">Create</Button>
+          </div>
+        </div>
+
+
+
+
+      <div class="drafts">
+        <Draft v-bind:index="index" @pop="removeDraftAtIndex(index)" v-bind:object="obj" v-for="(obj, index) in data">
+          <div v-for="(attr) in obj.getRequiredAttributes()">
+            <Attribute v-bind:name="attr.name" v-bind:description="attr.description">
+              <component
+                  v-bind:attribute="attr"
+                  v-bind:name="attr.id+obj.id.value"
+                  v-model:value="attr.value"
+                  :is="Inputs[attr.element]"
+                  @updateFiles="attr.internalFileList=$event"
+              />
+            </Attribute>
+          </div>
+
+          <h3>Optional attributes</h3>
+          <p>These are optional attributes</p>
+          <multiselect
+              ref="optionalAttributeSelector"
+              v-model="d[index]"
+              mode="multiple"
+              :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
+                value: attr.name, label: attr.name, attribute: attr
+              }))"
+              :object="true"
+              :show-labels="false"
+              :searchable="true"
+              :close-on-select="true"
+              placeholder="Select optional attributes"
+              :canClear="false"
+          >
+            <template v-slot:option="{ option }">
+              {{ option.label }}
+            </template>
+          </multiselect>
+
+          <div :key="item.attribute.id" v-for="item in d[index]">
+            <OptionalAttribute
+                v-bind:name="item.attribute.name"
+                v-bind:description="item.attribute.description"
+                @pop="deselectOptionalAttribute(index, item)"
+            >
+              <component
+                  :attribute="item.attribute"
+                  :name="item.attribute.id+obj.id.value"
+                  v-model:value="item.attribute.value"
+                  :is="Inputs[item.attribute.element]"
+              ></component>
+            </OptionalAttribute>
+          </div>
+        </Draft>
+      </div>
+
+        <div class="controls">
+          <Button @click="exportToJson()">Export JSON file</Button>
+          <Button>Export plugin.manifest file</Button>
+          <Button @click="exportToZip()">Export as a zip archive</Button>
+        </div>
+
+      </div>
+
+      <div class="preview-panel">
+        <h2>Live preview of the generated JSON:</h2>
+        <pre>
+        {{ data }}
+      </pre>
+      </div>
     </div>
 
-    <div class="preview">
-      <h2>Live preview of the generated JSON:</h2>
-      <pre>
-      {{ data }}
-    </pre>
+    <div class="footer">
+      &copy; JustAnyone 2023
     </div>
   </div>
+
 </template>
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
+/*.page-container {
+  display: flex;
+  align-items: stretch;
+}*/
 
-
-.bloody-disclaimer {
-  color: red;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 99vh;
 }
 
+.main-content {
+  display: flex;
+  flex: 1;
+}
 
-.flex-container2 {
+.documentation-panel {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.generator-panel {
+  flex: 5; /* Adjust the flex ratio for central panel size */
+  display: flex;
+  flex-direction: column;
+  //justify-content: space-between;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.generator-header {
+  margin-bottom: 20px;
+}
+
+.type-selector {
   display: flex;
   align-items: center;
-  gap: 30px;
-  justify-content: end;
-  padding-bottom: 10px;
 }
 
-.flex-container {
+.drafts {
+  margin-bottom: 20px;
+}
+
+.controls {
   display: flex;
-  //align-items: center;
-  gap: 30px;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.preview-panel {
+  flex: 2;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  background-color: #f5f5f5;
+  color: #999;
+  padding: 10px 0;
+}
+
+@media (max-width: 800px) {
+  .page-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .generator-panel {
+    flex: 1;
+    border-right: none;
+    margin-bottom: 20px;
+  }
+
+  .documentation-panel,
+  .preview-panel {
+    border: none;
+    padding: 10px;
+  }
 }
 </style>
+
