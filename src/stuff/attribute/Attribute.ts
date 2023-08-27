@@ -23,49 +23,58 @@
  *
  */
 
-import {Draft} from "./drafts/Draft";
-import {BuildingDraft} from "./drafts/BuildingDraft";
+export class Attribute {
+    public readonly id: string
+    readonly name: string
+    readonly description: string
+    readonly required: boolean
+    readonly defaultValue: any
 
-export const PCA_VERSION = "4.0-dev"
+    private _value: any
 
-export const enum Types {
-    AIRPORT = "airport",
-    AWARD = "award",
-    BODY_DISPOSAL = "body disposal",
-    DECORATION = "decoration",
-    EDUCATION = "education",
-    ENERGY = "energy",
-    FIRE_BRIGADE = "fire brigade",
-    LANDMARK = "landmark",
-    MEDIC = "medic",
-    MILITARY = "military",
-    PARK = "park",
-    POLICE = "police",
-    PUBLIC = "public",
-    RELIGION = "religion",
-    SPORT = "sport",
-    SWAT = "swat",
-    WASTE_DISPOSAL = "waste disposal",
-    WATER = "water",
+    element = null
 
-    // RCI
-    RESIDENTIAL = "residential",
-    COMMERCIAL = "commercial",
-    INDUSTRIAL = "industrial",
-    FARM = "farm",
-    HARBOR = "harbor",
-    HARBOR_PIER = "harbor pier"
-}
+    constructor(
+        id: string,
+        name: string,
+        description: string,
+        required: boolean = false,
+        defaultValue?: any | (() => any)
+    ) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.required = required
+        if (typeof defaultValue === "function") {
+            this.defaultValue = defaultValue()
+        } else {
+            this.defaultValue = defaultValue
+        }
+        this._value = this.defaultValue;
+    }
 
-export function createDraftFromType(type: Types): Draft {
-    console.log("Creating draft with type", type)
-    switch (type) {
-        default:
-            return new BuildingDraft(type)
+    public get value() {
+        return this._value
+    }
+
+    public set value(value: any) {
+        console.log(value)
+        this._value = value
+    }
+
+    public isDefault() {
+        return this.value === this.defaultValue
+    }
+
+    public validate() {
+
+    }
+
+    public isValid(): boolean {
+        return false
+    }
+
+    public toJSON() {
+        return this.value
     }
 }
-
-enum Attributes {}
-
-
-

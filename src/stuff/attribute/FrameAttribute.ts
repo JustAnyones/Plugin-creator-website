@@ -23,49 +23,8 @@
  *
  */
 
-import {Draft} from "./drafts/Draft";
-import {BuildingDraft} from "./drafts/BuildingDraft";
+import {FileAttribute} from "./FileAttribute";
 
-export const PCA_VERSION = "4.0-dev"
-
-export const enum Types {
-    AIRPORT = "airport",
-    AWARD = "award",
-    BODY_DISPOSAL = "body disposal",
-    DECORATION = "decoration",
-    EDUCATION = "education",
-    ENERGY = "energy",
-    FIRE_BRIGADE = "fire brigade",
-    LANDMARK = "landmark",
-    MEDIC = "medic",
-    MILITARY = "military",
-    PARK = "park",
-    POLICE = "police",
-    PUBLIC = "public",
-    RELIGION = "religion",
-    SPORT = "sport",
-    SWAT = "swat",
-    WASTE_DISPOSAL = "waste disposal",
-    WATER = "water",
-
-    // RCI
-    RESIDENTIAL = "residential",
-    COMMERCIAL = "commercial",
-    INDUSTRIAL = "industrial",
-    FARM = "farm",
-    HARBOR = "harbor",
-    HARBOR_PIER = "harbor pier"
+export class FrameAttribute extends FileAttribute {
+    element = "FrameInput"
 }
-
-export function createDraftFromType(type: Types): Draft {
-    console.log("Creating draft with type", type)
-    switch (type) {
-        default:
-            return new BuildingDraft(type)
-    }
-}
-
-enum Attributes {}
-
-
-

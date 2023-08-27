@@ -23,49 +23,19 @@
  *
  */
 
-import {Draft} from "./drafts/Draft";
-import {BuildingDraft} from "./drafts/BuildingDraft";
+import {Attribute} from "./Attribute";
 
-export const PCA_VERSION = "4.0-dev"
+export class BooleanAttribute extends Attribute {
+    element = "BooleanInput"
 
-export const enum Types {
-    AIRPORT = "airport",
-    AWARD = "award",
-    BODY_DISPOSAL = "body disposal",
-    DECORATION = "decoration",
-    EDUCATION = "education",
-    ENERGY = "energy",
-    FIRE_BRIGADE = "fire brigade",
-    LANDMARK = "landmark",
-    MEDIC = "medic",
-    MILITARY = "military",
-    PARK = "park",
-    POLICE = "police",
-    PUBLIC = "public",
-    RELIGION = "religion",
-    SPORT = "sport",
-    SWAT = "swat",
-    WASTE_DISPOSAL = "waste disposal",
-    WATER = "water",
-
-    // RCI
-    RESIDENTIAL = "residential",
-    COMMERCIAL = "commercial",
-    INDUSTRIAL = "industrial",
-    FARM = "farm",
-    HARBOR = "harbor",
-    HARBOR_PIER = "harbor pier"
-}
-
-export function createDraftFromType(type: Types): Draft {
-    console.log("Creating draft with type", type)
-    switch (type) {
-        default:
-            return new BuildingDraft(type)
+    constructor(
+        id: string,
+        name: string,
+        description: string,
+        required: boolean = false,
+        defaultValue: boolean = false,
+    ) {
+        super(id, name, description, required, defaultValue)
     }
+
 }
-
-enum Attributes {}
-
-
-

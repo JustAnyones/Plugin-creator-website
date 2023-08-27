@@ -1,0 +1,272 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2023 JustAnyone
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ */
+
+import {PCA_VERSION, Types} from "../Testing";
+import CryptoJS from "crypto-js";
+import {Attribute} from "../attribute/Attribute";
+import {StringAttribute} from "../attribute/StringAttribute";
+import {BooleanAttribute} from "../attribute/BooleanAttribute";
+import {NumberAttribute} from "../attribute/NumberAttribute";
+import {FileAttribute} from "../attribute/FileAttribute";
+
+export class Draft {
+    id = new StringAttribute(
+        "id",
+        "ID",
+        "A unique identifier which is used by the game to load and use the plugin.",
+        true,
+        "lt.svetikas.pca.v4." + CryptoJS.MD5(new Date().getTime().toString()).toString()
+    )
+
+    active: boolean
+    premium= new BooleanAttribute(
+        "premium",
+        "Premium",
+        "Whether the plugin is premium. If it's considered premium, it will not be active in non premium" +
+        "versions of the game.",
+        false, false
+    )
+    platform: string
+    readonly type: Types
+    once = new BooleanAttribute(
+        "once", "Once",
+        "Whether to load a draft by the specified ID once. It will not load any extra drafts whose" +
+        "ID is already loaded.",
+        false, false
+    )
+    inherit = new BooleanAttribute(
+        "inherit", "Inherit",
+        "Whether to inherit an already defined draft by the specified ID.",
+        false, false
+    )
+    override = new BooleanAttribute(
+        "override", "Override",
+        "Whether to override an already defined draft by the specified ID.",
+        false, false
+    )
+    privileged = new StringAttribute(
+        "privileged", "Privileged key",
+        "Privileged key for your draft. Allows to use special features, which are restricted to " +
+        "trusted plugin creators only."
+    )
+    mute= new BooleanAttribute(
+        "mute", "Mute",
+        "Whether to suppress any errors that have occurred while loading the draft.",
+        false, false
+    )
+
+    minVersion = new NumberAttribute(
+        "min version",
+        "Minimal version",
+        "Minimal game version required to run this draft",
+        false, 0,
+        {minValue: 0, maxValue: 99999}
+    )
+    maxVersion = new NumberAttribute(
+        "max version",
+        "Max version",
+        "Maximum game version required to run this draft",
+        false, 0,
+        {minValue: 0, maxValue: 99999}
+    )
+
+
+    // TODO: Template related
+    //String templatePrefix = src.optString("template prefix");
+    //String templatesAttribName = src.has("template") ? "template" : "templates";
+
+
+
+    title = new StringAttribute("title", "Title", "Draft title, usually of a building.")
+    titleId = new StringAttribute(
+        "title id", "Title ID",
+        "ID of the title string. Can be used to refer to specific translation key."
+    )
+    text = new StringAttribute("text", "Text", "Draft text, usually the description of the building or the text in notifications.")
+    textId= new StringAttribute(
+        "text id", "Text ID",
+        "ID of the text string. Can be used to refer to specific translation key."
+    )
+    hidden = new BooleanAttribute(
+        "hidden", "Hidden",
+        "Whether the draft will be hidden in the toolbar.",
+        false, false
+    )
+    author = new StringAttribute(
+        "author", "Author",
+        "The author of this plugin draft.",
+        true,
+        "Plugin creator website 4.0"
+    )
+
+
+    final = new BooleanAttribute(
+        "final",
+        "Final",
+        "Whether the draft can be overridden.",
+        false, false
+    )
+    hideId= new BooleanAttribute(
+        "hide id", "Hide ID",
+        "Whether the user can see the ID of the draft.",
+        false, false
+    )
+    muteLua = new BooleanAttribute(
+        "mute lua", "Mute Lua",
+        "Whether to mute Lua errors.",
+        false
+    )
+    strictLua = new BooleanAttribute(
+        "strict lua", "Strict Lua",
+        "???",
+        false
+    )
+    index = new BooleanAttribute(
+        "index", "Index",
+        "Whether to allow the draft to be indexed by Lua methods.",
+        false, false
+    )
+
+
+    // TODO: Sound click related
+    soundClick: number
+
+
+    ordinal: number
+    // TODO: Ordinal from
+    ordinalFrom: string // "ordinal from"
+
+
+    // TODO: meta
+    //meta: JSONObject
+
+
+    separator: boolean
+
+
+    // TODO: preview and icon frames
+    previewFrames: Array<number>
+    iconFrames: Array<number>
+    showNewMarker= new BooleanAttribute(
+        "show new marker", "Show new marker",
+        "Whether to draft will show a new marker in the toolbar.",
+        false, true
+    )
+    searchable = new BooleanAttribute(
+        "searchable", "Searchable",
+        "Whether to draft can be searched.",
+        false, true
+    )
+
+
+    category = new StringAttribute(
+        "category", "Category",
+        "Draft ID of a category this draft belongs to.")
+    categoryFrom = new StringAttribute(
+        "category from", "Category from",
+        "Draft ID to grab category from and use for this draft as well.")
+
+
+    // TODO: load aliases
+    aliases: Array<string>
+
+
+    // TODO: "premium requirements" and "requirements"
+
+
+    // TODO: scripts
+    //luaScripts: Array<Script>
+
+
+    constructor(type: Types) {
+        this.type = type
+    }
+
+    /**
+     * Returns an array of required attribute for the draft.
+     */
+    public getRequiredAttributes(): Array<Attribute> {
+        let attrs = []
+        Object.keys(this).forEach(
+            (item) => {
+                let attribute = this[item]
+                if (attribute instanceof Attribute && attribute.required)
+                    attrs.push(attribute)
+            })
+        return attrs
+    }
+
+    /**
+     * Returns an array of optional attribute for the draft.
+     */
+    public getOptionalAttributes(): Array<Attribute> {
+        let attrs = []
+        Object.keys(this).forEach(
+            (item) => {
+                let attribute = this[item]
+                if (attribute instanceof Attribute && !attribute.required)
+                    attrs.push(attribute)
+            })
+        return attrs
+    }
+
+    /**
+     * Returns a list of files associated with the draft which have to be included together with the plugin.
+     */
+    public getFiles(): Array<File> {
+        let files = [];
+        Object.keys(this).forEach(
+            (item) => {
+                let attribute = this[item]
+                if (attribute instanceof FileAttribute && attribute.internalFileList != null) {
+                    for (let i = 0; i < attribute.internalFileList.length; i++) {
+                        files.push(attribute.internalFileList[i])
+                    }
+                }
+            })
+        return files
+    }
+
+    /**
+     * Returns the JSON representation of the draft.
+     */
+    public toJSON() {
+        let data = {}
+        data["type"] = this.type
+        data["pca"] = PCA_VERSION
+        Object.keys(this).forEach(
+            (item) => {
+                let attribute = this[item]
+                if (
+                    attribute instanceof Attribute
+                    && attribute.value !== null
+                )
+                    if (attribute.required || !attribute.isDefault()) {
+                        data[attribute.id] = attribute.value
+                    }
+            })
+        return data
+    }
+}
