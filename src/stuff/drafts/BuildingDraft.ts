@@ -28,6 +28,7 @@ import {NumberAttribute} from "../attribute/NumberAttribute";
 import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
+import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
 
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute(
@@ -201,7 +202,11 @@ export class BuildingDraft extends ViewportDraft {
         false, true
     )
 
-    performance: boolean
+    performance = new BooleanAttribute(
+        "performance", "Performance",
+        "Whether the building uses performance.", // TODO: improve desc
+        false, false
+    )
 
     powerRadius: number
 
@@ -286,7 +291,95 @@ export class BuildingDraft extends ViewportDraft {
     )
     influencePreview: boolean
 
-    // TODO: loadInfluences
+    // Visible Influences
+    pollutionInfluence = new InfluenceAttribute(
+        "influence pollution", "Influence pollution",
+        "...",
+        false, null,
+        false
+    )
+    noiseInfluence = new InfluenceAttribute(
+        "influence noise", "Influence noise",
+        "...",
+        false, null,
+        false
+    )
+    healthInfluence= new InfluenceAttribute(
+        "influence health", "Influence health",
+        "...",
+    )
+    policeInfluence= new InfluenceAttribute(
+        "influence police", "Influence police",
+        "...",
+    )
+    fireDepartmentInfluence = new InfluenceAttribute(
+        "influence fire department", "Influence fire department",
+        "...",
+    )
+    parkInfluence= new InfluenceAttribute(
+        "influence park", "Influence park",
+        "...",
+    )
+    sportInfluence= new InfluenceAttribute(
+        "influence sport", "Influence sport",
+        "...",
+    )
+    educationLowInfluence= new InfluenceAttribute(
+        "influence education low", "Influence education low",
+        "...",
+    )
+    educationHighInfluence= new InfluenceAttribute(
+        "influence education high", "Influence education high",
+        "...",
+    )
+    cultureInfluence = new InfluenceAttribute(
+        "influence culture", "Influence culture",
+        "..."
+    )
+    managementInfluence= new InfluenceAttribute(
+        "influence management", "Influence management",
+        "..."
+    )
+    religionInfluence= new InfluenceAttribute(
+        "influence religion", "Influence religion",
+        "..."
+    )
+    passengerBusInfluence= new InfluenceAttribute(
+        "influence passenger bus", "Influence passenger bus",
+        "..."
+    )
+    passengerTrainInfluence= new InfluenceAttribute(
+        "influence passenger train", "Influence passenger train",
+        "..."
+    )
+    radioactivityInfluence= new InfluenceAttribute(
+        "influence radioactive", "Influence radioactive",
+        "...",
+        false, null,
+        false
+    )
+    natureInfluence= new InfluenceAttribute(
+        "influence nature", "Influence nature",
+        "..."
+    )
+    wasteDisposalInfluence= new InfluenceAttribute(
+        "influence waste disposal", "Influence waste disposal",
+        "..."
+    )
+    bodyDisposalInfluence= new InfluenceAttribute(
+        "influence body disposal", "Influence body disposal",
+        "..."
+    )
+    trafficInfluence= new InfluenceAttribute(
+        "influence traffic", "Influence traffic",
+        "...",
+        false, null,
+        false
+    )
+
+
+
+
     // TODO: loadUpgrades
     // TODO: loadAspects
     // TODO: loadPedestrian

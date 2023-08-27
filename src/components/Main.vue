@@ -150,16 +150,6 @@ function exportToZip() {
 
     <div class="generator">
 
-
-   <!-- <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Documentation</template>
-
-    Vue’s shit
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.-->
-
     <p class="bloody-disclaimer">
       This is a preview version of plugin creator website V4, feature parity and compatibility
       is not assured with the previous versions.
