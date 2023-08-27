@@ -9,13 +9,9 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <div>
-    <span><b>{{ name }}</b></span>
+  <div class="attribute">
+    <label>{{ name }}</label>
     <slot></slot>
-    <p>{{ description }}</p>
+    <span class="attribute-description">{{ description }}</span>
   </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -57,10 +57,7 @@ function updateFiles(files) {
       required
       multiple
       accept="image/png"
+      class="attribute-input"
       @input="test($emit, $event)"
   >
 </template>
-
-<style scoped>
-
-</style>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import Button from "@/components/elements/Button.vue";
+import Attribute from "@/components/attributes/Attribute.vue";
 interface Props {
   name: string
   description: string
@@ -11,14 +12,24 @@ defineEmits(['pop'])
 </script>
 
 <template>
-  <div>
-    <Button @click="$emit('pop')">Delete</Button>
-    <span>{{ props.name }}</span>
+  <Attribute
+      :name="props.name"
+      :description="props.description"
+  >
+    <a href="#" class="fa fa-solid fa-user-secret" @click="(e) => {
+      e.preventDefault();
+      $emit('pop')
+    }">
+      <font-awesome-icon :icon="['fas', 'trash']" />
+    </a>
     <slot></slot>
-    <p>{{ props.description }}</p>
-  </div>
+  </Attribute>
 </template>
 
 <style scoped>
-
+a {
+  color: red;
+  text-decoration: none;
+  background-color: transparent;
+}
 </style>

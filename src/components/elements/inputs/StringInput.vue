@@ -25,28 +25,33 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
+import {StringAttribute} from "@/stuff/attribute/StringAttribute";
   interface Props {
+    attribute: StringAttribute,
     name: string
     value: string
   }
 
   const props = defineProps<Props>()
+
+const long = props.attribute.id === "text"
+
 </script>
 
 <template>
   <input
+      v-if="!long"
       type="text"
       required
       :name="props.name"
       :value="props.value"
-      size="64"
+      class="attribute-input"
+      @input="$emit('update:value', $event.target.value)"
+  />
+  <textarea
+      v-if="long"
+      required
+      class="attribute-input"
       @input="$emit('update:value', $event.target.value)"
   />
 </template>
-
-<style scoped>
-  input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-</style>

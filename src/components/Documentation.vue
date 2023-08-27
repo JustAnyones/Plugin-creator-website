@@ -23,45 +23,14 @@
   -
   -->
 
-<script setup lang="ts">
-import { toRefs, defineProps } from 'vue';
-import Button from "@/components/elements/Button.vue";
-import {Draft as d} from "@/stuff/drafts/Draft";
+<script setup>
 
-interface Props {
-  object: d
-  index: number
-  //description: string
-}
-
-const props = defineProps<Props>()
-
-defineEmits(['pop'])
 </script>
 
 <template>
-  <div class="draft">
-    <div class="compact">
-      <h2>{{props.index + 1}}. ({{props.object.type}})</h2>
-      <Button @click="$emit('pop')">Delete</Button>
-    </div>
-    <slot></slot>
-  </div>
-
+  <h2>Documentation???</h2>
 </template>
 
 <style scoped>
-.compact {
-  display: flex;
-  gap: 5px;
-}
-
-.draft {
-  background-color: #f5f5f5;
-  margin-bottom: 20px;
-  //border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 5px;
-}
 
 </style>

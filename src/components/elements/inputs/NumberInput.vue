@@ -52,6 +52,7 @@ import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
 <template>
   <input
       type="number"
+      class="attribute-input"
       required
       :min="props.attribute.minValue"
       :max="props.attribute.maxValue"
@@ -59,10 +60,3 @@ import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
       @input="test($emit, $event)"
   />
 </template>
-
-<style scoped>
-input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-</style>

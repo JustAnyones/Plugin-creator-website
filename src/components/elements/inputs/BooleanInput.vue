@@ -30,5 +30,7 @@ const props = defineProps<Props>()
 </template>
 
 <style scoped>
+input {
 
+}
 </style>

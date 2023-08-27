@@ -39,6 +39,8 @@ import Button from "@/components/elements/Button.vue";
 import LevelInput from "@/components/elements/inputs/LevelInput.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
+import {Manifest} from "@/stuff/Manifest";
+import Documentation from "@/components/Documentation.vue";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -65,6 +67,10 @@ function createDraftFromType() {
 const files: Ref<Array<File>> = ref([]);
 
 const data: Ref<Array<DraftItem>> = ref([]);
+
+const manifestObject: Ref<Manifest> = ref(new Manifest());
+
+
 const d: Ref<Array<Array<any>>> = ref([]);
 
 const Inputs = {
@@ -119,9 +125,25 @@ function getJsonBlob(): Blob {
   return blob;
 }
 
+function getManifestBlob(): Blob {
+  // @ts-ignore
+  let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
+  content += JSON.stringify(manifestObject.value)
+
+  let blob = new Blob([content], {
+    type: "text/plain;charset=utf-8"
+  });
+  return blob;
+}
+
 function exportToJson() {
   if (!isValid()) return;
   FileSaver.saveAs(getJsonBlob(), "code.json")
+}
+
+function exportToManifest() {
+  if (!isValid()) return;
+  FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
 }
 
 function exportToZip() {
@@ -129,6 +151,7 @@ function exportToZip() {
 
   const zip = new JSZip();
   zip.file("code.json", getJsonBlob())
+  zip.file("plugin.manifest", getManifestBlob())
 
   data.value.forEach(draft => {
     draft.getFiles().forEach(file => {
@@ -148,7 +171,7 @@ function exportToZip() {
 
     <div class="main-content">
       <div class="documentation-panel">
-
+        <Documentation/>
       </div>
 
       <div class="generator-panel">
@@ -238,7 +261,7 @@ function exportToZip() {
 
         <div class="controls">
           <Button @click="exportToJson()">Export JSON file</Button>
-          <Button>Export plugin.manifest file</Button>
+          <Button @click="exportToManifest()">Export plugin.manifest file</Button>
           <Button @click="exportToZip()">Export as a zip archive</Button>
         </div>
 
@@ -246,9 +269,10 @@ function exportToZip() {
 
       <div class="preview-panel">
         <h2>Live preview of the generated JSON:</h2>
-        <pre>
-        {{ data }}
-      </pre>
+        <h3>plugin.manifest</h3>
+        <pre>{{ manifestObject }}</pre>
+        <h3>code.json</h3>
+        <pre>{{ data }}</pre>
       </div>
     </div>
 
