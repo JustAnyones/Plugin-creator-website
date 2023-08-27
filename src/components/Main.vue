@@ -24,7 +24,8 @@
   -->
 
 <script setup lang="ts">
-import {Types, createDraftFromType as cd, Draft as DraftItem, PCA_VERSION} from '@/stuff/Testing'
+import {Types, createDraftFromType as cd} from '@/stuff/Testing'
+import {Draft as DraftItem} from '@/stuff/drafts/Draft';
 import {Ref, ref} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "@/components/elements/inputs/StringInput.vue";
@@ -100,7 +101,7 @@ function getJsonBlob(): Blob {
 
   if (!isValid()) return;
 
-  let content = `//File was created by plugin creator website ${PCA_VERSION}\n`
+  let content = `//File was created by plugin creator website ${window['__APP_VERSION__']}\n`
   content += JSON.stringify(data.value)
 
   let blob = new Blob([content], {

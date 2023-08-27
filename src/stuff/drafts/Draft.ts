@@ -23,13 +23,14 @@
  *
  */
 
-import {PCA_VERSION, Types} from "../Testing";
+// @ts-ignore
 import CryptoJS from "crypto-js";
 import {Attribute} from "../attribute/Attribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
+import {Types} from "../Testing";
 
 export class Draft {
     id = new StringAttribute(
@@ -40,7 +41,12 @@ export class Draft {
         "lt.svetikas.pca.v4." + CryptoJS.MD5(new Date().getTime().toString()).toString()
     )
 
-    active: boolean
+    active = new BooleanAttribute(
+        "active",
+        "Active",
+        "Whether the draft is active and should be loaded by the game.",
+        false, true
+    )
     premium= new BooleanAttribute(
         "premium",
         "Premium",
@@ -48,7 +54,7 @@ export class Draft {
         "versions of the game.",
         false, false
     )
-    platform: string
+    platform: string // TODO: figure out possible values and create a custom attribute
     readonly type: Types
     once = new BooleanAttribute(
         "once", "Once",
@@ -99,12 +105,18 @@ export class Draft {
 
 
 
-    title = new StringAttribute("title", "Title", "Draft title, usually of a building.")
+    title = new StringAttribute(
+        "title", "Title",
+        "Draft title, usually of a building."
+    )
     titleId = new StringAttribute(
         "title id", "Title ID",
         "ID of the title string. Can be used to refer to specific translation key."
     )
-    text = new StringAttribute("text", "Text", "Draft text, usually the description of the building or the text in notifications.")
+    text = new StringAttribute(
+        "text", "Text",
+        "Draft text, usually the description of the building or the text in notifications."
+    )
     textId= new StringAttribute(
         "text id", "Text ID",
         "ID of the text string. Can be used to refer to specific translation key."
@@ -138,6 +150,7 @@ export class Draft {
         "Whether to mute Lua errors.",
         false
     )
+    // TODO: improve description
     strictLua = new BooleanAttribute(
         "strict lua", "Strict Lua",
         "???",
@@ -154,16 +167,29 @@ export class Draft {
     soundClick: number
 
 
-    ordinal: number
-    // TODO: Ordinal from
-    ordinalFrom: string // "ordinal from"
+    ordinal = new NumberAttribute(
+        "ordinal",
+        "Ordinal",
+        "Position of the draft in category.",
+        false, 0
+    )
+    // TODO: improve description
+    ordinalFrom = new StringAttribute(
+        "ordinal",
+        "Ordinal from",
+        "ID of the draft to grab ordinal from. Must be used in combination with ordinal attribute."
+    )
 
 
     // TODO: meta
     //meta: JSONObject
 
 
-    separator: boolean
+    separator = new BooleanAttribute(
+        "separator", "Separator",
+        "Whether to separate draft from others in category.", // TODO: improve, is separator before or after?
+        false, false
+    )
 
 
     // TODO: preview and icon frames
@@ -183,14 +209,16 @@ export class Draft {
 
     category = new StringAttribute(
         "category", "Category",
-        "Draft ID of a category this draft belongs to.")
+        "Draft ID of a category this draft belongs to."
+    )
     categoryFrom = new StringAttribute(
         "category from", "Category from",
-        "Draft ID to grab category from and use for this draft as well.")
+        "Draft ID to grab category from and use for this draft as well."
+    )
 
 
     // TODO: load aliases
-    aliases: Array<string>
+    //aliases: Array<string>
 
 
     // TODO: "premium requirements" and "requirements"
@@ -255,7 +283,7 @@ export class Draft {
     public toJSON() {
         let data = {}
         data["type"] = this.type
-        data["pca"] = PCA_VERSION
+        data["pca"] = window['__APP_VERSION__']
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]

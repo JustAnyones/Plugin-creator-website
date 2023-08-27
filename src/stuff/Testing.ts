@@ -26,7 +26,7 @@
 import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
 
-export const PCA_VERSION = "4.0-dev"
+//export const PCA_VERSION = "4.0-dev"
 
 export const enum Types {
     AIRPORT = "airport",

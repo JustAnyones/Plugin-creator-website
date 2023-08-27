@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import { toRefs, defineProps } from 'vue';
-import {Draft as d} from "@/stuff/Testing";
 import Button from "@/components/elements/Button.vue";
+import {Draft as d} from "@/stuff/drafts/Draft";
 
 interface Props {
   object: d
