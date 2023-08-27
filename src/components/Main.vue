@@ -95,10 +95,11 @@ async function deselectOptionalAttribute(selector_index: number, item: Attribute
 
 function isValid() {
 
-  let isValid = true;
+  if (data.value.length === 0) return false;
+
 
   // Validate drafts
-
+  let isValid = true;
   data.value.forEach((draft) => {
     console.log("Validating", draft)
     try {
@@ -108,7 +109,6 @@ function isValid() {
       console.log(e.attribute)
       isValid = false;
     }
-
   });
 
   return isValid;
@@ -342,6 +342,11 @@ function exportToZip() {
   background-color: #f5f5f5;
   padding: 20px;
   border-left: 1px solid #ccc;
+  overflow-x: auto;
+}
+
+.preview-panel pre {
+
 }
 
 .footer {
