@@ -13,24 +13,29 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <input
-      type="radio"
-      :name="props.name"
-      :checked="value === true"
-      @input="$emit('update:value', true)"
-  />
-  <label>{{ labelTrue || "True" }}</label>
-  <input
-      type="radio"
-      :name="props.name"
-      :checked="value === false"
-      @input="$emit('update:value', false)"
-  />
-  <label>{{ labelFalse || "False" }}</label>
+  <div class="attribute-input">
+    <label>
+      <input
+        type="radio"
+        :name="props.name"
+        :checked="value === true"
+        @input="$emit('update:value', true)"
+      />
+      {{ labelTrue || "True" }}
+    </label>
+
+    <label>
+      <input
+        type="radio"
+        :name="props.name"
+        :checked="value === false"
+        @input="$emit('update:value', false)"
+      />
+      {{ labelFalse || "False" }}
+    </label>
+  </div>
 </template>
 
 <style scoped>
-input {
 
-}
 </style>

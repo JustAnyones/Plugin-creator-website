@@ -35,39 +35,39 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <label>
-    <input
-        type="radio"
-        :name="props.name"
-        :checked="value === 1"
-        @input="$emit('update:value', 1)"
-    />
-    Poor
-  </label>
+  <div class="attribute-input">
+    <label>
+      <input
+          type="radio"
+          :name="props.name"
+          :checked="value === 1"
+          @input="$emit('update:value', 1)"
+      />
+      Poor
+    </label>
 
-  <label>
-    <input
-        type="radio"
-        :name="props.name"
-        :checked="value === 2"
-        @input="$emit('update:value', 2)"
-    />
-    Middle
-  </label>
+    <label>
+      <input
+          type="radio"
+          :name="props.name"
+          :checked="value === 2"
+          @input="$emit('update:value', 2)"
+      />
+      Middle
+    </label>
 
-  <label>
-    <input
-        type="radio"
-        :name="props.name"
-        :checked="value === 3"
-        @input="$emit('update:value', 3)"
-    />
-    Rich
-  </label>
+    <label>
+      <input
+          type="radio"
+          :name="props.name"
+          :checked="value === 3"
+          @input="$emit('update:value', 3)"
+      />
+      Rich
+    </label>
+  </div>
 </template>
 
 <style scoped>
-input {
 
-}
 </style>

@@ -30,7 +30,7 @@ import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
-import {Types} from "../Testing";
+import {Types, ValidationException} from "../Testing";
 
 export class Draft {
     id = new StringAttribute(
@@ -300,5 +300,10 @@ export class Draft {
     }
 
     public validate() {
+        if (this.id.isEmpty())
+            throw new ValidationException(this.id, "ID field cannot be empty")
+
+        if (this.author.isEmpty())
+            throw new ValidationException(this.author, "Author field cannot be empty")
     }
 }

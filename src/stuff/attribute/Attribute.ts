@@ -23,7 +23,7 @@
  *
  */
 
-export class Attribute {
+export abstract class Attribute {
     public readonly id: string
     readonly name: string
     readonly description: string
@@ -56,6 +56,8 @@ export class Attribute {
     public get value() {
         return this._value
     }
+
+    public abstract isEmpty(): boolean
 
     public reset() {
         console.log("asked to reset")

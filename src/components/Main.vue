@@ -277,7 +277,7 @@ function exportToZip() {
     </div>
 
     <div class="footer">
-      &copy; JustAnyone 2023
+      &copy; <a href="https://github.com/JustAnyones/Plugin-creator-website">JustAnyone</a> 2023
     </div>
   </div>
 

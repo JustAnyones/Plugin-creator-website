@@ -75,41 +75,41 @@ export class BuildingDraft extends ViewportDraft {
     price = new NumberAttribute(
         "price", "Price",
         "Price of the building in Theons.",
-        false, 0,
+        false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
     addPriceDrafts: Array<string> // draft.addPriceDrafts = loadDraftList(src, "add price", draft.id, draft.addPriceDrafts);
     monthlyPrice = new NumberAttribute(
         "monthly price", "Monthly price",
         "Monthly price of the building in Theons.",
-        false, 0,
+        false, null,
         {minValue: -10_000_000, maxValue: 10_000_000}
     )
     diamondPrice = new NumberAttribute(
         "diamond price", "Diamond price",
         "Diamond price of the building. Note that on premium platforms you need to specify normal price as " +
         "well, since the game does not convert diamond price to Theon price.",
-        false, 0,
+        false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
     budgetItem: string
     bulldozePrice = new NumberAttribute(
         "bulldoze price", "Bulldoze price",
         "Price to bulldoze the building.",
-        false, 0,
+        false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
 
     power = new NumberAttribute(
         "power", "Power",
         "Amount of power used. Use negative values to produce power instead.",
-        false, 0,
+        false, null,
         {minValue: -10_000_000, maxValue: 10_000_000}
     )
     water = new NumberAttribute(
         "water", "Water",
         "Amount of water used. Use negative values to produce water instead.",
-        false, 0,
+        false, null,
         {minValue: -10_000_000, maxValue: 10_000_000}
     )
 
@@ -140,7 +140,7 @@ export class BuildingDraft extends ViewportDraft {
     maxCount = new NumberAttribute(
         "max count", "Max count",
         "Maximum amount of buildings that can exist on the city.",
-        false, -1,
+        false, null,
         {minValue: -1, maxValue: 10_000_000}
     )
     priceFactor: number // float
@@ -271,7 +271,7 @@ export class BuildingDraft extends ViewportDraft {
         "people", "People",
         "Amount of inhabitants or workers the building has. " +
         "Only applies for RCI buildings.",
-        false, 0
+        false, null
     )
 
     autoBuild = new BooleanAttribute(
@@ -287,7 +287,7 @@ export class BuildingDraft extends ViewportDraft {
         "Build time",
         "Build time of the building. Can be left blank for game to calculate itself. Value of 0 will let" +
         "building finish instantly.",
-        false, 0,
+        false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
     influencePreview: boolean
@@ -393,11 +393,11 @@ export class BuildingDraft extends ViewportDraft {
         super.validate();
 
         if (this.frames.value.length == 0) {
-            throw new ValidationException("Please choose at least a single frame.", this.frames)
+            throw new ValidationException(this.frames,"Please choose at least a single frame.")
         }
 
         if (this.width.value != this.height.value) {
-            throw new ValidationException("Width and height must be the same", this.width)
+            throw new ValidationException(this.width,"Width and height must be the same")
         }
 
     }

@@ -16,7 +16,7 @@ defineEmits(['pop'])
       :name="props.name"
       :description="props.description"
   >
-    <a href="#" class="fa fa-solid fa-user-secret" @click="(e) => {
+    <a href="#" class="remove-hyperlink" @click="(e) => {
       e.preventDefault();
       $emit('pop')
     }">
@@ -27,9 +27,5 @@ defineEmits(['pop'])
 </template>
 
 <style scoped>
-a {
-  color: red;
-  text-decoration: none;
-  background-color: transparent;
-}
+
 </style>

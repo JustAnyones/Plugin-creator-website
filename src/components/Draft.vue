@@ -43,7 +43,12 @@ defineEmits(['pop'])
   <div class="draft">
     <div class="compact">
       <h2>{{props.index + 1}}. ({{props.object.type}})</h2>
-      <Button @click="$emit('pop')">Delete</Button>
+      <a class="remove-hyperlink" href="#" @click="(e) => {
+        e.preventDefault();
+        $emit('pop')
+      }">
+        <font-awesome-icon :icon="['fas', 'trash']" />
+      </a>
     </div>
     <slot></slot>
   </div>
@@ -53,14 +58,19 @@ defineEmits(['pop'])
 <style scoped>
 .compact {
   display: flex;
-  gap: 5px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .draft {
   background-color: #f5f5f5;
   margin-bottom: 20px;
-  //border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 5px;
 }
 

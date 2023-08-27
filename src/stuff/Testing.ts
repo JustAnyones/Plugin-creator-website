@@ -32,7 +32,7 @@ import {Attribute} from "./attribute/Attribute";
 export class ValidationException extends Error {
     // . declare any additional properties or methods .
     attribute: Attribute
-    constructor(message, attribute) {
+    constructor(attribute: Attribute, message: string) {
         super(message);
         this.attribute = attribute
     }
