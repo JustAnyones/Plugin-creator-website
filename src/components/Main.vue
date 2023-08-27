@@ -82,12 +82,17 @@ function removeDraftAtIndex(index: number) {
 
 
 async function deselectOptionalAttribute(selector_index: number, item: Attribute) {
-  item.reset()
+  item.attribute.reset()
   await nextTick()
   optionalAttributeSelector.value[selector_index].deselect(item)
 }
 
 function validate() {
+
+  // Validate drafts
+  data.value.forEach((draft) => {
+    console.log("Validating", draft)
+  });
 
 }
 
@@ -202,7 +207,9 @@ function exportToZip() {
             ref="optionalAttributeSelector"
             v-model="d[index]"
             mode="multiple"
-            :options="obj.getOptionalAttributes()"
+            :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
+              value: attr.name, label: attr.name, attribute: attr
+            }))"
             :object="true"
             :show-labels="false"
             :searchable="true"
@@ -213,17 +220,22 @@ function exportToZip() {
             @deselect="console.log('deselect', $event);"
         >
           <template v-slot:option="{ option }">
-            {{ option.name }}
+            {{ option.label }}
           </template>
         </multiselect>
 
-        <div :key="item.id" v-for="item in d[index]">
+        <div :key="item.attribute.id" v-for="item in d[index]">
           <OptionalAttribute
-              v-bind:name="item.name"
-              v-bind:description="item.description"
+              v-bind:name="item.attribute.name"
+              v-bind:description="item.attribute.description"
               @pop="deselectOptionalAttribute(index, item)"
           >
-            <component v-bind:attribute="item" v-bind:name="item.id+obj.id.value" v-model:value="item.value" :is="Inputs[item.element]"></component>
+            <component
+                :attribute="item.attribute"
+                :name="item.attribute.id+obj.id.value"
+                v-model:value="item.attribute.value"
+                :is="Inputs[item.attribute.element]"
+            ></component>
           </OptionalAttribute>
         </div>
       </Draft>
