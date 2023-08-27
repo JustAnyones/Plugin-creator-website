@@ -96,7 +96,8 @@ function isValid() {
 }
 
 function getJsonBlob(): Blob {
-  let content = `//File was created by plugin creator website ${window['__APP_VERSION__']}\n`
+  // @ts-ignore
+  let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
   content += JSON.stringify(data.value)
 
   let blob = new Blob([content], {

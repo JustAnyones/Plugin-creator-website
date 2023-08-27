@@ -283,7 +283,8 @@ export class Draft {
     public toJSON() {
         let data = {}
         data["type"] = this.type
-        data["pca"] = window['__APP_VERSION__']
+        // @ts-ignore
+        data["pca"] = __APP_VERSION__
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
