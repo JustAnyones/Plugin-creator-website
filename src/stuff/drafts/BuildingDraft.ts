@@ -392,7 +392,11 @@ export class BuildingDraft extends ViewportDraft {
     validate() {
         super.validate();
 
-        if (this.width != this.height) {
+        if (this.frames.value.length == 0) {
+            throw new ValidationException("Please choose at least a single frame.", this.frames)
+        }
+
+        if (this.width.value != this.height.value) {
             throw new ValidationException("Width and height must be the same", this.width)
         }
 
