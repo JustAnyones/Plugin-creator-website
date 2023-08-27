@@ -236,7 +236,7 @@ export class Draft {
      * Returns an array of required attribute for the draft.
      */
     public getRequiredAttributes(): Array<Attribute> {
-        let attrs = []
+        let attrs: Array<Attribute> = []
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
@@ -250,7 +250,7 @@ export class Draft {
      * Returns an array of optional attribute for the draft.
      */
     public getOptionalAttributes(): Array<Attribute> {
-        let attrs = []
+        let attrs: Array<Attribute> = []
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
@@ -264,7 +264,7 @@ export class Draft {
      * Returns a list of files associated with the draft which have to be included together with the plugin.
      */
     public getFiles(): Array<File> {
-        let files = [];
+        let files: Array<File> = [];
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]

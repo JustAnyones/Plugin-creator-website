@@ -35,7 +35,7 @@ export class NumberAttribute extends Attribute {
         name: string,
         description: string,
         required: boolean = false,
-        defaultValue: any = null,
+        defaultValue: number | null = null,
         validation = {
             minValue: Number.NEGATIVE_INFINITY,
             maxValue: Number.POSITIVE_INFINITY,

@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import {Types, createDraftFromType as cd} from '@/stuff/Testing'
 import {Draft as DraftItem} from '@/stuff/drafts/Draft';
-import {Ref, ref} from "vue";
+import {nextTick, Ref, ref} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "@/components/elements/inputs/StringInput.vue";
 import NumberInput from "@/components/elements/inputs/NumberInput.vue";
@@ -80,13 +80,11 @@ function removeDraftAtIndex(index: number) {
   d.value.splice(index, 1)
 }
 
-function updateFiles(filesa) {
-  console.log("Asked to update files at", filesa)
-  files.value = filesa
-}
 
-function deselectOptionalAttribute(selector_index: number, value: Attribute) {
-  optionalAttributeSelector.value[selector_index].deselect(value)
+async function deselectOptionalAttribute(selector_index: number, item: Attribute) {
+  item.reset()
+  await nextTick()
+  optionalAttributeSelector.value[selector_index].deselect(item)
 }
 
 function validate() {
@@ -98,9 +96,6 @@ function isValid() {
 }
 
 function getJsonBlob(): Blob {
-
-  if (!isValid()) return;
-
   let content = `//File was created by plugin creator website ${window['__APP_VERSION__']}\n`
   content += JSON.stringify(data.value)
 
@@ -206,28 +201,28 @@ function exportToZip() {
             ref="optionalAttributeSelector"
             v-model="d[index]"
             mode="multiple"
-            :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
-              value: attr.name, label: attr.name, extra: attr
-            }))"
+            :options="obj.getOptionalAttributes()"
             :object="true"
             :show-labels="false"
             :searchable="true"
             :close-on-select="true"
             placeholder="Select optional attributes"
             :canClear="false"
+            trackBy="name"
+            @deselect="console.log('deselect', $event);"
         >
           <template v-slot:option="{ option }">
-            {{ option.label }}
+            {{ option.name }}
           </template>
         </multiselect>
 
-        <div :key="item.extra.id" v-for="item in d[index]">
+        <div :key="item.id" v-for="item in d[index]">
           <OptionalAttribute
-              v-bind:name="item.extra.name"
-              v-bind:description="item.extra.description"
+              v-bind:name="item.name"
+              v-bind:description="item.description"
               @pop="deselectOptionalAttribute(index, item)"
           >
-            <component v-bind:attribute="item.extra" v-bind:name="item.extra.id+obj.id.value" v-model:value="item.extra.value" :is="Inputs[item.extra.element]"></component>
+            <component v-bind:attribute="item" v-bind:name="item.id+obj.id.value" v-model:value="item.value" :is="Inputs[item.element]"></component>
           </OptionalAttribute>
         </div>
       </Draft>

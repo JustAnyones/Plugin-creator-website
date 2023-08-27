@@ -32,7 +32,7 @@ export class Attribute {
 
     private _value: any
 
-    element = null
+    element: string = null
 
     constructor(
         id: string,
@@ -55,6 +55,11 @@ export class Attribute {
 
     public get value() {
         return this._value
+    }
+
+    public reset() {
+        console.log("asked to reset")
+        this.value = this.defaultValue
     }
 
     public set value(value: any) {
