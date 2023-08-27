@@ -298,4 +298,7 @@ export class Draft {
             })
         return data
     }
+
+    public validate() {
+    }
 }

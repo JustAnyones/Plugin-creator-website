@@ -29,6 +29,7 @@ import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
+import {ValidationException} from "../Testing";
 
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute(
@@ -387,4 +388,13 @@ export class BuildingDraft extends ViewportDraft {
 
     influences: any
     aspect: any
+
+    validate() {
+        super.validate();
+
+        if (this.width != this.height) {
+            throw new ValidationException("Width and height must be the same", this.width)
+        }
+
+    }
 }

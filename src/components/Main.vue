@@ -87,17 +87,25 @@ async function deselectOptionalAttribute(selector_index: number, item: Attribute
   optionalAttributeSelector.value[selector_index].deselect(item)
 }
 
-function validate() {
+function isValid() {
+
+  let isValid = true;
 
   // Validate drafts
+
   data.value.forEach((draft) => {
     console.log("Validating", draft)
+    try {
+      draft.validate()
+    } catch (e) {
+      alert(e.message)
+      console.log(e.attribute)
+      isValid = false;
+    }
+
   });
 
-}
-
-function isValid() {
-  return true;
+  return isValid;
 }
 
 function getJsonBlob(): Blob {
@@ -117,13 +125,10 @@ function exportToJson() {
 }
 
 function exportToZip() {
-
   if (!isValid()) return;
 
-  let json = getJsonBlob()
-
   const zip = new JSZip();
-  zip.file("code.json", json)
+  zip.file("code.json", getJsonBlob())
 
   data.value.forEach(draft => {
     draft.getFiles().forEach(file => {

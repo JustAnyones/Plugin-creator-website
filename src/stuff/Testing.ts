@@ -25,8 +25,18 @@
 
 import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
+import {Attribute} from "./attribute/Attribute";
 
 //export const PCA_VERSION = "4.0-dev"
+
+export class ValidationException extends Error {
+    // . declare any additional properties or methods .
+    attribute: Attribute
+    constructor(message, attribute) {
+        super(message);
+        this.attribute = attribute
+    }
+}
 
 export const enum Types {
     AIRPORT = "airport",
