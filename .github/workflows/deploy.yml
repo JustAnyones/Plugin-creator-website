@@ -8,10 +8,10 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v2
 
-      - name: Use Node.js 16
+      - name: Use Node.js 20
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: '20.x'
 
       - name: Build Project
         run: |
@@ -25,6 +25,6 @@ jobs:
           remote-user: deployment
           private-ssh-key: ${{ secrets.SSH_KEY }}
           ssh-port: 22
-          source-path: ./
+          source-path: ./dist
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
           rsync-options: --dry-run --archive --verbose --compress --delete-after --human-readable
