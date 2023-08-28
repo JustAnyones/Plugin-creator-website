@@ -25,18 +25,6 @@
 
 import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
-import {Attribute} from "./attribute/Attribute";
-
-//export const PCA_VERSION = "4.0-dev"
-
-export class ValidationException extends Error {
-    // . declare any additional properties or methods .
-    attribute: Attribute
-    constructor(attribute: Attribute, message: string) {
-        super(message);
-        this.attribute = attribute
-    }
-}
 
 export const enum Types {
     AIRPORT = "airport",
@@ -67,15 +55,13 @@ export const enum Types {
     HARBOR_PIER = "harbor pier"
 }
 
+/**
+ * Creates a new draft for the specified type.
+ * @param type Type of the draft.
+ */
 export function createDraftFromType(type: Types): Draft {
-    console.log("Creating draft with type", type)
     switch (type) {
         default:
             return new BuildingDraft(type)
     }
 }
-
-enum Attributes {}
-
-
-

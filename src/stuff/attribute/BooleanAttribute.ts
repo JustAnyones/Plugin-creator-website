@@ -38,4 +38,8 @@ export class BooleanAttribute extends Attribute {
         super(id, name, description, required, defaultValue)
     }
 
+    isEmpty(): boolean {
+        return this.value === null;
+    }
+
 }

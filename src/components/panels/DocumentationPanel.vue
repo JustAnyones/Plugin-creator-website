@@ -28,7 +28,8 @@
 </script>
 
 <template>
-  <h2>Documentation???</h2>
+  <h2>Documentation</h2>
+  <p>Work in progress...</p>
 </template>
 
 <style scoped>

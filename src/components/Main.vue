@@ -24,9 +24,8 @@
   -->
 
 <script setup lang="ts">
-import {Types, createDraftFromType as cd} from '@/stuff/Testing'
 import {Draft as DraftItem} from '@/stuff/drafts/Draft';
-import {nextTick, Ref, ref} from "vue";
+import {nextTick, Ref, ref, UnwrapRef} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "@/components/elements/inputs/StringInput.vue";
 import NumberInput from "@/components/elements/inputs/NumberInput.vue";
@@ -40,7 +39,15 @@ import LevelInput from "@/components/elements/inputs/LevelInput.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 import {Manifest} from "@/stuff/Manifest";
-import Documentation from "@/components/Documentation.vue";
+import Documentation from "@/components/panels/DocumentationPanel.vue";
+import ManifestC from "@/components/elements/ManifestComponent.vue";
+
+
+
+import { Collapse } from 'vue-collapsed'
+import {createDraftFromType, Types} from "@/stuff/Types";
+
+
 
 
 function capitalizeFirstLetter(string: string) {
@@ -52,23 +59,21 @@ var selected_type = null;
 const typeSelector = ref(null);
 const optionalAttributeSelector = ref(null);
 
-function createDraftFromType() {
+function addNewDraft() {
     if (selected_type === null) {
       alert("Please select draft type")
     } else {
-      let draft = cd(selected_type as Types);
+      let draft = createDraftFromType(selected_type as Types);
       data.value.push(draft)
       typeSelector.value.clear()
       d.value.push([])
     }
 }
 
-
-const files: Ref<Array<File>> = ref([]);
-
+const manifestObject: Ref<UnwrapRef<Manifest>> = ref(new Manifest());
 const data: Ref<Array<DraftItem>> = ref([]);
 
-const manifestObject: Ref<Manifest> = ref(new Manifest());
+
 
 
 const d: Ref<Array<Array<any>>> = ref([]);
@@ -93,22 +98,36 @@ async function deselectOptionalAttribute(selector_index: number, item: Attribute
   optionalAttributeSelector.value[selector_index].deselect(item)
 }
 
+function isManifestValid(): boolean {
+  let valid = true;
+  let val = manifestObject.value
+
+  if (!val.id.validate()) valid = false;
+  if (!val.version.validate()) valid = false;
+  if (!val.title.validate()) valid = false;
+  if (!val.text.validate()) valid = false;
+  if (!val.author.validate()) valid = false;
+
+  if (val.version.value < 1) {
+    val.version.addError("Manifest version is invalid. It must be a positive number and equal to at least 1.")
+    valid = false;
+  }
+  return valid;
+}
+
 function isValid() {
 
-  if (data.value.length === 0) return false;
+  if (!isManifestValid()) return false;
 
+  if (data.value.length === 0) {
+    alert("Cannot export - the are no drafts")
+    return false;
+  }
 
   // Validate drafts
   let isValid = true;
   data.value.forEach((draft) => {
-    console.log("Validating", draft)
-    try {
-      draft.validate()
-    } catch (e) {
-      alert(e.message)
-      console.log(e.attribute)
-      isValid = false;
-    }
+    if (!draft.validate()) isValid = false;
   });
 
   return isValid;
@@ -142,7 +161,7 @@ function exportToJson() {
 }
 
 function exportToManifest() {
-  if (!isValid()) return;
+  if (!isManifestValid()) return;
   FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
 }
 
@@ -179,12 +198,25 @@ function exportToZip() {
 
 
         <div class="generator-header">
-          <p class="bloody-disclaimer">
+
+          <p class="disclaimer-text">
             This is a preview version of plugin creator website V4, feature parity and compatibility
             is not assured with the previous versions.
           </p>
 
-          <p>To begin, please select the draft type</p>
+          <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
+
+          <b></b>
+          <Collapse :when="true" class="collapse">
+            <ManifestC :manifest="manifestObject"/>
+          </Collapse>
+
+
+
+
+
+
+          <p>Once you've finished writing the manifest, you can begin adding drafts.</p>
 
           <!-- Type selector for new draft object -->
           <div class="type-selector">
@@ -200,7 +232,7 @@ function exportToZip() {
                 {{ capitalizeFirstLetter(option.label) }}
               </template>
             </multiselect>
-            <Button @click="createDraftFromType">Create</Button>
+            <Button @click="addNewDraft">Create</Button>
           </div>
         </div>
 
@@ -210,7 +242,7 @@ function exportToZip() {
       <div class="drafts">
         <Draft v-bind:index="index" @pop="removeDraftAtIndex(index)" v-bind:object="obj" v-for="(obj, index) in data">
           <div v-for="(attr) in obj.getRequiredAttributes()">
-            <Attribute v-bind:name="attr.name" v-bind:description="attr.description">
+            <Attribute v-bind:name="attr.name" v-bind:description="attr.description" v-bind:errors="attr.errors">
               <component
                   v-bind:attribute="attr"
                   v-bind:name="attr.id+obj.id.value"
@@ -335,6 +367,10 @@ function exportToZip() {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.collapse {
+  transition: height var(--vc-auto-duration) cubic-bezier(0.3, 0, 0.6, 1);
 }
 
 .preview-panel {

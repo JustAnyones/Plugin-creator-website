@@ -18,7 +18,8 @@
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "uuid": "^9.0.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-collapsed": "^1.2.7"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",

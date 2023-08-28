@@ -23,11 +23,35 @@
  *
  */
 
+import {StringAttribute} from "./attribute/StringAttribute";
+import {NumberAttribute} from "./attribute/NumberAttribute";
+
 export class Manifest {
-    id: string = "some ID"
-    version: number = 1
-    title: string = "Title"
-    text: string = "Text"
-    author: string = "Author"
+    id = new StringAttribute(
+        "id", "Manifest ID",
+        "ID of the plugin manifest.",
+        true
+    )
+    version = new NumberAttribute(
+        "version", "Version",
+        "Version of the plugin. Should be kept 1 for first the version and incremented for each update.",
+        true, 1,
+        {minValue: 1, maxValue: 999999}
+    )
+    title= new StringAttribute(
+        "title", "Name",
+        "The name or title of the plugin.",
+        true
+    )
+    text = new StringAttribute(
+        "text", "Description",
+        "Description of the plugin.",
+        true
+    )
+    author = new StringAttribute(
+        "author", "Author",
+        "Author of the plugin.",
+        true
+    )
 }
 

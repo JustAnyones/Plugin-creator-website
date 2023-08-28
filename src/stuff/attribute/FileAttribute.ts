@@ -28,4 +28,8 @@ import {Attribute} from "./Attribute";
 export class FileAttribute extends Attribute {
     element = "FileAttribute"
     internalFileList?: FileList
+
+    isEmpty(): boolean {
+        return false;
+    }
 }

@@ -45,4 +45,8 @@ export class NumberAttribute extends Attribute {
         this.minValue = validation.minValue
         this.maxValue = validation.maxValue
     }
+
+    isEmpty(): boolean {
+        return this.value === null;
+    }
 }

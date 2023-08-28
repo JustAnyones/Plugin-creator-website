@@ -27,10 +27,13 @@ export abstract class Attribute {
     public readonly id: string
     readonly name: string
     readonly description: string
+    errors: Array<string> = []
     readonly required: boolean
     readonly defaultValue: any
 
     private _value: any
+
+    customValidator?: (() => boolean)
 
     element: string = null
 
@@ -53,32 +56,68 @@ export abstract class Attribute {
         this._value = this.defaultValue;
     }
 
+    /**
+     * Returns true if the attribute is empty.
+     */
+    public abstract isEmpty(): boolean
+
+    /**
+     * Returns the raw attribute value.
+     */
     public get value() {
         return this._value
     }
 
-    public abstract isEmpty(): boolean
-
-    public reset() {
-        console.log("asked to reset")
-        this.value = this.defaultValue
-    }
-
+    /**
+     * Sets the raw attribute value.
+     * @param value Attribute value to set.
+     */
     public set value(value: any) {
-        console.log(value)
         this._value = value
     }
 
+    /**
+     * Resets the attribute to the default value.
+     */
+    public reset() {
+        this.value = this.defaultValue
+    }
+
+    /**
+     * Returns true if current attribute value is the default value.
+     */
     public isDefault() {
         return this.value === this.defaultValue
     }
 
-    public validate() {
-
+    /**
+     * Returns true if current attribute is valid and has no errors.
+     */
+    public isValid() {
+        return this.errors.length === 0
     }
 
-    public isValid(): boolean {
-        return false
+    /**
+     * Creates a validation error.
+     * @param message Message of the validation error.
+     */
+    public addError(message: string) {
+        this.errors.push(message)
+    }
+
+    /**
+     * Validates attribute values and returns if it's valid.
+     */
+    public validate(): boolean {
+        this.errors = []
+        // If it's required and it's empty
+        if (this.required && this.isEmpty()) {
+            this.addError(`${this.name} field cannot be empty`)
+        }
+        // Call the custom validator, if defined
+        if (this.customValidator)
+            this.customValidator()
+        return this.isValid()
     }
 
     public toJSON() {

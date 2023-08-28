@@ -27,4 +27,8 @@ import {FileAttribute} from "./FileAttribute";
 
 export class FrameAttribute extends FileAttribute {
     element = "FrameInput"
+
+    isEmpty(): boolean {
+        return false;
+    }
 }

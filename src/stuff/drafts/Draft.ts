@@ -30,7 +30,7 @@ import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
-import {Types, ValidationException} from "../Testing";
+import {Types} from "../Types";
 
 export class Draft {
     id = new StringAttribute(
@@ -299,11 +299,26 @@ export class Draft {
         return data
     }
 
-    public validate() {
-        if (this.id.isEmpty())
-            throw new ValidationException(this.id, "ID field cannot be empty")
+    /**
+     * Validates every attribute of the draft.
+     *
+     * Returns whether the draft is valid.
+     */
+    private validateFields(): boolean {
+        let valid = true;
+        Object.keys(this).forEach(
+            (item) => {
+                let attribute = this[item]
+                if (attribute instanceof Attribute)
+                    if (!attribute.validate()) valid = false;
+            })
+        return valid
+    }
 
-        if (this.author.isEmpty())
-            throw new ValidationException(this.author, "Author field cannot be empty")
+    /**
+     * Runs validation for the draft.
+     */
+    public validate(): boolean {
+        return this.validateFields()
     }
 }
