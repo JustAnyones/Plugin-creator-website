@@ -1,4 +1,4 @@
-on: workflow_dispatch
+on: push
 name: Deploy website
 jobs:
   web-deploy:
@@ -27,4 +27,3 @@ jobs:
           ssh-port: 22
           source-path: ./dist/
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
-          rsync-options: --dry-run --archive --verbose --compress --delete-after --human-readable
