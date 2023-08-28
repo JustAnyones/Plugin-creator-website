@@ -278,6 +278,7 @@ function exportToZip() {
             <OptionalAttribute
                 v-bind:name="item.attribute.name"
                 v-bind:description="item.attribute.description"
+                :errors="item.attribute.errors"
                 @pop="deselectOptionalAttribute(index, item)"
             >
               <component
@@ -364,9 +365,14 @@ function exportToZip() {
 }
 
 .controls {
-  display: flex;
-  justify-content: space-between;
+  display: block;
+  justify-content: stretch;
   margin-bottom: 20px;
+}
+
+.controls button {
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .collapse {

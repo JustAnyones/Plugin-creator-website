@@ -5,6 +5,7 @@ import Attribute from "@/components/attributes/Attribute.vue";
 interface Props {
   name: string
   description: string
+  errors: Array<string>
 }
 
 const props = defineProps<Props>()
@@ -15,6 +16,7 @@ defineEmits(['pop'])
   <Attribute
       :name="props.name"
       :description="props.description"
+      :errors="props.errors"
   >
     <a href="#" class="remove-hyperlink" @click="(e) => {
       e.preventDefault();
