@@ -47,6 +47,6 @@ export class NumberAttribute extends Attribute {
     }
 
     isEmpty(): boolean {
-        return this.value === null;
+        return this.value === null || Number.isNaN(this.value);
     }
 }
