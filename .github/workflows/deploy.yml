@@ -1,15 +1,15 @@
 on: workflow_dispatch
-name: Deploy website on push
+name: Deploy website
 jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js 20
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
@@ -25,6 +25,6 @@ jobs:
           remote-user: deployment
           private-ssh-key: ${{ secrets.SSH_KEY }}
           ssh-port: 22
-          source-path: ./dist
+          source-path: ./dist/
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
           rsync-options: --dry-run --archive --verbose --compress --delete-after --human-readable
