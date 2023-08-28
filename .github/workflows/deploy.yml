@@ -1,0 +1,30 @@
+on: workflow_dispatch
+name: Deploy website on push
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Build Project
+        run: |
+          npm install
+          npm run build
+
+      - name: Sync Files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ secrets.SERVER_IP }}
+          remote-user: deployment
+          private-ssh-key: ${{ secrets.SSH_KEY }}
+          ssh-port: 22
+          source-path: ./
+          destination-path: /var/www/vhosts/pca.svetikas.lt/public/
+          rsync-options: --dry-run --archive --verbose --compress --delete-after --human-readable
