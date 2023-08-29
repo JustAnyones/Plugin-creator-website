@@ -136,10 +136,10 @@ function isValid() {
 function getJsonBlob(): Blob {
   // @ts-ignore
   let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
-  content += JSON.stringify(data.value)
+  content += JSON.stringify(data.value, null, 2)
 
   let blob = new Blob([content], {
-    type: "text/plain;charset=utf-8"
+    type: "application/json;charset=utf-8"
   });
   return blob;
 }
@@ -147,7 +147,7 @@ function getJsonBlob(): Blob {
 function getManifestBlob(): Blob {
   // @ts-ignore
   let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
-  content += JSON.stringify(manifestObject.value)
+  content += JSON.stringify(manifestObject.value, null, 2)
 
   let blob = new Blob([content], {
     type: "text/plain;charset=utf-8"
