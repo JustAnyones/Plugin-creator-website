@@ -467,6 +467,11 @@ export class BuildingDraft extends ViewportDraft {
             valid = false;
         }
 
+        if (this.rotationAware.value === true && this.frames.value.length % 4 != 0) {
+            this.frames.addError("Rotation aware requires you to specify a multiple of 4 frames.")
+            valid = false;
+        }
+
         if (this.width.value != this.height.value) {
             this.height.addError("Width and height must be the same.")
             valid = false;
