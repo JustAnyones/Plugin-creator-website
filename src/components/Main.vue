@@ -199,11 +199,6 @@ function exportToZip() {
 
         <div class="generator-header">
 
-          <p class="disclaimer-text">
-            This is a preview version of plugin creator website V4, feature parity and compatibility
-            is not assured with the previous versions.
-          </p>
-
           <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
 
           <b></b>
