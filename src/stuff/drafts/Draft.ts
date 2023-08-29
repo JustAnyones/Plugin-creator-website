@@ -36,7 +36,10 @@ export class Draft {
     id = new StringAttribute(
         "id",
         "ID",
-        "A unique identifier which is used by the game to load and use the plugin.",
+        "Each object has to have a unique ID to identify it. " +
+        "So you should add some specific information about the plugin to ensure nobody else ever gonna use this ID. " +
+        "Avoid changes to the ID afterwards, as it is used to identify buildings in saved cities. " + 
+        "If you need to change it, please use the \"aliases\" attribute instead.",
         true,
         "lt.svetikas.pca.v4." + CryptoJS.MD5(new Date().getTime().toString()).toString()
     )
@@ -47,10 +50,10 @@ export class Draft {
         "Whether the draft is active and should be loaded by the game.",
         false, true
     )
-    premium= new BooleanAttribute(
+    premium = new BooleanAttribute(
         "premium",
         "Premium",
-        "Whether the plugin is premium. If it's considered premium, it will not be active in non premium" +
+        "Whether the plugin is premium. If it's considered premium, it will not be active in non premium " +
         "versions of the game.",
         false, false
     )
@@ -58,7 +61,7 @@ export class Draft {
     readonly type: Types
     once = new BooleanAttribute(
         "once", "Once",
-        "Whether to load a draft by the specified ID once. It will not load any extra drafts whose" +
+        "Whether to load a draft by the specified ID once. It will not load any extra drafts whose " +
         "ID is already loaded.",
         false, false
     )
@@ -77,7 +80,7 @@ export class Draft {
         "Privileged key for your draft. Allows to use special features, which are restricted to " +
         "trusted plugin creators only."
     )
-    mute= new BooleanAttribute(
+    mute = new BooleanAttribute(
         "mute", "Mute",
         "Whether to suppress any errors that have occurred while loading the draft.",
         false, false
@@ -86,14 +89,14 @@ export class Draft {
     minVersion = new NumberAttribute(
         "min version",
         "Minimal version",
-        "Minimal game version required to run this draft",
+        "Minimal game version required to run this draft.",
         false, 0,
         {minValue: 0, maxValue: 99999}
     )
     maxVersion = new NumberAttribute(
         "max version",
         "Max version",
-        "Maximum game version required to run this draft",
+        "Maximum game version required to run this draft.",
         false, 0,
         {minValue: 0, maxValue: 99999}
     )
@@ -140,7 +143,7 @@ export class Draft {
         "Whether the draft can be overridden.",
         false, false
     )
-    hideId= new BooleanAttribute(
+    hideId = new BooleanAttribute(
         "hide id", "Hide ID",
         "Whether the user can see the ID of the draft.",
         false, false
@@ -170,7 +173,8 @@ export class Draft {
     ordinal = new NumberAttribute(
         "ordinal",
         "Ordinal",
-        "Position of the draft in category.",
+        "Position of the draft in category. " +
+        "Lower ordinal value will list the draft first.",
         false, null
     )
     // TODO: improve description
@@ -187,7 +191,7 @@ export class Draft {
 
     separator = new BooleanAttribute(
         "separator", "Separator",
-        "Whether to separate draft from others in category.", // TODO: improve, is separator before or after?
+        "Whether to separate draft from others in a category.", // TODO: improve, is separator before or after?
         false, false
     )
 
@@ -195,14 +199,14 @@ export class Draft {
     // TODO: preview and icon frames
     previewFrames: Array<number>
     iconFrames: Array<number>
-    showNewMarker= new BooleanAttribute(
+    showNewMarker = new BooleanAttribute(
         "show new marker", "Show new marker",
-        "Whether to draft will show a new marker in the toolbar.",
+        "Whether the draft will show a new marker in the toolbar.",
         false, true
     )
     searchable = new BooleanAttribute(
         "searchable", "Searchable",
-        "Whether to draft can be searched.",
+        "Whether the draft can be searched.",
         false, true
     )
 

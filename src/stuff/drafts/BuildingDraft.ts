@@ -33,14 +33,15 @@ import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute(
         "width", "Width",
-        "Width of your building draft in tiles. Should be the same height.",
+        "Tile width of the base of the building. Each tile has a pixel size of 32x16.",
         true,
         1,
         {minValue: 1, maxValue: 16}
     )
     height = new NumberAttribute(
         "height", "Height",
-        "Height of your building draft in tiles. Should be the same width.",
+        "Tile width of the base of the building. " +
+        "Has to be the same as width, as only squared buildings are possible.",
         true,
         1,
         {minValue: 1, maxValue: 16}
@@ -57,16 +58,16 @@ export class BuildingDraft extends ViewportDraft {
     minWaterTiles: number
     level = new LevelAttribute(
         "level", "Level",
-        "Residential/commercial/industrial building level.",
+        "Building wealth level. Only applicable for RCI buildings.",
         false, null,
         {minValue: 1, maxValue: 3}
     )
     density: number // float
-    buildHeight= new NumberAttribute(
+    buildHeight = new NumberAttribute(
         "build height", "Build height",
-        "The building height. Should be used when frames are not provided. Otherwise, game calculates it" +
-        "by itself.",
-        false, -1,
+        "The building height in pixels. Should be used when frames are not provided. Otherwise, game will calculate it" +
+        " on its own.",
+        false, null,
     )
 
     //animation: boolean // draft.animation = src.optBoolean("animated", draft.animation); TODO: ???
@@ -282,9 +283,8 @@ export class BuildingDraft extends ViewportDraft {
     rebuild: boolean
 
     buildTime= new NumberAttribute(
-        "build time",
-        "Build time",
-        "Build time of the building. Can be left blank for game to calculate itself. Value of 0 will let" +
+        "build time", "Build time",
+        "Build time of the building. Can be left blank for game to calculate itself. Value of 0 will let " +
         "building finish instantly.",
         false, null,
         {minValue: 0, maxValue: 10_000_000}
