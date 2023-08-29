@@ -64,6 +64,9 @@ function addNewDraft() {
       alert("Please select draft type")
     } else {
       let draft = createDraftFromType(selected_type as Types);
+
+      if (!manifestObject.value.author.isEmpty())
+        draft.author.value = manifestObject.value.author.value
       data.value.push(draft)
       typeSelector.value.clear()
       d.value.push([])

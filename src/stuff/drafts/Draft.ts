@@ -132,8 +132,7 @@ export class Draft {
     author = new StringAttribute(
         "author", "Author",
         "The author of this plugin draft.",
-        true,
-        "Plugin creator website 4.0"
+        true
     )
 
 
