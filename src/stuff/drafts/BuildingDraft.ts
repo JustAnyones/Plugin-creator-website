@@ -154,7 +154,12 @@ export class BuildingDraft extends ViewportDraft {
     frameAlignmentArea: boolean
     frameAlignment: boolean
     alignable: boolean
-    rotationAware: boolean
+    rotationAware = new BooleanAttribute(
+        "rotation aware", "Rotation aware",
+        "Whether the building is rotation aware. " +
+        "If set to aware, you have to provide a multiple of 4 frames.",
+        false, false
+    )
     extRotationAware: boolean
     selectableFrames: boolean
     volatile: boolean
@@ -171,7 +176,12 @@ export class BuildingDraft extends ViewportDraft {
         "Whether the building explodes after being set on fire.",
         false, false
     )
-    explosionRadius: number
+    explosionRadius = new NumberAttribute(
+        "explosion radius", "Explosion radius",
+        "Radius of the explosion.",
+        false, null,
+        {minValue: 0, maxValue: 10_000_000}
+    )
     nuclear = new BooleanAttribute(
         "nuclear", "Nuclear",
         "Whether the explosion of the building is nuclear.",
@@ -254,7 +264,11 @@ export class BuildingDraft extends ViewportDraft {
         "Draft ID of a zone this draft belongs to. " +
         "Game will place the specified zone underneath the building."
     )
-    buildZone: boolean
+    buildZone = new BooleanAttribute(
+        "build zone", "Build zone",
+        "Whether to build the zone under the building, if available.",
+        false, true
+    )
 
     conductive: boolean
     superConductive: boolean
@@ -265,7 +279,11 @@ export class BuildingDraft extends ViewportDraft {
         false, false
     )
 
-    drawZone: boolean
+    drawZone = new BooleanAttribute(
+        "draw zone", "Draw zone",
+        "Whether to draw the zone under the building.",
+        false, false
+    )
 
     people = new NumberAttribute(
         "people", "People",
@@ -289,7 +307,11 @@ export class BuildingDraft extends ViewportDraft {
         false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
-    influencePreview: boolean
+    influencePreview = new BooleanAttribute(
+        "influence preview", "Influence preview",
+        "Whether the show a preview of building influences in the build mode.",
+        false, true
+    )
 
     // Visible Influences
     pollutionInfluence = new InfluenceAttribute(
@@ -378,15 +400,64 @@ export class BuildingDraft extends ViewportDraft {
     )
 
 
-
-
     // TODO: loadUpgrades
-    // TODO: loadAspects
-    // TODO: loadPedestrian
 
 
-    influences: any
-    aspect: any
+
+    // Aspects
+    provideAspectEducationLow = new NumberAttribute(
+        "provide aspect education low", "Provide aspect education low",
+        "..."
+    )
+    provideAspectEducationHigh = new NumberAttribute(
+        "provide aspect education high", "Provide aspect education high",
+        "..."
+    )
+    provideAspectHealthCare = new NumberAttribute(
+        "provide aspect health care", "Provide aspect health care",
+        "..."
+    )
+    provideAspectWasteDisposal = new NumberAttribute(
+        "provide aspect waste disposal", "Provide aspect waste disposal",
+        "..."
+    )
+    provideAspectBodyDisposal = new NumberAttribute(
+        "provide aspect body disposal", "Provide aspect body disposal",
+        "..."
+    )
+
+    // Aspect capacities
+    aspectEducationLowCapacity = new NumberAttribute(
+        "aspect education low capacity", "Aspect education low capacity",
+        "..."
+    )
+    aspectEducationHighCapacity = new NumberAttribute(
+        "aspect education high capacity", "Aspect education high capacity",
+        "..."
+    )
+    aspectHealthCareCapacity = new NumberAttribute(
+        "aspect health care capacity", "Aspect health care capacity",
+        "..."
+    )
+    aspectWasteDisposalCapacity = new NumberAttribute(
+        "aspect waste disposal capacity", "Aspect waste disposal capacity",
+        "..."
+    )
+    aspectBodyDisposalCapacity = new NumberAttribute(
+        "aspect body disposal capacity", "Aspect body disposal capacity",
+        "..."
+    )
+
+
+    pedestrian = new StringAttribute(
+        "pedestrian", "Pedestrian",
+        "ID of Pedestrian draft to spawn from this building."
+    )
+    pedestrianCount = new NumberAttribute(
+        "pedestrian count", "Pedestrian count",
+        "Amount of pedestrians to spawn from this building.",
+        false, 0
+    )
 
     validate(): boolean {
         let valid = super.validate()
