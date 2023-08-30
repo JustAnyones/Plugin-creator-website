@@ -53,9 +53,21 @@ export class BuildingDraft extends ViewportDraft {
     // TODO: implement more of loadFrames(draft);
 
 
-    needsRoad: boolean
-    needsLand: boolean
-    needsWater: boolean
+    needsRoad = new BooleanAttribute(
+        "needs road", "Needs road",
+        "Whether the building needs a road connection to operate.",
+        false, true
+    )
+    needsLand = new BooleanAttribute(
+        "needs land", "Needs land",
+        "Whether the building needs to be on land to be built.",
+        false, null
+    )
+    needsWater = new BooleanAttribute(
+        "needs water", "Needs water",
+        "Whether the building needs to be on water to be built.",
+        false, null
+    )
     minWaterTiles: number
     level = new LevelAttribute(
         "level", "Level",
@@ -93,7 +105,10 @@ export class BuildingDraft extends ViewportDraft {
         false, null,
         {minValue: 0, maxValue: 10_000_000}
     )
-    budgetItem: string
+    budgetItem = new StringAttribute(
+        "budget item", "Budget item",
+        "ID of the budget draft to put the building under in estate menu of the city."
+    )
     bulldozePrice = new NumberAttribute(
         "bulldoze price", "Bulldoze price",
         "Price to bulldoze the building.",
