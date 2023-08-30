@@ -107,8 +107,6 @@ function isManifestValid(): boolean {
 
 function isValid() {
 
-  if (!isManifestValid()) return false;
-
   if (data.value.length === 0) {
     alert("Cannot export - the are no drafts")
     return false;
@@ -155,7 +153,7 @@ function exportToManifest() {
   FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
 }
 
-function createZipArchive() {
+function createZipArchive(): JSZip {
   const zip = new JSZip();
   zip.file("code.json", getJsonBlob())
   zip.file("plugin.manifest", getManifestBlob())
@@ -169,21 +167,64 @@ function createZipArchive() {
 }
 
 function exportToZip() {
-  if (!isValid()) return;
+  if (!isValid() || !isManifestValid()) return;
 
-  const zip = createZipArchive();
-
-  zip.generateAsync({ type: 'blob' }).then(function (content) {
+  createZipArchive().generateAsync({ type: 'blob' }).then(function (content) {
     FileSaver.saveAs(content, 'plugin.zip');
   });
 }
 
+// https://stackoverflow.com/a/16245768
+function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
+  const byteCharacters = atob(encodedData);
+  const byteArrays = [];
 
-function exportToEncryptedPlugin() {
-  return alert("Feature coming soon")
-  if (!isValid()) return;
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
 
-  const zip = createZipArchive();
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
+
+async function exportToEncryptedPlugin() {
+  if (!isValid() || !isManifestValid()) return;
+
+  createZipArchive().generateAsync({type: 'blob'}).then(async function (content) {
+    let formData = new FormData();
+    formData.append(
+        "file",
+        content,
+        "plugin.zip"
+    );
+
+    fetch(
+      "https://api.svetikas.lt/v1/theotown/encrypt",
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+    .then(response => response.json())
+    .then(result => {
+      if (!result.success) throw new Error(result.details)
+      FileSaver.saveAs(Base64ToBlob(result.data), 'plugin.plugin');
+
+    })
+    .catch(error => alert(`An error has occurred while trying to encrypt your plugin: ${error}`));
+  });
+
+  
+
 }
 
 </script>
@@ -237,58 +278,83 @@ function exportToEncryptedPlugin() {
 
 
 
-      <div class="drafts">
-        <Draft v-bind:index="index" @pop="removeDraftAtIndex(index)" v-bind:object="obj" v-for="(obj, index) in data">
-          <div v-for="(attr) in obj.getRequiredAttributes()">
-            <Attribute v-bind:name="attr.name" v-bind:description="attr.description" v-bind:errors="attr.errors">
-              <component
-                  v-bind:attribute="attr"
-                  v-bind:name="attr.id+obj.id.value"
-                  v-model:value="attr.value"
-                  :is="Inputs[attr.element]"
-                  @updateFiles="attr.internalFileList=$event"
-              />
-            </Attribute>
-          </div>
-
-          <h3>Optional attributes</h3>
-          <p>These are optional attributes</p>
-          <multiselect
-              ref="optionalAttributeSelector"
-              v-model="d[index]"
-              mode="multiple"
-              :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
-                value: attr.name, label: attr.name, attribute: attr
-              }))"
-              :object="true"
-              :show-labels="false"
-              :searchable="true"
-              :close-on-select="true"
-              placeholder="Select optional attributes"
-              :canClear="false"
+        <div class="drafts">
+          <Draft
+              :index="index"
+              :object="obj"
+              v-for="(obj, index) in data"
+              @pop="removeDraftAtIndex(index)"
           >
-            <template v-slot:option="{ option }">
-              {{ option.label }}
-            </template>
-          </multiselect>
+            <div v-for="(attr) in obj.getRequiredAttributes()">
+              <Attribute
+                  :name="attr.name"
+                  :description="attr.description"
+                  :errors="attr.errors"
+              >
+                <component
+                    v-bind:attribute="attr"
+                    v-bind:name="attr.id+obj.id.value"
+                    v-model:value="attr.value"
+                    :is="Inputs[attr.element]"
+                    @updateFiles="attr.internalFileList=$event"
+                />
+              </Attribute>
+            </div>
 
-          <div :key="item.attribute.id" v-for="item in d[index]">
-            <OptionalAttribute
-                v-bind:name="item.attribute.name"
-                v-bind:description="item.attribute.description"
-                :errors="item.attribute.errors"
-                @pop="deselectOptionalAttribute(index, item)"
+
+
+
+
+
+            <h3>Optional attributes</h3>
+            <p>These are optional attributes</p>
+            <multiselect
+                class="optional-attribute-multiselect"
+                ref="optionalAttributeSelector"
+                v-model="d[index]"
+                mode="multiple"
+                :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
+                  value: attr.name, label: attr.name, attribute: attr
+                }))"
+                :object="true"
+                :show-labels="false"
+                :searchable="true"
+                :close-on-select="true"
+                placeholder="Select optional attributes"
+                :canClear="false"
             >
-              <component
-                  :attribute="item.attribute"
-                  :name="item.attribute.id+obj.id.value"
-                  v-model:value="item.attribute.value"
-                  :is="Inputs[item.attribute.element]"
-              ></component>
-            </OptionalAttribute>
-          </div>
-        </Draft>
-      </div>
+              <template v-slot:option="{ option }">
+                {{ option.label }}
+              </template>
+            </multiselect>
+
+
+
+
+
+            <div :key="item.attribute.id" v-for="item in d[index]">
+              <OptionalAttribute
+                  :name="item.attribute.name"
+                  :description="item.attribute.description"
+                  :errors="item.attribute.errors"
+                  @pop="deselectOptionalAttribute(index, item)"
+              >
+                <component
+                    :attribute="item.attribute"
+                    :name="item.attribute.id+obj.id.value"
+                    v-model:value="item.attribute.value"
+                    :is="Inputs[item.attribute.element]"
+                ></component>
+              </OptionalAttribute>
+            </div>
+
+
+
+          </Draft>
+        </div>
+
+
+
 
         <div class="controls">
           <Button @click="exportToJson()">Export JSON file</Button>
@@ -296,6 +362,7 @@ function exportToEncryptedPlugin() {
           <Button @click="exportToZip()">Export as a zip archive</Button>
           <Button @click="exportToEncryptedPlugin()">Export as encrypted .plugin file</Button>
         </div>
+
 
       </div>
 
@@ -320,6 +387,10 @@ function exportToEncryptedPlugin() {
   display: flex;
   align-items: stretch;
 }*/
+
+.optional-attribute-multiselect {
+  margin-bottom: 20px;
+}
 
 .page-container {
   display: flex;
