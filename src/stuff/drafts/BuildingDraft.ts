@@ -266,7 +266,11 @@ export class BuildingDraft extends ViewportDraft {
     supportsTerrain: boolean
     supportsShoreline: boolean
 
-    drawWaterBorders: boolean
+    drawWaterBorders = new BooleanAttribute(
+        "draw water borders", "Draw water borders",
+        "Whether to draw the water borders when near water.",
+        false, null
+    )
     drawWaterGround: any // either a boolean or ID of the ground to draw
 
     movable = new BooleanAttribute(
