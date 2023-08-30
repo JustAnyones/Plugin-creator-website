@@ -102,20 +102,7 @@ async function deselectOptionalAttribute(selector_index: number, item: Attribute
 }
 
 function isManifestValid(): boolean {
-  let valid = true;
-  let val = manifestObject.value
-
-  if (!val.id.validate()) valid = false;
-  if (!val.version.validate()) valid = false;
-  if (!val.title.validate()) valid = false;
-  if (!val.text.validate()) valid = false;
-  if (!val.author.validate()) valid = false;
-
-  if (val.version.value < 1) {
-    val.version.addError("Manifest version is invalid. It must be a positive number and equal to at least 1.")
-    valid = false;
-  }
-  return valid;
+  return manifestObject.value.validate()
 }
 
 function isValid() {
@@ -168,9 +155,7 @@ function exportToManifest() {
   FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
 }
 
-function exportToZip() {
-  if (!isValid()) return;
-
+function createZipArchive() {
   const zip = new JSZip();
   zip.file("code.json", getJsonBlob())
   zip.file("plugin.manifest", getManifestBlob())
@@ -180,10 +165,25 @@ function exportToZip() {
       zip.file(file.name, file)
     })
   })
+  return zip
+}
+
+function exportToZip() {
+  if (!isValid()) return;
+
+  const zip = createZipArchive();
 
   zip.generateAsync({ type: 'blob' }).then(function (content) {
     FileSaver.saveAs(content, 'plugin.zip');
   });
+}
+
+
+function exportToEncryptedPlugin() {
+  return alert("Feature coming soon")
+  if (!isValid()) return;
+
+  const zip = createZipArchive();
 }
 
 </script>
@@ -294,6 +294,7 @@ function exportToZip() {
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
           <Button @click="exportToZip()">Export as a zip archive</Button>
+          <Button @click="exportToEncryptedPlugin()">Export as encrypted .plugin file</Button>
         </div>
 
       </div>

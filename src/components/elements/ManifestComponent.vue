@@ -27,6 +27,7 @@
 import {Manifest} from "@/stuff/Manifest";
 import {defineProps} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
+import StringInput from "../attributes/inputs/StringInput.vue";
 
 interface Props {
   manifest: Manifest
@@ -41,12 +42,11 @@ const props = defineProps<Props>()
         :description="props.manifest.id.description"
         :errors="props.manifest.id.errors"
     >
-      <input
-          type="text"
-          class="attribute-input"
-          :value="props.manifest.id.value"
-          @input="props.manifest.id.value = $event.target.value"
-      >
+      <StringInput
+        :attribute="props.manifest.id"
+        :name="props.manifest.id.name"
+        v-model:value="props.manifest.id.value"
+      />
     </Attribute>
 
     <Attribute
@@ -68,12 +68,11 @@ const props = defineProps<Props>()
         :description="props.manifest.title.description"
         :errors="props.manifest.title.errors"
     >
-      <input
-          type="text"
-          class="attribute-input"
-          :value="props.manifest.title.value"
-          @input="props.manifest.title.value = $event.target.value"
-      >
+      <StringInput
+        :attribute="props.manifest.title"
+        :name="props.manifest.title.name"
+        v-model:value="props.manifest.title.value"
+      />
     </Attribute>
 
     <Attribute
@@ -81,12 +80,11 @@ const props = defineProps<Props>()
         :description="props.manifest.text.description"
         :errors="props.manifest.text.errors"
     >
-      <input
-          type="text"
-          class="attribute-input"
-          :value="props.manifest.text.value"
-          @input="props.manifest.text.value = $event.target.value"
-      >
+      <StringInput
+        :attribute="props.manifest.text"
+        :name="props.manifest.text.name"
+        v-model:value="props.manifest.text.value"
+      />
     </Attribute>
 
     <Attribute
@@ -94,12 +92,11 @@ const props = defineProps<Props>()
         :description="props.manifest.author.description"
         :errors="props.manifest.author.errors"
     >
-      <input
-          type="text"
-          class="attribute-input"
-          :value="props.manifest.author.value"
-          @input="props.manifest.author.value = $event.target.value"
-      >
+      <StringInput
+        :attribute="props.manifest.author"
+        :name="props.manifest.author.name"
+        v-model:value="props.manifest.author.value"
+      />
     </Attribute>
   </div>
 </template>

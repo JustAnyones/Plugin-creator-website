@@ -120,7 +120,7 @@ export class Draft {
         "text", "Text",
         "Draft text, usually the description of the building or the text in notifications."
     )
-    textId= new StringAttribute(
+    textId = new StringAttribute(
         "text id", "Text ID",
         "ID of the text string. Can be used to refer to specific translation key."
     )

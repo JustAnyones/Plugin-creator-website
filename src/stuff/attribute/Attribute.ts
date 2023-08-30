@@ -112,7 +112,7 @@ export abstract class Attribute {
         this.errors = []
         // If it's required and it's empty
         if (this.required && this.isEmpty()) {
-            this.addError(`${this.name} field cannot be empty`)
+            this.addError(`${this.name} field cannot be empty.`)
         }
         // Call the custom validator, if defined
         if (this.customValidator)

@@ -53,5 +53,44 @@ export class Manifest {
         "Author of the plugin.",
         true
     )
+
+    /**
+     * Returns true if manifest is considered to be valid.
+     */
+    public validate(): boolean {
+        let valid = true;
+
+        if (!this.id.validate()) valid = false;
+        if (!this.version.validate()) valid = false;
+        if (!this.title.validate()) valid = false;
+        if (!this.text.validate()) valid = false;
+        if (!this.author.validate()) valid = false;
+
+        if (this.version.value < 1) {
+            this.version.addError("Manifest version is invalid. It must be a positive number and equal to at least 1.")
+            valid = false;
+        }
+
+        if (this.id.value.trim().length < 5) {
+            this.id.addError("ID of your plugin must be at least 5 characters long.")
+            valid = false;
+        }
+
+        if (this.title.value.trim().length < 5) {
+            this.title.addError("Title of your plugin must be at least 5 characters long.")
+            valid = false;
+        }
+
+        if (this.text.value.trim().length < 10) {
+            this.text.addError("Description of your plugin must be at least 10 characters long.")
+            valid = false;
+        }
+
+        if (this.author.value.trim().length < 5) {
+            this.author.addError("Author field of your plugin must be at least 5 characters long.")
+            valid = false;
+        }
+        return valid;
+    }
 }
 
