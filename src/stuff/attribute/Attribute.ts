@@ -24,11 +24,11 @@
  */
 
 export abstract class Attribute {
-    public readonly id: string
+    readonly id: string
     readonly name: string
     readonly description: string
     errors: Array<string> = []
-    readonly required: boolean
+    required: boolean
     readonly defaultValue: any
 
     private _value: any

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import Button from "@/components/elements/Button.vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 interface Props {
   name: string

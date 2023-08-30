@@ -29,6 +29,7 @@ import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
+import {Types} from "../Types";
 
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute(
@@ -458,6 +459,13 @@ export class BuildingDraft extends ViewportDraft {
         "Amount of pedestrians to spawn from this building.",
         false, 0
     )
+
+    constructor(type: Types) {
+        super(type)
+
+        this.width.required = true;
+        this.height.required = true;
+    }
 
     validate(): boolean {
         let valid = super.validate()

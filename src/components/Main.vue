@@ -27,15 +27,15 @@
 import {Draft as DraftItem} from '@/stuff/drafts/Draft';
 import {nextTick, Ref, ref, UnwrapRef} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
-import StringInput from "@/components/elements/inputs/StringInput.vue";
-import NumberInput from "@/components/elements/inputs/NumberInput.vue";
+import StringInput from "@/components/attributes/inputs/StringInput.vue";
+import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
 import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
-import BooleanInput from "@/components/elements/inputs/BooleanInput.vue";
-import FrameInput from "@/components/elements/inputs/FrameInput.vue";
+import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
+import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
 import Draft from "@/components/Draft.vue";
 import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
-import LevelInput from "@/components/elements/inputs/LevelInput.vue";
+import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 import {Manifest} from "@/stuff/Manifest";
