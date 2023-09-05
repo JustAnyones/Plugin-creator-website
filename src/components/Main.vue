@@ -245,6 +245,12 @@ async function exportToEncryptedPlugin() {
 
           <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
 
+          <p>
+            Manifest helps the game identify your plugin by putting it in the plugins category
+            of the toolbar and inside the local plugin list. This also allows you to specify
+            where the plugin can be used inside online mode.
+          </p>
+
           <b></b>
           <Collapse :when="true" class="collapse">
             <ManifestC :manifest="manifestObject"/>
@@ -255,7 +261,9 @@ async function exportToEncryptedPlugin() {
 
 
 
-          <p>Once you've finished writing the manifest, you can begin adding drafts.</p>
+          <p>
+            Once you've finished writing the manifest, you can begin adding drafts to your plugin.
+          </p>
 
           <!-- Type selector for new draft object -->
           <div class="type-selector">
