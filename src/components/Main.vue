@@ -58,6 +58,7 @@ var selected_type = null;
 
 const typeSelector = ref(null);
 const optionalAttributeSelector = ref(null);
+const showPreviewPanel = false;
 
 function addNewDraft() {
     if (selected_type === null) {
@@ -374,7 +375,7 @@ async function exportToEncryptedPlugin() {
 
       </div>
 
-      <div class="preview-panel">
+      <div v-if="showPreviewPanel" class="preview-panel">
         <h2>Live preview of the generated JSON:</h2>
         <h3>plugin.manifest</h3>
         <pre>{{ manifestObject }}</pre>
