@@ -25,17 +25,10 @@
 
 <script setup lang="ts">
 import {Draft as DraftItem} from '@/stuff/drafts/Draft';
-import {nextTick, Ref, ref, UnwrapRef} from "vue";
-import Attribute from "@/components/attributes/Attribute.vue";
-import StringInput from "@/components/attributes/inputs/StringInput.vue";
-import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
-import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
-import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
-import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
+import {Ref, ref, UnwrapRef} from "vue";
 import Draft from "@/components/Draft.vue";
 import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
-import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 import {Manifest} from "@/stuff/Manifest";
@@ -43,11 +36,8 @@ import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
 
 
-
-import { Collapse } from 'vue-collapsed'
+import {Collapse} from 'vue-collapsed'
 import {createDraftFromType, Types} from "@/stuff/Types";
-
-
 
 
 function capitalizeFirstLetter(string: string) {
@@ -57,8 +47,8 @@ function capitalizeFirstLetter(string: string) {
 var selected_type = null;
 
 const typeSelector = ref(null);
-const optionalAttributeSelector = ref(null);
-const showPreviewPanel = false;
+const showManifest = ref(true);
+const showPreviewPanel = ref(false);
 
 function addNewDraft() {
     if (selected_type === null) {
@@ -68,38 +58,17 @@ function addNewDraft() {
 
       if (!manifestObject.value.author.isEmpty())
         draft.author.value = manifestObject.value.author.value
-      data.value.push(draft)
+      drafts.value.push(draft)
       typeSelector.value.clear()
-      d.value.push([])
     }
 }
 
-const manifestObject: Ref<UnwrapRef<Manifest>> = ref(new Manifest());
-const data: Ref<Array<DraftItem>> = ref([]);
-
-
-
-
-const d: Ref<Array<Array<any>>> = ref([]);
-
-const Inputs = {
-  StringInput,
-  NumberInput,
-  BooleanInput,
-  FrameInput,
-  LevelInput,
-}
+const manifestObject: Ref<Manifest> = ref(null);
+manifestObject.value = new Manifest();
+const drafts: Ref<Array<DraftItem>> = ref([]);
 
 function removeDraftAtIndex(index: number) {
-  data.value.splice(index, 1) // Remove item
-  d.value.splice(index, 1)
-}
-
-
-async function deselectOptionalAttribute(selector_index: number, item: Attribute) {
-  item.attribute.reset()
-  await nextTick()
-  optionalAttributeSelector.value[selector_index].deselect(item)
+  drafts.value.splice(index, 1) // Remove item
 }
 
 function isManifestValid(): boolean {
@@ -108,14 +77,14 @@ function isManifestValid(): boolean {
 
 function isValid() {
 
-  if (data.value.length === 0) {
+  if (drafts.value.length === 0) {
     alert("Cannot export - the are no drafts")
     return false;
   }
 
   // Validate drafts
   let isValid = true;
-  data.value.forEach((draft) => {
+  drafts.value.forEach((draft) => {
     if (!draft.validate()) isValid = false;
   });
 
@@ -125,12 +94,11 @@ function isValid() {
 function getJsonBlob(): Blob {
   // @ts-ignore
   let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
-  content += JSON.stringify(data.value, null, 2)
+  content += JSON.stringify(drafts.value, null, 2)
 
-  let blob = new Blob([content], {
+  return new Blob([content], {
     type: "application/json;charset=utf-8"
   });
-  return blob;
 }
 
 function getManifestBlob(): Blob {
@@ -138,10 +106,9 @@ function getManifestBlob(): Blob {
   let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
   content += JSON.stringify(manifestObject.value, null, 2)
 
-  let blob = new Blob([content], {
+  return new Blob([content], {
     type: "text/plain;charset=utf-8"
   });
-  return blob;
 }
 
 function exportToJson() {
@@ -159,7 +126,7 @@ function createZipArchive(): JSZip {
   zip.file("code.json", getJsonBlob())
   zip.file("plugin.manifest", getManifestBlob())
 
-  data.value.forEach(draft => {
+  drafts.value.forEach(draft => {
     draft.getFiles().forEach(file => {
       zip.file(file.name, file)
     })
@@ -192,8 +159,7 @@ function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
     byteArrays.push(byteArray);
   }
 
-  const blob = new Blob(byteArrays, {type: contentType});
-  return blob;
+  return new Blob(byteArrays, {type: contentType});
 }
 
 
@@ -244,16 +210,15 @@ async function exportToEncryptedPlugin() {
 
         <div class="generator-header">
 
-          <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
+          <Collapse :when="showManifest" class="collapse">
+            <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
 
-          <p>
-            Manifest helps the game identify your plugin by putting it in the plugins category
-            of the toolbar and inside the local plugin list. This also allows you to specify
-            where the plugin can be used inside online mode.
-          </p>
+            <p>
+              Manifest helps the game identify your plugin by putting it in the plugins category
+              of the toolbar and inside the local plugin list. This also allows you to specify
+              where the plugin can be used inside online mode.
+            </p>
 
-          <b></b>
-          <Collapse :when="true" class="collapse">
             <ManifestC :manifest="manifestObject"/>
           </Collapse>
 
@@ -287,81 +252,13 @@ async function exportToEncryptedPlugin() {
 
 
 
-        <div class="drafts">
-          <Collapse :when="true" class="collapse">
+        <div v-if="drafts.length > 0" class="drafts">
             <Draft
                 :index="index"
-                :object="obj"
-                v-for="(obj, index) in data"
+                :draftObject="obj"
+                v-for="(obj, index) in drafts"
                 @pop="removeDraftAtIndex(index)"
-            >
-              <div v-for="(attr) in obj.getRequiredAttributes()">
-                <Attribute
-                    :name="attr.name"
-                    :description="attr.description"
-                    :errors="attr.errors"
-                >
-                  <component
-                      v-bind:attribute="attr"
-                      v-bind:name="attr.id+obj.id.value"
-                      v-model:value="attr.value"
-                      :is="Inputs[attr.element]"
-                      @updateFiles="attr.internalFileList=$event"
-                  />
-                </Attribute>
-              </div>
-
-
-
-
-
-
-              <h3>Optional attributes</h3>
-              <p>These are optional attributes</p>
-              <multiselect
-                  class="optional-attribute-multiselect"
-                  ref="optionalAttributeSelector"
-                  v-model="d[index]"
-                  mode="multiple"
-                  :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
-                    value: attr.name, label: attr.name, attribute: attr
-                  }))"
-                  :object="true"
-                  :show-labels="false"
-                  :searchable="true"
-                  :close-on-select="true"
-                  placeholder="Select optional attributes"
-                  :canClear="false"
-              >
-                <template v-slot:option="{ option }">
-                  {{ option.label }}
-                </template>
-              </multiselect>
-
-
-
-
-
-              <div :key="item.attribute.id" v-for="item in d[index]">
-                <OptionalAttribute
-                    :name="item.attribute.name"
-                    :description="item.attribute.description"
-                    :errors="item.attribute.errors"
-                    @pop="deselectOptionalAttribute(index, item)"
-                >
-                  <component
-                      :attribute="item.attribute"
-                      :name="item.attribute.id+obj.id.value"
-                      v-model:value="item.attribute.value"
-                      :is="Inputs[item.attribute.element]"
-                  ></component>
-                </OptionalAttribute>
-              </div>
-
-
-
-            </Draft>
-          </Collapse>
+            />
         </div>
 
 
@@ -392,7 +289,7 @@ async function exportToEncryptedPlugin() {
         <h3>plugin.manifest</h3>
         <pre>{{ manifestObject }}</pre>
         <h3>code.json</h3>
-        <pre>{{ data }}</pre>
+        <pre>{{ drafts }}</pre>
       </div>
     </div>
 
@@ -408,10 +305,6 @@ async function exportToEncryptedPlugin() {
   display: flex;
   align-items: stretch;
 }*/
-
-.optional-attribute-multiselect {
-  margin-bottom: 20px;
-}
 
 .page-container {
   display: flex;
