@@ -372,7 +372,8 @@ async function exportToEncryptedPlugin() {
             Now you can export your plugin to be loaded into the game. If you just want the JSON
             file that was generated or the manifest, you can download them separately and put
             it all together by yourself.
-
+          </p>
+          <p>
             If you want something that you can just load into the game and it just works,
             you can use the export as a zip or as .plugin file. .plugin file in this case
             encrypts the plugin and protects its contents from others.
