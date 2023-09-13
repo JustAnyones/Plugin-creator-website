@@ -288,84 +288,95 @@ async function exportToEncryptedPlugin() {
 
 
         <div class="drafts">
-          <Draft
-              :index="index"
-              :object="obj"
-              v-for="(obj, index) in data"
-              @pop="removeDraftAtIndex(index)"
-          >
-            <div v-for="(attr) in obj.getRequiredAttributes()">
-              <Attribute
-                  :name="attr.name"
-                  :description="attr.description"
-                  :errors="attr.errors"
-              >
-                <component
-                    v-bind:attribute="attr"
-                    v-bind:name="attr.id+obj.id.value"
-                    v-model:value="attr.value"
-                    :is="Inputs[attr.element]"
-                    @updateFiles="attr.internalFileList=$event"
-                />
-              </Attribute>
-            </div>
-
-
-
-
-
-
-            <h3>Optional attributes</h3>
-            <p>These are optional attributes</p>
-            <multiselect
-                class="optional-attribute-multiselect"
-                ref="optionalAttributeSelector"
-                v-model="d[index]"
-                mode="multiple"
-                :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
-                  value: attr.name, label: attr.name, attribute: attr
-                }))"
-                :object="true"
-                :show-labels="false"
-                :searchable="true"
-                :close-on-select="true"
-                placeholder="Select optional attributes"
-                :canClear="false"
+          <Collapse :when="true" class="collapse">
+            <Draft
+                :index="index"
+                :object="obj"
+                v-for="(obj, index) in data"
+                @pop="removeDraftAtIndex(index)"
             >
-              <template v-slot:option="{ option }">
-                {{ option.label }}
-              </template>
-            </multiselect>
+              <div v-for="(attr) in obj.getRequiredAttributes()">
+                <Attribute
+                    :name="attr.name"
+                    :description="attr.description"
+                    :errors="attr.errors"
+                >
+                  <component
+                      v-bind:attribute="attr"
+                      v-bind:name="attr.id+obj.id.value"
+                      v-model:value="attr.value"
+                      :is="Inputs[attr.element]"
+                      @updateFiles="attr.internalFileList=$event"
+                  />
+                </Attribute>
+              </div>
 
 
 
 
 
-            <div :key="item.attribute.id" v-for="item in d[index]">
-              <OptionalAttribute
-                  :name="item.attribute.name"
-                  :description="item.attribute.description"
-                  :errors="item.attribute.errors"
-                  @pop="deselectOptionalAttribute(index, item)"
+
+              <h3>Optional attributes</h3>
+              <p>These are optional attributes</p>
+              <multiselect
+                  class="optional-attribute-multiselect"
+                  ref="optionalAttributeSelector"
+                  v-model="d[index]"
+                  mode="multiple"
+                  :options="Array.from(obj.getOptionalAttributes(), (attr) => ({
+                    value: attr.name, label: attr.name, attribute: attr
+                  }))"
+                  :object="true"
+                  :show-labels="false"
+                  :searchable="true"
+                  :close-on-select="true"
+                  placeholder="Select optional attributes"
+                  :canClear="false"
               >
-                <component
-                    :attribute="item.attribute"
-                    :name="item.attribute.id+obj.id.value"
-                    v-model:value="item.attribute.value"
-                    :is="Inputs[item.attribute.element]"
-                ></component>
-              </OptionalAttribute>
-            </div>
+                <template v-slot:option="{ option }">
+                  {{ option.label }}
+                </template>
+              </multiselect>
 
 
 
-          </Draft>
+
+
+              <div :key="item.attribute.id" v-for="item in d[index]">
+                <OptionalAttribute
+                    :name="item.attribute.name"
+                    :description="item.attribute.description"
+                    :errors="item.attribute.errors"
+                    @pop="deselectOptionalAttribute(index, item)"
+                >
+                  <component
+                      :attribute="item.attribute"
+                      :name="item.attribute.id+obj.id.value"
+                      v-model:value="item.attribute.value"
+                      :is="Inputs[item.attribute.element]"
+                  ></component>
+                </OptionalAttribute>
+              </div>
+
+
+
+            </Draft>
+          </Collapse>
         </div>
 
 
 
 
         <div class="controls">
+          <p>
+            Now you can export your plugin to be loaded into the game. If you just want the JSON
+            file that was generated or the manifest, you can download them separately and put
+            it all together by yourself.
+
+            If you want something that you can just load into the game and it just works,
+            you can use the export as a zip or as .plugin file. .plugin file in this case
+            encrypts the plugin and protects its contents from others.
+          </p>
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
           <Button @click="exportToZip()">Export as a zip archive</Button>
@@ -423,7 +434,7 @@ async function exportToEncryptedPlugin() {
   flex: 5; /* Adjust the flex ratio for central panel size */
   display: flex;
   flex-direction: column;
-  //justify-content: space-between;
+  /*justify-content: space-between;*/
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
