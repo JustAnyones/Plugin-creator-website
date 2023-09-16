@@ -24,7 +24,7 @@
   -->
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import {defineProps, watch} from 'vue';
 
 interface Props {
   name: string
@@ -32,6 +32,13 @@ interface Props {
   errors: Array<string>
 }
 const props = defineProps<Props>()
+const emit = defineEmits(['raiseError'])
+
+watch(() => props.errors, async (newObj, oldObj) => {
+  if (newObj.length > 0) {
+    emit('raiseError')
+  }
+})
 </script>
 
 <template>

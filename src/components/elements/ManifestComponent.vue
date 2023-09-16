@@ -33,6 +33,7 @@ interface Props {
   manifest: Manifest
 }
 const props = defineProps<Props>()
+defineEmits(['raiseError'])
 </script>
 
 <template>
@@ -41,6 +42,7 @@ const props = defineProps<Props>()
         :name="props.manifest.id.name"
         :description="props.manifest.id.description"
         :errors="props.manifest.id.errors"
+        @raise-error="$emit('raiseError')"
     >
       <StringInput
         :attribute="props.manifest.id"
@@ -53,6 +55,7 @@ const props = defineProps<Props>()
         :name="props.manifest.version.name"
         :description="props.manifest.version.description"
         :errors="props.manifest.version.errors"
+        @raise-error="$emit('raiseError')"
     >
       <input
           type="number"
@@ -67,6 +70,7 @@ const props = defineProps<Props>()
         :name="props.manifest.title.name"
         :description="props.manifest.title.description"
         :errors="props.manifest.title.errors"
+        @raise-error="$emit('raiseError')"
     >
       <StringInput
         :attribute="props.manifest.title"
@@ -79,6 +83,7 @@ const props = defineProps<Props>()
         :name="props.manifest.text.name"
         :description="props.manifest.text.description"
         :errors="props.manifest.text.errors"
+        @raise-error="$emit('raiseError')"
     >
       <StringInput
         :attribute="props.manifest.text"
@@ -91,6 +96,7 @@ const props = defineProps<Props>()
         :name="props.manifest.author.name"
         :description="props.manifest.author.description"
         :errors="props.manifest.author.errors"
+        @raise-error="$emit('raiseError')"
     >
       <StringInput
         :attribute="props.manifest.author"

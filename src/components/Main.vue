@@ -225,7 +225,7 @@ async function exportToEncryptedPlugin() {
                 where the plugin can be used inside online mode.
               </p>
 
-              <ManifestC :manifest="manifestObject"/>
+              <ManifestC :manifest="manifestObject" @raise-error="showManifest = true"/>
             </Collapse>
           </div>
 

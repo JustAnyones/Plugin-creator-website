@@ -8,7 +8,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-defineEmits(['pop'])
+defineEmits(['pop', 'raiseError'])
 </script>
 
 <template>
@@ -16,6 +16,7 @@ defineEmits(['pop'])
       :name="props.name"
       :description="props.description"
       :errors="props.errors"
+      @raise-error="$emit('raiseError')"
   >
     <a href="#" class="remove-hyperlink" @click="(e) => {
       e.preventDefault();

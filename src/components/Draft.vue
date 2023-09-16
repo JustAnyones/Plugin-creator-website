@@ -89,6 +89,7 @@ defineEmits(['pop'])
             :name="attr.name"
             :description="attr.description"
             :errors="attr.errors"
+            @raise-error="showDraftContent = true"
         >
           <component
               v-bind:attribute="attr"
@@ -131,6 +132,7 @@ defineEmits(['pop'])
             :description="item.attribute.description"
             :errors="item.attribute.errors"
             @pop="deselectOptionalAttribute(item)"
+            @raise-error="showDraftContent = true"
         >
           <component
               :attribute="item.attribute"
