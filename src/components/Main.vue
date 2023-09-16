@@ -206,20 +206,29 @@ async function exportToEncryptedPlugin() {
 
       <div class="generator-panel">
         <h2>Plugin creator</h2>
-        
+
         <div class="generator-header">
 
-          <Collapse :when="showManifest" class="collapse">
-            <p>To begin creating your plugin, please create a manifest of the plugin first:</p>
+          <div class="backdrop">
+            <h3 @click="showManifest = !showManifest">Manifest</h3>
+            <Collapse :when="showManifest" class="collapse">
 
-            <p>
-              Manifest helps the game identify your plugin by putting it in the plugins category
-              of the toolbar and inside the local plugin list. This also allows you to specify
-              where the plugin can be used inside online mode.
-            </p>
+              <p>
+                To begin creating your plugin, please create a manifest of the plugin first. Manifest is a file that
+                helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
+                show up under local plugins list and the plugins toolbar.
+              </p>
 
-            <ManifestC :manifest="manifestObject"/>
-          </Collapse>
+              <p>
+                Manifest helps the game identify your plugin by putting it in the plugins category
+                of the toolbar and inside the local plugin list. This also allows you to specify
+                where the plugin can be used inside online mode.
+              </p>
+
+              <ManifestC :manifest="manifestObject"/>
+            </Collapse>
+          </div>
+
 
 
 
@@ -260,6 +269,7 @@ async function exportToEncryptedPlugin() {
                 :index="index"
                 :draftObject="obj"
                 v-for="(obj, index) in drafts"
+                class="backdrop"
                 @pop="removeDraftAtIndex(index)"
             />
         </div>
@@ -313,6 +323,15 @@ async function exportToEncryptedPlugin() {
   display: flex;
   flex-direction: column;
   min-height: 99vh;
+}
+
+.backdrop {
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+
 }
 
 .main-content {

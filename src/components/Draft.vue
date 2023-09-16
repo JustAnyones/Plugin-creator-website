@@ -64,14 +64,14 @@ defineEmits(['pop'])
 </script>
 
 <template>
-  <div class="draft">
+  <div>
     <!-- Buttons to delete and collapse the draft -->
     <div class="compact">
-      <h2 @click="showDraftContent = !showDraftContent">
-        {{props.index + 1}}.
+      <h3 @click="showDraftContent = !showDraftContent">
+        {{ props.index + 1 }}.
         {{ props.draftObject.id.value ? props.draftObject.id.value : "No ID specified" }}
-        (type: {{props.draftObject.type}})
-      </h2>
+        (type: {{ props.draftObject.type }})
+      </h3>
       <a class="remove-hyperlink" href="#" @click="(e) => {
         e.preventDefault();
         $emit('pop')
@@ -153,14 +153,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.draft {
-  background-color: #f5f5f5;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .optional-attribute-multiselect {
