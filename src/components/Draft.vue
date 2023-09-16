@@ -68,7 +68,9 @@ defineEmits(['pop'])
     <!-- Buttons to delete and collapse the draft -->
     <div class="compact">
       <h2 @click="showDraftContent = !showDraftContent">
-        {{props.index + 1}}. ({{props.draftObject.type}})
+        {{props.index + 1}}.
+        {{ props.draftObject.id.value ? props.draftObject.id.value : "No ID specified" }}
+        (type: {{props.draftObject.type}})
       </h2>
       <a class="remove-hyperlink" href="#" @click="(e) => {
         e.preventDefault();

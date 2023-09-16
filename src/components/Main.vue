@@ -205,9 +205,8 @@ async function exportToEncryptedPlugin() {
       </div>
 
       <div class="generator-panel">
-
-
-
+        <h2>Plugin creator</h2>
+        
         <div class="generator-header">
 
           <Collapse :when="showManifest" class="collapse">
@@ -230,6 +229,10 @@ async function exportToEncryptedPlugin() {
           <p>
             Once you've finished writing the manifest, you can begin adding drafts to your plugin.
           </p>
+          <p>
+            Draft is a general term used to refer to a plugin object inside the game. What the draft can do
+            is defined by the draft type.
+          </p>
 
           <!-- Type selector for new draft object -->
           <div class="type-selector">
@@ -245,7 +248,7 @@ async function exportToEncryptedPlugin() {
                 {{ capitalizeFirstLetter(option.label) }}
               </template>
             </multiselect>
-            <Button @click="addNewDraft">Create</Button>
+            <Button @click="addNewDraft">Add</Button>
           </div>
         </div>
 
