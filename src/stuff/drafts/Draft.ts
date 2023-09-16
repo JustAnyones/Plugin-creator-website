@@ -31,6 +31,7 @@ import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
 import {Types} from "../Types";
+import {MetaAttribute} from "../attribute/MetaAttribute";
 
 export class Draft {
     id = new StringAttribute(
@@ -41,7 +42,7 @@ export class Draft {
         "Avoid changes to the ID afterwards, as it is used to identify buildings in saved cities. " + 
         "If you need to change it, please use the \"aliases\" attribute instead.",
         true,
-        "lt.svetikas.pca.v4." + CryptoJS.MD5(new Date().getTime().toString()).toString()
+        "lt.svetikas.pca." + CryptoJS.MD5(new Date().getTime().toString()).toString()
     )
 
     active = new BooleanAttribute(
@@ -184,9 +185,13 @@ export class Draft {
     )
 
 
-    // TODO: meta
-    //meta: JSONObject
-
+    // TODO: proper meta implementation
+    meta = new MetaAttribute(
+        "meta", "Meta",
+        "Draft metadata. Useful for defining special draft data such as ...",
+        // @ts-ignore
+        false, {"pca": {"version": __APP_VERSION__}}
+    )
 
     separator = new BooleanAttribute(
         "separator", "Separator",
@@ -243,7 +248,10 @@ export class Draft {
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
-                if (attribute instanceof Attribute && attribute.required)
+                if (attribute instanceof Attribute
+                    && attribute.required
+                    && attribute.isExposed()
+                    && attribute.element != null)
                     attrs.push(attribute)
             })
         return attrs
@@ -257,7 +265,10 @@ export class Draft {
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
-                if (attribute instanceof Attribute && !attribute.required)
+                if (attribute instanceof Attribute
+                    && !attribute.required
+                    && attribute.isExposed()
+                    && attribute.element != null)
                     attrs.push(attribute)
             })
         return attrs
@@ -286,8 +297,6 @@ export class Draft {
     public toJSON() {
         let data = {}
         data["type"] = this.type
-        // @ts-ignore
-        data["pca"] = __APP_VERSION__
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]
@@ -299,6 +308,7 @@ export class Draft {
                         data[attribute.id] = attribute.value
                     }
             })
+        //data["meta"] = this.meta;
         return data
     }
 

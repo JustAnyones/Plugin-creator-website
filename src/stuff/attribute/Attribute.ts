@@ -31,7 +31,7 @@ export abstract class Attribute {
     required: boolean
     readonly defaultValue: any
 
-    private _value: any
+    protected _value: any
 
     customValidator?: (() => boolean)
 
@@ -62,6 +62,13 @@ export abstract class Attribute {
     public abstract isEmpty(): boolean
 
     /**
+     * Returns true if attribute is exposed to the end user.
+     */
+    public isExposed() {
+        return true;
+    }
+
+    /**
      * Returns the raw attribute value.
      */
     public get value() {
@@ -85,6 +92,8 @@ export abstract class Attribute {
 
     /**
      * Returns true if current attribute value is the default value.
+     *
+     * Used to omit default values from the generated JSON.
      */
     public isDefault() {
         return this.value === this.defaultValue
