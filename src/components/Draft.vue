@@ -157,6 +157,10 @@ a {
   justify-content: center;
 }
 
+h3 {
+  word-wrap: anywhere;
+}
+
 .optional-attribute-multiselect {
   margin-bottom: 20px;
 }
