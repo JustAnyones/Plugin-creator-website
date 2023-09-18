@@ -29,7 +29,7 @@ import {NumberAttribute} from "./attribute/NumberAttribute";
 export class Manifest {
     id = new StringAttribute(
         "id", "Manifest ID",
-        "ID of the plugin manifest.",
+        "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
         true
     )
     version = new NumberAttribute(

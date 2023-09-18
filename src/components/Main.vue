@@ -212,19 +212,11 @@ async function exportToEncryptedPlugin() {
           <div class="backdrop">
             <h3 @click="showManifest = !showManifest">Manifest</h3>
             <Collapse :when="showManifest" class="collapse">
-
               <p>
                 To begin creating your plugin, please create a manifest of the plugin first. Manifest is a file that
                 helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
                 show up under local plugins list and the plugins toolbar.
               </p>
-
-              <p>
-                Manifest helps the game identify your plugin by putting it in the plugins category
-                of the toolbar and inside the local plugin list. This also allows you to specify
-                where the plugin can be used inside online mode.
-              </p>
-
               <ManifestC :manifest="manifestObject" @raise-error="showManifest = true"/>
             </Collapse>
           </div>
@@ -325,18 +317,18 @@ async function exportToEncryptedPlugin() {
   min-height: 99vh;
 }
 
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
 .backdrop {
   background-color: #f5f5f5;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 5px;
-
-}
-
-.main-content {
-  display: flex;
-  flex: 1;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .documentation-panel {
