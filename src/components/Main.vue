@@ -37,7 +37,7 @@ import ManifestC from "@/components/elements/ManifestComponent.vue";
 
 
 import {Collapse} from 'vue-collapsed'
-import {createDraftFromType, Types} from "@/stuff/Types";
+import {Types3} from "@/stuff/Types";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -54,7 +54,8 @@ function addNewDraft() {
     if (selected_type === null) {
       alert("Please select draft type")
     } else {
-      let draft = createDraftFromType(selected_type as Types);
+      let selected = Types3.getType(selected_type);
+      let draft = selected.getDraft()
 
       if (!manifestObject.value.author.isEmpty())
         draft.author.value = manifestObject.value.author.value
@@ -240,7 +241,7 @@ async function exportToEncryptedPlugin() {
             <multiselect
               ref="typeSelector"
               v-model="selected_type"
-              :options="Array.from(Object.keys(Types), (key) => Types[key])"
+              :options="Array.from(Types3.getTypes(), (draftType) => draftType.tag)"
               :show-labels="false"
               :searchable="true"
               placeholder="Select draft type"

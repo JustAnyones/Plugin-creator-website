@@ -70,7 +70,7 @@ defineEmits(['pop'])
       <h3 @click="showDraftContent = !showDraftContent">
         {{ props.index + 1 }}.
         {{ props.draftObject.id.value ? props.draftObject.id.value : "No ID specified" }}
-        (type: {{ props.draftObject.type }})
+        (type: {{ props.draftObject.type.tag }})
       </h3>
       <a class="remove-hyperlink" href="#" @click="(e) => {
         e.preventDefault();

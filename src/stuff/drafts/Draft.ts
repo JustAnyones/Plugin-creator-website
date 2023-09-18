@@ -30,7 +30,7 @@ import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
-import {Types} from "../Types";
+import {DraftType} from "../Types";
 import {MetaAttribute} from "../attribute/MetaAttribute";
 
 export class Draft {
@@ -59,7 +59,7 @@ export class Draft {
         false, false
     )
     platform: string // TODO: figure out possible values and create a custom attribute
-    readonly type: Types
+    readonly type: DraftType
     once = new BooleanAttribute(
         "once", "Once",
         "Whether to load a draft by the specified ID once. It will not load any extra drafts whose " +
@@ -236,7 +236,7 @@ export class Draft {
     //luaScripts: Array<Script>
 
 
-    constructor(type: Types) {
+    constructor(type: DraftType) {
         this.type = type
     }
 
@@ -296,7 +296,7 @@ export class Draft {
      */
     public toJSON() {
         let data = {}
-        data["type"] = this.type
+        data["type"] = this.type.tag
         Object.keys(this).forEach(
             (item) => {
                 let attribute = this[item]

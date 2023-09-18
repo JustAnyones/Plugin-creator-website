@@ -25,43 +25,240 @@
 
 import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
+import {Categories, Category} from "./Categories";
 
-export const enum Types {
-    AIRPORT = "airport",
-    AWARD = "award",
-    BODY_DISPOSAL = "body disposal",
-    DECORATION = "decoration",
-    EDUCATION = "education",
-    ENERGY = "energy",
-    FIRE_BRIGADE = "fire brigade",
-    LANDMARK = "landmark",
-    MEDIC = "medic",
-    MILITARY = "military",
-    PARK = "park",
-    POLICE = "police",
-    PUBLIC = "public",
-    RELIGION = "religion",
-    SPORT = "sport",
-    SWAT = "swat",
-    WASTE_DISPOSAL = "waste disposal",
-    WATER = "water",
-
-    // RCI
-    RESIDENTIAL = "residential",
-    COMMERCIAL = "commercial",
-    INDUSTRIAL = "industrial",
-    FARM = "farm",
-    HARBOR = "harbor",
-    HARBOR_PIER = "harbor pier"
+interface DraftTypeConstructorParams {
+    tag: string;
+    category?: Category;
+    rci?: boolean;
+    draftType: typeof Draft;
 }
 
-/**
- * Creates a new draft for the specified type.
- * @param type Type of the draft.
- */
-export function createDraftFromType(type: Types): Draft {
-    switch (type) {
-        default:
-            return new BuildingDraft(type)
+export class DraftType {
+    private readonly _tag: string;
+    private readonly category?: Category
+    private readonly rci: boolean
+    private readonly draftType: typeof Draft
+
+    constructor({tag, category, rci, draftType}: DraftTypeConstructorParams) {
+        this._tag = tag;
+        this.category = category
+        this.rci = rci || false
+        this.draftType = draftType
+    }
+
+    get tag(): string {
+        return this._tag;
+    }
+
+    public getDraft(): Draft {
+        return new this.draftType(this);
+    }
+
+}
+
+export class Types3 {
+    // RCI
+    static readonly RESIDENTIAL = new DraftType({
+        tag: "residential",
+        category: Categories.RESIDENTIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+    static readonly COMMERCIAL = new DraftType({
+        tag: "commercial",
+        category: Categories.COMMERCIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+    static readonly INDUSTRIAL = new DraftType({
+        tag: "industrial",
+        category: Categories.INDUSTRIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+    static readonly FARM = new DraftType({
+        tag: "farm",
+        category: Categories.INDUSTRIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+    static readonly HARBOR_IND = new DraftType({
+        tag: "harbor ind",
+        category: Categories.INDUSTRIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+    static readonly HARBOR_PIER = new DraftType({
+        tag: "harbor pier",
+        category: Categories.INDUSTRIAL,
+        rci: true,
+        draftType: BuildingDraft
+    })
+
+    // Buildings
+    static readonly PARK = new DraftType({
+        tag: "park",
+        category: Categories.PARK,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly SPORT = new DraftType({
+        tag: "sport",
+        category: Categories.SPORT,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly PUBLIC = new DraftType({
+        tag: "public",
+        category: Categories.MANAGEMENT,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly RELIGION = new DraftType({
+        tag: "religion",
+        category: Categories.RELIGION,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly AWARD = new DraftType({
+        tag: "award",
+        category: Categories.AWARD,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly ENERGY = new DraftType({
+        tag: "energy",
+        category: Categories.ENERGY,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly WATER = new DraftType({
+        tag: "water",
+        category: Categories.WATER,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly MEDIC = new DraftType({
+        tag: "medic",
+        category: Categories.MEDIC,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly POLICE = new DraftType({
+        tag: "police",
+        category: Categories.POLICE,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly SWAT = new DraftType({
+        tag: "swat",
+        category: Categories.POLICE,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly FIRE_BRIGADE = new DraftType({
+        tag: "fire brigade",
+        category: Categories.FIRE_BRIGADE,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly EDUCATION = new DraftType({
+        tag: "education",
+        category: Categories.EDUCATION,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly BUS_DEPOT = new DraftType({
+        tag: "bus depot",
+        category: Categories.ROAD,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly DESTROYED = new DraftType({
+        tag: "destroyed",
+        category: null,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly DECORATION = new DraftType({
+        tag: "decoration",
+        category: Categories.DECORATION,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly BUOY = new DraftType({
+        tag: "buoy",
+        category: Categories.TRANSPORT,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly RAILWAY_STATION = new DraftType({
+        tag: "railway station",
+        category: Categories.ROAD,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly WASTE_DISPOSAL = new DraftType({
+        tag: "waste disposal",
+        category: Categories.WASTE_DISPOSAL,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly BODY_DISPOSAL = new DraftType({
+        tag: "body disposal",
+        category: Categories.BODY_DISPOSAL,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly MILITARY = new DraftType({
+        tag: "military",
+        category: Categories.MILITARY,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly AIRPORT = new DraftType({
+        tag: "airport",
+        category: Categories.AIRPORT,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    //static readonly OTHER = new DraftType("building", null) // Valid type, but should it be used?
+    static readonly TERRAIN = new DraftType({
+        tag: "terrain",
+        category: Categories.TERRAIN,
+        rci: false,
+        draftType: BuildingDraft
+    })
+    static readonly LANDMARK = new DraftType({
+        tag: "landmark",
+        category: Categories.LANDMARK,
+        rci: false,
+        draftType: BuildingDraft
+    })
+
+    private constructor(private key: string, public value: any) {}
+    toString() {
+        return this.key;
+    }
+
+    public static getType(type: string) {
+        let keys = Object.keys(this);
+        for (let i = 0; i < keys.length; i++) {
+            let item = this[keys[i]];
+            if (item instanceof DraftType && item.tag === type)
+                return item;
+        }
+        return null;
+    }
+
+    public static getTypes() {
+        let attrs: Array<DraftType> = []
+        Object.keys(this).forEach(
+            (item) => {
+                if (this[item] instanceof DraftType)
+                    attrs.push(this[item])
+            })
+        return attrs
     }
 }

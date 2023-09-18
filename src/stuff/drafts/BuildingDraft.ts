@@ -29,7 +29,7 @@ import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
-import {Types} from "../Types";
+import {DraftType} from "../Types";
 
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute(
@@ -479,7 +479,7 @@ export class BuildingDraft extends ViewportDraft {
         false, 0
     )
 
-    constructor(type: Types) {
+    constructor(type: DraftType) {
         super(type)
 
         this.width.required = true;
