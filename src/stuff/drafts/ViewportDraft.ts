@@ -40,7 +40,7 @@ export class ViewportDraft extends Draft {
         // Ensure that every frame passed is a PNG file
         if (this.frames.internalFileList != null) {
             for (let i = 0; i < this.frames.internalFileList.length; i++) {
-                if (this.frames.internalFileList[i].name) {
+                if (this.frames.internalFileList[i].name.endsWith(".png")) {
                     this.frames.addError("All frames must be of a PNG format")
                     valid = false;
                     break;
