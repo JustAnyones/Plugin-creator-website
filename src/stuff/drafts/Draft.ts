@@ -188,7 +188,7 @@ export class Draft {
     // TODO: proper meta implementation
     meta = new MetaAttribute(
         "meta", "Meta",
-        "Draft metadata. Useful for defining special draft data such as ...",
+        "Draft metadata. Useful for defining special draft data. By default, PCA includes some information about itself.",
         // @ts-ignore
         false, {"pca": {"version": __APP_VERSION__}}
     )
