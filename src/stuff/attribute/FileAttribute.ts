@@ -27,7 +27,7 @@ import {Attribute} from "./Attribute";
 
 export class FileAttribute extends Attribute {
     element = "FileAttribute"
-    internalFileList?: FileList
+    internalFileList: FileList | null = null;
 
     isEmpty(): boolean {
         return false;
