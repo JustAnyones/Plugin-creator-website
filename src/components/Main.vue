@@ -36,6 +36,9 @@ import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
 
 
+import { useToast } from 'primevue/usetoast';
+import Toast from 'primevue/toast';
+
 import {Collapse} from 'vue-collapsed'
 import {Types3} from "@/stuff/Types";
 
@@ -46,13 +49,28 @@ function capitalizeFirstLetter(string: string) {
 }
 var selected_type = null;
 
+const toast = useToast();
+
+
 const typeSelector = ref(null);
 const showManifest = ref(true);
 const showPreviewPanel = ref(false);
 
+function showErrorToast(summary: string, detail: string, life: number = 10000) {
+  toast.add({
+    severity: 'error',
+    summary: summary,
+    detail: detail,
+    life: life
+  })
+}
+
 function addNewDraft() {
     if (selected_type === null) {
-      alert("Please select draft type")
+      showErrorToast(
+          "No draft type specified",
+          "Please specify a draft type before trying to add one"
+      )
     } else {
       let selected = Types3.getType(selected_type);
       let draft = selected.getDraft()
@@ -79,7 +97,10 @@ function isManifestValid(): boolean {
 function isValid() {
 
   if (drafts.value.length === 0) {
-    alert("Cannot export - the are no drafts")
+    showErrorToast(
+        "Cannot export an empty plugin",
+        "Before exporting, make sure you have defined at least one draft"
+    )
     return false;
   }
 
@@ -188,7 +209,11 @@ async function exportToEncryptedPlugin() {
       FileSaver.saveAs(Base64ToBlob(result.data), 'plugin.plugin');
 
     })
-    .catch(error => alert(`An error has occurred while trying to encrypt your plugin: ${error}`));
+    .catch(
+        error => showErrorToast(
+            "An error occurred while trying to encrypt your plugin",
+            error
+        ));
   });
 
   
@@ -198,6 +223,8 @@ async function exportToEncryptedPlugin() {
 </script>
 
 <template>
+  <Toast position="bottom-right" />
+
   <div class="page-container">
 
     <div class="main-content">

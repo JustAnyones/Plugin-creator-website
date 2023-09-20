@@ -31,22 +31,15 @@ import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
     name: string
     value: number | null
   }
-//$emit('update:value', $event.target.value)
   const props = defineProps<Props>()
-  console.log(props.attribute)
 
 
-  function test(a, val) {
-    console.log(typeof val)
-    console.log(val.target.value)
-
-    let parsed = Number.parseInt(val.target.value)
-    console.log(val.target.value, parsed)
+  function onInput(emit, event) {
+    let parsed = Number.parseInt(event.target.value)
     if (parsed != null) {
-      a('update:value', parsed)
+      emit('update:value', parsed)
     }
   }
-
 </script>
 
 <template>
@@ -57,6 +50,6 @@ import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
       :min="props.attribute.minValue"
       :max="props.attribute.maxValue"
       :value="props.value"
-      @input="test($emit, $event)"
+      @input="onInput($emit, $event)"
   />
 </template>
