@@ -23,7 +23,51 @@
  *
  */
 
+import { BooleanAttribute } from "../attribute/BooleanAttribute";
+import { NumberAttribute } from "../attribute/NumberAttribute";
 import {Draft} from "./Draft";
 
 export class BiomeDraft extends Draft {
+    isWater = new BooleanAttribute(
+        "water", "Is water",
+        "Whether the biome is considered to be water",
+        false, false
+    )
+    noiseScale = new NumberAttribute(
+        "noise scale", "Noise scale",
+        "...",
+        false, 1.0
+    )
+    noiseOffset = new NumberAttribute(
+        "noise offset", "Noise offset",
+        "...",
+        false, 0.0
+    )
+    noiseFactor = new NumberAttribute(
+        "noise factor", "Noise factor",
+        "...",
+        false, 0.0
+    )
+    heightCenter = new NumberAttribute(
+        "height center", "Height center",
+        "...",
+        false, 0.0
+    )
+    heightRadius = new NumberAttribute(
+        "height radius", "Height radius",
+        "...",
+        false, 10.0
+    )
+    heightOffset = new NumberAttribute(
+        "height offset", "Height offset",
+        "...",
+        false, 0.0
+    )
+    heightFactor = new NumberAttribute(
+        "height factor", "Height factor",
+        "...",
+        false, 0.0
+    )
+
+    tempIndex: number
 }
