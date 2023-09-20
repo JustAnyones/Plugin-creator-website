@@ -25,6 +25,7 @@
 
 import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
+import {BiomeDraft} from "./drafts/BiomeDraft";
 import {Categories, Category} from "./Categories";
 
 interface DraftTypeConstructorParams {
@@ -36,7 +37,7 @@ interface DraftTypeConstructorParams {
 
 export class DraftType {
     private readonly _tag: string;
-    private readonly category?: Category
+    private readonly category: Category | null
     private readonly rci: boolean
     private readonly draftType: typeof Draft
 
@@ -236,6 +237,15 @@ export class Types3 {
         rci: false,
         draftType: BuildingDraft
     })
+
+    // Upcoming draft type
+    //static readonly BIOME = new DraftType({
+    //    tag: "biome",
+    //    category: null,
+    //    rci: false,
+    //    draftType: BiomeDraft
+    //})
+
 
     private constructor(private key: string, public value: any) {}
     toString() {
