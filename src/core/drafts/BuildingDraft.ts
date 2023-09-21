@@ -292,9 +292,21 @@ export class BuildingDraft extends ViewportDraft {
         false, true
     )
 
-    conductive: boolean
-    superConductive: boolean
-    highVoltageOnly: boolean
+    conductive = new BooleanAttribute(
+        "conductive",
+        "Conductive",
+        "Whether the building can conduct power.",
+    )
+    superConductive = new BooleanAttribute(
+        "super conductive",
+        "Super conductive",
+        "Whether the building can connect to regular and high voltage power lines.",
+    )
+    highVoltageOnly = new BooleanAttribute(
+        "high voltage only",
+        "High voltage only",
+        "Whether the building can only connect to high voltage power lines.",
+    )
     liquid = new BooleanAttribute(
         "liquid", "Liquid",
         "Whether the building conducts water like a pipe.",
