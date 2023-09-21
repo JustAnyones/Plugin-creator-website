@@ -81,8 +81,10 @@ export class BuildingDraft extends ViewportDraft {
     buildHeight = new NumberAttribute({
         id: "build height",
         name: "Build height",
-        description: "The building height in pixels. Should be used when frames are not provided. " +
-            "Otherwise, game will calculate it on its own."
+        description: "The height of the building in 8px units. Should be used when frames are not provided. " +
+            "Otherwise, game will calculate it on its own. " +
+            "Used for auto build time calculation, collision checks, " +
+            "clipping during drawing, helicopters and much more."
     })
 
     //animation: boolean // draft.animation = src.optBoolean("animated", draft.animation); TODO: ???
@@ -261,7 +263,13 @@ export class BuildingDraft extends ViewportDraft {
 
     nightLightProbability: number // float
 
-    rciCars: number
+    rciCars = new NumberAttribute({
+        id: "rci cars",
+        name: "RCI cars",
+        description: "Amount of RCI cars that the building spawns. " +
+            "By default, it's usually the amount of residents + workers in a building. " +
+            "Used to estimate rci car spawning and targeting."
+    })
 
     easyRemove: boolean
     supportsSlope: boolean
