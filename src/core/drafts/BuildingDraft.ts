@@ -155,7 +155,13 @@ export class BuildingDraft extends ViewportDraft {
         "Whether the building can be set on fire.",
         false, true
     )
-    useFireFrames: boolean
+    useFireFrames = new BooleanAttribute(
+        "use fire frames",
+        "Use fire frames",
+        "Whether the building will draw the usual fire when burning. " +
+        "Can be disabled to draw a custom fire animation.",
+        false, true
+    )
 
     maxCount = new NumberAttribute({
         id: "max count",
