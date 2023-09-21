@@ -319,7 +319,14 @@ export class BuildingDraft extends ViewportDraft {
         "Whether the building can be auto built by the game.",
         false, null
     )
-    autoBuildFactor: number // float
+    autoBuildFactor = new NumberAttribute({
+        id: "auto build factor",
+        name: "Auto build factor",
+        description: "The auto build factor can be used to tweak the auto spawn rate of the building. " +
+            "Higher values will cause the building to be built more likely.",
+        isInteger: false,
+        defaultValue: 1.0
+    })
     rebuild: boolean
 
     buildTime= new NumberAttribute({
