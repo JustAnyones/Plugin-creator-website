@@ -77,7 +77,14 @@ export class BuildingDraft extends ViewportDraft {
         description: "Building wealth level. Only applicable for RCI buildings.",
         validation: {minValue: 1, maxValue: 3}
     })
-    density: number // float
+    density = new NumberAttribute({
+        id: "density",
+        name: "Density",
+        description: "Used for expectation calculations, as more dense buildings usually have higher expectations. " +
+            "By default the number of people in the building divided by the building's area.",
+        isInteger: false,
+        defaultValue: -1.0
+    })
     buildHeight = new NumberAttribute({
         id: "build height",
         name: "Build height",
@@ -106,7 +113,8 @@ export class BuildingDraft extends ViewportDraft {
         id: "diamond price",
         name: "Diamond price",
         description: "Diamond price of the building. Note that on premium platforms you need to " +
-            "specify normal price as well, since the game does not convert diamond price to Theon price.",
+            "specify normal price as well, since the game does not convert diamond price to Theon price. " +
+            "Will be ignored in case the building was unlocked by a feature.",
         validation: {minValue: 0, maxValue: 10_000_000}
     })
     budgetItem = new StringAttribute(
