@@ -10,6 +10,7 @@ export default defineConfig({
   ],
   define: {
     '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+    'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   },
   base: '', // Do not set / as base
   resolve: {

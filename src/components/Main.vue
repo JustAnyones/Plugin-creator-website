@@ -54,7 +54,7 @@ const toast = useToast();
 
 const typeSelector = ref(null);
 const showManifest = ref(true);
-const showPreviewPanel = ref(false);
+const showPreviewPanel = ref(NODE_ENV === "development");
 
 function showErrorToast(summary: string, detail: string, life: number = 10000) {
   toast.add({
