@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {defineProps, nextTick, Ref, ref} from 'vue';
-import {Draft as DraftObject} from "@/stuff/drafts/Draft";
+import {Draft as DraftObject} from "@/core/drafts/Draft";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";

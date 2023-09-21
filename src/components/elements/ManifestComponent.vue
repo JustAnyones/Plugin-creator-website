@@ -24,7 +24,7 @@
   -->
 
 <script setup lang="ts">
-import {Manifest} from "@/stuff/Manifest";
+import {Manifest} from "@/core/Manifest";
 import {defineProps} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "../attributes/inputs/StringInput.vue";

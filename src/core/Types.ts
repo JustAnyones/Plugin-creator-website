@@ -55,10 +55,9 @@ export class DraftType {
     public getDraft(): Draft {
         return new this.draftType(this);
     }
-
 }
 
-export class Types3 {
+export class Types {
     // RCI
     static readonly RESIDENTIAL = new DraftType({
         tag: "residential",

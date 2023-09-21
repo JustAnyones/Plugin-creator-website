@@ -24,14 +24,14 @@
   -->
 
 <script setup lang="ts">
-import {Draft as DraftItem} from '@/stuff/drafts/Draft';
+import {Draft as DraftItem} from '@/core/drafts/Draft';
 import {Ref, ref, UnwrapRef} from "vue";
 import Draft from "@/components/Draft.vue";
 import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
-import {Manifest} from "@/stuff/Manifest";
+import {Manifest} from "@/core/Manifest";
 import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
 
@@ -40,7 +40,7 @@ import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
 import {Collapse} from 'vue-collapsed'
-import {Types3} from "@/stuff/Types";
+import {Types} from "@/core/Types";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -72,7 +72,7 @@ function addNewDraft() {
           "Please specify a draft type before trying to add one"
       )
     } else {
-      let selected = Types3.getType(selected_type);
+      let selected = Types.getType(selected_type);
       let draft = selected.getDraft()
 
       if (!manifestObject.value.author.isEmpty())
@@ -268,7 +268,7 @@ async function exportToEncryptedPlugin() {
             <multiselect
               ref="typeSelector"
               v-model="selected_type"
-              :options="Array.from(Types3.getTypes(), (draftType) => draftType.tag)"
+              :options="Array.from(Types.getTypes(), (draftType) => draftType.tag)"
               :show-labels="false"
               :searchable="true"
               placeholder="Select draft type"

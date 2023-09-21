@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {FrameAttribute} from '@/stuff/attribute/FrameAttribute';
+import {FrameAttribute} from '@/core/attribute/FrameAttribute';
   interface Props {
     attribute: FrameAttribute,
     name: string

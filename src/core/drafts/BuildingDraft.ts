@@ -32,21 +32,23 @@ import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
 import {DraftType} from "../Types";
 
 export class BuildingDraft extends ViewportDraft {
-    width = new NumberAttribute(
-        "width", "Width",
-        "Tile width of the base of the building. Each tile has a pixel size of 32x16.",
-        true,
-        1,
-        {minValue: 1, maxValue: 16}
-    )
-    height = new NumberAttribute(
-        "height", "Height",
-        "Tile width of the base of the building. " +
-        "Has to be the same as width, as only squared buildings are possible.",
-        true,
-        1,
-        {minValue: 1, maxValue: 16}
-    )
+    width = new NumberAttribute({
+        id: "width",
+        name: "Width",
+        description: "Tile width of the base of the building. Each tile has a pixel size of 32x16.",
+        required: true,
+        defaultValue: 1,
+        validation: {minValue: 1, maxValue: 16}
+    })
+    height = new NumberAttribute({
+        id: "height",
+        name: "Height",
+        description: "Tile width of the base of the building. " +
+            "Has to be the same as width, as only squared buildings are possible.",
+        required: true,
+        defaultValue: 1,
+        validation: {minValue: 1, maxValue: 16}
+    })
 
 
     // TODO: implement loadComposition(draft);
@@ -69,65 +71,65 @@ export class BuildingDraft extends ViewportDraft {
         false, null
     )
     minWaterTiles: number
-    level = new LevelAttribute(
-        "level", "Level",
-        "Building wealth level. Only applicable for RCI buildings.",
-        false, null,
-        {minValue: 1, maxValue: 3}
-    )
+    level = new LevelAttribute({
+        id: "level",
+        name: "Level",
+        description: "Building wealth level. Only applicable for RCI buildings.",
+        validation: {minValue: 1, maxValue: 3}
+    })
     density: number // float
-    buildHeight = new NumberAttribute(
-        "build height", "Build height",
-        "The building height in pixels. Should be used when frames are not provided. Otherwise, game will calculate it" +
-        " on its own.",
-        false, null,
-    )
+    buildHeight = new NumberAttribute({
+        id: "build height",
+        name: "Build height",
+        description: "The building height in pixels. Should be used when frames are not provided. " +
+            "Otherwise, game will calculate it on its own."
+    })
 
     //animation: boolean // draft.animation = src.optBoolean("animated", draft.animation); TODO: ???
 
-    price = new NumberAttribute(
-        "price", "Price",
-        "Price of the building in Theons.",
-        false, null,
-        {minValue: 0, maxValue: 10_000_000}
-    )
+    price = new NumberAttribute({
+        id: "price",
+        name: "Price",
+        description: "Price of the building in Theons.",
+        validation: {minValue: 0, maxValue: 10_000_000}
+    })
     addPriceDrafts: Array<string> // draft.addPriceDrafts = loadDraftList(src, "add price", draft.id, draft.addPriceDrafts);
-    monthlyPrice = new NumberAttribute(
-        "monthly price", "Monthly price",
-        "Monthly price of the building in Theons.",
-        false, null,
-        {minValue: -10_000_000, maxValue: 10_000_000}
-    )
-    diamondPrice = new NumberAttribute(
-        "diamond price", "Diamond price",
-        "Diamond price of the building. Note that on premium platforms you need to specify normal price as " +
-        "well, since the game does not convert diamond price to Theon price.",
-        false, null,
-        {minValue: 0, maxValue: 10_000_000}
-    )
+    monthlyPrice = new NumberAttribute({
+        id: "monthly price",
+        name: "Monthly price",
+        description: "Monthly price of the building in Theons.",
+        validation: {minValue: -10_000_000, maxValue: 10_000_000}
+    })
+    diamondPrice = new NumberAttribute({
+        id: "diamond price",
+        name: "Diamond price",
+        description: "Diamond price of the building. Note that on premium platforms you need to " +
+            "specify normal price as well, since the game does not convert diamond price to Theon price.",
+        validation: {minValue: 0, maxValue: 10_000_000}
+    })
     budgetItem = new StringAttribute(
         "budget item", "Budget item",
         "ID of the budget draft to put the building under in estate menu of the city."
     )
-    bulldozePrice = new NumberAttribute(
-        "bulldoze price", "Bulldoze price",
-        "Price to bulldoze the building.",
-        false, null,
-        {minValue: 0, maxValue: 10_000_000}
-    )
+    bulldozePrice = new NumberAttribute({
+        id: "bulldoze price",
+        name: "Bulldoze price",
+        description: "Price to bulldoze the building.",
+        validation: {minValue: 0, maxValue: 10_000_000}
+    })
 
-    power = new NumberAttribute(
-        "power", "Power",
-        "Amount of power used. Use negative values to produce power instead.",
-        false, null,
-        {minValue: -10_000_000, maxValue: 10_000_000}
-    )
-    water = new NumberAttribute(
-        "water", "Water",
-        "Amount of water used. Use negative values to produce water instead.",
-        false, null,
-        {minValue: -10_000_000, maxValue: 10_000_000}
-    )
+    power = new NumberAttribute({
+        id: "power",
+        name: "Power",
+        description: "Amount of power used. Use negative values to produce power instead.",
+        validation: {minValue: -10_000_000, maxValue: 10_000_000}
+    })
+    water = new NumberAttribute({
+        id: "water",
+        name: "Water",
+        description: "Amount of water used. Use negative values to produce water instead.",
+        validation: {minValue: -10_000_000, maxValue: 10_000_000}
+    })
 
     // TODO: revisit when transport update hits, "capacity"
     destroyable = new BooleanAttribute(
@@ -153,11 +155,11 @@ export class BuildingDraft extends ViewportDraft {
     )
     useFireFrames: boolean
 
-    maxCount = new NumberAttribute(
-        "max count", "Max count",
-        "Maximum amount of buildings that can exist on the city.",
-        false, null,
-        {minValue: -1, maxValue: 10_000_000}
+    maxCount = new NumberAttribute({
+        id: "max count",
+        name: "Max count",
+        description: "Maximum amount of buildings that can exist on the city.",
+        validation: {minValue: -1, maxValue: 10_000_000}}
     )
     priceFactor: number // float
 
@@ -192,12 +194,12 @@ export class BuildingDraft extends ViewportDraft {
         "Whether the building explodes after being set on fire.",
         false, false
     )
-    explosionRadius = new NumberAttribute(
-        "explosion radius", "Explosion radius",
-        "Radius of the explosion.",
-        false, null,
-        {minValue: 0, maxValue: 10_000_000}
-    )
+    explosionRadius = new NumberAttribute({
+        id: "explosion radius",
+        name: "Explosion radius",
+        description: "Radius of the explosion.",
+        validation: {minValue: 0, maxValue: 10_000_000}
+    })
     nuclear = new BooleanAttribute(
         "nuclear", "Nuclear",
         "Whether the explosion of the building is nuclear.",
@@ -305,12 +307,12 @@ export class BuildingDraft extends ViewportDraft {
         false, false
     )
 
-    people = new NumberAttribute(
-        "people", "People",
-        "Amount of inhabitants or workers the building has. " +
-        "Only applies for RCI buildings.",
-        false, null
-    )
+    people = new NumberAttribute({
+        id: "people",
+        name: "People",
+        description: "Amount of inhabitants or workers the building has. " +
+            "Only applies for RCI buildings."
+    })
 
     autoBuild = new BooleanAttribute(
         "auto build", "Auto build",
@@ -320,13 +322,13 @@ export class BuildingDraft extends ViewportDraft {
     autoBuildFactor: number // float
     rebuild: boolean
 
-    buildTime= new NumberAttribute(
-        "build time", "Build time",
-        "Build time of the building. Can be left blank for game to calculate itself. Value of 0 will let " +
-        "building finish instantly.",
-        false, null,
-        {minValue: 0, maxValue: 10_000_000}
-    )
+    buildTime= new NumberAttribute({
+        id: "build time",
+        name: "Build time",
+        description: "Build time of the building. Can be left blank for game to calculate itself. " +
+            "Value of 0 will let building finish instantly.",
+        validation: {minValue: 0, maxValue: 10_000_000}
+    })
     influencePreview = new BooleanAttribute(
         "influence preview", "Influence preview",
         "Whether the show a preview of building influences in the build mode.",
@@ -425,59 +427,70 @@ export class BuildingDraft extends ViewportDraft {
 
 
     // Aspects
-    provideAspectEducationLow = new NumberAttribute(
-        "provide aspect education low", "Provide aspect education low",
-        "..."
-    )
-    provideAspectEducationHigh = new NumberAttribute(
-        "provide aspect education high", "Provide aspect education high",
-        "..."
-    )
-    provideAspectHealthCare = new NumberAttribute(
-        "provide aspect health care", "Provide aspect health care",
-        "..."
-    )
-    provideAspectWasteDisposal = new NumberAttribute(
-        "provide aspect waste disposal", "Provide aspect waste disposal",
-        "..."
-    )
-    provideAspectBodyDisposal = new NumberAttribute(
-        "provide aspect body disposal", "Provide aspect body disposal",
-        "..."
-    )
+    provideAspectEducationLow = new NumberAttribute({
+        id: "provide aspect education low",
+        name: "Provide aspect education low",
+        description: "..."
+    })
+    provideAspectEducationHigh = new NumberAttribute({
+        id: "provide aspect education high",
+        name: "Provide aspect education high",
+        description: "..."
+    })
+    provideAspectHealthCare = new NumberAttribute({
+        id: "provide aspect health care",
+        name: "Provide aspect health care",
+        description: "..."
+    })
+    provideAspectWasteDisposal = new NumberAttribute({
+        id: "provide aspect waste disposal",
+        name: "Provide aspect waste disposal",
+        description: "..."
+    })
+    provideAspectBodyDisposal = new NumberAttribute({
+        id: "provide aspect body disposal",
+        name: "Provide aspect body disposal",
+        description: "..."
+    })
 
     // Aspect capacities
-    aspectEducationLowCapacity = new NumberAttribute(
-        "aspect education low capacity", "Aspect education low capacity",
-        "..."
-    )
-    aspectEducationHighCapacity = new NumberAttribute(
-        "aspect education high capacity", "Aspect education high capacity",
-        "..."
-    )
-    aspectHealthCareCapacity = new NumberAttribute(
-        "aspect health care capacity", "Aspect health care capacity",
-        "..."
-    )
-    aspectWasteDisposalCapacity = new NumberAttribute(
-        "aspect waste disposal capacity", "Aspect waste disposal capacity",
-        "..."
-    )
-    aspectBodyDisposalCapacity = new NumberAttribute(
-        "aspect body disposal capacity", "Aspect body disposal capacity",
-        "..."
-    )
+    aspectEducationLowCapacity = new NumberAttribute({
+        id: "aspect education low capacity",
+        name: "Aspect education low capacity",
+        description: "..."
+    })
+    aspectEducationHighCapacity = new NumberAttribute({
+        id: "aspect education high capacity",
+        name: "Aspect education high capacity",
+        description: "..."
+    })
+    aspectHealthCareCapacity = new NumberAttribute({
+        id: "aspect health care capacity",
+        name: "Aspect health care capacity",
+        description: "..."
+    })
+    aspectWasteDisposalCapacity = new NumberAttribute({
+        id: "aspect waste disposal capacity",
+        name: "Aspect waste disposal capacity",
+        description: "..."
+    })
+    aspectBodyDisposalCapacity = new NumberAttribute({
+        id: "aspect body disposal capacity",
+        name: "Aspect body disposal capacity",
+        description: "..."
+    })
 
 
     pedestrian = new StringAttribute(
         "pedestrian", "Pedestrian",
         "ID of Pedestrian draft to spawn from this building."
     )
-    pedestrianCount = new NumberAttribute(
-        "pedestrian count", "Pedestrian count",
-        "Amount of pedestrians to spawn from this building.",
-        false, 0
-    )
+    pedestrianCount = new NumberAttribute({
+        id: "pedestrian count",
+        name: "Pedestrian count",
+        description: "Amount of pedestrians to spawn from this building.",
+        defaultValue: 0
+    })
 
     constructor(type: DraftType) {
         super(type)

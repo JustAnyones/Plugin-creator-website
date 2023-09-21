@@ -87,20 +87,20 @@ export class Draft {
         false, false
     )
 
-    minVersion = new NumberAttribute(
-        "min version",
-        "Minimal version",
-        "Minimal game version required to run this draft.",
-        false, 0,
-        {minValue: 0, maxValue: 99999}
-    )
-    maxVersion = new NumberAttribute(
-        "max version",
-        "Max version",
-        "Maximum game version required to run this draft.",
-        false, 0,
-        {minValue: 0, maxValue: 99999}
-    )
+    minVersion = new NumberAttribute({
+        id: "min version",
+        name: "Minimal version",
+        description: "Minimal game version required to run this draft.",
+        defaultValue: 0,
+        validation: {minValue: 0, maxValue: 99999}
+    })
+    maxVersion = new NumberAttribute({
+        id: "max version",
+        name: "Max version",
+        description: "Maximum game version required to run this draft.",
+        defaultValue: 0,
+        validation: {minValue: 0, maxValue: 99999}
+    })
 
 
     // TODO: Template related
@@ -170,13 +170,11 @@ export class Draft {
     soundClick: number
 
 
-    ordinal = new NumberAttribute(
-        "ordinal",
-        "Ordinal",
-        "Position of the draft in category. " +
-        "Lower ordinal value will list the draft first.",
-        false, null
-    )
+    ordinal = new NumberAttribute({
+        id: "ordinal",
+        name: "Ordinal",
+        description: "Position of the draft in category. Lower ordinal value will list the draft first."
+    })
     // TODO: improve description
     ordinalFrom = new StringAttribute(
         "ordinal",
@@ -310,6 +308,18 @@ export class Draft {
             })
         //data["meta"] = this.meta;
         return data
+    }
+
+    public static fromJSON(json: any) {
+        let obj = new this(json["type"]);
+        Object.keys(obj).forEach(
+            (item) => {
+                let attribute = obj[item]
+                if (attribute instanceof Attribute)
+                    if (json[attribute.id] !== undefined) {
+                        attribute.value = json[attribute.id]
+                    }
+            })
     }
 
     /**

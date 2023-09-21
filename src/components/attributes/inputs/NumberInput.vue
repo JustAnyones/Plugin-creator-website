@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
+import {NumberAttribute} from '@/core/attribute/NumberAttribute';
   interface Props {
     attribute: NumberAttribute,
     name: string
@@ -35,7 +35,14 @@ import {NumberAttribute} from '@/stuff/attribute/NumberAttribute';
 
 
   function onInput(emit, event) {
-    let parsed = Number.parseInt(event.target.value)
+    let parsed;
+
+    if (props.attribute.isInteger) {
+      parsed = Number.parseInt(event.target.value)
+    } else {
+      parsed = Number.parseFloat(event.target.value)
+    }
+
     if (parsed != null) {
       emit('update:value', parsed)
     }

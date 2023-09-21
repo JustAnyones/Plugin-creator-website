@@ -32,12 +32,15 @@ export class Manifest {
         "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
         true
     )
-    version = new NumberAttribute(
-        "version", "Version",
-        "Version of the plugin. Should be kept 1 for first the version and incremented for each update.",
-        true, 1,
-        {minValue: 1, maxValue: 999999}
-    )
+    version = new NumberAttribute({
+        id: "version",
+        name: "Version",
+        description: "Version of the plugin. " +
+            "Should be kept 1 for first the version and incremented for each update.",
+        required: true,
+        defaultValue: 1,
+        validation: {minValue: 1, maxValue: 999999}
+    })
     title= new StringAttribute(
         "title", "Name",
         "The name or title of the plugin.",

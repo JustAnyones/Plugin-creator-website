@@ -33,41 +33,55 @@ export class BiomeDraft extends Draft {
         "Whether the biome is considered to be water",
         false, false
     )
-    noiseScale = new NumberAttribute(
-        "noise scale", "Noise scale",
-        "...",
-        false, 1.0
-    )
-    noiseOffset = new NumberAttribute(
-        "noise offset", "Noise offset",
-        "...",
-        false, 0.0
-    )
-    noiseFactor = new NumberAttribute(
-        "noise factor", "Noise factor",
-        "...",
-        false, 0.0
-    )
-    heightCenter = new NumberAttribute(
-        "height center", "Height center",
-        "...",
-        false, 0.0
-    )
-    heightRadius = new NumberAttribute(
-        "height radius", "Height radius",
-        "...",
-        false, 10.0
-    )
-    heightOffset = new NumberAttribute(
-        "height offset", "Height offset",
-        "...",
-        false, 0.0
-    )
-    heightFactor = new NumberAttribute(
-        "height factor", "Height factor",
-        "...",
-        false, 0.0
-    )
+    noiseScale = new NumberAttribute({
+        id: "noise scale",
+        name: "Noise scale",
+        description: "...",
+        isInteger: false,
+        defaultValue: 1.0
+    })
+    noiseOffset = new NumberAttribute({
+        id: "noise offset",
+        name: "Noise offset",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    noiseFactor = new NumberAttribute({
+        id: "noise factor",
+        name: "Noise factor",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    heightCenter = new NumberAttribute({
+        id: "height center",
+        name: "Height center",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    heightRadius = new NumberAttribute({
+        id: "height radius",
+        name: "Height radius",
+        description: "...",
+        isInteger: false,
+        defaultValue: 10.0
+    })
+    heightOffset = new NumberAttribute({
+        id: "height offset",
+        name: "Height offset",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    heightFactor = new NumberAttribute({
+        id: "height factor",
+        name: "Height factor",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
 
     tempIndex: number
 }

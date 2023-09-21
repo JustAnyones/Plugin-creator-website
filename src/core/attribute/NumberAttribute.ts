@@ -23,20 +23,42 @@
  *
  */
 
-import {NumberAttribute} from "./NumberAttribute";
+import {Attribute} from "./Attribute";
 
-export class InfluenceAttribute extends NumberAttribute {
+interface ConstructorParams {
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: number | null;
+    validation?: { minValue: number; maxValue: number };
+    isInteger?: boolean
+}
+
+/**
+ * This represents a draft number attribute.
+ * 
+ * It can refer to integers or floating point values.
+ */
+export class NumberAttribute extends Attribute {
+    element = "NumberInput"
+    readonly isInteger: boolean
+    readonly minValue: Number
+    readonly maxValue: Number
+
     constructor(
-        id: string,
-        name: string,
-        description: string,
-        required: boolean = false,
-        defaultValue: number | null = null,
-        isPositive: boolean = true
+        {id, name, description, required=false, defaultValue=null, validation={
+            minValue: Number.NEGATIVE_INFINITY,
+            maxValue: Number.POSITIVE_INFINITY,
+        }, isInteger=true}: ConstructorParams
     ) {
-        super(id, name, description, required, defaultValue, {
-            minValue: -10_000, maxValue: 10_000
-        })
+        super(id, name, description, required, defaultValue)
+        this.isInteger = isInteger
+        this.minValue = validation.minValue
+        this.maxValue = validation.maxValue
     }
 
+    isEmpty(): boolean {
+        return this.value === null || Number.isNaN(this.value);
+    }
 }

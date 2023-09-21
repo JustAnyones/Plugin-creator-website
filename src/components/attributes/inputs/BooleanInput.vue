@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {BooleanAttribute} from '@/stuff/attribute/BooleanAttribute';
+import {BooleanAttribute} from '@/core/attribute/BooleanAttribute';
 interface Props {
   attribute: BooleanAttribute,
   name: string

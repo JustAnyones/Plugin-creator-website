@@ -23,30 +23,27 @@
  *
  */
 
-import {Attribute} from "./Attribute";
+import {NumberAttribute} from "./NumberAttribute";
 
-export class NumberAttribute extends Attribute {
-    element = "NumberInput"
-    minValue: Number
-    maxValue: Number
-
+export class InfluenceAttribute extends NumberAttribute {
     constructor(
         id: string,
         name: string,
         description: string,
         required: boolean = false,
         defaultValue: number | null = null,
-        validation = {
-            minValue: Number.NEGATIVE_INFINITY,
-            maxValue: Number.POSITIVE_INFINITY,
-        }
+        isPositive: boolean = true
     ) {
-        super(id, name, description, required, defaultValue)
-        this.minValue = validation.minValue
-        this.maxValue = validation.maxValue
+        super({
+            id: id,
+            name: name,
+            description: description,
+            required: required,
+            defaultValue: defaultValue,
+            validation: {
+                minValue: -10_000, maxValue: 10_000
+            }
+        })
     }
 
-    isEmpty(): boolean {
-        return this.value === null || Number.isNaN(this.value);
-    }
 }
