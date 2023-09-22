@@ -61,4 +61,18 @@ export class NumberAttribute extends Attribute {
     isEmpty(): boolean {
         return this.value === null || Number.isNaN(this.value);
     }
+
+    validate(): boolean {
+        super.validate();
+
+        // Check if number is within range
+        if (this.value > this.maxValue || this.value < this.minValue) {
+            this.addError(
+                "Value must be in range (" + this.minValue + "," + this.maxValue + ")."
+            )
+        }
+
+        return this.isValid();
+    }
+
 }

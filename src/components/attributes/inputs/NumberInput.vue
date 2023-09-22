@@ -33,30 +33,48 @@ import {NumberAttribute} from '@/core/attribute/NumberAttribute';
   }
   const props = defineProps<Props>()
 
+  let displayedValue = props.value;
+
 
   function onInput(emit, event) {
-    let parsed;
+    let inputValue = event.target.value;
+    let isInteger = props.attribute.isInteger;
+    let parsedValue;
 
-    if (props.attribute.isInteger) {
-      parsed = Number.parseInt(event.target.value)
+    //console.log("Input changed", inputValue, isInteger)
+
+    if (isInteger) {
+      parsedValue = Number.parseInt(inputValue);
     } else {
-      parsed = Number.parseFloat(event.target.value)
+      displayedValue = inputValue;
+      parsedValue = Number.parseFloat(inputValue)
     }
 
-    if (parsed != null) {
-      emit('update:value', parsed)
+
+    //console.log("Parsed", parsedValue)
+
+    if (parsedValue !== null && !Number.isNaN(parsedValue)) {
+
+      if (isInteger)
+        displayedValue = parsedValue;
+
+      //a = inputValue;
+      emit('update:value', parsedValue)
+    } else {
+      displayedValue = inputValue;
+      emit('update:value', null)
     }
+
+    return;
   }
 </script>
 
 <template>
+  <!-- type=text, because type=number trims "1." to "1" when querying value -->
   <input
-      type="number"
+      type="text"
       class="attribute-input"
-      required
-      :min="props.attribute.minValue"
-      :max="props.attribute.maxValue"
-      :value="props.value"
+      :value="displayedValue"
       @input="onInput($emit, $event)"
   />
 </template>
