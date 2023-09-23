@@ -69,7 +69,7 @@ function addNewDraft() {
     if (selected_type === null) {
       showErrorToast(
           "No draft type specified",
-          "Please specify a draft type before trying to add one"
+          "Please specify a draft type before trying to add one."
       )
     } else {
       let selected = Types.getType(selected_type);
@@ -99,7 +99,7 @@ function isValid() {
   if (drafts.value.length === 0) {
     showErrorToast(
         "Cannot export an empty plugin",
-        "Before exporting, make sure you have defined at least one draft"
+        "Before exporting, make sure you have defined at least one draft."
     )
     return false;
   }
@@ -134,12 +134,18 @@ function getManifestBlob(): Blob {
 }
 
 function exportToJson() {
-  if (!isValid()) return;
+  if (!isValid()) return showErrorToast(
+      "Could not export JSON",
+      "Please ensure all draft attributes are correct."
+  );
   FileSaver.saveAs(getJsonBlob(), "code.json")
 }
 
 function exportToManifest() {
-  if (!isManifestValid()) return;
+  if (!isManifestValid()) return showErrorToast(
+      "Could not export manifest",
+      "Please ensure all manifest attributes are correct."
+  );
   FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
 }
 
@@ -157,7 +163,10 @@ function createZipArchive(): JSZip {
 }
 
 function exportToZip() {
-  if (!isValid() || !isManifestValid()) return;
+  if (!isValid() || !isManifestValid()) return showErrorToast(
+      "Could not export archive",
+      "Please ensure all plugin attributes are correct."
+  );
 
   createZipArchive().generateAsync({ type: 'blob' }).then(function (content) {
     FileSaver.saveAs(content, 'plugin.zip');
@@ -186,7 +195,10 @@ function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
 
 
 async function exportToEncryptedPlugin() {
-  if (!isValid() || !isManifestValid()) return;
+  if (!isValid() || !isManifestValid()) return showErrorToast(
+      "Could not export plugin file",
+      "Please ensure all plugin attributes are correct."
+  );
 
   createZipArchive().generateAsync({type: 'blob'}).then(async function (content) {
     let formData = new FormData();
@@ -211,7 +223,7 @@ async function exportToEncryptedPlugin() {
     })
     .catch(
         error => showErrorToast(
-            "An error occurred while trying to encrypt your plugin",
+            "Failed to encrypt your plugin",
             error
         ));
   });
