@@ -65,8 +65,8 @@ export class NumberAttribute extends Attribute {
     validate(): boolean {
         super.validate();
 
-        // Check if number is within range
-        if (this.value > this.maxValue || this.value < this.minValue) {
+        // Check if number is within range, only if it's not default
+        if (!this.isDefault() && (this.value > this.maxValue || this.value < this.minValue)) {
             this.addError(
                 "Value must be in range (" + this.minValue + "," + this.maxValue + ")."
             )
