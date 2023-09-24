@@ -27,12 +27,15 @@ import { BooleanAttribute } from "../attribute/BooleanAttribute";
 import { NumberAttribute } from "../attribute/NumberAttribute";
 import {Draft} from "./Draft";
 
+// A biome is used to decide on ground and decorations to place during map creation phase.
 export class BiomeDraft extends Draft {
     isWater = new BooleanAttribute(
         "water", "Is water",
         "Whether the biome is considered to be water",
         false, false
     )
+
+
     noiseScale = new NumberAttribute({
         id: "noise scale",
         name: "Noise scale",
@@ -54,6 +57,15 @@ export class BiomeDraft extends Draft {
         isInteger: false,
         defaultValue: 0.0
     })
+    noiseVariance = new NumberAttribute({
+        id: "noise variance",
+        name: "Noise variance",
+        description: "...",
+        isInteger: false,
+        defaultValue: 1.0
+    })
+
+
     heightCenter = new NumberAttribute({
         id: "height center",
         name: "Height center",
@@ -66,7 +78,7 @@ export class BiomeDraft extends Draft {
         name: "Height radius",
         description: "...",
         isInteger: false,
-        defaultValue: 10.0
+        defaultValue: 1.0
     })
     heightOffset = new NumberAttribute({
         id: "height offset",
@@ -82,6 +94,63 @@ export class BiomeDraft extends Draft {
         isInteger: false,
         defaultValue: 0.0
     })
+
+
+    derivCenter = new NumberAttribute({
+        id: "deriv center",
+        name: "Deriv center",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    derivRadius = new NumberAttribute({
+        id: "deriv radius",
+        name: "Deriv radius",
+        description: "...",
+        isInteger: false,
+        defaultValue: 1.0
+    })
+    derivOffset = new NumberAttribute({
+        id: "deriv offset",
+        name: "Deriv offset",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+    derivFactor = new NumberAttribute({
+        id: "deriv factor",
+        name: "Deriv factor",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+
+
+    offset = new NumberAttribute({
+        id: "offset",
+        name: "Offset",
+        description: "...",
+        isInteger: false,
+        defaultValue: 0.0
+    })
+
+
+    coverage = new NumberAttribute({
+        id: "coverage",
+        name: "Coverage",
+        description: "...",
+        isInteger: false,
+        defaultValue: 1.0
+    })
+    precedence = new NumberAttribute({
+        id: "precedence",
+        name: "Precedence",
+        description: "...",
+        isInteger: false,
+        defaultValue: 1.0
+    })
+
+    // "ground" array of ground IDs
 
     tempIndex: number
 }
