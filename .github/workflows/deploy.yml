@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+    branches:
+      - master
 name: Deploy website
 jobs:
   web-deploy:
