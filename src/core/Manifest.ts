@@ -27,6 +27,13 @@ import {StringAttribute} from "./attribute/StringAttribute";
 import {NumberAttribute} from "./attribute/NumberAttribute";
 
 export class Manifest {
+    constructor() {
+        let authorName = localStorage.getItem("authorName");
+        if (authorName !== null) {
+            this.author.value = authorName;
+        }
+    }
+
     id = new StringAttribute(
         "id", "Manifest ID",
         "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",

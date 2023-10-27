@@ -25,15 +25,27 @@
 
 <script setup lang="ts">
 import {Manifest} from "@/core/Manifest";
-import {defineProps} from "vue";
+import {computed, defineProps} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "../attributes/inputs/StringInput.vue";
 
 interface Props {
   manifest: Manifest
 }
+
+const authorName = computed({
+  get() {
+    return props.manifest.author.value
+  },
+  set(value) {
+    emit('update:value', value)
+    props.manifest.author.value = value;
+    localStorage.setItem('authorName', props.manifest.author.value)
+  }
+})
+
 const props = defineProps<Props>()
-defineEmits(['raiseError'])
+const emit = defineEmits(['raiseError', 'update:value'])
 </script>
 
 <template>
@@ -101,7 +113,7 @@ defineEmits(['raiseError'])
       <StringInput
         :attribute="props.manifest.author"
         :name="props.manifest.author.name"
-        v-model:value="props.manifest.author.value"
+        v-model:value="authorName"
       />
     </Attribute>
   </div>

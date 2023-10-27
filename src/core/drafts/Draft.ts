@@ -24,7 +24,6 @@
  */
 
 // @ts-ignore
-import CryptoJS from "crypto-js";
 import {Attribute} from "../attribute/Attribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
@@ -41,8 +40,7 @@ export class Draft {
         "So you should add some specific information about the plugin to ensure nobody else ever gonna use this ID. " +
         "Avoid changes to the ID afterwards, as it is used to identify buildings in saved cities. " + 
         "If you need to change it, please use the \"aliases\" attribute instead.",
-        true,
-        "lt.svetikas.pca." + CryptoJS.MD5(new Date().getTime().toString()).toString()
+        true
     )
 
     active = new BooleanAttribute(
@@ -236,6 +234,27 @@ export class Draft {
 
     constructor(type: DraftType) {
         this.type = type
+
+        let authorName = localStorage.getItem("authorName");
+        if (authorName == null) {
+            authorName = "pca.svetikas.lt";
+        } else {
+            this.author.value = authorName;
+        }
+
+        let date = new Date().getTime()
+        let fmt = {
+            year: Intl.DateTimeFormat('en', {year: "numeric"}).format(date),
+            month: Intl.DateTimeFormat('en', {month: "2-digit"}).format(date),
+            day: Intl.DateTimeFormat('en', {day: "2-digit"}).format(date),
+            hour: Intl.DateTimeFormat('en', {hour: "2-digit", hour12: false}).format(date),
+            minute: Intl.DateTimeFormat('en', {minute: "2-digit"}).format(date),
+        }
+
+        this.id.value = `$`;
+        this.id.value += `${authorName.replace(" ", "_").toLowerCase()}`;
+        this.id.value += `.${type.tag}`;
+        this.id.value += `.${fmt.year}-${fmt.month}-${fmt.day}-${fmt.hour}:${fmt.minute}`;
     }
 
     /**
