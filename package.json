@@ -15,7 +15,6 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@vueform/multiselect": "^2.6.2",
     "primevue": "^3.34.1",
-    "crypto-js": "^4.1.1",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "uuid": "^9.0.0",
