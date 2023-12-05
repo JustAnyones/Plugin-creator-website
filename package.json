@@ -1,6 +1,6 @@
 {
   "name": "plugin-creator-website",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -22,7 +22,6 @@
     "vue-collapsed": "^1.2.7"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.1.1",
     "@types/file-saver": "^2.0.5",
     "@vitejs/plugin-vue": "^4.3.1",
     "vite": "^4.4.9"

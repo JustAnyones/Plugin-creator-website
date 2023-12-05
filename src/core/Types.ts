@@ -52,6 +52,10 @@ export class DraftType {
         return this._tag;
     }
 
+    public isRCI(): boolean {
+        return this.rci;
+    }
+
     public getDraft(): Draft {
         return new this.draftType(this);
     }

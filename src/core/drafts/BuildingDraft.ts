@@ -532,12 +532,15 @@ export class BuildingDraft extends ViewportDraft {
         description: "Amount of pedestrians to spawn from this building.",
         defaultValue: 0
     })
-
     constructor(type: DraftType) {
         super(type)
 
         this.width.required = true;
         this.height.required = true;
+
+        if (this.type.isRCI()) {
+            this.level.required = true;
+        }
     }
 
     validate(): boolean {
