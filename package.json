@@ -24,6 +24,6 @@
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
     "@vitejs/plugin-vue": "^4.3.1",
-    "vite": "^4.4.9"
+    "vite": "^4.4.12"
   }
 }
