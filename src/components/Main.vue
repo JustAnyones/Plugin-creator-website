@@ -114,21 +114,13 @@ function isValid() {
 }
 
 function getJsonBlob(): Blob {
-  // @ts-ignore
-  let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
-  content += JSON.stringify(drafts.value, null, 2)
-
-  return new Blob([content], {
+  return new Blob([JSON.stringify(drafts.value, null, 2)], {
     type: "application/json;charset=utf-8"
   });
 }
 
 function getManifestBlob(): Blob {
-  // @ts-ignore
-  let content = `//File was created by plugin creator website ${__APP_VERSION__}\n`
-  content += JSON.stringify(manifestObject.value, null, 2)
-
-  return new Blob([content], {
+  return new Blob([JSON.stringify(manifestObject.value, null, 2)], {
     type: "text/plain;charset=utf-8"
   });
 }
@@ -223,7 +215,7 @@ async function exportToEncryptedPlugin() {
     })
     .catch(
         error => showErrorToast(
-            "Failed to encrypt your plugin",
+            "Failed to encrypt your plugin, try again later",
             error
         ));
   });
@@ -319,6 +311,10 @@ async function exportToEncryptedPlugin() {
             If you want something that you can just load into the game and it just works,
             you can use the export as a zip or as .plugin file. .plugin file in this case
             encrypts the plugin and protects its contents from others.
+          </p>
+          <p>
+            It is recommended to export the zip archive. It will act as a project restoration file
+            for future versions of PCA as .plugin files encrypted.
           </p>
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
