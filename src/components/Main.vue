@@ -24,14 +24,15 @@
   -->
 
 <script setup lang="ts">
-import {Draft as DraftItem} from '@/core/drafts/Draft';
+
 import {Ref, ref, UnwrapRef} from "vue";
 import Draft from "@/components/Draft.vue";
 import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
-import {Manifest} from "@/core/Manifest";
+import FileUpload from "primevue/fileupload";
+
 import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
 
@@ -40,7 +41,10 @@ import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
 import {Collapse} from 'vue-collapsed'
+
 import {Types} from "@/core/Types";
+import {Manifest} from "@/core/Manifest";
+import {Draft as DraftItem} from '@/core/drafts/Draft';
 
 
 function capitalizeFirstLetter(string: string) {
@@ -65,6 +69,15 @@ function showErrorToast(summary: string, detail: string, life: number = 10000) {
   })
 }
 
+function showWarningToast(summary: string, detail: string, life: number = 10000) {
+  toast.add({
+    severity: 'warn',
+    summary: summary,
+    detail: detail,
+    life: life
+  })
+}
+
 function addNewDraft() {
     if (selected_type === null) {
       showErrorToast(
@@ -72,9 +85,7 @@ function addNewDraft() {
           "Please specify a draft type before trying to add one."
       )
     } else {
-      let selected = Types.getType(selected_type);
-      let draft = selected.getDraft()
-
+      let draft = DraftItem.fromType(selected_type)
       if (!manifestObject.value.author.isEmpty())
         draft.author.value = manifestObject.value.author.value
       drafts.value.push(draft)
@@ -219,8 +230,73 @@ async function exportToEncryptedPlugin() {
             error
         ));
   });
+}
 
-  
+function loadFromZip(event) {
+  event.files
+
+  if (event.files.length == 0) {
+    return showErrorToast(
+        "Project loading failed",
+        "Cannot load from a non zip file."
+    );
+  }
+
+
+  console.log(event.files)
+
+  let archive = new JSZip();
+  archive.loadAsync(event.files[0]).then(function(zip) {
+
+    const codeFile = zip.file("code.json")
+    const manifestFile = zip.file("plugin.manifest")
+
+    if (codeFile === null || manifestFile === null) {
+      return showErrorToast(
+          "Project loading failed",
+          "Selected zip is not a PCA project."
+      );
+    }
+
+    // Load the code.json file
+    codeFile.async("string")
+        .then(function success(content) {
+          const jsonObject = JSON.parse(content);
+
+          if (!Array.isArray(jsonObject)) {
+            return showErrorToast(
+                "Project loading failed",
+                "Error loading code: not array"
+            );
+          }
+
+          drafts.value = [];
+          jsonObject.forEach((obj) => {
+            const draft = DraftItem.fromJSON(obj);
+            if (draft === null) {
+              showWarningToast(
+                  "Draft loading failed",
+                  "Unsupported draft type encountered: " + obj["type"] + " for " + obj["id"]
+              );
+            } else {
+              drafts.value.push(draft)
+            }
+          })
+
+          // use the content
+        }, function error(e) {
+          return showErrorToast(
+              "Project loading failed",
+              "Error loading code: " + e
+          );
+        });
+
+
+
+    console.log(zip.files)
+    // you now have every files contained in the loaded zip
+    //zip.file("hello.txt").async("string"); // a promise of "Hello World\n"
+  });
 
 }
 
@@ -316,6 +392,15 @@ async function exportToEncryptedPlugin() {
             It is recommended to export the zip archive. It will act as a project restoration file
             for future versions of PCA as .plugin files encrypted.
           </p>
+
+          <FileUpload v-if="showPreviewPanel"
+              mode="basic"
+              accept="application/zip"
+              @select="loadFromZip($event)"
+          >
+          </FileUpload>
+
+          <!-- <Button @click="loadFromZip()">Load from zip</Button> -->
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
           <Button @click="exportToZip()">Export as a zip archive</Button>

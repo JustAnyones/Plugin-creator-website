@@ -23,43 +23,9 @@
  *
  */
 
-import {Draft} from "./drafts/Draft";
 import {BuildingDraft} from "./drafts/BuildingDraft";
-import {BiomeDraft} from "./drafts/BiomeDraft";
-import {Categories, Category} from "./Categories";
-
-interface DraftTypeConstructorParams {
-    tag: string;
-    category?: Category;
-    rci?: boolean;
-    draftType: typeof Draft;
-}
-
-export class DraftType {
-    private readonly _tag: string;
-    private readonly category: Category | null
-    private readonly rci: boolean
-    private readonly draftType: typeof Draft
-
-    constructor({tag, category, rci, draftType}: DraftTypeConstructorParams) {
-        this._tag = tag;
-        this.category = category
-        this.rci = rci || false
-        this.draftType = draftType
-    }
-
-    get tag(): string {
-        return this._tag;
-    }
-
-    public isRCI(): boolean {
-        return this.rci;
-    }
-
-    public getDraft(): Draft {
-        return new this.draftType(this);
-    }
-}
+import {Categories} from "./Categories";
+import {DraftType} from "./DraftType";
 
 export class Types {
     // RCI

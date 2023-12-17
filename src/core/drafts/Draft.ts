@@ -29,8 +29,9 @@ import {StringAttribute} from "../attribute/StringAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {FileAttribute} from "../attribute/FileAttribute";
-import {DraftType} from "../Types";
+import {Types} from "../Types";
 import {MetaAttribute} from "../attribute/MetaAttribute";
+import {DraftType} from "../DraftType";
 
 export class Draft {
     id = new StringAttribute(
@@ -171,7 +172,7 @@ export class Draft {
     ordinal = new NumberAttribute({
         id: "ordinal",
         name: "Ordinal",
-        description: "Position of the draft in category. Lower ordinal value will list the draft first."
+        description: "Position of the draft in category. Lower ordinal value will list the draft higher. Negative values are allowed."
     })
     // TODO: improve description
     ordinalFrom = new StringAttribute(
@@ -329,16 +330,51 @@ export class Draft {
         return data
     }
 
+    public static fromType(type: string) {
+        const draftType = Types.getType(type);
+        if (draftType === null) return null;
+        return draftType.getDraft();
+    }
+
     public static fromJSON(json: any) {
-        let obj = new this(json["type"]);
-        Object.keys(obj).forEach(
-            (item) => {
-                let attribute = obj[item]
-                if (attribute instanceof Attribute)
-                    if (json[attribute.id] !== undefined) {
-                        attribute.value = json[attribute.id]
-                    }
-            })
+        let obj = this.fromType(json["type"]);
+        if (obj === null) return null;
+
+
+        let jsonAttrs = Object.keys(json);
+
+
+        Object.keys(json).forEach(
+            (key) => {
+                console.log(key, json[key]);
+            }
+        )
+
+        let removed = {
+            "deleted": "this is a custom entry for listing unsupported pca tags"
+        }
+
+        Object.keys(obj).forEach((item) => {
+            let attribute = obj[item]
+            if (attribute instanceof Attribute)
+                if (json[attribute.id] !== undefined) {
+                    attribute.value = json[attribute.id]
+                    json[attribute.id] = removed;
+                    // TODO: does not display optional attributes visually, should be resolved
+                    // TODO: does not load frames
+                }
+        })
+
+        console.log("Unsupported tags:")
+        jsonAttrs.forEach(
+            (key) => {
+                if (json[key] !== removed)
+                    console.log(key, json[key]);
+            }
+        )
+
+
+        return obj
     }
 
     /**

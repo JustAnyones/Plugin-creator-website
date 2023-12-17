@@ -29,7 +29,7 @@ import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
 import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
-import {DraftType} from "../Types";
+import {DraftType} from "../DraftType";
 
 export class BuildingDraft extends ViewportDraft {
     width = new NumberAttribute({
