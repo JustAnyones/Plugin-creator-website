@@ -35,6 +35,9 @@ import {Plugin} from "../Plugin";
 import {BmpFrame, FrameAttribute} from "../attribute/FrameAttribute";
 
 export class Draft {
+    plugin: Plugin
+    readonly type: DraftType
+
     id = new StringAttribute({
         owner: this, id: "id",
         name: "ID", description: "Each object has to have a unique ID to identify it. " +
@@ -57,8 +60,6 @@ export class Draft {
         required : false, defaultValue : false
     })
     platform: string // TODO: figure out possible values and create a custom attribute
-    readonly type: DraftType
-    plugin: Plugin
     once = new BooleanAttribute({
         owner: this, id : "once",
         name : "Once", description : "Whether to load a draft by the specified ID once. It will not load any extra drafts whose " +
@@ -190,23 +191,30 @@ export class Draft {
 
     separator = new BooleanAttribute({
         owner: this, id: "separator",
-        name : "Separator", description : "Whether to separate draft from others in a category.",
-        required : false, defaultValue : false
+        name: "Separator", description: "Whether to separate draft from others in a category.",
+        defaultValue: false
     })
 
+    previewFrames = new FrameAttribute({
+        owner: this, id: "preview frames",
+        name: "Preview frames", description: "The preview frames of your draft visible in the toolbar.",
+        defaultValue: []
+    })
+    iconFrames = new FrameAttribute({
+        owner: this, id: "icon frames",
+        name: "Icon frames", description: "The icon frames of your draft. Visible in the building information panel.",
+        defaultValue: []
+    })
 
-    // TODO: preview and icon frames
-    previewFrames: Array<number>
-    iconFrames: Array<number>
     showNewMarker = new BooleanAttribute({
         owner: this, id: "show new marker",
-        name : "Show new marker", description : "Whether the draft will show a new marker in the toolbar.",
-        required : false, defaultValue : true
+        name: "Show new marker", description: "Whether the draft will show a new marker in the toolbar.",
+        defaultValue: true
     })
     searchable = new BooleanAttribute({
         owner: this, id: "searchable",
-        name : "Searchable", description : "Whether the draft can be searched.",
-        required : false, defaultValue : true
+        name: "Searchable", description: "Whether the draft can be searched.",
+        defaultValue: true
     })
 
 
@@ -325,10 +333,11 @@ export class Draft {
                 if (
                     attribute instanceof Attribute
                     && attribute.value !== null
-                )
+                ) {
                     if (attribute.required || !attribute.isDefault()) {
                         data[attribute.id] = attribute.value
                     }
+                }
             })
         //data["meta"] = this.meta;
         return data

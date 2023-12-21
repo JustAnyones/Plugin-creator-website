@@ -239,6 +239,10 @@ export class FrameAttribute extends Attribute {
         return this._value.length == 0;
     }
 
+    isDefault(): boolean {
+        return this._value.length === 0
+    }
+
     get value() {
         return this._value
     }
