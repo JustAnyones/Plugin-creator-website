@@ -24,17 +24,11 @@
   -->
 
 <script setup lang="ts">
-import {defineProps, nextTick, Ref, ref} from 'vue';
+import {defineProps, ref} from 'vue';
 import {Draft as DraftObject} from "@/core/drafts/Draft";
-import Attribute from "@/components/attributes/Attribute.vue";
-import StringInput from "@/components/attributes/inputs/StringInput.vue";
-import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
-import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
-import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
-import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
-import Multiselect from "@vueform/multiselect";
-import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
 import {Collapse} from "vue-collapsed";
+import OptionalAttributeSelector from "@/components/elements/OptionalAttributes.vue";
+import RequiredAttributes from "@/components/elements/RequiredAttributes.vue";
 
 interface Props {
   draftObject: DraftObject
@@ -42,23 +36,8 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const Inputs = {
-  StringInput,
-  NumberInput,
-  BooleanInput,
-  FrameInput,
-  LevelInput,
-}
-
 const showDraftContent = ref(true);
 const optionalAttributeSelector = ref(null);
-const selectedOptionalAttributes: Ref<Array<any>> = ref([]);
-
-async function deselectOptionalAttribute(item: Attribute) {
-  item.attribute.reset()
-  await nextTick()
-  optionalAttributeSelector.value.deselect(item)
-}
 
 defineEmits(['pop'])
 </script>
@@ -83,65 +62,15 @@ defineEmits(['pop'])
     <!-- Actual draft element, that can be collapsed -->
     <Collapse :when="showDraftContent" class="collapse">
 
-      <!-- The required attributes -->
-      <div v-for="(attr) in props.draftObject.getRequiredAttributes()">
-        <Attribute
-            :name="attr.name"
-            :description="attr.description"
-            :errors="attr.errors"
-            @raise-error="showDraftContent = true"
-        >
-          <component
-              v-bind:attribute="attr"
-              v-bind:name="attr.id+props.draftObject.id.value"
-              v-model:value="attr.value"
-              :is="Inputs[attr.element]"
-              @updateFiles="attr.internalFileList=$event"
-          />
-        </Attribute>
-      </div>
+      <RequiredAttributes
+          v-model:object="props.draftObject"
+      />
 
-
-      <!-- The optional attribute selector -->
-      <h3>Optional attributes</h3>
-      <p>These are optional attributes</p>
-      <multiselect
-          class="optional-attribute-multiselect"
-          ref="optionalAttributeSelector"
-          v-model="selectedOptionalAttributes"
-          mode="multiple"
-          :options="Array.from(props.draftObject.getOptionalAttributes(), (attr) => ({
-            value: attr.name, label: attr.name, attribute: attr
-          }))"
-          :object="true"
-          :show-labels="false"
-          :searchable="true"
-          :close-on-select="true"
-          placeholder="Select optional attributes"
-          :canClear="false"
-      >
-        <template v-slot:option="{ option }">
-          {{ option.label }}
-        </template>
-      </multiselect>
-
-      <!-- Actually list all the optional attributes -->
-      <div :key="item.attribute.id" v-for="item in selectedOptionalAttributes">
-        <OptionalAttribute
-            :name="item.attribute.name"
-            :description="item.attribute.description"
-            :errors="item.attribute.errors"
-            @pop="deselectOptionalAttribute(item)"
-            @raise-error="showDraftContent = true"
-        >
-          <component
-              :attribute="item.attribute"
-              :name="item.attribute.id+draftObject.id.value"
-              v-model:value="item.attribute.value"
-              :is="Inputs[item.attribute.element]"
-          ></component>
-        </OptionalAttribute>
-      </div>
+      <OptionalAttributeSelector
+          name="Optional attributes"
+          description="These are optional attributes you can add to your plugin draft. They are not required, however useful such as adding a title, a description or a price for your building."
+          v-model:object="props.draftObject"
+      />
     </Collapse>
   </div>
 </template>
@@ -160,9 +89,4 @@ a {
 h3 {
   word-wrap: anywhere;
 }
-
-.optional-attribute-multiselect {
-  margin-bottom: 20px;
-}
-
 </style>

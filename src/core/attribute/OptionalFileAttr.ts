@@ -24,10 +24,31 @@
  */
 
 import {Attribute} from "./Attribute";
+import {Draft} from "../drafts/Draft";
 
-export class FileAttribute extends Attribute {
-    element = "FileAttribute"
-    internalFileList: FileList | null = null;
+interface ConstructorParams {
+    owner: Draft;
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: number | null;
+}
+
+export class OptionalFileAttr extends Attribute {
+    element = "OptionalFileInput"
+    //element2 = OptionalFileInput
+
+    multiple = false
+
+    constructor(
+        {owner, id, name, description, required=false, defaultValue=null}: ConstructorParams
+    ) {
+        super({
+            owner: owner, id: id,
+            name : name, description : description, required : required, defaultValue : defaultValue
+        })
+    }
 
     isEmpty(): boolean {
         return false;

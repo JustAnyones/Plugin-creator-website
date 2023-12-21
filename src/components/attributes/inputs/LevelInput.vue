@@ -27,9 +27,7 @@
 import {defineProps} from 'vue';
 import {LevelAttribute} from '@/core/attribute/LevelAttribute';
 interface Props {
-  attribute: LevelAttribute,
-  name: string
-  value: number | null
+  attribute: LevelAttribute
 }
 const props = defineProps<Props>()
 </script>
@@ -39,9 +37,8 @@ const props = defineProps<Props>()
     <label>
       <input
           type="radio"
-          :name="props.name"
-          :checked="value === 1"
-          @input="$emit('update:value', 1)"
+          :checked="props.attribute.value === 1"
+          @input="props.attribute.value = 1"
       />
       Poor
     </label>
@@ -49,9 +46,8 @@ const props = defineProps<Props>()
     <label>
       <input
           type="radio"
-          :name="props.name"
-          :checked="value === 2"
-          @input="$emit('update:value', 2)"
+          :checked="props.attribute.value === 2"
+          @input="props.attribute.value = 2"
       />
       Middle
     </label>
@@ -59,9 +55,8 @@ const props = defineProps<Props>()
     <label>
       <input
           type="radio"
-          :name="props.name"
-          :checked="value === 3"
-          @input="$emit('update:value', 3)"
+          :checked="props.attribute.value === 3"
+          @input="props.attribute.value = 3"
       />
       Rich
     </label>

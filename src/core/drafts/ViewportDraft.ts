@@ -27,16 +27,19 @@ import {Draft} from "./Draft";
 import {FrameAttribute} from "../attribute/FrameAttribute";
 
 export class ViewportDraft extends Draft {
-    frames = new FrameAttribute(
-        "frames", "Frames",
-        "Frames define your draft texture. Usually, this means the texture of the building.",
-        true,
-        []
-    )
+    frames = new FrameAttribute({
+        owner: this,
+        id: "frames",
+        name: "Frames",
+        description: "Frames define your draft texture. Usually, this means the texture of the building.",
+        required: true,
+        defaultValue: []
+    })
 
     validate(): boolean {
         let valid = super.validate()
 
+        /*
         // Ensure that every frame passed is a PNG file
         if (this.frames.internalFileList != null) {
             for (let i = 0; i < this.frames.internalFileList.length; i++) {
@@ -46,7 +49,7 @@ export class ViewportDraft extends Draft {
                     break;
                 }
             }
-        }
+        }*/
 
         return valid
     }

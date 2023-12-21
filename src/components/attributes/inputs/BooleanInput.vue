@@ -3,8 +3,6 @@ import {defineProps} from 'vue';
 import {BooleanAttribute} from '@/core/attribute/BooleanAttribute';
 interface Props {
   attribute: BooleanAttribute,
-  name: string
-  value: boolean | null,
 
   labelTrue?: string
   labelFalse?: string
@@ -17,9 +15,8 @@ const props = defineProps<Props>()
     <label>
       <input
         type="radio"
-        :name="props.name"
-        :checked="value === true"
-        @input="$emit('update:value', true)"
+        :checked="props.attribute.value === true"
+        @input="props.attribute.value = true"
       />
       {{ labelTrue || "True" }}
     </label>
@@ -27,9 +24,8 @@ const props = defineProps<Props>()
     <label>
       <input
         type="radio"
-        :name="props.name"
-        :checked="value === false"
-        @input="$emit('update:value', false)"
+        :checked="props.attribute.value === false"
+        @input="props.attribute.value = false"
       />
       {{ labelFalse || "False" }}
     </label>

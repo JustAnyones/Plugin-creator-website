@@ -24,17 +24,24 @@
  */
 
 import {NumberAttribute} from "./NumberAttribute";
+import {Draft} from "../drafts/Draft";
+
+interface ConstructorParams {
+    owner: Draft;
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: number | null;
+    isPositive?: boolean;
+}
 
 export class InfluenceAttribute extends NumberAttribute {
     constructor(
-        id: string,
-        name: string,
-        description: string,
-        required: boolean = false,
-        defaultValue: number | null = null,
-        isPositive: boolean = true
+        {owner, id, name, description, required=false, defaultValue=null, isPositive=true}: ConstructorParams
     ) {
         super({
+            owner: owner,
             id: id,
             name: name,
             description: description,

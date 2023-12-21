@@ -25,39 +25,27 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {FrameAttribute} from '@/core/attribute/FrameAttribute';
-  interface Props {
-    attribute: FrameAttribute,
-    name: string
-    value: Array<Object>
-  }
-  const props = defineProps<Props>()
+import {BmpFrame, FrameAttribute} from "@/core/attribute/FrameAttribute";
+import Frame from "@/components/elements/Frame.vue";
+interface Props {
+  attribute: FrameAttribute
+}
+const props = defineProps<Props>()
 
-  function test(emit, event) {
-    let arr = []
-    updateFiles(event.target.files)
-    for (let i = 0; i < event.target.files.length; i++) {
-      let file = event.target.files[i] // TODO: store these files somewhere
-      arr.push({bmp: file.name})
-    }
-    emit('update:value', arr)
-  }
+function addFrame() {
+  props.attribute.addFrame(new BmpFrame(props.attribute.owner))
+}
 
-const emit = defineEmits(['updateFiles', 'update:value'])
-
-function updateFiles(files) {
-  emit('updateFiles', files)
+function removeFrame(index: number) {
+  props.attribute.removeFrame(index)
 }
 
 </script>
 
 <template>
-  <input
-      type="file"
-      required
-      multiple
-      accept="image/png"
-      class="attribute-input"
-      @input="test($emit, $event)"
-  >
+  <button @click="addFrame()">Add frame</button>
+  <Frame v-for="(frame, i) in props.attribute.frames" @pop="removeFrame(i)"
+         v-bind:index="i"
+         v-model:frame="props.attribute.frames[i]">
+  </Frame>
 </template>

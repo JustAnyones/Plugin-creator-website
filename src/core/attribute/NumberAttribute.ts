@@ -24,8 +24,10 @@
  */
 
 import {Attribute} from "./Attribute";
+import {Draft} from "../drafts/Draft";
 
 interface ConstructorParams {
+    owner: Draft;
     id: string;
     name: string;
     description: string;
@@ -47,12 +49,12 @@ export class NumberAttribute extends Attribute {
     readonly maxValue: Number
 
     constructor(
-        {id, name, description, required=false, defaultValue=null, validation={
+        {owner, id, name, description, required=false, defaultValue=null, validation={
             minValue: Number.NEGATIVE_INFINITY,
             maxValue: Number.POSITIVE_INFINITY,
         }, isInteger=true}: ConstructorParams
     ) {
-        super(id, name, description, required, defaultValue)
+        super({owner: owner, id : id, name : name, description : description, required : required, defaultValue : defaultValue})
         this.isInteger = isInteger
         this.minValue = validation.minValue
         this.maxValue = validation.maxValue

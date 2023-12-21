@@ -24,6 +24,16 @@
  */
 
 import {Attribute} from "./Attribute";
+import {Draft} from "../drafts/Draft";
+
+interface ConstructorParams {
+    owner: Draft;
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: string | (() => string);
+}
 
 export class StringAttribute extends Attribute {
     element = "StringInput"
@@ -31,13 +41,13 @@ export class StringAttribute extends Attribute {
     maxLength: Number
 
     constructor(
-        id: string,
-        name: string,
-        description: string,
-        required: boolean = false,
-        defaultValue: string | (() => string) = "",
+        {owner, id, name, description, required=false, defaultValue=""}: ConstructorParams,
     ) {
-        super(id, name, description, required, defaultValue)
+        super({
+            owner: owner, id : id,
+            name : name, description : description,
+            required : required, defaultValue : defaultValue
+        })
     }
 
     isEmpty(): boolean {

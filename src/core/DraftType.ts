@@ -29,7 +29,11 @@ export class DraftType {
         return this.rci;
     }
 
-    public getDraft(): Draft {
+    public getNewDraft(): Draft {
         return new this.draftType(this);
+    }
+
+    public getDraft(): typeof Draft{
+        return this.draftType;
     }
 }

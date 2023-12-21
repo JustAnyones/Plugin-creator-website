@@ -34,13 +34,14 @@ export class Manifest {
         }
     }
 
-    id = new StringAttribute(
-        "id", "Manifest ID",
-        "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
-        true
-    )
+    id = new StringAttribute({
+        owner: null, id : "id",
+        name : "Manifest ID",
+        description : "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
+        required : true
+    })
     version = new NumberAttribute({
-        id: "version",
+        owner: null, id: "version",
         name: "Version",
         description: "Version of the plugin. " +
             "Should be kept 1 for first the version and incremented for each update.",
@@ -48,21 +49,21 @@ export class Manifest {
         defaultValue: 1,
         validation: {minValue: 1, maxValue: 999999}
     })
-    title= new StringAttribute(
-        "title", "Name",
-        "The name or title of the plugin.",
-        true
-    )
-    text = new StringAttribute(
-        "text", "Description",
-        "Description of the plugin.",
-        true
-    )
-    author = new StringAttribute(
-        "author", "Author",
-        "Author of the plugin.",
-        true
-    )
+    title= new StringAttribute({
+        owner: null, id : "title",
+        name : "Name", description : "The name or title of the plugin.",
+        required : true
+    })
+    text = new StringAttribute({
+        owner: null, id : "text",
+        name : "Description", description : "Description of the plugin.",
+        required : true
+    })
+    author = new StringAttribute({
+        owner: null, id : "author",
+        name : "Author", description : "Author of the plugin.",
+        required : true
+    })
 
     /**
      * Returns true if manifest is considered to be valid.

@@ -26,15 +26,20 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
 import {StringAttribute} from "@/core/attribute/StringAttribute";
-  interface Props {
-    attribute: StringAttribute,
-    name: string
-    value: string
-  }
+interface Props {
+  attribute: StringAttribute,
+}
 
-  const props = defineProps<Props>()
+const props = defineProps<Props>()
 
 const long = props.attribute.id === "text"
+
+function onInput(value) {
+  props.attribute.value = value
+  if (props.attribute.id == "author") {
+    localStorage.setItem('authorName', value)
+  }
+}
 
 </script>
 
@@ -43,15 +48,15 @@ const long = props.attribute.id === "text"
       v-if="!long"
       type="text"
       required
-      :name="props.name"
-      :value="props.value"
+      :value="props.attribute.value"
       class="attribute-input"
-      @input="$emit('update:value', $event.target.value)"
+      @input="onInput($event.target.value)"
   />
   <textarea
       v-if="long"
       required
       class="attribute-input"
-      @input="$emit('update:value', $event.target.value)"
+      @input="onInput($event.target.value)"
+      :value="props.attribute.value"
   />
 </template>

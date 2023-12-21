@@ -23,6 +23,17 @@
  *
  */
 
+import {Draft} from "../drafts/Draft";
+
+interface ConstructorParams {
+    owner: Draft;
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: any;
+}
+
 export abstract class Attribute {
     readonly id: string
     readonly name: string
@@ -32,18 +43,16 @@ export abstract class Attribute {
     readonly defaultValue: any
 
     protected _value: any
+    owner: Draft
 
     customValidator?: (() => boolean)
 
     element: string = null
 
     constructor(
-        id: string,
-        name: string,
-        description: string,
-        required: boolean = false,
-        defaultValue?: any | (() => any)
+        {owner, id, name, description, required=false, defaultValue}: ConstructorParams
     ) {
+        this.owner = owner;
         this.id = id;
         this.name = name;
         this.description = description;

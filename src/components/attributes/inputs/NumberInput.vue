@@ -26,17 +26,13 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
 import {NumberAttribute} from '@/core/attribute/NumberAttribute';
-  interface Props {
-    attribute: NumberAttribute,
-    name: string
-    value: number | null
-  }
-  const props = defineProps<Props>()
+interface Props {
+  attribute: NumberAttribute,
+}
+const props = defineProps<Props>()
 
-  let displayedValue = props.value;
-
-
-  function onInput(emit, event) {
+let displayedValue = props.attribute.value;
+function onInput(event) {
     let inputValue = event.target.value;
     let isInteger = props.attribute.isInteger;
     let parsedValue;
@@ -59,14 +55,13 @@ import {NumberAttribute} from '@/core/attribute/NumberAttribute';
         displayedValue = parsedValue;
 
       //a = inputValue;
-      emit('update:value', parsedValue)
+      props.attribute.value = parsedValue
     } else {
       displayedValue = inputValue;
-      emit('update:value', null)
+      props.attribute.value = null
     }
-
-    return;
-  }
+  return;
+}
 </script>
 
 <template>
@@ -75,6 +70,6 @@ import {NumberAttribute} from '@/core/attribute/NumberAttribute';
       type="text"
       class="attribute-input"
       :value="displayedValue"
-      @input="onInput($emit, $event)"
+      @input="onInput($event)"
   />
 </template>

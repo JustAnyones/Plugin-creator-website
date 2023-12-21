@@ -24,18 +24,28 @@
  */
 
 import {Attribute} from "./Attribute";
+import {Draft} from "../drafts/Draft";
+
+interface ConstructorParams {
+    owner: Draft;
+    id: string;
+    name: string;
+    description: string;
+    required?: boolean;
+    defaultValue?: boolean | null;
+}
 
 export class BooleanAttribute extends Attribute {
     element = "BooleanInput"
 
     constructor(
-        id: string,
-        name: string,
-        description: string,
-        required: boolean = false,
-        defaultValue: boolean | null = false,
+        {owner, id, name, description, required=false, defaultValue=false}: ConstructorParams,
     ) {
-        super(id, name, description, required, defaultValue)
+        super({
+            owner: owner, id : id,
+            name : name, description : description,
+            required : required, defaultValue : defaultValue
+        })
     }
 
     isEmpty(): boolean {

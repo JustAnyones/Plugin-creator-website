@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import {Manifest} from "@/core/Manifest";
-import {computed, defineProps} from "vue";
+import {defineProps} from "vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "../attributes/inputs/StringInput.vue";
 
@@ -33,19 +33,8 @@ interface Props {
   manifest: Manifest
 }
 
-const authorName = computed({
-  get() {
-    return props.manifest.author.value
-  },
-  set(value) {
-    emit('update:value', value)
-    props.manifest.author.value = value;
-    localStorage.setItem('authorName', props.manifest.author.value)
-  }
-})
-
 const props = defineProps<Props>()
-const emit = defineEmits(['raiseError', 'update:value'])
+const emit = defineEmits(['raiseError'])
 </script>
 
 <template>
@@ -57,9 +46,7 @@ const emit = defineEmits(['raiseError', 'update:value'])
         @raise-error="$emit('raiseError')"
     >
       <StringInput
-        :attribute="props.manifest.id"
-        :name="props.manifest.id.name"
-        v-model:value="props.manifest.id.value"
+          v-model:attribute="props.manifest.id"
       />
     </Attribute>
 
@@ -85,9 +72,7 @@ const emit = defineEmits(['raiseError', 'update:value'])
         @raise-error="$emit('raiseError')"
     >
       <StringInput
-        :attribute="props.manifest.title"
-        :name="props.manifest.title.name"
-        v-model:value="props.manifest.title.value"
+          v-model:attribute="props.manifest.title"
       />
     </Attribute>
 
@@ -98,9 +83,7 @@ const emit = defineEmits(['raiseError', 'update:value'])
         @raise-error="$emit('raiseError')"
     >
       <StringInput
-        :attribute="props.manifest.text"
-        :name="props.manifest.text.name"
-        v-model:value="props.manifest.text.value"
+          v-model:attribute="props.manifest.text"
       />
     </Attribute>
 
@@ -111,9 +94,7 @@ const emit = defineEmits(['raiseError', 'update:value'])
         @raise-error="$emit('raiseError')"
     >
       <StringInput
-        :attribute="props.manifest.author"
-        :name="props.manifest.author.name"
-        v-model:value="authorName"
+          v-model:attribute="props.manifest.author"
       />
     </Attribute>
   </div>

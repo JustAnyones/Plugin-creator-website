@@ -29,14 +29,17 @@ import {Draft} from "./Draft";
 
 // A biome is used to decide on ground and decorations to place during map creation phase.
 export class BiomeDraft extends Draft {
-    isWater = new BooleanAttribute(
-        "water", "Is water",
-        "Whether the biome is considered to be water",
-        false, false
-    )
-
+    isWater = new BooleanAttribute({
+        owner: this,
+        id: "water",
+        name: "Is water",
+        description: "Whether the biome is considered to be water",
+        required: false,
+        defaultValue: false
+    })
 
     noiseScale = new NumberAttribute({
+        owner: this,
         id: "noise scale",
         name: "Noise scale",
         description: "...",
@@ -44,6 +47,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 1.0
     })
     noiseOffset = new NumberAttribute({
+        owner: this,
         id: "noise offset",
         name: "Noise offset",
         description: "...",
@@ -51,6 +55,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     noiseFactor = new NumberAttribute({
+        owner: this,
         id: "noise factor",
         name: "Noise factor",
         description: "...",
@@ -58,6 +63,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     noiseVariance = new NumberAttribute({
+        owner: this,
         id: "noise variance",
         name: "Noise variance",
         description: "...",
@@ -67,6 +73,7 @@ export class BiomeDraft extends Draft {
 
 
     heightCenter = new NumberAttribute({
+        owner: this,
         id: "height center",
         name: "Height center",
         description: "...",
@@ -74,6 +81,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     heightRadius = new NumberAttribute({
+        owner: this,
         id: "height radius",
         name: "Height radius",
         description: "...",
@@ -81,6 +89,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 1.0
     })
     heightOffset = new NumberAttribute({
+        owner: this,
         id: "height offset",
         name: "Height offset",
         description: "...",
@@ -88,6 +97,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     heightFactor = new NumberAttribute({
+        owner: this,
         id: "height factor",
         name: "Height factor",
         description: "...",
@@ -97,6 +107,7 @@ export class BiomeDraft extends Draft {
 
 
     derivCenter = new NumberAttribute({
+        owner: this,
         id: "deriv center",
         name: "Deriv center",
         description: "...",
@@ -104,6 +115,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     derivRadius = new NumberAttribute({
+        owner: this,
         id: "deriv radius",
         name: "Deriv radius",
         description: "...",
@@ -111,6 +123,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 1.0
     })
     derivOffset = new NumberAttribute({
+        owner: this,
         id: "deriv offset",
         name: "Deriv offset",
         description: "...",
@@ -118,6 +131,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 0.0
     })
     derivFactor = new NumberAttribute({
+        owner: this,
         id: "deriv factor",
         name: "Deriv factor",
         description: "...",
@@ -127,6 +141,7 @@ export class BiomeDraft extends Draft {
 
 
     offset = new NumberAttribute({
+        owner: this,
         id: "offset",
         name: "Offset",
         description: "...",
@@ -136,6 +151,7 @@ export class BiomeDraft extends Draft {
 
 
     coverage = new NumberAttribute({
+        owner: this,
         id: "coverage",
         name: "Coverage",
         description: "...",
@@ -143,6 +159,7 @@ export class BiomeDraft extends Draft {
         defaultValue: 1.0
     })
     precedence = new NumberAttribute({
+        owner: this,
         id: "precedence",
         name: "Precedence",
         description: "...",

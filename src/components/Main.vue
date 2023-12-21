@@ -42,9 +42,10 @@ import Toast from 'primevue/toast';
 
 import {Collapse} from 'vue-collapsed'
 
+import {Plugin} from "@/core/Plugin";
 import {Types} from "@/core/Types";
-import {Manifest} from "@/core/Manifest";
 import {Draft as DraftItem} from '@/core/drafts/Draft';
+import {PluginFile} from "@/core/PluginFile";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -86,28 +87,20 @@ function addNewDraft() {
       )
     } else {
       let draft = DraftItem.fromType(selected_type)
-      if (!manifestObject.value.author.isEmpty())
-        draft.author.value = manifestObject.value.author.value
-      drafts.value.push(draft)
+      if (!plugin.value.manifest.author.isEmpty())
+        draft.author.value = plugin.value.manifest.author.value
+
+      plugin.value.addDraft(draft);
       typeSelector.value.clear()
     }
 }
 
-const manifestObject: Ref<Manifest> = ref(null);
-manifestObject.value = new Manifest();
-const drafts: Ref<Array<DraftItem>> = ref([]);
-
-function removeDraftAtIndex(index: number) {
-  drafts.value.splice(index, 1) // Remove item
-}
-
-function isManifestValid(): boolean {
-  return manifestObject.value.validate()
-}
+const plugin: Ref<Plugin> = ref(null);
+plugin.value = new Plugin();
 
 function isValid() {
 
-  if (drafts.value.length === 0) {
+  if (plugin.value.drafts.length === 0) {
     showErrorToast(
         "Cannot export an empty plugin",
         "Before exporting, make sure you have defined at least one draft."
@@ -117,23 +110,11 @@ function isValid() {
 
   // Validate drafts
   let isValid = true;
-  drafts.value.forEach((draft) => {
+  plugin.value.drafts.forEach((draft) => {
     if (!draft.validate()) isValid = false;
   });
 
   return isValid;
-}
-
-function getJsonBlob(): Blob {
-  return new Blob([JSON.stringify(drafts.value, null, 2)], {
-    type: "application/json;charset=utf-8"
-  });
-}
-
-function getManifestBlob(): Blob {
-  return new Blob([JSON.stringify(manifestObject.value, null, 2)], {
-    type: "text/plain;charset=utf-8"
-  });
 }
 
 function exportToJson() {
@@ -141,32 +122,30 @@ function exportToJson() {
       "Could not export JSON",
       "Please ensure all draft attributes are correct."
   );
-  FileSaver.saveAs(getJsonBlob(), "code.json")
+  FileSaver.saveAs(plugin.value.getJsonBlob(), "code.json")
 }
 
 function exportToManifest() {
-  if (!isManifestValid()) return showErrorToast(
+  if (!plugin.value.isManifestValid()) return showErrorToast(
       "Could not export manifest",
       "Please ensure all manifest attributes are correct."
   );
-  FileSaver.saveAs(getManifestBlob(), "plugin.manifest")
+  FileSaver.saveAs(plugin.value.getManifestBlob(), "plugin.manifest")
 }
 
 function createZipArchive(): JSZip {
   const zip = new JSZip();
-  zip.file("code.json", getJsonBlob())
-  zip.file("plugin.manifest", getManifestBlob())
+  zip.file("code.json", plugin.value.getJsonBlob())
+  zip.file("plugin.manifest", plugin.value.getManifestBlob())
 
-  drafts.value.forEach(draft => {
-    draft.getFiles().forEach(file => {
-      zip.file(file.name, file)
-    })
+  Object.keys(plugin.value.fileMapping).forEach(key => {
+    zip.file(key, plugin.value.fileMapping[key].raw)
   })
   return zip
 }
 
 function exportToZip() {
-  if (!isValid() || !isManifestValid()) return showErrorToast(
+  if (!isValid() || !plugin.value.isManifestValid()) return showErrorToast(
       "Could not export archive",
       "Please ensure all plugin attributes are correct."
   );
@@ -198,7 +177,7 @@ function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
 
 
 async function exportToEncryptedPlugin() {
-  if (!isValid() || !isManifestValid()) return showErrorToast(
+  if (!isValid() || !plugin.value.isManifestValid()) return showErrorToast(
       "Could not export plugin file",
       "Please ensure all plugin attributes are correct."
   );
@@ -232,8 +211,13 @@ async function exportToEncryptedPlugin() {
   });
 }
 
-function loadFromZip(event) {
-  event.files
+function getFilename(path: string) {
+  return path.split("/").pop()
+}
+
+async function loadFromZip(event) {
+
+  // TODO: optional attributes do not get shown on UI
 
   if (event.files.length == 0) {
     return showErrorToast(
@@ -242,62 +226,98 @@ function loadFromZip(event) {
     );
   }
 
-
-  console.log(event.files)
-
   let archive = new JSZip();
-  archive.loadAsync(event.files[0]).then(function(zip) {
+  plugin.value = new Plugin()
 
-    const codeFile = zip.file("code.json")
-    const manifestFile = zip.file("plugin.manifest")
+  let zip = await archive.loadAsync(event.files[0])
 
-    if (codeFile === null || manifestFile === null) {
-      return showErrorToast(
-          "Project loading failed",
-          "Selected zip is not a PCA project."
+  const codeFile = zip.file("code.json")
+  const manifestFile = zip.file("plugin.manifest")
+
+  if (codeFile === null || manifestFile === null) {
+    return showErrorToast(
+        "Project loading failed",
+        "Selected zip is not a PCA project."
+    );
+  }
+
+  // Load the code.json file
+  let codeContent = await codeFile.async("string")
+  let jsonObject = JSON.parse(codeContent);
+
+  if (!Array.isArray(jsonObject)) {
+    return showErrorToast(
+        "Project loading failed",
+        "Error loading code: not array"
+    );
+  }
+
+  jsonObject.forEach((obj) => {
+    const draft = DraftItem.fromJSON(obj);
+    if (draft === null) {
+      showWarningToast(
+          "Draft loading failed",
+          "Unsupported draft type encountered: " + obj["type"] + " for " + obj["id"]
       );
+    } else {
+      plugin.value.addDraft(draft)
+    }
+  })
+
+  // Load the manifest
+  let manifestContent = await manifestFile.async("string")
+  jsonObject = JSON.parse(manifestContent);
+  console.log(jsonObject)
+  plugin.value.manifest.id.value = jsonObject["id"]
+  plugin.value.manifest.version.value = jsonObject["version"]
+  plugin.value.manifest.title.value = jsonObject["title"]
+  plugin.value.manifest.text.value = jsonObject["text"]
+  plugin.value.manifest.author.value = jsonObject["author"]
+
+
+  for (const fileKey in zip.files) {
+    const file = zip.files[fileKey]
+    // Ignore PCA files
+    const fileName = getFilename(file.name)
+    if (fileName === "code.json" || fileName === "plugin.manifest") {
+      console.log("Ignoring " + file.name)
+      continue
     }
 
-    // Load the code.json file
-    codeFile.async("string")
-        .then(function success(content) {
-          const jsonObject = JSON.parse(content);
+    let data = await file.async("uint8array")
+    plugin.value.addFile(
+        file.name,
+        new PluginFile(file.name, data)
+    )
+  }
 
-          if (!Array.isArray(jsonObject)) {
-            return showErrorToast(
-                "Project loading failed",
-                "Error loading code: not array"
-            );
-          }
+  let alreadyVisited = {}
+  for (let i = 0; i < plugin.value.drafts.length; i++) {
+    const draft = plugin.value.drafts[i]
+    for (const file of draft.getFiles()) {
+      if (alreadyVisited[file] !== true) {
+        plugin.value.getFile(file).owners--;
+        alreadyVisited[file] = true
+      }
+      plugin.value.addFile(file, null)
+    }
+  }
 
-          drafts.value = [];
-          jsonObject.forEach((obj) => {
-            const draft = DraftItem.fromJSON(obj);
-            if (draft === null) {
-              showWarningToast(
-                  "Draft loading failed",
-                  "Unsupported draft type encountered: " + obj["type"] + " for " + obj["id"]
-              );
-            } else {
-              drafts.value.push(draft)
-            }
-          })
+  return true;
+}
 
-          // use the content
-        }, function error(e) {
-          return showErrorToast(
-              "Project loading failed",
-              "Error loading code: " + e
-          );
-        });
+window.addEventListener('unhandledrejection', function(event) {
+  alert("Error happened while handling promise: " + JSON.stringify(event.reason))
+  console.log(event.reason)
+  //handle error here
+  //event.promise contains the promise object
+  //event.reason contains the reason for the rejection
+});
 
 
-
-    console.log(zip.files)
-    // you now have every files contained in the loaded zip
-    //zip.file("hello.txt").async("string"); // a promise of "Hello World\n"
-  });
-
+window.onerror = function (msg, url, line, col, error) {
+  alert("Unexpected error encountered: " + msg)
+  //code to handle or report error goes here
 }
 
 </script>
@@ -325,7 +345,7 @@ function loadFromZip(event) {
                 helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
                 show up under local plugins list and the plugins toolbar.
               </p>
-              <ManifestC :manifest="manifestObject" @raise-error="showManifest = true"/>
+              <ManifestC :manifest="plugin.manifest" @raise-error="showManifest = true"/>
             </Collapse>
           </div>
 
@@ -364,13 +384,13 @@ function loadFromZip(event) {
 
 
 
-        <div v-if="drafts.length > 0" class="drafts">
+        <div v-if="plugin.drafts.length > 0" class="drafts">
             <Draft
                 :index="index"
                 :draftObject="obj"
-                v-for="(obj, index) in drafts"
+                v-for="(obj, index) in plugin.drafts"
                 class="backdrop"
-                @pop="removeDraftAtIndex(index)"
+                @pop="plugin.removeDraftAtIndex(index)"
             />
         </div>
 
@@ -411,11 +431,13 @@ function loadFromZip(event) {
       </div>
 
       <div v-if="showPreviewPanel" class="preview-panel">
+        <h2>Files:</h2>
+        <pre>{{ plugin.fileMapping }}</pre>
         <h2>Live preview of the generated JSON:</h2>
         <h3>plugin.manifest</h3>
-        <pre>{{ manifestObject }}</pre>
+        <pre>{{ plugin.manifest }}</pre>
         <h3>code.json</h3>
-        <pre>{{ drafts }}</pre>
+        <pre>{{ plugin.drafts }}</pre>
       </div>
     </div>
 
