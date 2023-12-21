@@ -30,6 +30,7 @@ export class Categories {
     static readonly AIRPORT = new Category("$cat_airport00")
     static readonly TERRAIN = new Category("$cat_terrain00")
     static readonly LANDMARK = new Category("$cat_landmark00")
+    static readonly TREE = new Category("$cat_tree00")
 
 
     private constructor(private key: string, public value: any) {}

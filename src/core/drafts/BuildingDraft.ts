@@ -286,7 +286,10 @@ export class BuildingDraft extends ViewportDraft {
     })
 
     easyRemove: boolean
-    supportsSlope: boolean
+    supportsSlope = new BooleanAttribute({
+        owner: this, id: "supports slope",
+        name: "Supports slope", description: "Whether the building can be placed on slopes."
+    })
     supportsTerrain: boolean
     supportsShoreline: boolean
 
