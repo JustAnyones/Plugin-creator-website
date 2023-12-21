@@ -27,6 +27,7 @@ import {BuildingDraft} from "./drafts/BuildingDraft";
 import {Categories} from "./Categories";
 import {DraftType} from "./DraftType";
 import {TreeDraft} from "./drafts/TreeDraft";
+import {CategoryDraft} from "./drafts/CategoryDraft";
 
 export class Types {
     // RCI
@@ -213,6 +214,13 @@ export class Types {
         category: Categories.TREE,
         rci: false,
         draftType: TreeDraft
+    })
+
+    static readonly CATEGORY = new DraftType({
+        tag: "category",
+        category: Categories.ROOT,
+        rci: false,
+        draftType: CategoryDraft
     })
 
     // Upcoming draft type
