@@ -61,6 +61,8 @@ const typeSelector = ref(null);
 const showManifest = ref(true);
 const showPreviewPanel = ref(NODE_ENV === "development");
 
+const version = __APP_VERSION__
+
 function showErrorToast(summary: string, detail: string, life: number = 10000) {
   toast.add({
     severity: 'error',
@@ -442,7 +444,11 @@ window.onerror = function (msg, url, line, col, error) {
     </div>
 
     <div class="footer">
-      &copy; <a href="https://github.com/JustAnyones/Plugin-creator-website">JustAnyone</a> 2023
+      &copy;
+      <a href="https://github.com/JustAnyones/Plugin-creator-website">
+        Plugin creator website {{version}} by  JustAnyone
+      </a>
+      2023
     </div>
   </div>
 
