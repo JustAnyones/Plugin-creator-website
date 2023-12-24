@@ -35,6 +35,49 @@ import {Plugin} from "../Plugin";
 import {FrameAttribute} from "../attribute/FrameAttribute";
 import {BmpFrame} from "../objects/Frame";
 import {AttributeContainer} from "../attribute/interfaces/AttributeContainer";
+import {AttributeContainerFactory} from "../interfaces/AttributeContainerFactory";
+
+export class DraftFactory implements AttributeContainerFactory {
+    fromJSON(json: Object, owner: Draft): Draft {
+        let obj = Draft.fromType(json["type"]);
+        if (obj === null) return null;
+
+
+        let jsonAttrs = Object.keys(json);
+
+
+        Object.keys(json).forEach(
+            (key) => {
+                console.log(key, json[key]);
+            }
+        )
+
+        let removed = {
+            "deleted": "this is a custom entry for listing unsupported pca tags"
+        }
+
+        Object.keys(obj).forEach((item) => {
+            let attribute = obj[item]
+            if (attribute instanceof Attribute) {
+                if (json[attribute.id] !== undefined) {
+                    attribute.value = json[attribute.id]
+                    json[attribute.id] = removed;
+                    // TODO: does not display optional attributes visually, should be resolved
+                }
+            }
+        })
+
+        console.log("Unsupported tags:")
+        jsonAttrs.forEach((key) => {
+            if (json[key] !== removed)
+                console.log(key, json[key]);
+        })
+        console.log("-----------------")
+
+
+        return obj
+    }
+}
 
 export class Draft extends AttributeContainer {
     plugin: Plugin
@@ -317,46 +360,5 @@ export class Draft extends AttributeContainer {
         if (draftType === null) return null;
         const draft = draftType.getDraft();
         return new draft(draftType);
-    }
-
-    public static fromJSON(json: any) {
-        let obj = this.fromType(json["type"]);
-        if (obj === null) return null;
-
-
-        let jsonAttrs = Object.keys(json);
-
-
-        Object.keys(json).forEach(
-            (key) => {
-                console.log(key, json[key]);
-            }
-        )
-
-        let removed = {
-            "deleted": "this is a custom entry for listing unsupported pca tags"
-        }
-
-        Object.keys(obj).forEach((item) => {
-            let attribute = obj[item]
-            if (attribute instanceof Attribute) {
-                if (json[attribute.id] !== undefined) {
-                    attribute.value = json[attribute.id]
-                    json[attribute.id] = removed;
-                    // TODO: does not display optional attributes visually, should be resolved
-                }
-            }
-        })
-
-        console.log("Unsupported tags:")
-        jsonAttrs.forEach(
-            (key) => {
-                if (json[key] !== removed)
-                    console.log(key, json[key]);
-            }
-        )
-
-
-        return obj
     }
 }

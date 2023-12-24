@@ -23,8 +23,9 @@
  *
  */
 
-export interface Validatable {
-    isValid(boolean)
-    isValid(): boolean
-    validate()
+import {AttributeContainer} from "../attribute/interfaces/AttributeContainer";
+import {Draft} from "../drafts/Draft";
+
+export interface AttributeContainerFactory {
+    fromJSON(obj: Object, owner: Draft): AttributeContainer
 }

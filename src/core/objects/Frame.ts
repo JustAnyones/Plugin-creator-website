@@ -29,6 +29,54 @@ import {OptionalFileAttr} from "../attribute/OptionalFileAttr";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {OwnedAttributeContainer} from "../attribute/interfaces/OwnedAttributeContainer";
 import {Draft} from "../drafts/Draft";
+import {BooleanAttribute} from "../attribute/BooleanAttribute";
+import {StringAttribute} from "../attribute/StringAttribute";
+import {AttributeContainerFactory} from "../interfaces/AttributeContainerFactory";
+
+export class FrameFactory implements AttributeContainerFactory {
+    fromJSON(obj: Object, owner: Draft): Frame {
+        let frameObj: Frame
+        switch (obj) {
+            case null:
+                frameObj = new EmptyFrame(owner)
+                return frameObj
+            default:
+                frameObj = new BmpFrame(owner)
+                break
+        }
+
+
+        Object.keys(obj).forEach(
+            (key) => {
+                console.log(key, obj[key]);
+            }
+        )
+
+        let removed = {
+            "deleted": "this is a custom entry for listing unsupported pca tags"
+        }
+
+        Object.keys(frameObj).forEach((item) => {
+            let attribute = frameObj[item]
+            if (attribute instanceof Attribute)
+                if (obj[attribute.id] !== undefined) {
+                    attribute.value = obj[attribute.id]
+                    obj[attribute.id] = removed;
+                }
+        })
+
+        console.log("Unsupported tags:")
+        Object.keys(obj).forEach(
+            (key) => {
+                if (obj[key] !== removed)
+                    console.log(key, obj[key]);
+            }
+        )
+        console.log("-----------------")
+
+        return frameObj
+    }
+}
 
 export class Frame extends OwnedAttributeContainer {
 
@@ -48,52 +96,6 @@ export class Frame extends OwnedAttributeContainer {
             })
         return data
     }
-
-
-
-    static fromJSON(json: object, owner: Draft) {
-
-        let obj: Frame
-        switch (json) {
-            case null:
-                obj = new EmptyFrame(owner)
-                return obj
-            default:
-                obj = new BmpFrame(owner)
-                break
-        }
-
-
-        Object.keys(json).forEach(
-            (key) => {
-                console.log(key, json[key]);
-            }
-        )
-
-        let removed = {
-            "deleted": "this is a custom entry for listing unsupported pca tags"
-        }
-
-        Object.keys(obj).forEach((item) => {
-            let attribute = obj[item]
-            if (attribute instanceof Attribute)
-                if (json[attribute.id] !== undefined) {
-                    attribute.value = json[attribute.id]
-                    json[attribute.id] = removed;
-                }
-        })
-
-        console.log("Unsupported tags:")
-        Object.keys(json).forEach(
-            (key) => {
-                if (json[key] !== removed)
-                    console.log(key, json[key]);
-            }
-        )
-
-
-        return obj
-    }
 }
 
 
@@ -112,7 +114,6 @@ const example_ref = {
 }
 
 class TextureFrame extends Frame {
-
     example = {
         "offset x": 0,
         "offset y": 0,
@@ -130,11 +131,6 @@ class TextureFrame extends Frame {
         "copies": 0,
         "n": 1, // (copies + 1)
     }
-
-    steal: string
-    bmp: string
-    x: number
-    y: number
 }
 
 
@@ -151,6 +147,46 @@ class StealFrame extends Frame {
         "share": false
     }
 
+
+
+    steal = new StringAttribute({
+        owner: this.owningDraft, id: "steal",
+        name: "Steal", description: "ID of the draft to steal frames from.",
+        required: true
+    })
+
+    type // TODO: add either some selector attribute type or something to allow selecting one of 2 options
+
+
+    frame: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "frame",
+        name: "Frame", description: "Index of the frame to steal."
+    })
+    count: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "count",
+        name: "Count", description: ""
+    })
+    moveX: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "move x",
+        name: "Move x", description: ""
+    })
+    moveY: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "move y",
+        name: "Move y", description: ""
+    })
+    handleX: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "handle x",
+        name: "Handle x", description: ""
+    })
+    handleY: NumberAttribute = new NumberAttribute({
+        owner: this.owningDraft, id: "handle y",
+        name: "Handle y", description: ""
+    })
+    shared = new BooleanAttribute({
+        owner: this.owningDraft, id : "share",
+        name: "Share", description: "",
+        defaultValue: false
+    })
 }
 
 export class EmptyFrame extends Frame {

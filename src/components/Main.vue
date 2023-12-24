@@ -44,7 +44,7 @@ import {Collapse} from 'vue-collapsed'
 
 import {Plugin} from "@/core/Plugin";
 import {Types} from "@/core/Types";
-import {Draft as DraftItem} from '@/core/drafts/Draft';
+import {Draft as DraftItem, DraftFactory} from '@/core/drafts/Draft';
 import {PluginFile} from "@/core/PluginFile";
 
 
@@ -253,7 +253,7 @@ async function loadFromZip(event) {
   }
 
   jsonObject.forEach((obj) => {
-    const draft = DraftItem.fromJSON(obj);
+    const draft = new DraftFactory().fromJSON(obj);
     if (draft === null) {
       showWarningToast(
           "Draft loading failed",

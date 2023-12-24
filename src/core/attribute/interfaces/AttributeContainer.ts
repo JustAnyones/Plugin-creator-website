@@ -83,9 +83,6 @@ export abstract class AttributeContainer {
      */
     abstract toJSON(): Object
 
-    //fromJSON(json: any): this
-
-
     /**
      * Validates every attribute of the object.
      */
@@ -95,11 +92,8 @@ export abstract class AttributeContainer {
             let attribute = this[item]
             if (attribute instanceof Attribute) {
                 if (!attribute.isValid()) this.isValid = false;
-                console.log(attribute.errors)
             }
-
         })
-
     }
 
     /**

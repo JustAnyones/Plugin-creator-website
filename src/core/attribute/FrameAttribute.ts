@@ -1,8 +1,5 @@
-import {NumberAttribute} from "./NumberAttribute";
 import {Attribute} from "./Attribute";
-import {OptionalFileAttr} from "./OptionalFileAttr";
-import {Draft} from "../drafts/Draft";
-import {Frame, BmpFrame} from "../objects/Frame";
+import {Frame, BmpFrame, FrameFactory} from "../objects/Frame";
 
 export class FrameAttribute extends Attribute {
     element = "FrameInput"
@@ -24,8 +21,7 @@ export class FrameAttribute extends Attribute {
         console.log("Asked to set value of FrameAttribute", value)
         if (value instanceof Array) {
             for (const valueKey in value) {
-                let frame = Frame.fromJSON(value[valueKey], this.owner)
-                this._value.push(frame)
+                this._value.push(new FrameFactory().fromJSON(value[valueKey], this.owner))
             }
         }
     }

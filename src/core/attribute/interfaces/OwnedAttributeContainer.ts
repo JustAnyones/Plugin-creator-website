@@ -26,7 +26,7 @@
 import {AttributeContainer} from "./AttributeContainer";
 import {Draft} from "../../drafts/Draft";
 
-export class OwnedAttributeContainer extends AttributeContainer {
+export abstract class OwnedAttributeContainer extends AttributeContainer {
     /**
      * The draft that owns this attribute container.
      */
@@ -35,9 +35,5 @@ export class OwnedAttributeContainer extends AttributeContainer {
     constructor(owningDraft: Draft) {
         super();
         this.owningDraft = owningDraft;
-    }
-
-    toJSON(): Object {
-        return undefined;
     }
 }

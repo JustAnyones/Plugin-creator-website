@@ -53,11 +53,19 @@ export class OptionalFileAttr extends Attribute {
     }
 
     isEmpty(): boolean {
-        return this.selected === false;
+        return this.value === null;
+    }
+
+    get value(): any {
+        return this._value;
+    }
+
+    set value(value: any) {
+        this._value = value;
+        this.selected = value !== null
     }
 
     protected validate() {
-        console.log("Running validation, is file selected", this.selected)
         if (!this.selected) {
             this.addError("A file is required, but not selected")
         }
