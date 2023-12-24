@@ -23,8 +23,21 @@
  *
  */
 
-import {FileAttribute} from "./FileAttribute";
+import {AttributeContainer} from "./AttributeContainer";
+import {Draft} from "../../drafts/Draft";
 
-export class LuaAttribute extends FileAttribute {
-    
+export class OwnedAttributeContainer extends AttributeContainer {
+    /**
+     * The draft that owns this attribute container.
+     */
+    protected owningDraft: Draft
+
+    constructor(owningDraft: Draft) {
+        super();
+        this.owningDraft = owningDraft;
+    }
+
+    toJSON(): Object {
+        return undefined;
+    }
 }

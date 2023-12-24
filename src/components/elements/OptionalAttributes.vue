@@ -2,7 +2,7 @@
 
 import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
 import Multiselect from "@vueform/multiselect";
-import {Frame} from "@/core/attribute/FrameAttribute";
+import {Frame} from "@/core/objects/Frame";
 import {Draft} from "@/core/drafts/Draft";
 import {defineProps, nextTick, Ref, ref} from 'vue';
 import Attribute from "@/components/attributes/Attribute.vue";

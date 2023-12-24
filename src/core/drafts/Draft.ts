@@ -32,9 +32,11 @@ import {Types} from "../Types";
 import {MetaAttribute} from "../attribute/MetaAttribute";
 import {DraftType} from "../DraftType";
 import {Plugin} from "../Plugin";
-import {BmpFrame, FrameAttribute} from "../attribute/FrameAttribute";
+import {FrameAttribute} from "../attribute/FrameAttribute";
+import {BmpFrame} from "../objects/Frame";
+import {AttributeContainer} from "../attribute/interfaces/AttributeContainer";
 
-export class Draft {
+export class Draft extends AttributeContainer {
     plugin: Plugin
     readonly type: DraftType
 
@@ -240,6 +242,7 @@ export class Draft {
 
 
     constructor(type: DraftType) {
+        super();
         this.type = type
 
         let authorName = localStorage.getItem("authorName");
@@ -266,40 +269,6 @@ export class Draft {
 
     public setOwner(owningPlugin: Plugin) {
         this.plugin = owningPlugin
-    }
-
-    /**
-     * Returns an array of required attribute for the draft.
-     */
-    public getRequiredAttributes(): Array<Attribute> {
-        let attrs: Array<Attribute> = []
-        Object.keys(this).forEach(
-            (item) => {
-                let attribute = this[item]
-                if (attribute instanceof Attribute
-                    && attribute.required
-                    && attribute.isExposed()
-                    && attribute.element != null)
-                    attrs.push(attribute)
-            })
-        return attrs
-    }
-
-    /**
-     * Returns an array of optional attribute for the draft.
-     */
-    public getOptionalAttributes(): Array<Attribute> {
-        let attrs: Array<Attribute> = []
-        Object.keys(this).forEach(
-            (item) => {
-                let attribute = this[item]
-                if (attribute instanceof Attribute
-                    && !attribute.required
-                    && attribute.isExposed()
-                    && attribute.element != null)
-                    attrs.push(attribute)
-            })
-        return attrs
     }
 
     /**
@@ -389,28 +358,5 @@ export class Draft {
 
 
         return obj
-    }
-
-    /**
-     * Validates every attribute of the draft.
-     *
-     * Returns whether the draft is valid.
-     */
-    private validateFields(): boolean {
-        let valid = true;
-        Object.keys(this).forEach(
-            (item) => {
-                let attribute = this[item]
-                if (attribute instanceof Attribute)
-                    if (!attribute.validate()) valid = false;
-            })
-        return valid
-    }
-
-    /**
-     * Runs validation for the draft.
-     */
-    public validate(): boolean {
-        return this.validateFields()
     }
 }

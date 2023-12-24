@@ -38,4 +38,7 @@ export class MetaAttribute extends Attribute {
     isEmpty(): boolean {
         return false;
     }
+
+    protected validate() {
+    }
 }

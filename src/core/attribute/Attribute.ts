@@ -109,13 +109,6 @@ export abstract class Attribute {
     }
 
     /**
-     * Returns true if current attribute is valid and has no errors.
-     */
-    public isValid() {
-        return this.errors.length === 0
-    }
-
-    /**
      * Creates a validation error.
      * @param message Message of the validation error.
      */
@@ -123,19 +116,23 @@ export abstract class Attribute {
         this.errors.push(message)
     }
 
+    protected abstract validate()
+
     /**
-     * Validates attribute values and returns if it's valid.
+     * Runs validation and returns true if the attribute values are valid.
      */
-    public validate(): boolean {
+    public isValid() {
         this.errors = []
         // If it's required and it's empty
         if (this.required && this.isEmpty()) {
             this.addError(`${this.name} field cannot be empty.`)
         }
-        // Call the custom validator, if defined
-        if (this.customValidator)
-            this.customValidator()
-        return this.isValid()
+
+        // Call validator
+        this.validate()
+
+        // Return the check
+        return this.errors.length === 0
     }
 
     public toJSON() {

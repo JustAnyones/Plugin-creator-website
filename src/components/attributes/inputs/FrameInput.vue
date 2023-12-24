@@ -25,7 +25,8 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {BmpFrame, FrameAttribute} from "@/core/attribute/FrameAttribute";
+import {BmpFrame, EmptyFrame} from "@/core/objects/Frame";
+import {FrameAttribute} from "@/core/attribute/FrameAttribute";
 import Frame from "@/components/elements/Frame.vue";
 interface Props {
   attribute: FrameAttribute
@@ -34,6 +35,7 @@ const props = defineProps<Props>()
 
 function addFrame() {
   props.attribute.addFrame(new BmpFrame(props.attribute.owner))
+  //props.attribute.addFrame(new EmptyFrame(props.attribute.owner))
 }
 
 function removeFrame(index: number) {

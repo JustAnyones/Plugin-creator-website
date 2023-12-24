@@ -52,4 +52,7 @@ export class BooleanAttribute extends Attribute {
         return this.value === null;
     }
 
+    protected validate() {
+    }
+
 }

@@ -58,12 +58,14 @@ function onSelect(event) {
 
     props.attribute.owner.plugin.addFile(file.name, pluginFile)
     props.attribute.value = file.name
+    props.attribute.selected = true
   });
 }
 
 function remove() {
   props.attribute.owner.plugin.removeFile(props.attribute.value)
   props.attribute.value = null
+  props.attribute.selected = false
 }
 
 </script>

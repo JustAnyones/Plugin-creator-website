@@ -30,4 +30,7 @@ export class AnimationAttribute extends Attribute {
         throw new Error("Not implemented")
     }
 
+    protected validate() {
+    }
+
 }

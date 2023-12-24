@@ -40,17 +40,26 @@ export class OptionalFileAttr extends Attribute {
     //element2 = OptionalFileInput
 
     multiple = false
+    selected = false
 
     constructor(
         {owner, id, name, description, required=false, defaultValue=null}: ConstructorParams
     ) {
         super({
             owner: owner, id: id,
-            name : name, description : description, required : required, defaultValue : defaultValue
+            name: name, description: description,
+            required: required, defaultValue: defaultValue
         })
     }
 
     isEmpty(): boolean {
-        return false;
+        return this.selected === false;
+    }
+
+    protected validate() {
+        console.log("Running validation, is file selected", this.selected)
+        if (!this.selected) {
+            this.addError("A file is required, but not selected")
+        }
     }
 }

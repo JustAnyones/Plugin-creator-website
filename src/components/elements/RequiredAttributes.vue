@@ -3,7 +3,7 @@
 import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
 import Attribute from "@/components/attributes/Attribute.vue";
 import {Draft} from "@/core/drafts/Draft";
-import {Frame} from "@/core/attribute/FrameAttribute";
+import {Frame} from "@/core/objects/Frame";
 import {defineProps, nextTick, Ref, ref} from 'vue';
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";

@@ -31,7 +31,7 @@ export class ViewportDraft extends Draft {
         owner: this,
         id: "frames",
         name: "Frames",
-        description: "Frames define your draft texture. Usually, this means the texture of the building.",
+        description: "Frames define your draft texture. Usually, this means the textures of a building, category and etc.",
         required: true,
         defaultValue: []
     })

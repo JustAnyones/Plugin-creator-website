@@ -64,17 +64,12 @@ export class NumberAttribute extends Attribute {
         return this.value === null || Number.isNaN(this.value);
     }
 
-    validate(): boolean {
-        super.validate();
-
-        // Check if number is within range, only if it's not default
+    protected validate() {
         if (!this.isDefault() && (this.value > this.maxValue || this.value < this.minValue)) {
             this.addError(
                 "Value must be in range (" + this.minValue + "," + this.maxValue + ")."
             )
         }
-
-        return this.isValid();
     }
 
 }
