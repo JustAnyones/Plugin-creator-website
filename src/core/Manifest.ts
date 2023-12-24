@@ -71,11 +71,11 @@ export class Manifest {
     public validate(): boolean {
         let valid = true;
 
-        if (!this.id.validate()) valid = false;
-        if (!this.version.validate()) valid = false;
-        if (!this.title.validate()) valid = false;
-        if (!this.text.validate()) valid = false;
-        if (!this.author.validate()) valid = false;
+        if (!this.id.isValid()) valid = false;
+        if (!this.version.isValid()) valid = false;
+        if (!this.title.isValid()) valid = false;
+        if (!this.text.isValid()) valid = false;
+        if (!this.author.isValid()) valid = false;
 
         if (this.version.value < 1) {
             this.version.addError("Manifest version is invalid. It must be a positive number and equal to at least 1.")
