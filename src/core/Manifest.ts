@@ -25,6 +25,7 @@
 
 import {StringAttribute} from "./attribute/StringAttribute";
 import {NumberAttribute} from "./attribute/NumberAttribute";
+import {generateId} from "./utils/Utils";
 
 export class Manifest {
     constructor() {
@@ -35,10 +36,10 @@ export class Manifest {
     }
 
     id = new StringAttribute({
-        owner: null, id : "id",
-        name : "Manifest ID",
-        description : "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
-        required : true
+        owner: null, id: "id",
+        name: "Manifest ID",
+        description: "ID of the plugin manifest. This should be a unique identifier for your plugin as a whole.",
+        required: true, defaultValue: () => {return "$manifest-" + generateId()}
     })
     version = new NumberAttribute({
         owner: null, id: "version",
