@@ -31,7 +31,6 @@ import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
-import FileUpload from "primevue/fileupload";
 
 import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
@@ -59,6 +58,7 @@ const toast = useToast();
 
 const typeSelector = ref(null);
 const showManifest = ref(true);
+const zipFileUpload = ref(null);
 const showPreviewPanel = ref(NODE_ENV === "development");
 
 const version = __APP_VERSION__
@@ -219,8 +219,6 @@ function getFilename(path: string) {
 
 async function loadFromZip(event) {
 
-  // TODO: optional attributes do not get shown on UI
-
   if (event.files.length == 0) {
     return showErrorToast(
         "Project loading failed",
@@ -255,7 +253,7 @@ async function loadFromZip(event) {
   }
 
   jsonObject.forEach((obj) => {
-    const draft = new DraftFactory().fromJSON(obj);
+    const draft = new DraftFactory().fromJSON(obj, null);
     if (draft === null) {
       showWarningToast(
           "Draft loading failed",
@@ -415,14 +413,14 @@ window.onerror = function (msg, url, line, col, error) {
             for future versions of PCA as .plugin files encrypted.
           </p>
 
-          <FileUpload v-if="showPreviewPanel"
-              mode="basic"
+          <input
+              ref="zipFileUpload"
               accept="application/zip"
-              @select="loadFromZip($event)"
-          >
-          </FileUpload>
-
-          <!-- <Button @click="loadFromZip()">Load from zip</Button> -->
+              type="file"
+              style="display:none;"
+              @change="loadFromZip($event.target)"
+          />
+          <Button @click="zipFileUpload.click()">Load from zip</Button>
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
           <Button @click="exportToZip()">Export as a zip archive</Button>

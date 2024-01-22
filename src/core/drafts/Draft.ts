@@ -62,7 +62,6 @@ export class DraftFactory implements AttributeContainerFactory {
                 if (json[attribute.id] !== undefined) {
                     attribute.value = json[attribute.id]
                     json[attribute.id] = removed;
-                    // TODO: does not display optional attributes visually, should be resolved
                 }
             }
         })

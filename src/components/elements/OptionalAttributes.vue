@@ -31,6 +31,16 @@ async function deselectOptionalAttribute(item: Attribute) {
   optionalAttributeSelector.value.deselect(item)
 }
 
+// Load optional attributes on initialization of the container
+console.log("Initializing OptionalAttributes")
+for (const attr of props.object.getOptionalAttributes()) {
+  if (!attr.isDefault()) {
+    selectedOptionalAttributes.value.push({
+      value: attr.name, label: attr.name, attribute: attr
+    })
+  }
+}
+
 const Inputs = {
   StringInput,
   NumberInput,
