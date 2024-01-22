@@ -409,8 +409,7 @@ window.onerror = function (msg, url, line, col, error) {
             encrypts the plugin and protects its contents from others.
           </p>
           <p>
-            It is recommended to export the zip archive. It will act as a project restoration file
-            for future versions of PCA as .plugin files encrypted.
+            It is recommended to export the zip archive. It can be used to load your plugin into PCA again.
           </p>
 
           <input
@@ -442,11 +441,9 @@ window.onerror = function (msg, url, line, col, error) {
     </div>
 
     <div class="footer">
-      &copy;
       <a href="https://github.com/JustAnyones/Plugin-creator-website">
-        Plugin creator website {{version}} by  JustAnyone
+        &copy; Plugin creator website {{version}} by JustAnyone 2024
       </a>
-      2023
     </div>
   </div>
 
@@ -521,7 +518,7 @@ window.onerror = function (msg, url, line, col, error) {
 }
 
 .collapse {
-  transition: height var(--vc-auto-duration) cubic-bezier(0.3, 0, 0.6, 1);
+  transition: height cubic-bezier(0.3, 0, 0.6, 1);
 }
 
 .preview-panel {
