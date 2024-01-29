@@ -32,7 +32,6 @@ import Button from "@/components/elements/Button.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 
-import Documentation from "@/components/panels/DocumentationPanel.vue";
 import ManifestC from "@/components/elements/ManifestComponent.vue";
 
 
@@ -328,9 +327,6 @@ window.onerror = function (msg, url, line, col, error) {
   <div class="page-container">
 
     <div class="main-content">
-      <div class="documentation-panel">
-        <Documentation/>
-      </div>
 
       <div class="generator-panel">
         <h2>Plugin creator</h2>
