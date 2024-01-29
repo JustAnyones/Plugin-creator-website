@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 JustAnyone
+ * Copyright (c) 2024 JustAnyone
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,22 @@
  *
  */
 
-import {Draft} from "./Draft";
-import {FrameAttribute} from "../attribute/FrameAttribute";
-import {ViewportDraftAttributes} from "./Interfaces";
+import {DraftType} from "../DraftType";
+import {BuildingBasedDraft} from "./BuildingBasedDraft";
+import {UpgradeDraftAttributes} from "./Interfaces";
+import {BooleanAttribute} from "../attribute/BooleanAttribute";
 
-export class ViewportDraft extends Draft implements ViewportDraftAttributes {
-    frames = new FrameAttribute({
-        owner: this,
-        id: "frames",
-        name: "Frames",
-        description: "Frames define your draft texture. Usually, this means the textures of a building, category and etc.",
-        required: true,
-        defaultValue: []
+export class UpgradeDraft extends BuildingBasedDraft implements UpgradeDraftAttributes {
+
+    onlyOne = new BooleanAttribute({
+        owner: this, id: "only one",
+        name: "Only one", description: "Whether only one upgrade is supported for the building.",
+        defaultValue: false
     })
 
-    validate(): boolean {
-        let valid = super.validate()
+    constructor(type: DraftType) {
+        super(type);
 
-        /*
-        // Ensure that every frame passed is a PNG file
-        if (this.frames.internalFileList != null) {
-            for (let i = 0; i < this.frames.internalFileList.length; i++) {
-                if (!this.frames.internalFileList[i].name.endsWith(".png")) {
-                    this.frames.addError("All frames must be of a PNG format")
-                    valid = false;
-                    break;
-                }
-            }
-        }*/
-
-        return valid
     }
 
 }

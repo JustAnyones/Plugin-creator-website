@@ -36,6 +36,7 @@ import {FrameAttribute} from "../attribute/FrameAttribute";
 import {BmpFrame} from "../objects/Frame";
 import {AttributeContainer} from "../attribute/interfaces/AttributeContainer";
 import {AttributeContainerFactory} from "../interfaces/AttributeContainerFactory";
+import {DefaultAttributes} from "./Interfaces";
 
 export class DraftFactory implements AttributeContainerFactory {
     fromJSON(json: Object, owner: Draft): Draft {
@@ -78,7 +79,7 @@ export class DraftFactory implements AttributeContainerFactory {
     }
 }
 
-export class Draft extends AttributeContainer {
+export class Draft extends AttributeContainer implements DefaultAttributes {
     plugin: Plugin
     readonly type: DraftType
 
@@ -272,15 +273,11 @@ export class Draft extends AttributeContainer {
     })
 
 
-    // TODO: load aliases
-    //aliases: Array<string>
-
-
-    // TODO: "premium requirements" and "requirements"
-
-
-    // TODO: scripts
-    //luaScripts: Array<Script>
+    notImplemented = new BooleanAttribute({
+        owner: this, id: "not implemented",
+        name: "Not implemented", description: "Whether this draft has to be inherited to be considered implemented.",
+        defaultValue: false
+    })
 
 
     constructor(type: DraftType) {

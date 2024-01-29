@@ -23,15 +23,16 @@
  *
  */
 
-import {ViewportDraft} from "./ViewportDraft";
 import {NumberAttribute} from "../attribute/NumberAttribute";
 import {LevelAttribute} from "../attribute/LevelAttribute";
 import {BooleanAttribute} from "../attribute/BooleanAttribute";
 import {StringAttribute} from "../attribute/StringAttribute";
-import {InfluenceAttribute} from "../attribute/InfluenceAttribute";
 import {DraftType} from "../DraftType";
+import {BuildingDraftAttributes} from "./Interfaces";
+import {BuildingBasedDraft} from "./BuildingBasedDraft";
+import {FrameAttribute} from "../attribute/FrameAttribute";
 
-export class BuildingDraft extends ViewportDraft {
+export class BuildingDraft extends BuildingBasedDraft implements BuildingDraftAttributes {
     width = new NumberAttribute({
         owner: this, id: "width",
         name: "Width",
@@ -50,10 +51,44 @@ export class BuildingDraft extends ViewportDraft {
         validation: {minValue: 1, maxValue: 16}
     })
 
+    decoFrames = new FrameAttribute({
+        owner: this, id: "deco frames",
+        name: "Deco frames", description: "...",
+        defaultValue: []
+    })
+    decoFramesWinter = new FrameAttribute({
+        owner: this, id: "deco frames winter",
+        name: "Deco winter frames", description: "...",
+        defaultValue: []
+    })
 
-    // TODO: implement loadComposition(draft);
-    // TODO: implement more of loadFrames(draft);
+    waterBorderFrames = new FrameAttribute({
+        owner: this, id: "water border frames",
+        name: "Water border frames", description: "...",
+        defaultValue: []
+    })
+    waterBorderFramesWinter = new FrameAttribute({
+        owner: this, id: "water border frames winter",
+        name: "Water border winter frames", description: "...",
+        defaultValue: []
+    })
 
+    groundFrames = new FrameAttribute({
+        owner: this, id: "ground frames",
+        name: "Ground frames", description: "...",
+        defaultValue: []
+    })
+    groundFramesWinter = new FrameAttribute({
+        owner: this, id: "ground frames winter",
+        name: "Ground winter frames", description: "...",
+        defaultValue: []
+    })
+
+    randomFrame = new BooleanAttribute({
+        owner: this, id: "random frame",
+        name: "Random frame", description: "If true, a random frame will be used when building the building.",
+        defaultValue: true
+    })
 
     needsRoad = new BooleanAttribute({
         owner: this, id : "needs road",
@@ -70,7 +105,6 @@ export class BuildingDraft extends ViewportDraft {
         name: "Needs water", description: "Whether the building needs to be on water to be built.",
         required: false, defaultValue: null
     })
-    minWaterTiles: number
     level = new LevelAttribute({
         owner: this, id: "level",
         name: "Level",
@@ -94,31 +128,6 @@ export class BuildingDraft extends ViewportDraft {
             "clipping during drawing, helicopters and much more."
     })
 
-    // TODO: add support for building animations
-    //animation: boolean // draft.animation = src.optBoolean("animated", draft.animation); TODO: ???
-
-    price = new NumberAttribute({
-        owner: this, id: "price",
-        name: "Price",
-        description: "Price of the building in Theons.",
-        validation: {minValue: 0, maxValue: 10_000_000}
-    })
-    // TODO: add support for addPriceDrafts
-    addPriceDrafts: Array<string> // draft.addPriceDrafts = loadDraftList(src, "add price", draft.id, draft.addPriceDrafts);
-    monthlyPrice = new NumberAttribute({
-        owner: this, id: "monthly price",
-        name: "Monthly price",
-        description: "Monthly price of the building in Theons.",
-        validation: {minValue: -10_000_000, maxValue: 10_000_000}
-    })
-    diamondPrice = new NumberAttribute({
-        owner: this, id: "diamond price",
-        name: "Diamond price",
-        description: "Diamond price of the building. Note that on premium platforms you need to " +
-            "specify normal price as well, since the game does not convert diamond price to Theon price. " +
-            "Will be ignored in case the building was unlocked by a feature.",
-        validation: {minValue: 0, maxValue: 10_000_000}
-    })
     budgetItem = new StringAttribute({
         owner: this, id : "budget item",
         name : "Budget item", description : "ID of the budget draft to put the building under in estate menu of the city."
@@ -130,20 +139,6 @@ export class BuildingDraft extends ViewportDraft {
         validation: {minValue: 0, maxValue: 10_000_000}
     })
 
-    power = new NumberAttribute({
-        owner: this, id: "power",
-        name: "Power",
-        description: "Amount of power used. Use negative values to produce power instead.",
-        validation: {minValue: -10_000_000, maxValue: 10_000_000}
-    })
-    water = new NumberAttribute({
-        owner: this, id: "water",
-        name: "Water",
-        description: "Amount of water used. Use negative values to produce water instead.",
-        validation: {minValue: -10_000_000, maxValue: 10_000_000}
-    })
-
-    // TODO: revisit when transport update hits, "capacity"
     destroyable = new BooleanAttribute({
         owner: this, id : "destroyable",
         name : "Destroyable", description : "Whether the building can be destroyed by disasters.",
@@ -178,33 +173,30 @@ export class BuildingDraft extends ViewportDraft {
         description: "Maximum amount of buildings that can exist on the city.",
         validation: {minValue: -1, maxValue: 10_000_000}}
     )
-    priceFactor: number // float
+    priceFactor = new NumberAttribute({
+        owner: this, id: "price factor",
+        name: "Price factor",
+        description: "...",
+        isInteger: false
+    })
 
-    waterWaste: number // float
+    waterWaste = new NumberAttribute({
+        owner: this, id: "water waste",
+        name: "Water waste",
+        description: "How much waste water the building produces.",
+        isInteger: false
+    })
     drawGround = new BooleanAttribute({
         owner: this, id : "draw ground",
         name : "Draw ground", description : "Whether to draw ground underneath the building in place of transparency.",
         required : false, defaultValue : false}
     )
-    frameAlignmentArea: boolean
-    frameAlignment: boolean
-    alignable: boolean
     rotationAware = new BooleanAttribute({
         owner: this, id : "rotation aware",
         name : "Rotation aware", description : "Whether the building is rotation aware. " +
         "If set to aware, you have to provide a multiple of 4 frames.",
         required : false, defaultValue : false
     })
-    extRotationAware: boolean
-    selectableFrames: boolean
-    volatile: boolean
-
-    useFence: Array<String>
-
-    // TODO: "ships", "ship count", "ship radius"
-    // TODO: "helicopter spawner"
-    // TODO: "car spawner"
-    // TODO: "spawn"
 
     explodes= new BooleanAttribute({
         owner: this, id : "explodes",
@@ -234,8 +226,6 @@ export class BuildingDraft extends ViewportDraft {
         required : false, defaultValue : true
     })
 
-    //mapColor: Colour
-
     pickable = new BooleanAttribute({
         owner: this, id : "pickable",
         name : "Pickable", description : "Whether the building can be picked with the picker tool.",
@@ -253,29 +243,23 @@ export class BuildingDraft extends ViewportDraft {
         required : false, defaultValue : false
     })
 
-    powerRadius: number
+    powerRadius = new NumberAttribute({
+        owner: this, id: "power radius",
+        name: "Power radius", description: "Radius of how far the power spreads from the building, if connected.",
+        validation: {minValue: 0, maxValue: 1024}
+    })
 
-    idleBuildTime: boolean
+    idleBuildTime = new BooleanAttribute({
+        owner: this, id: "idle build time",
+        name: "Idle build time", description: "Whether this building can get build progress through idle time.",
+        defaultValue: true
+    })
 
-    randomizeAnimation: boolean
-    randomizeLights: boolean
-
-
-    // TODO: loadFun
-
-    // TODO: loadSmoke
-
-    // TODO: loadAnimations
-
-    buildTimeFactor: number // float
-    freeBuildTimeSkip: boolean
-
-    serviceCars: number
-    // TODO: serviceCarTags
-
-    // TODO: roadFlags
-
-    nightLightProbability: number // float
+    serviceCars = new NumberAttribute({
+        owner: this, id: "service cars",
+        name: "Service cars",
+        description: "Amount of service cars that the building spawns."
+    })
 
     rciCars = new NumberAttribute({
         owner: this, id: "rci cars",
@@ -285,20 +269,24 @@ export class BuildingDraft extends ViewportDraft {
             "Used to estimate rci car spawning and targeting."
     })
 
-    easyRemove: boolean
     supportsSlope = new BooleanAttribute({
         owner: this, id: "supports slope",
         name: "Supports slope", description: "Whether the building can be placed on slopes."
     })
-    supportsTerrain: boolean
-    supportsShoreline: boolean
+    supportsTerrain = new BooleanAttribute({
+        owner: this, id: "supports terrain",
+        name: "Supports terrain", description: "Whether the building supports terrain."
+    })
+    supportsShoreline = new BooleanAttribute({
+        owner: this, id: "supports shoreline",
+        name: "Supports shoreline", description: "Whether the building supports shoreline."
+    })
 
     drawWaterBorders = new BooleanAttribute({
         owner: this, id : "draw water borders",
         name : "Draw water borders", description : "Whether to draw the water borders when near water.",
         required : false, defaultValue : null}
     )
-    drawWaterGround: any // either a boolean or ID of the ground to draw
 
     movable = new BooleanAttribute({
         owner: this, id : "movable",
@@ -361,165 +349,15 @@ export class BuildingDraft extends ViewportDraft {
         isInteger: false,
         defaultValue: 1.0
     })
-    rebuild: boolean
 
-    buildTime= new NumberAttribute({
-        owner: this, id: "build time",
-        name: "Build time",
-        description: "Build time of the building. Can be left blank for game to calculate itself. " +
-            "Value of 0 will let building finish instantly.",
-        validation: {minValue: 0, maxValue: 10_000_000}
-    })
     influencePreview = new BooleanAttribute({
         owner: this, id : "influence preview",
         name : "Influence preview", description : "Whether the show a preview of building influences in the build mode.",
         required : false, defaultValue : true
     })
 
-    // Visible Influences
-    pollutionInfluence = new InfluenceAttribute({
-        owner: this,  id : "influence pollution",
-        name : "Influence pollution", description : "...",
-        required : false, defaultValue : null, isPositive : false
-    })
-    noiseInfluence = new InfluenceAttribute({
-        owner: this, id : "influence noise",
-        name : "Influence noise", description : "...",
-        required : false, defaultValue : null, isPositive : false
-    })
-    healthInfluence= new InfluenceAttribute({
-        owner: this, id : "influence health",
-        name : "Influence health", description : "..."
-    })
-    policeInfluence= new InfluenceAttribute({
-        owner: this, id : "influence police",
-        name : "Influence police", description : "..."
-    })
-    fireDepartmentInfluence = new InfluenceAttribute({
-        owner: this, id : "influence fire department",
-        name : "Influence fire department", description : "..."
-    })
-    parkInfluence= new InfluenceAttribute({
-        owner: this, id : "influence park",
-        name : "Influence park", description : "..."
-    })
-    sportInfluence= new InfluenceAttribute({
-        owner: this, id : "influence sport",
-        name : "Influence sport", description : "..."
-    })
-    educationLowInfluence= new InfluenceAttribute({
-        owner: this, id : "influence education low",
-        name : "Influence education low", description : "..."
-    })
-    educationHighInfluence= new InfluenceAttribute({
-        owner: this, id : "influence education high",
-        name : "Influence education high", description : "..."
-    })
-    cultureInfluence = new InfluenceAttribute({
-        owner: this, id : "influence culture",
-        name : "Influence culture", description : "..."
-    })
-    managementInfluence= new InfluenceAttribute({
-        owner: this, id : "influence management",
-        name : "Influence management", description : "..."
-    })
-    religionInfluence= new InfluenceAttribute({
-        owner: this, id : "influence religion",
-        name : "Influence religion", description : "..."
-    })
-    passengerBusInfluence= new InfluenceAttribute({
-        owner: this, id : "influence passenger bus",
-        name : "Influence passenger bus", description : "..."
-    })
-    passengerTrainInfluence= new InfluenceAttribute({
-        owner: this, id : "influence passenger train",
-        name : "Influence passenger train", description : "..."
-    })
-    radioactivityInfluence= new InfluenceAttribute({
-        owner: this, id : "influence radioactive",
-        name : "Influence radioactive", description : "...",
-        required : false, defaultValue : null, isPositive : false
-    })
-    natureInfluence= new InfluenceAttribute({
-        owner: this, id : "influence nature",
-        name : "Influence nature", description : "..."
-    })
-    wasteDisposalInfluence= new InfluenceAttribute({
-        owner: this, id : "influence waste disposal",
-        name : "Influence waste disposal", description : "..."
-    })
-    bodyDisposalInfluence= new InfluenceAttribute({
-        owner: this, id : "influence body disposal",
-        name : "Influence body disposal", description : "..."
-    })
-    trafficInfluence= new InfluenceAttribute({
-        owner: this, id : "influence traffic",
-        name : "Influence traffic", description : "...",
-        required : false, defaultValue : null, isPositive : false
-    })
-
-
-    // TODO: loadUpgrades
-
-
-
-    // Aspects
-    provideAspectEducationLow = new NumberAttribute({
-        owner: this, id: "provide aspect education low",
-        name: "Provide aspect education low",
-        description: "The capacity of low education students the building can support."
-    })
-    provideAspectEducationHigh = new NumberAttribute({
-        owner: this, id: "provide aspect education high",
-        name: "Provide aspect education high",
-        description: "The capacity of high education students the building can support."
-    })
-    provideAspectHealthCare = new NumberAttribute({
-        owner: this, id: "provide aspect health care",
-        name: "Provide aspect health care",
-        description: "The capacity of health care receiving citizens the building can support."
-    })
-    provideAspectWasteDisposal = new NumberAttribute({
-        owner: this, id: "provide aspect waste disposal",
-        name: "Provide aspect waste disposal",
-        description: "..."
-    })
-    provideAspectBodyDisposal = new NumberAttribute({
-        owner: this, id: "provide aspect body disposal",
-        name: "Provide aspect body disposal",
-        description: "..."
-    })
-
-    // Aspect capacities
-    aspectEducationLowCapacity = new NumberAttribute({
-        owner: this, id: "aspect education low capacity",
-        name: "Aspect education low capacity",
-        description: "..."
-    })
-    aspectEducationHighCapacity = new NumberAttribute({
-        owner: this, id: "aspect education high capacity",
-        name: "Aspect education high capacity",
-        description: "..."
-    })
-    aspectHealthCareCapacity = new NumberAttribute({
-        owner: this, id: "aspect health care capacity",
-        name: "Aspect health care capacity",
-        description: "..."
-    })
-    aspectWasteDisposalCapacity = new NumberAttribute({
-        owner: this, id: "aspect waste disposal capacity",
-        name: "Aspect waste disposal capacity",
-        description: "..."
-    })
-    aspectBodyDisposalCapacity = new NumberAttribute({
-        owner: this, id: "aspect body disposal capacity",
-        name: "Aspect body disposal capacity",
-        description: "..."
-    })
-
-
     pedestrian = new StringAttribute({
-        owner: this, id : "pedestrian",
+        owner: this, id: "pedestrian",
         name : "Pedestrian", description : "ID of Pedestrian draft to spawn from this building."
     })
     pedestrianCount = new NumberAttribute({
@@ -528,6 +366,7 @@ export class BuildingDraft extends ViewportDraft {
         description: "Amount of pedestrians to spawn from this building.",
         defaultValue: 0
     })
+
     constructor(type: DraftType) {
         super(type)
 

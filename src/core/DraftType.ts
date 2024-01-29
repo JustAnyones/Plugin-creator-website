@@ -6,6 +6,7 @@ interface DraftTypeConstructorParams {
     category?: Category;
     rci?: boolean;
     draftType: typeof Draft;
+    base?: boolean
 }
 
 export class DraftType {
@@ -13,12 +14,18 @@ export class DraftType {
     private readonly category: Category | null
     private readonly rci: boolean
     private readonly draftType: typeof Draft
+    private readonly base: boolean
 
-    constructor({tag, category, rci, draftType}: DraftTypeConstructorParams) {
+    constructor({tag, category, rci, draftType, base}: DraftTypeConstructorParams) {
         this._tag = tag;
         this.category = category
         this.rci = rci || false
         this.draftType = draftType
+        if (base == undefined) {
+            this.base = true
+        } else {
+            this.base = base
+        }
     }
 
     get tag(): string {
@@ -33,7 +40,7 @@ export class DraftType {
         return new this.draftType(this);
     }
 
-    public getDraft(): typeof Draft{
+    public getDraft(): typeof Draft {
         return this.draftType;
     }
 }

@@ -28,6 +28,7 @@ import {Categories} from "./Categories";
 import {DraftType} from "./DraftType";
 import {TreeDraft} from "./drafts/TreeDraft";
 import {CategoryDraft} from "./drafts/CategoryDraft";
+import {UpgradeDraft} from "./drafts/UpgradeDraft";
 
 export class Types {
     // RCI
@@ -223,6 +224,14 @@ export class Types {
         draftType: CategoryDraft
     })
 
+    static readonly UPGRADE = new DraftType({
+        tag: "upgrade",
+        category: null,
+        rci: false,
+        draftType: UpgradeDraft,
+        base: false
+    })
+
     // Upcoming draft type
     //static readonly BIOME = new DraftType({
     //    tag: "biome",
@@ -251,7 +260,7 @@ export class Types {
         let attrs: Array<DraftType> = []
         Object.keys(this).forEach(
             (item) => {
-                if (this[item] instanceof DraftType)
+                if (this[item] instanceof DraftType && this[item].base)
                     attrs.push(this[item])
             })
         return attrs
