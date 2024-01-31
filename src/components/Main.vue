@@ -384,6 +384,7 @@ window.onerror = function (msg, url, line, col, error) {
               :title="`${(index + 1)}. ${obj.id.value ? obj.id.value : 'No ID specified'} (type: ${obj.type.tag})`"
               :removable="true"
               @pop="plugin.removeDraftAtIndex(index)"
+              class="marginify"
           >
             <AttributeContainer
                 :attribute-owner="obj"
@@ -461,13 +462,8 @@ window.onerror = function (msg, url, line, col, error) {
   flex: 1;
 }
 
-.backdrop {
-  background-color: #f5f5f5;
+.marginify {
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
 }
 
 .generator-panel {
@@ -540,7 +536,6 @@ window.onerror = function (msg, url, line, col, error) {
     margin-bottom: 20px;
   }
 
-  .documentation-panel,
   .preview-panel {
     border: none;
     padding: 10px;

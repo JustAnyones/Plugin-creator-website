@@ -48,6 +48,7 @@ function add(object) {
       v-for="(item, index) in props.attribute.items"
       :title="item.getTitle(index)"
       :removable="true"
+      heading="h4"
       @pop="props.attribute.remove(index)"
   >
     <p>{{item.getDescription()}}</p>
