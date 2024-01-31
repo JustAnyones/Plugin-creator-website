@@ -205,7 +205,7 @@ export class EmptyFrame extends Frame {
     }
 
     getDescription(): string {
-        return "..."
+        return "Empty frame is useful for making invisible or fake frames for whatever purpose."
     }
     getTitle(index: number): string {
         return `Frame ${index} (empty)`
@@ -231,8 +231,6 @@ export class BmpFrame extends Frame {
 
     constructor(plugin: Plugin) {
         super(plugin);
-
-        console.log("creating bmp frame", this.plugin)
 
         this.bmp = new FileAttribute({
             plugin: this.plugin, id: "bmp",
@@ -308,6 +306,6 @@ export class BmpFrame extends Frame {
     }
 
     getDescription(): string {
-        return "..."
+        return "Custom frame is useful for adding your own texture from a file."
     }
 }

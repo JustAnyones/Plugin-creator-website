@@ -57,3 +57,9 @@ function add(object) {
     />
   </Collapsable>
 </template>
+
+<style>
+p {
+  margin-top: 0;
+}
+</style>

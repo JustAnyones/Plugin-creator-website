@@ -62,7 +62,7 @@ export class UpgradeDraft extends BuildingBasedDraft implements UpgradeDraftAttr
 
         this.onlyOne = new BooleanAttribute({
             plugin: this.plugin, id: "only one",
-            name: "Only one", description: "Whether only one upgrade is supported for the building.",
+            name: "Only one", description: "Whether only one upgrade is supported for the building at a time.",
             defaultValue: false
         })
 
@@ -71,7 +71,7 @@ export class UpgradeDraft extends BuildingBasedDraft implements UpgradeDraftAttr
     }
 
     getDescription(): string {
-        return "";
+        return "Upgrades allow the user to optionally upgrade the building.";
     }
 
     getTitle(index: number): string {
