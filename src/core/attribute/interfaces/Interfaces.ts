@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 JustAnyone
+ * Copyright (c) 2024 JustAnyone
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +23,43 @@
  *
  */
 
-import {Attribute} from "./Attribute";
+import {Attribute} from "../Attribute";
 
-export class AnimationAttribute extends Attribute {
-    isEmpty(): boolean {
-        throw new Error("Not implemented")
-    }
+export interface HasAttributes {
+    /**
+     * Returns an array of required attributes.
+     */
+    getRequiredAttributes(): Array<Attribute>
+    /**
+     * Returns an array of optional attributes.
+     */
+    getOptionalAttributes(): Array<Attribute>
+}
 
-    protected validate() {
-    }
 
+export interface Validatable {
+    /**
+     * Returns true if current object is valid.
+     */
+    isValid(): boolean
+}
+
+export interface Resettable {
+    /**
+     * Resets the property ensuring that all associated resources are cleaned up.
+     */
+    reset(): void;
+}
+
+export interface DraftProperty extends Validatable {
+
+    /**
+     * Resets the property ensuring that all associated resources are cleaned up.
+     */
+    reset(): void;
+}
+
+export interface IListable {
+    getTitle(index: number): string
+    getDescription(): string
 }

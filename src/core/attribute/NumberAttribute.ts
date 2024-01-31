@@ -24,17 +24,18 @@
  */
 
 import {Attribute} from "./Attribute";
-import {Draft} from "../drafts/Draft";
+import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    owner: Draft;
+    plugin: Plugin;
     id: string;
     name: string;
     description: string;
     required?: boolean;
     defaultValue?: number | null;
     validation?: { minValue: number; maxValue: number };
-    isInteger?: boolean
+    isInteger?: boolean;
+    customValidator?: (() => void)
 }
 
 /**
@@ -43,33 +44,41 @@ interface ConstructorParams {
  * It can refer to integers or floating point values.
  */
 export class NumberAttribute extends Attribute {
-    element = "NumberInput"
     readonly isInteger: boolean
     readonly minValue: Number
     readonly maxValue: Number
 
     constructor(
-        {owner, id, name, description, required=false, defaultValue=null, validation={
+        {plugin, id, name, description, required=false, defaultValue=null, validation={
             minValue: Number.NEGATIVE_INFINITY,
             maxValue: Number.POSITIVE_INFINITY,
-        }, isInteger=true}: ConstructorParams
+        }, isInteger=true, customValidator}: ConstructorParams
     ) {
-        super({owner: owner, id : id, name : name, description : description, required : required, defaultValue : defaultValue})
+        super({
+            plugin: plugin, id: id,
+            name: name, description: description,
+            required: required, defaultValue: defaultValue,
+            customValidator: customValidator
+        })
         this.isInteger = isInteger
         this.minValue = validation.minValue
         this.maxValue = validation.maxValue
     }
 
     isEmpty(): boolean {
-        return this.value === null || Number.isNaN(this.value);
+        // @ts-ignore
+        return this.currentValue === null || Number.isNaN(this.currentValue);
     }
 
     protected validate() {
-        if (!this.isDefault() && (this.value > this.maxValue || this.value < this.minValue)) {
+        if (!this.isDefault() && (this.currentValue > this.maxValue || this.currentValue < this.minValue)) {
             this.addError(
                 "Value must be in range (" + this.minValue + "," + this.maxValue + ")."
             )
         }
     }
 
+    getComponent(): string {
+        return "NumberInput";
+    }
 }

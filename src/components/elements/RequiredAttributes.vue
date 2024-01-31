@@ -1,21 +1,18 @@
 <script setup lang="ts">
 
-import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
-import Attribute from "@/components/attributes/Attribute.vue";
-import {Draft} from "@/core/drafts/Draft";
-import {Frame} from "@/core/objects/Frame";
+import AttributeC from "@/components/attributes/Attribute.vue";
 import {defineProps, nextTick, Ref, ref} from 'vue';
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
 import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
 import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
-import OptionalFileInput from "@/components/attributes/inputs/OptionalFileInput.vue";
+import FileInput from "@/components/attributes/inputs/FileInput.vue";
+import ListInput from "@/components/attributes/inputs/ListInput.vue";
+import {HasAttributes} from "@/core/attribute/interfaces/Interfaces";
 
 
 interface Props {
-  name?: String
-  description?: String
-  object: Draft | Frame
+  object: HasAttributes
 }
 
 const props = defineProps<Props>()
@@ -26,15 +23,15 @@ const Inputs = {
   NumberInput,
   BooleanInput,
   LevelInput,
-  FrameInput,
-  OptionalFileInput
+  FileInput,
+  ListInput
 }
 
 </script>
 
 <template>
   <div v-for="(attr, i) in props.object.getRequiredAttributes()">
-    <Attribute
+    <AttributeC
         :name="attr.name"
         :description="attr.description"
         :errors="attr.errors"
@@ -42,9 +39,9 @@ const Inputs = {
     >
       <component
           v-model:attribute="props.object.getRequiredAttributes()[i]"
-          :is="Inputs[attr.element]"
+          :is="Inputs[attr.getComponent()]"
       />
-    </Attribute>
+    </AttributeC>
   </div>
 </template>
 

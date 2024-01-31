@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024 JustAnyone
+ * Copyright (c) 2023 JustAnyone
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,13 @@
  *
  */
 
-import {DraftType} from "../DraftType";
-import {BuildingBasedDraft} from "./BuildingBasedDraft";
-import {UpgradeDraftAttributes} from "./Interfaces";
-import {BooleanAttribute} from "../attribute/BooleanAttribute";
+import {ViewportDraft} from "./ViewportDraft";
+import {DraftType} from "../../DraftType";
+import {Plugin} from "../Plugin";
 
-export class UpgradeDraft extends BuildingBasedDraft implements UpgradeDraftAttributes {
-
-    onlyOne = new BooleanAttribute({
-        owner: this, id: "only one",
-        name: "Only one", description: "Whether only one upgrade is supported for the building.",
-        defaultValue: false
-    })
-
-    constructor(type: DraftType) {
-        super(type);
-
+export class CategoryDraft extends ViewportDraft {
+    constructor(type: DraftType, plugin: Plugin) {
+        super(type, plugin);
+        this.title.required = true;
     }
-
 }

@@ -26,24 +26,20 @@
 <script setup lang="ts">
 
 import {Ref, ref, UnwrapRef} from "vue";
-import Draft from "@/components/Draft.vue";
 import Multiselect from '@vueform/multiselect'
 import Button from "@/components/elements/Button.vue";
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 
-import ManifestC from "@/components/elements/ManifestComponent.vue";
-
-
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
-import {Collapse} from 'vue-collapsed'
-
-import {Plugin} from "@/core/Plugin";
+import {Plugin} from "@/core/plugin/Plugin";
 import {Types} from "@/core/Types";
-import {Draft as DraftItem, DraftFactory} from '@/core/drafts/Draft';
+import {DraftFactory} from '@/core/plugin/drafts/Draft';
 import {PluginFile} from "@/core/PluginFile";
+import Collapsable from "@/components/elements/core/Collapsable.vue";
+import AttributeContainer from "@/components/elements/AttributeOwner.vue";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -87,7 +83,8 @@ function addNewDraft() {
           "Please specify a draft type before trying to add one."
       )
     } else {
-      let draft = DraftItem.fromType(selected_type)
+
+      let draft = new DraftFactory().fromType(selected_type, plugin.value)
       if (!plugin.value.manifest.author.isEmpty())
         draft.author.value = plugin.value.manifest.author.value
 
@@ -99,38 +96,39 @@ function addNewDraft() {
 const plugin: Ref<Plugin> = ref(null);
 plugin.value = new Plugin();
 
-function isValid() {
-
-  if (plugin.value.drafts.length === 0) {
-    showErrorToast(
-        "Cannot export an empty plugin",
-        "Before exporting, make sure you have defined at least one draft."
-    )
-    return false;
-  }
-
+function areDraftsValid() {
   // Validate drafts
   let isValid = true;
   plugin.value.drafts.forEach((draft) => {
-    if (!draft.validate()) isValid = false;
+    if (!draft.isValid()) isValid = false;
   });
-
   return isValid;
 }
 
 function exportToJson() {
-  if (!isValid()) return showErrorToast(
+  // Check that the drafts are defined
+  if (plugin.value.drafts.length === 0)
+    return showErrorToast(
+        "Cannot export empty JSON",
+        "Make sure you have defined at least one draft before exporting to JSON."
+    )
+
+  if (!areDraftsValid())
+    return showErrorToast(
       "Could not export JSON",
       "Please ensure all draft attributes are correct."
-  );
+    )
+
   FileSaver.saveAs(plugin.value.getJsonBlob(), "code.json")
 }
 
 function exportToManifest() {
-  if (!plugin.value.isManifestValid()) return showErrorToast(
+  if (!plugin.value.isManifestValid())
+    return showErrorToast(
       "Could not export manifest",
       "Please ensure all manifest attributes are correct."
-  );
+    )
+
   FileSaver.saveAs(plugin.value.getManifestBlob(), "plugin.manifest")
 }
 
@@ -146,7 +144,14 @@ function createZipArchive(): JSZip {
 }
 
 function exportToZip() {
-  if (!isValid() || !plugin.value.isManifestValid()) return showErrorToast(
+  if (plugin.value.drafts.length === 0)
+    return showErrorToast(
+        "Cannot export an empty plugin",
+        "Make sure you have defined at least one draft before exporting as archive."
+    )
+
+
+  if (!areDraftsValid() || !plugin.value.isManifestValid()) return showErrorToast(
       "Could not export archive",
       "Please ensure all plugin attributes are correct."
   );
@@ -178,7 +183,7 @@ function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
 
 
 async function exportToEncryptedPlugin() {
-  if (!isValid() || !plugin.value.isManifestValid()) return showErrorToast(
+  if (!areDraftsValid() || !plugin.value.isManifestValid()) return showErrorToast(
       "Could not export plugin file",
       "Please ensure all plugin attributes are correct."
   );
@@ -240,9 +245,22 @@ async function loadFromZip(event) {
     );
   }
 
+
+  // Load the manifest
+  let manifestContent = await manifestFile.async("string")
+  let jsonObject = JSON.parse(manifestContent);
+  console.log(jsonObject)
+  plugin.value.manifest.id.value = jsonObject["id"]
+  plugin.value.manifest.version.value = jsonObject["version"]
+  plugin.value.manifest.title.value = jsonObject["title"]
+  plugin.value.manifest.text.value = jsonObject["text"]
+  plugin.value.manifest.author.value = jsonObject["author"]
+
+
+
   // Load the code.json file
   let codeContent = await codeFile.async("string")
-  let jsonObject = JSON.parse(codeContent);
+  jsonObject = JSON.parse(codeContent);
 
   if (!Array.isArray(jsonObject)) {
     return showErrorToast(
@@ -252,7 +270,7 @@ async function loadFromZip(event) {
   }
 
   jsonObject.forEach((obj) => {
-    const draft = new DraftFactory().fromJSON(obj, null);
+    const draft = new DraftFactory().fromJSON(obj, plugin.value);
     if (draft === null) {
       showWarningToast(
           "Draft loading failed",
@@ -262,17 +280,6 @@ async function loadFromZip(event) {
       plugin.value.addDraft(draft)
     }
   })
-
-  // Load the manifest
-  let manifestContent = await manifestFile.async("string")
-  jsonObject = JSON.parse(manifestContent);
-  console.log(jsonObject)
-  plugin.value.manifest.id.value = jsonObject["id"]
-  plugin.value.manifest.version.value = jsonObject["version"]
-  plugin.value.manifest.title.value = jsonObject["title"]
-  plugin.value.manifest.text.value = jsonObject["text"]
-  plugin.value.manifest.author.value = jsonObject["author"]
-
 
   for (const fileKey in zip.files) {
     const file = zip.files[fileKey]
@@ -291,16 +298,14 @@ async function loadFromZip(event) {
   }
 
   let alreadyVisited = {}
-  for (let i = 0; i < plugin.value.drafts.length; i++) {
-    const draft = plugin.value.drafts[i]
-    for (const file of draft.getFiles()) {
-      if (alreadyVisited[file] !== true) {
-        plugin.value.getFile(file).owners--;
-        alreadyVisited[file] = true
-      }
-      plugin.value.addFile(file, null)
+  let enumeratedFileUsages = plugin.value.enumerateFiles()
+  enumeratedFileUsages.forEach(item => {
+    if (alreadyVisited[item] !== true) {
+      plugin.value.getFile(item).owners--;
+      alreadyVisited[item] = true
     }
-  }
+    plugin.value.addFile(item, null)
+  });
 
   return true;
 }
@@ -329,25 +334,20 @@ window.onerror = function (msg, url, line, col, error) {
     <div class="main-content">
 
       <div class="generator-panel">
-        <h2>Plugin creator</h2>
+        <h2>Plugin creator for TheoTown</h2>
 
         <div class="generator-header">
 
-          <div class="backdrop">
-            <h3 @click="showManifest = !showManifest">Manifest</h3>
-            <Collapse :when="showManifest" class="collapse">
-              <p>
-                To begin creating your plugin, please create a manifest of the plugin first. Manifest is a file that
-                helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
-                show up under local plugins list and the plugins toolbar.
-              </p>
-              <ManifestC :manifest="plugin.manifest" @raise-error="showManifest = true"/>
-            </Collapse>
-          </div>
-
-
-
-
+          <Collapsable title="Manifest">
+            <p>
+              To begin creating your plugin, please create a manifest of the plugin first. Manifest is a file that
+              helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
+              show up under local plugins list and the plugins toolbar.
+            </p>
+            <AttributeContainer
+                :attribute-owner="plugin.manifest"
+            />
+          </Collapsable>
 
 
 
@@ -377,20 +377,19 @@ window.onerror = function (msg, url, line, col, error) {
           </div>
         </div>
 
-
-
-
         <div v-if="plugin.drafts.length > 0" class="drafts">
-            <Draft
-                :index="index"
-                :draftObject="obj"
-                v-for="(obj, index) in plugin.drafts"
-                class="backdrop"
-                @pop="plugin.removeDraftAtIndex(index)"
+          <!--:title="`${(props.index + 1)}. ${props.draftObject.id.value ? props.draftObject.id.value : 'No ID specified'} (type: ${ props.draftObject.type.tag})`"-->
+          <Collapsable
+              v-for="(obj, index) in plugin.drafts"
+              :title="`${(index + 1)}. ${obj.id.value ? obj.id.value : 'No ID specified'} (type: ${obj.type.tag})`"
+              :removable="true"
+              @pop="plugin.removeDraftAtIndex(index)"
+          >
+            <AttributeContainer
+                :attribute-owner="obj"
             />
+          </Collapsable>
         </div>
-
-
 
 
         <div class="controls">
@@ -471,13 +470,6 @@ window.onerror = function (msg, url, line, col, error) {
   padding-left: 10px;
 }
 
-.documentation-panel {
-  flex: 1;
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-}
-
 .generator-panel {
   flex: 5; /* Adjust the flex ratio for central panel size */
   display: flex;
@@ -511,10 +503,6 @@ window.onerror = function (msg, url, line, col, error) {
 .controls button {
   margin-bottom: 10px;
   margin-right: 10px;
-}
-
-.collapse {
-  transition: height cubic-bezier(0.3, 0, 0.6, 1);
 }
 
 .preview-panel {

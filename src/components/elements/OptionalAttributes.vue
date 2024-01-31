@@ -2,20 +2,19 @@
 
 import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
 import Multiselect from "@vueform/multiselect";
-import {Frame} from "@/core/objects/Frame";
-import {Draft} from "@/core/drafts/Draft";
 import {defineProps, nextTick, Ref, ref} from 'vue';
-import Attribute from "@/components/attributes/Attribute.vue";
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
 import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
 import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
-import FrameInput from "@/components/attributes/inputs/FrameInput.vue";
+import FileInput from "@/components/attributes/inputs/FileInput.vue";
+import ListInput from "@/components/attributes/inputs/ListInput.vue";
+import {HasAttributes} from "@/core/attribute/interfaces/Interfaces";
 
 interface Props {
   name?: String
   description?: String
-  object: Draft | Frame
+  object: HasAttributes
 }
 
 const props = defineProps<Props>()
@@ -25,7 +24,7 @@ const showDraftContent = ref(true);
 const optionalAttributeSelector = ref(null);
 const selectedOptionalAttributes: Ref<Array<any>> = ref([]);
 
-async function deselectOptionalAttribute(item: Attribute) {
+async function deselectOptionalAttribute(item) {
   item.attribute.reset()
   await nextTick()
   optionalAttributeSelector.value.deselect(item)
@@ -46,7 +45,8 @@ const Inputs = {
   NumberInput,
   BooleanInput,
   LevelInput,
-  FrameInput
+  FileInput,
+  ListInput
 }
 
 </script>
@@ -85,7 +85,7 @@ const Inputs = {
     >
       <component
           v-model:attribute="item.attribute"
-          :is="Inputs[item.attribute.element]"
+          :is="Inputs[item.attribute.getComponent()]"
       ></component>
     </OptionalAttribute>
   </div>

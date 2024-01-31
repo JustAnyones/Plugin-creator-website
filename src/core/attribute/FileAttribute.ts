@@ -24,50 +24,58 @@
  */
 
 import {Attribute} from "./Attribute";
-import {Draft} from "../drafts/Draft";
+import {Plugin} from "../plugin/Plugin";
+import {PluginFile} from "../PluginFile";
 
 interface ConstructorParams {
-    owner: Draft;
+    plugin: Plugin;
     id: string;
     name: string;
     description: string;
     required?: boolean;
-    defaultValue?: number | null;
+    defaultValue?: boolean | null;
+    customValidator?: (() => void)
 }
 
-export class OptionalFileAttr extends Attribute {
-    element = "OptionalFileInput"
-    //element2 = OptionalFileInput
+export class FileAttribute extends Attribute {
 
-    multiple = false
-    selected = false
+    readonly acceptedType: string = "image/png"
 
     constructor(
-        {owner, id, name, description, required=false, defaultValue=null}: ConstructorParams
+        {plugin, id, name, description, required=false, defaultValue=null, customValidator}: ConstructorParams,
     ) {
         super({
-            owner: owner, id: id,
+            plugin: plugin, id: id,
             name: name, description: description,
-            required: required, defaultValue: defaultValue
+            required: required, defaultValue: defaultValue,
+            customValidator: customValidator
         })
     }
 
-    isEmpty(): boolean {
-        return this.value === null;
+    getComponent(): string {
+        return "FileInput";
     }
 
-    get value(): any {
-        return this._value;
+    protected isEmpty(): boolean {
+        return this.currentValue === null;
     }
 
-    set value(value: any) {
-        this._value = value;
-        this.selected = value !== null
+    protected validate(): void {
     }
 
-    protected validate() {
-        if (!this.selected) {
-            this.addError("A file is required, but not selected")
-        }
+    public addFile(fileName: string, data: Uint8Array) {
+        let file = new PluginFile(fileName, data)
+        this.plugin.addFile(fileName, file);
+        this.currentValue = fileName;
+    }
+
+    public removeFile() {
+        this.plugin.removeFile(this.currentValue)
+        this.currentValue = null;
+    }
+
+    public reset() {
+        this.removeFile()
+        super.reset();
     }
 }

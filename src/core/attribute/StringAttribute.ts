@@ -24,29 +24,30 @@
  */
 
 import {Attribute} from "./Attribute";
-import {Draft} from "../drafts/Draft";
+import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    owner: Draft;
+    plugin: Plugin;
     id: string;
     name: string;
     description: string;
     required?: boolean;
     defaultValue?: string | (() => string);
+    customValidator?: (() => void)
 }
 
 export class StringAttribute extends Attribute {
-    element = "StringInput"
 
     maxLength: Number
 
     constructor(
-        {owner, id, name, description, required=false, defaultValue=""}: ConstructorParams,
+        {plugin, id, name, description, required=false, defaultValue="", customValidator}: ConstructorParams,
     ) {
         super({
-            owner: owner, id : id,
-            name : name, description : description,
-            required : required, defaultValue : defaultValue
+            plugin: plugin, id: id,
+            name: name, description: description,
+            required: required, defaultValue: defaultValue,
+            customValidator: customValidator
         })
     }
 
@@ -54,6 +55,10 @@ export class StringAttribute extends Attribute {
         return this.value === "";
     }
 
-    protected validate() {
+    getComponent() {
+        return "StringInput"
+    }
+
+    validate(): void {
     }
 }

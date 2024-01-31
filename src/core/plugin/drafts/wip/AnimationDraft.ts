@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 JustAnyone
+ * Copyright (c) 2023-2024 JustAnyone
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,9 @@
  *
  */
 
-import {ViewportDraft} from "./ViewportDraft";
-import {BooleanAttribute} from "../attribute/BooleanAttribute";
-import {NumberAttribute} from "../attribute/NumberAttribute";
+import {ViewportDraft} from "../ViewportDraft";
+import {BooleanAttribute} from "../../../attribute/BooleanAttribute";
+import {NumberAttribute} from "../../../attribute/NumberAttribute";
 
 export class AnimationDraft extends ViewportDraft {
     additive = new BooleanAttribute({

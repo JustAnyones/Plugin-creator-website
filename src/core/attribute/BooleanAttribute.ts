@@ -24,35 +24,43 @@
  */
 
 import {Attribute} from "./Attribute";
-import {Draft} from "../drafts/Draft";
+import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    owner: Draft;
+    plugin: Plugin;
     id: string;
     name: string;
     description: string;
     required?: boolean;
     defaultValue?: boolean | null;
+    customValidator?: (() => void)
 }
 
 export class BooleanAttribute extends Attribute {
-    element = "BooleanInput"
 
     constructor(
-        {owner, id, name, description, required=false, defaultValue=false}: ConstructorParams,
+        {plugin, id, name, description, required=false, defaultValue=false, customValidator}: ConstructorParams,
     ) {
         super({
-            owner: owner, id : id,
-            name : name, description : description,
-            required : required, defaultValue : defaultValue
+            plugin: plugin, id: id,
+            name: name, description: description,
+            required: required, defaultValue: defaultValue,
+            customValidator: customValidator
         })
     }
 
-    isEmpty(): boolean {
-        return this.value === null;
+    protected isEmpty(): boolean {
+        return this.currentValue === null;
     }
 
-    protected validate() {
+    reset(): void {
+        this.currentValue = this.defaultValue;
     }
 
+    getComponent() {
+        return "BooleanInput"
+    }
+
+    validate(): void {
+    }
 }

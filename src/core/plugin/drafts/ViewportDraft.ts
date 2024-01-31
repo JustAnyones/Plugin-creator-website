@@ -23,14 +23,33 @@
  *
  */
 
-import {ViewportDraft} from "./ViewportDraft";
-import {DraftType} from "../DraftType";
+import {DefaultAttributes, Draft} from "./Draft";
+import {DraftType} from "../../DraftType";
+import {Plugin} from "../Plugin";
+import {ListAttribute} from "../../attribute/ListAttribute";
+import {Frame, FrameFactory} from "../objects/Frame";
 
-export class CategoryDraft extends ViewportDraft {
+export interface ViewportDraftAttributes extends DefaultAttributes {
+    frames: ListAttribute<Frame>
+}
 
-    constructor(type: DraftType) {
-        super(type)
-        this.title.required = true
+export class ViewportDraft extends Draft implements ViewportDraftAttributes {
+
+    frames: ListAttribute<Frame>
+
+    constructor(type: DraftType, plugin: Plugin) {
+        super(type, plugin);
+        this.frames = new ListAttribute<Frame>({
+            plugin: this.plugin, id: "frames",
+            name: "Frames",
+            description: "Frames define your draft texture. Usually, this means the textures of a building, category and etc.",
+            required: true,
+            customValidator: () => {
+                if (this.frames.value.length == 0) {
+                    this.frames.addError("Please choose at least a single frame.")
+                }
+            },
+            factory: new FrameFactory()
+        })
     }
-
 }

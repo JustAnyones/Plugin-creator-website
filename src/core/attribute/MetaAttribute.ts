@@ -27,7 +27,7 @@ import {Attribute} from "./Attribute";
 
 export class MetaAttribute extends Attribute {
 
-    isExposed(): boolean {
+    isVisible(): boolean {
         return false;
     }
 
@@ -40,5 +40,9 @@ export class MetaAttribute extends Attribute {
     }
 
     protected validate() {
+    }
+
+    getComponent(): string {
+        return null;
     }
 }

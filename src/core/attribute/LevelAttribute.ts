@@ -26,5 +26,7 @@
 import {NumberAttribute} from "./NumberAttribute";
 
 export class LevelAttribute extends NumberAttribute {
-    element = "LevelInput"
+    getComponent(): string {
+        return "LevelInput"
+    }
 }

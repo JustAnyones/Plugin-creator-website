@@ -23,12 +23,12 @@
  *
  */
 
-import {BuildingDraft} from "./drafts/BuildingDraft";
+import {BuildingDraft} from "./plugin/drafts/BuildingDraft";
 import {Categories} from "./Categories";
 import {DraftType} from "./DraftType";
-import {TreeDraft} from "./drafts/TreeDraft";
-import {CategoryDraft} from "./drafts/CategoryDraft";
-import {UpgradeDraft} from "./drafts/UpgradeDraft";
+import {TreeDraft} from "./plugin/drafts/TreeDraft";
+import {CategoryDraft} from "./plugin/drafts/CategoryDraft";
+import {UpgradeDraft} from "./plugin/drafts/UpgradeDraft";
 
 export class Types {
     // RCI

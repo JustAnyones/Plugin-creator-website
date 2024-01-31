@@ -25,23 +25,17 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {OptionalFileAttr} from "@/core/attribute/OptionalFileAttr";
-import {PluginFile} from "@/core/PluginFile";
+import {FileAttribute} from "@/core/attribute/FileAttribute";
 
 interface Props {
-  attribute: OptionalFileAttr,
+  attribute: FileAttribute,
 }
 const props = defineProps<Props>()
 
 function onSelect(event) {
-  const files: FileList  = event.target.files;
+  const file: File = event.target.files[0]
 
-  if (props.attribute.multiple) {
-    throw new Error("OptionalFileInput does not support multiple files")
-  }
-
-  const file = files[0]
-
+  // TODO: move elsewhere
   props.attribute.errors = []
   if (!file.name.endsWith(".png")) {
     return props.attribute.addError("File is not a .PNG file")
@@ -53,19 +47,12 @@ function onSelect(event) {
 
   file.arrayBuffer().then(buffer => {
     let rawData = new Uint8Array(buffer);
-
-    let pluginFile = new PluginFile(file.name, rawData)
-
-    props.attribute.owner.plugin.addFile(file.name, pluginFile)
-    props.attribute.value = file.name
-    props.attribute.selected = true
+    props.attribute.addFile(file.name, rawData)
   });
 }
 
 function remove() {
-  props.attribute.owner.plugin.removeFile(props.attribute.value)
-  props.attribute.value = null
-  props.attribute.selected = false
+  props.attribute.removeFile()
 }
 
 </script>
@@ -74,8 +61,8 @@ function remove() {
   <label v-if="attribute.value === null">
     <input
         type="file"
-        v-bind:multiple="props.attribute.multiple"
-        accept="image/png"
+        :multiple="false"
+        :accept="attribute.acceptedType"
         class="attribute-input"
         @input="onSelect($event)"
     >

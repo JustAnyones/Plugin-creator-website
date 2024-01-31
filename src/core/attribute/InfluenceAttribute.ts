@@ -24,10 +24,10 @@
  */
 
 import {NumberAttribute} from "./NumberAttribute";
-import {Draft} from "../drafts/Draft";
+import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    owner: Draft;
+    plugin: Plugin;
     id: string;
     name: string;
     description: string;
@@ -38,10 +38,10 @@ interface ConstructorParams {
 
 export class InfluenceAttribute extends NumberAttribute {
     constructor(
-        {owner, id, name, description, required=false, defaultValue=null, isPositive=true}: ConstructorParams
+        {plugin, id, name, description, required=false, defaultValue=null, isPositive=true}: ConstructorParams
     ) {
         super({
-            owner: owner,
+            plugin: plugin,
             id: id,
             name: name,
             description: description,

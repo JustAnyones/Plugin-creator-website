@@ -1,5 +1,5 @@
 import {Category} from "./Categories";
-import {Draft} from "./drafts/Draft";
+import {Draft} from "./plugin/drafts/Draft";
 
 interface DraftTypeConstructorParams {
     tag: string;
@@ -14,7 +14,7 @@ export class DraftType {
     private readonly category: Category | null
     private readonly rci: boolean
     private readonly draftType: typeof Draft
-    private readonly base: boolean
+    readonly base: boolean
 
     constructor({tag, category, rci, draftType, base}: DraftTypeConstructorParams) {
         this._tag = tag;
@@ -34,10 +34,6 @@ export class DraftType {
 
     public isRCI(): boolean {
         return this.rci;
-    }
-
-    public getNewDraft(): Draft {
-        return new this.draftType(this);
     }
 
     public getDraft(): typeof Draft {

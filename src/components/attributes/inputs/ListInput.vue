@@ -25,29 +25,34 @@
 
 <script setup lang="ts">
 import {defineProps} from 'vue';
-import {BmpFrame, EmptyFrame} from "@/core/objects/Frame";
-import {FrameAttribute} from "@/core/attribute/FrameAttribute";
-import Frame from "@/components/elements/Frame.vue";
+import {IListable} from "@/core/attribute/interfaces/Interfaces";
+import {ListAttribute} from "@/core/attribute/ListAttribute";
+import Collapsable from "@/components/elements/core/Collapsable.vue";
+import AttributeContainer from "@/components/elements/AttributeOwner.vue";
+import {AttributeOwner} from "@/core/plugin/AttributeOwner";
 interface Props {
-  attribute: FrameAttribute
+  attribute: ListAttribute<AttributeOwner & IListable>
 }
 const props = defineProps<Props>()
 
-function addFrame() {
-  props.attribute.addFrame(new BmpFrame(props.attribute.owner))
-  //props.attribute.addFrame(new EmptyFrame(props.attribute.owner))
+function add(object) {
+  props.attribute.add(object)
 }
-
-function removeFrame(index: number) {
-  props.attribute.removeFrame(index)
-}
-
 </script>
 
 <template>
-  <button @click="addFrame()">Add frame</button>
-  <Frame v-for="(frame, i) in props.attribute.frames" @pop="removeFrame(i)"
-         v-bind:index="i"
-         v-model:frame="props.attribute.frames[i]">
-  </Frame>
+  <!-- TODO: Make this cleaner -->
+  <button v-for="(callback, name) in props.attribute.options()" @click="add(callback(props.attribute.plugin))">{{ name }}</button>
+
+  <Collapsable
+      v-for="(item, index) in props.attribute.items"
+      :title="item.getTitle(index)"
+      :removable="true"
+      @pop="props.attribute.remove(index)"
+  >
+    <p>{{item.getDescription()}}</p>
+    <AttributeContainer
+        :attribute-owner="props.attribute.items[index]"
+    />
+  </Collapsable>
 </template>
