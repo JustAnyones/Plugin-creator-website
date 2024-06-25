@@ -24,7 +24,43 @@
  */
 
 import {v4 as uuidv4} from 'uuid';
+import { Attribute } from '../attribute/Attribute';
 
 export function generateId() {
     return uuidv4()
+}
+
+const REMOVED_MARKER = "[THIS IS A MARKER THAT INDICATES THAT THE ENTRY HAS BEEN READ AND REMOVED]";
+
+
+export function serialize(obj: any, destinationObj: any) {
+    console.log("Serializing", obj)
+    // Log keys of the source object
+    Object.keys(obj).forEach(
+        (key) => {
+            console.log(key, obj[key]);
+        }
+    )
+
+    // Do the actual loading here
+    Object.keys(destinationObj).forEach((item) => {
+        let attribute = destinationObj[item]
+        if (attribute instanceof Attribute)
+            if (obj[attribute.id] !== undefined) {
+                attribute.value = obj[attribute.id]
+                obj[attribute.id] = REMOVED_MARKER;
+            }
+    })
+
+    // Log tags that are not supported
+    console.log("Unsupported tags:")
+    Object.keys(obj).forEach(
+        (key) => {
+            if (obj[key] !== REMOVED_MARKER)
+                console.log(key, obj[key]);
+        }
+    )
+    console.log("-----------------")
+
+    return destinationObj
 }

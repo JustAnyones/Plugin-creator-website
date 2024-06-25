@@ -29,6 +29,7 @@ import {DraftType} from "./DraftType";
 import {TreeDraft} from "./plugin/drafts/TreeDraft";
 import {CategoryDraft} from "./plugin/drafts/CategoryDraft";
 import {UpgradeDraft} from "./plugin/drafts/UpgradeDraft";
+import { AnimationDraft } from "./plugin/drafts/AnimationDraft";
 
 export class Types {
     // RCI
@@ -232,13 +233,12 @@ export class Types {
         base: false
     })
 
-    // Upcoming draft type
-    //static readonly BIOME = new DraftType({
-    //    tag: "biome",
-    //    category: null,
-    //    rci: false,
-    //    draftType: BiomeDraft
-    //})
+    static readonly ANIMATION = new DraftType({
+        tag: "animation",
+        category: null,
+        rci: false,
+        draftType: AnimationDraft
+    })
 
 
     private constructor(private key: string, public value: any) {}

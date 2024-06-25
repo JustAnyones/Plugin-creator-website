@@ -32,6 +32,7 @@ import {IListable} from "../../attribute/interfaces/Interfaces";
 import {Plugin} from "../Plugin";
 import {AttributeOwner, AttributeOwnerFactory, AttributeOwnerFactoryWithOptions} from "../AttributeOwner";
 import {FileAttribute} from "../../attribute/FileAttribute";
+import { serialize } from "@/core/utils/Utils";
 
 export class FrameFactory implements AttributeOwnerFactory, AttributeOwnerFactoryWithOptions {
     fromJSON(obj: any, plugin: Plugin): AttributeOwner {
@@ -44,37 +45,7 @@ export class FrameFactory implements AttributeOwnerFactory, AttributeOwnerFactor
                 frameObj = new BmpFrame(plugin)
                 break
         }
-
-
-        Object.keys(obj).forEach(
-            (key) => {
-                console.log(key, obj[key]);
-            }
-        )
-
-        let removed = {
-            "deleted": "this is a custom entry for listing unsupported pca tags"
-        }
-
-        Object.keys(frameObj).forEach((item) => {
-            let attribute = frameObj[item]
-            if (attribute instanceof Attribute)
-                if (obj[attribute.id] !== undefined) {
-                    attribute.value = obj[attribute.id]
-                    obj[attribute.id] = removed;
-                }
-        })
-
-        console.log("Unsupported tags:")
-        Object.keys(obj).forEach(
-            (key) => {
-                if (obj[key] !== removed)
-                    console.log(key, obj[key]);
-            }
-        )
-        console.log("-----------------")
-
-        return frameObj
+        return serialize(obj, frameObj)
     }
 
     getOptions() {

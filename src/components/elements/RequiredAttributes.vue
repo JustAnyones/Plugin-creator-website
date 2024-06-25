@@ -9,6 +9,7 @@ import FileInput from "@/components/attributes/inputs/FileInput.vue";
 import ListInput from "@/components/attributes/inputs/ListInput.vue";
 import { AttributeOwner } from "@/core/plugin/AttributeOwner";
 import Attribute from "@/components/attributes/Attribute.vue";
+import FactoryInput from '../attributes/inputs/FactoryInput.vue';
 
 
 interface Props {
@@ -24,7 +25,8 @@ const Inputs = {
   BooleanInput,
   LevelInput,
   FileInput,
-  ListInput
+  ListInput,
+  FactoryInput
 }
 
 </script>

@@ -66,7 +66,6 @@ export class NumberAttribute extends Attribute {
     }
 
     isEmpty(): boolean {
-        // @ts-ignore
         return this.currentValue === null || Number.isNaN(this.currentValue);
     }
 

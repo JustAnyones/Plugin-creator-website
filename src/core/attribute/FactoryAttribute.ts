@@ -25,8 +25,8 @@
 
 import {Attribute} from "./Attribute";
 import {AttributeOwner, AttributeOwnerFactoryWithOptions} from "../plugin/AttributeOwner";
-import {IListable} from "./interfaces/Interfaces";
 import {Plugin} from "../plugin/Plugin";
+import { Color } from "../plugin/objects/Color";
 
 interface ConstructorParams {
     plugin: Plugin;
@@ -39,7 +39,7 @@ interface ConstructorParams {
     factory: AttributeOwnerFactoryWithOptions
 }
 
-export class ListAttribute<T extends AttributeOwner & IListable> extends Attribute {
+export class FactoryAttribute<T extends AttributeOwner> extends Attribute {
 
     private factory: AttributeOwnerFactoryWithOptions
 
@@ -47,7 +47,7 @@ export class ListAttribute<T extends AttributeOwner & IListable> extends Attribu
         {
             plugin, id,
             name, description,
-            required=false, defaultValue=[],
+            required=false, defaultValue=null,
             customValidator,
             factory
         }: ConstructorParams,
@@ -62,61 +62,45 @@ export class ListAttribute<T extends AttributeOwner & IListable> extends Attribu
         this.factory = factory
     }
 
-    declare defaultValue: Array<T>
+    declare defaultValue: T
 
     getComponent(): string {
-        return "ListInput";
+        return "FactoryInput";
     }
 
     protected isEmpty(): boolean {
-        return this.currentValue.length === 0;
+        return this.currentValue === this.defaultValue;
     }
 
     isDefault(): boolean {
-        return this.currentValue.length === 0;
+        return this.currentValue === this.defaultValue;
     }
 
     public options() {
         return this.factory.getOptions()
     }
 
-    get items(): Array<T> {
-        return this.currentValue
-    }
-
-    public add(element: T) {
-        this.currentValue.push(element)
-    }
-
-    public remove(index: number) {
-        this.items[index].reset();
-        this.currentValue.splice(index, 1)
-    }
 
     get value() {
         return this.currentValue
     }
 
     set value(value: any) {
-        if (value instanceof Array)
-            for (const valueKey in value)
-                this.currentValue.push(this.factory.fromJSON(value[valueKey], this.plugin))
+        if (!(value instanceof Color))
+            this.currentValue = this.factory.fromJSON(value, this.plugin)
+        else
+            this.currentValue = value
     }
 
     reset() {
-        for (const item of this.items) {
-            item.reset()
-        }
-        this.currentValue = [];
+        if (this.currentValue)
+            this.currentValue.reset()
+        this.currentValue = this.defaultValue;
     }
 
     protected validate(): void {
-        let validationFailed = false;
-        for (const item of this.items) {
-            if (!item.isValid()) validationFailed = true;
-        }
-        if (validationFailed)
+        if (this.currentValue && !this.currentValue.isValid()) {
             this.addError("Validation failed for " + this.name.toLowerCase() + " attribute")
+        }
     }
-
 }

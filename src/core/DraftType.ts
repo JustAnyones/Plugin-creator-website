@@ -6,6 +6,7 @@ interface DraftTypeConstructorParams {
     category?: Category;
     rci?: boolean;
     draftType: typeof Draft;
+    /** Whether the draft type can be considered a base type. */
     base?: boolean
 }
 

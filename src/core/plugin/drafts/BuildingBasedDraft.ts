@@ -31,6 +31,8 @@ import {Plugin} from "../Plugin";
 import {DefaultAttributes} from "./Draft";
 import {ListAttribute} from "../../attribute/ListAttribute";
 import {Frame, FrameFactory} from "../objects/Frame";
+import { Animation } from "../objects/Animation";
+import { SupportsAnimation, SupportsFgAnimation, loadAnimation, loadAnimationFg } from "../Attributes";
 
 interface SupportsInfluences {
     // Visible Influences
@@ -74,11 +76,6 @@ interface SupportsCarSpawner {
     //TODO: carSpawner
 }
 
-interface SupportsAnimation {
-    //TODO: animation // loadAnimations
-    //TODO: frameAnimationIndices // loadFrameAnimationIndices
-}
-
 interface SupportsBasicBuildingFrames {
     framesWinter: ListAttribute<Frame>
 }
@@ -90,6 +87,7 @@ export interface BuildingBasedAttributes extends
     SupportsAspects,
     SupportsCarSpawner,
     SupportsAnimation,
+    SupportsFgAnimation,
     SupportsBasicBuildingFrames
 {
     price: NumberAttribute
@@ -144,6 +142,9 @@ export abstract class BuildingBasedDraft extends ViewportDraft implements Buildi
     aspectHealthCareCapacity: NumberAttribute
     aspectWasteDisposalCapacity: NumberAttribute
     aspectBodyDisposalCapacity: NumberAttribute
+
+    animation: ListAttribute<Animation>;
+    animationFg: ListAttribute<Animation>;
 
     constructor(type: DraftType, plugin: Plugin) {
         super(type, plugin);
@@ -332,5 +333,8 @@ export abstract class BuildingBasedDraft extends ViewportDraft implements Buildi
             name: "Aspect body disposal capacity",
             description: "..."
         })
+
+        this.animation = loadAnimation(this.plugin)
+        this.animationFg = loadAnimationFg(this.plugin)
     }
 }

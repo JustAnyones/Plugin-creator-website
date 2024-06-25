@@ -23,7 +23,6 @@
  *
  */
 
-import {Attribute} from "../../attribute/Attribute";
 import {StringAttribute} from "../../attribute/StringAttribute";
 import {BooleanAttribute} from "../../attribute/BooleanAttribute";
 import {NumberAttribute} from "../../attribute/NumberAttribute";
@@ -34,45 +33,14 @@ import {Plugin} from "../Plugin";
 import {Frame, FrameFactory} from "../objects/Frame";
 import {AttributeOwner, AttributeOwnerFactory} from "../AttributeOwner";
 import {ListAttribute} from "../../attribute/ListAttribute";
+import { serialize } from "@/core/utils/Utils";
 
 export class DraftFactory implements AttributeOwnerFactory {
-
-    private static removedMarker = "[THIS IS A MARKER THAT INDICATES THAT THE ENTRY HAS BEEN READ AND REMOVED]";
-
-    protected loadKeysFromJsonToObject(json: any, newObject: any) {
-        let jsonAttrs = Object.keys(json);
-        Object.keys(json).forEach(
-            (key) => {
-                //console.log(key, json[key]);
-            }
-        )
-
-        Object.keys(newObject).forEach((item) => {
-            let attribute = newObject[item]
-            if (attribute instanceof Attribute) {
-                if (json[attribute.id] !== undefined) {
-                    attribute.value = json[attribute.id]
-                    json[attribute.id] = DraftFactory.removedMarker;
-                }
-            }
-        })
-
-        // Print out unsupported tags
-        //console.log("Unsupported tags:")
-        //console.log("Start>")
-        jsonAttrs.forEach((key) => {
-            if (json[key] !== DraftFactory.removedMarker)
-                console.log(key, json[key]);
-        })
-        //console.log("<End")
-
-        return newObject
-    }
 
     fromJSON(json: any, plugin: Plugin): Draft {
         let obj = this.fromType(json["type"], plugin);
         if (obj === null) return null;
-        return this.loadKeysFromJsonToObject(json, obj)
+        return serialize(json, obj);
     }
 
     fromType(type: string, plugin: Plugin): Draft {

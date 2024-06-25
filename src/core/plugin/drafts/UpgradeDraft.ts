@@ -31,6 +31,7 @@ import {Plugin} from "../Plugin";
 import {Draft, DraftFactory} from "./Draft";
 import {AttributeOwnerFactoryWithOptions} from "../AttributeOwner";
 import {Types} from "../../Types";
+import { serialize } from "@/core/utils/Utils";
 
 interface UpgradeDraftAttributes extends
     BuildingBasedAttributes
@@ -42,7 +43,7 @@ export class UpgradeDraftFactory extends DraftFactory implements AttributeOwnerF
 
     fromJSON(json: any, plugin: Plugin): Draft {
         let obj = new UpgradeDraft(Types.UPGRADE, plugin);
-        return this.loadKeysFromJsonToObject(json, obj)
+        return serialize(json, obj)
     }
 
     getOptions() {

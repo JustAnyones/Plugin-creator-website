@@ -23,18 +23,8 @@
  *
  */
 
-import {Draft} from "../plugin/drafts/Draft";
 import {Resettable, Validatable} from "./interfaces/Interfaces";
 import {Plugin} from "../plugin/Plugin";
-
-interface ConstructorParamsOld {
-    owner: Draft;
-    id: string;
-    name: string;
-    description: string;
-    required?: boolean;
-    defaultValue?: any;
-}
 
 interface ConstructorParams {
     plugin: Plugin;
