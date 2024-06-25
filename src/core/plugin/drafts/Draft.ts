@@ -382,4 +382,9 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
         //data["meta"] = this.meta;
         return data
     }
+
+    getOptionalAttributeDescription(): string {
+        return "These are optional attributes you can add to your plugin draft. " +
+            "They are not required, however useful such as adding a title, a description or a price for your building.";
+    }
 }

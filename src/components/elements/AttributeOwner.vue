@@ -46,7 +46,7 @@ defineEmits(['pop'])
   <OptionalAttributes
       v-if="props.attributeOwner.getOptionalAttributes().length > 0"
       name="Optional attributes"
-      description="These are optional attributes you can add to your plugin draft. They are not required, however useful such as adding a title, a description or a price for your building."
+      :description="props.attributeOwner.getOptionalAttributeDescription()"
       v-model:object="props.attributeOwner"
   />
 </template>

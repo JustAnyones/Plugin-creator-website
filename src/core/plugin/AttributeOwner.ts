@@ -116,4 +116,8 @@ export class AttributeOwner implements HasAttributes, Validatable, Resettable {
             }
         })
     }
+
+    getOptionalAttributeDescription(): string {
+        return "These are optional attributes that you can add to your object.";
+    }
 }
