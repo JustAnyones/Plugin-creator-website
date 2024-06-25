@@ -9,12 +9,11 @@ import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
 import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
 import FileInput from "@/components/attributes/inputs/FileInput.vue";
 import ListInput from "@/components/attributes/inputs/ListInput.vue";
-import {HasAttributes} from "@/core/attribute/interfaces/Interfaces";
+import { AttributeOwner } from "@/core/plugin/AttributeOwner";
 
 interface Props {
-  name?: String
-  description?: String
-  object: HasAttributes
+  description: String
+  object: AttributeOwner
 }
 
 const props = defineProps<Props>()
@@ -50,10 +49,9 @@ const Inputs = {
 }
 
 </script>
-
 <template>
-  <h3>{{props.name ?? "Optional attributes"}}</h3>
-  <p>{{props.description ?? "These are optional attributes that you can add to your object."}}</p>
+  <h3>Optional attributes</h3>
+  <p>{{ props.description }}</p>
   <multiselect
       class="optional-attribute-multiselect"
       ref="optionalAttributeSelector"

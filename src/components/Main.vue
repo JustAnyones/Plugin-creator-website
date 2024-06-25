@@ -39,7 +39,7 @@ import {Types} from "@/core/Types";
 import {DraftFactory} from '@/core/plugin/drafts/Draft';
 import {PluginFile} from "@/core/PluginFile";
 import Collapsable from "@/components/elements/core/Collapsable.vue";
-import AttributeContainer from "@/components/elements/AttributeOwner.vue";
+import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 
 
 function capitalizeFirstLetter(string: string) {
@@ -509,10 +509,6 @@ window.onerror = function (msg, url, line, col, error) {
   overflow-x: auto;
 }
 
-.preview-panel pre {
-
-}
-
 .footer {
   margin-top: auto;
   text-align: center;
@@ -542,4 +538,3 @@ window.onerror = function (msg, url, line, col, error) {
   }
 }
 </style>
-

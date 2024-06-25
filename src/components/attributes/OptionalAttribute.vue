@@ -27,7 +27,3 @@ defineEmits(['pop', 'raiseError'])
     <slot></slot>
   </Attribute>
 </template>
-
-<style scoped>
-
-</style>

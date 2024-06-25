@@ -28,7 +28,7 @@ import {defineProps} from 'vue';
 import {IListable} from "@/core/attribute/interfaces/Interfaces";
 import {ListAttribute} from "@/core/attribute/ListAttribute";
 import Collapsable from "@/components/elements/core/Collapsable.vue";
-import AttributeContainer from "@/components/elements/AttributeOwner.vue";
+import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 import {AttributeOwner} from "@/core/plugin/AttributeOwner";
 interface Props {
   attribute: ListAttribute<AttributeOwner & IListable>

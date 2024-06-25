@@ -23,25 +23,6 @@
  *
  */
 
-import {Attribute} from "../Attribute";
-
-export interface HasAttributes {
-    /**
-     * Returns an array of required attributes.
-     */
-    getRequiredAttributes(): Array<Attribute>
-    /**
-     * Returns an array of optional attributes.
-     */
-    getOptionalAttributes(): Array<Attribute>
-
-    /**
-     * Returns a description describing what the optional attributes are for.
-     */
-    getOptionalAttributeDescription(): string
-}
-
-
 export interface Validatable {
     /**
      * Returns true if current object is valid.

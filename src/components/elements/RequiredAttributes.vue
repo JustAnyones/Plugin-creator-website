@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import AttributeC from "@/components/attributes/Attribute.vue";
 import {defineProps, nextTick, Ref, ref} from 'vue';
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
@@ -8,11 +7,12 @@ import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
 import LevelInput from "@/components/attributes/inputs/LevelInput.vue";
 import FileInput from "@/components/attributes/inputs/FileInput.vue";
 import ListInput from "@/components/attributes/inputs/ListInput.vue";
-import {HasAttributes} from "@/core/attribute/interfaces/Interfaces";
+import { AttributeOwner } from "@/core/plugin/AttributeOwner";
+import Attribute from "@/components/attributes/Attribute.vue";
 
 
 interface Props {
-  object: HasAttributes
+  object: AttributeOwner
 }
 
 const props = defineProps<Props>()
@@ -28,10 +28,9 @@ const Inputs = {
 }
 
 </script>
-
 <template>
   <div v-for="(attr, i) in props.object.getRequiredAttributes()">
-    <AttributeC
+    <Attribute
         :name="attr.name"
         :description="attr.description"
         :errors="attr.errors"
@@ -41,10 +40,6 @@ const Inputs = {
           v-model:attribute="props.object.getRequiredAttributes()[i]"
           :is="Inputs[attr.getComponent()]"
       />
-    </AttributeC>
+    </Attribute>
   </div>
 </template>
-
-<style scoped>
-
-</style>

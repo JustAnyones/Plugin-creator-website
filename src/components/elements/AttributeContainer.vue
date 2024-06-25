@@ -28,10 +28,10 @@ import RequiredAttributes from "@/components/elements/RequiredAttributes.vue";
 import OptionalAttributes from "@/components/elements/OptionalAttributes.vue";
 
 import {defineProps} from 'vue';
-import {HasAttributes} from "@/core/attribute/interfaces/Interfaces";
+import { AttributeOwner } from "@/core/plugin/AttributeOwner";
 
 interface Props {
-  attributeOwner: HasAttributes
+  attributeOwner: AttributeOwner
 }
 const props = defineProps<Props>()
 
@@ -45,12 +45,7 @@ defineEmits(['pop'])
   />
   <OptionalAttributes
       v-if="props.attributeOwner.getOptionalAttributes().length > 0"
-      name="Optional attributes"
       :description="props.attributeOwner.getOptionalAttributeDescription()"
       v-model:object="props.attributeOwner"
   />
 </template>
-
-<style scoped>
-
-</style>

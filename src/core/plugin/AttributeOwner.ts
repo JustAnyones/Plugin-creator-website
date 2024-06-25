@@ -23,7 +23,7 @@
  *
  */
 
-import {HasAttributes, Resettable, Validatable} from "../attribute/interfaces/Interfaces";
+import {Resettable, Validatable} from "../attribute/interfaces/Interfaces";
 import {Attribute} from "../attribute/Attribute";
 import {Plugin} from "./Plugin";
 
@@ -35,7 +35,7 @@ export interface AttributeOwnerFactoryWithOptions extends AttributeOwnerFactory 
     getOptions(): Object
 }
 
-export class AttributeOwner implements HasAttributes, Validatable, Resettable {
+export class AttributeOwner implements Validatable, Resettable {
 
     plugin: Plugin
     constructor(plugin: Plugin) {
