@@ -51,7 +51,7 @@ function add(object) {
       heading="h4"
       @pop="props.attribute.remove(index)"
   >
-    <p>{{item.getDescription()}}</p>
+    <p>{{ item.getDescription() }}</p>
     <AttributeContainer
         :attribute-owner="props.attribute.items[index]"
     />
