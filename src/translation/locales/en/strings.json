@@ -7,11 +7,52 @@
     "colors": {
       "name": "Colors",
       "description": ""
+    },
+    "rotation_aware": {
+      "name": "Rotation aware",
+      "description": ""
     }
   },
 
   "drafts": {
-
+    "animation": {
+      "additive": {
+        "name": "Additive",
+        "description": "Whether the animation frames will be drawn using additive blending."
+      },
+      "light": {
+        "name": "Light",
+        "description": "If set to true the game's shading (ie for night) will not be applied to the animation."
+      },
+      "light_switching": {
+        "name": "Light switching",
+        "description": "If set to true the animation will only be shown during night with some probabilistic switching behavior dependent on the using object."
+      },
+      "night_light_probability": {
+        "name": "Night light probability",
+        "description": "The probability of the light to turn on during night. 1 means it will always switch on. Smaller values mean that location and spot seed will be used to determine whether to switch it on."
+      },
+      "speed": {
+        "name": "Speed multiplier",
+        "description": "Animation speed multiplier."
+      },
+      "rotation_aware": {
+        "name": "Rotation aware",
+        "description": "If set to true the animation is considered to be animation aware. This means that the frames are assigned into groups. The group to draw will depend on the rotation of the underlying building. Ie if 8 frames were defined frames 0,1 will be used for the first rotation and so on."
+      },
+      "loop": {
+        "name": "Loop",
+        "description": ""
+      },
+      "handle_interpolation": {
+        "name": "Handle interpolation",
+        "description": ""
+      },
+      "ping_pong": {
+        "name": "Ping pong",
+        "description": ""
+      }
+    }
   },
 
 
@@ -64,9 +105,19 @@
       "color": {
         "name": "Color",
         "description": "A tint color for this animation spot. This will be applied besides other tint colors like daytime shading and animation color."
+      },
+      "frames": {
+        "name": "Target frames",
+        "description": "The frames for which this animation should be drawn. The default empty value means to always draw it."
+      },
+      "night_light_probability": {
+        "name": "Night light probability",
+        "description": "Like night light probability in animation draft but on the spot level. Both values will be multiplied before evaluation."
+      },
+      "rotation_aware": {
+        "name": "Rotation aware",
+        "description": "Only relevant for frame targeting. If true, the rotation frame of the underlying building will be used for target frames test instead of the actual frame to draw."
       }
     }
-  },
-
-  "inter": "interpolated {{val}}"
+  }
 }

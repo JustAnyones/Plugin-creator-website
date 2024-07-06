@@ -4,6 +4,7 @@ import { ListAttribute } from "../attribute/ListAttribute";
 import { Plugin } from "./Plugin";
 import { Animation, AnimationFactory } from "./objects/Animation";
 import { Color, ColorFactory } from "./objects/Color";
+import { BooleanAttribute } from "../attribute/BooleanAttribute";
 
 export interface SupportsAnimation {
     animation: ListAttribute<Animation>
@@ -51,5 +52,16 @@ export function loadColors(plugin: Plugin, name?: string, description?: string) 
         description: description || i18next.t("attributes.colors.description"),
         required: false,
         factory: new ColorFactory()
+    })
+}
+
+export function loadRotationAware(
+    plugin: Plugin, name?: string, description?: string, defaultValue?: boolean
+) {
+    return new BooleanAttribute({
+        plugin: plugin, id: "rotation aware",
+        name: name || i18next.t("attributes.rotation_aware.name"),
+        description: description || i18next.t("attributes.rotation_aware.description"),
+        defaultValue: defaultValue || false
     })
 }

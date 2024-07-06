@@ -5,8 +5,9 @@ import { BooleanAttribute } from "@/core/attribute/BooleanAttribute";
 import { NumberAttribute } from "@/core/attribute/NumberAttribute";
 import { ListAttribute } from "@/core/attribute/ListAttribute";
 import { Animation } from "../objects/Animation";
-import { loadAnimation, loadColors, SupportsAnimation } from "../Attributes";
+import { loadAnimation, loadColors, loadRotationAware, SupportsAnimation } from "../Attributes";
 import { Color } from "../objects/Color";
+import i18next from "@/translation/definition";
 
 export class AnimationDraft extends ViewportDraft implements SupportsAnimation {
 
@@ -29,28 +30,32 @@ export class AnimationDraft extends ViewportDraft implements SupportsAnimation {
         this.additive = new BooleanAttribute({
             plugin: this.plugin,
             id: "additive",
-            name: "Additive", description: "Whether to draw the frames using additive blending.",
+            name: i18next.t("drafts.animation.additive.name"),
+            description: i18next.t("drafts.animation.additive.description"),
             required: false, defaultValue: false
         })
 
         this.light = new BooleanAttribute({
             plugin: this.plugin,
             id: "light",
-            name: "Light", description: "",
+            name: i18next.t("drafts.animation.light.name"),
+            description: i18next.t("drafts.animation.light.description"),
             required: false, defaultValue: false
         })
 
         this.lightSwitching = new BooleanAttribute({
             plugin: this.plugin,
             id: "light switching",
-            name: "Light switching", description: "",
+            name: i18next.t("drafts.animation.light_switching.name"),
+            description: i18next.t("drafts.animation.light_switching.description"),
             required: false, defaultValue: false
         })
 
         this.nightLightProbability = new NumberAttribute({
             plugin: this.plugin,
             id: "night light probability",
-            name: "Night light probability", description: "",
+            name: i18next.t("drafts.animation.night_light_probability.name"),
+            description: i18next.t("drafts.animation.night_light_probability.description"),
             required: false, defaultValue: 1.0,
             isInteger: false
         })
@@ -58,31 +63,33 @@ export class AnimationDraft extends ViewportDraft implements SupportsAnimation {
         this.speed = new NumberAttribute({
             plugin: this.plugin,
             id: "speed",
-            name: "Speed multiplier", description: "Speed multiplier on how fast the animation goes.",
+            name: i18next.t("drafts.animation.speed.name"),
+            description: i18next.t("drafts.animation.speed.description"),
             required: false, defaultValue: 1.0,
             isInteger: false
         })
 
-        this.rotationAware = new BooleanAttribute({
-            plugin: this.plugin,
-            id: "rotation aware",
-            name: "Rotation aware", description: "",
-            required: false, defaultValue: false
-        })
+        this.rotationAware = loadRotationAware(
+            this.plugin,
+            i18next.t("drafts.animation.rotation_aware.name"),
+            i18next.t("drafts.animation.rotation_aware.description")
+        )
 
         this.colors = loadColors(this.plugin)
 
         this.loop = new BooleanAttribute({
             plugin: this.plugin,
             id: "loop",
-            name: "Loop", description: "",
+            name: i18next.t("drafts.animation.loop.name"),
+            description: i18next.t("drafts.animation.loop.description"),
             required: false, defaultValue: true
         })
 
         this.handleInterpolation = new NumberAttribute({
             plugin: this.plugin,
             id: "handle interpolation",
-            name: "Handle interpolation", description: "",
+            name: i18next.t("drafts.animation.handle_interpolation.name"),
+            description: i18next.t("drafts.animation.handle_interpolation.description"),
             required: false, defaultValue: 1,
             isInteger: true
         })
@@ -90,7 +97,8 @@ export class AnimationDraft extends ViewportDraft implements SupportsAnimation {
         this.pingPong = new BooleanAttribute({
             plugin: this.plugin,
             id: "ping pong",
-            name: "Ping pong", description: "",
+            name: i18next.t("drafts.animation.ping_pong.name"),
+            description: i18next.t("drafts.animation.ping_pong.description"),
             required: false, defaultValue: false
         })
 

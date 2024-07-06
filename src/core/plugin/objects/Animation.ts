@@ -7,7 +7,7 @@ import { IListable } from "@/core/attribute/interfaces/Interfaces";
 import { serialize } from "@/core/utils/Utils";
 import { FactoryAttribute } from "@/core/attribute/FactoryAttribute";
 import { Color } from "./Color";
-import { loadColor } from "../Attributes";
+import { loadColor, loadRotationAware } from "../Attributes";
 import i18next from "@/translation/definition";
 
 export class AnimationFactory implements AttributeOwnerFactory, AttributeOwnerFactoryWithOptions {
@@ -38,6 +38,9 @@ export class Animation extends AttributeOwner implements IListable {
 
     seed: NumberAttribute
     color: FactoryAttribute<Color>
+
+    nightLightProbability: NumberAttribute
+    rotationAware: BooleanAttribute
 
     constructor(plugin: Plugin) {
         super(plugin);
@@ -133,15 +136,26 @@ export class Animation extends AttributeOwner implements IListable {
             required: false,
         })
 
-
         this.color = loadColor(
             this.plugin,
             i18next.t("objects.animation.color.name"),
             i18next.t("objects.animation.color.description")
         )
-        // TODO: "night light probability"
-        // TODO: "rotation aware"
 
+        this.nightLightProbability = new NumberAttribute({
+            plugin: this.plugin,
+            id: "night light probability",
+            name: i18next.t("objects.animation.night_light_probability.name"),
+            description: i18next.t("objects.animation.night_light_probability.description"),
+            required: false, defaultValue: 1,
+            isInteger: false
+        })
+
+        this.rotationAware = loadRotationAware(
+            this.plugin,
+            i18next.t("objects.animation.rotation_aware.name"),
+            i18next.t("objects.animation.rotation_aware.description")
+        )
     }
     getTitle(index: number): string {
         return `Animation ${index}`
