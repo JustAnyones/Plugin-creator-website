@@ -8,6 +8,7 @@ import { serialize } from "@/core/utils/Utils";
 import { FactoryAttribute } from "@/core/attribute/FactoryAttribute";
 import { Color } from "./Color";
 import { loadColor } from "../Attributes";
+import i18next from "@/translation/definition";
 
 export class AnimationFactory implements AttributeOwnerFactory, AttributeOwnerFactoryWithOptions {
     fromJSON(obj: any, plugin: Plugin): AttributeOwner {
@@ -44,70 +45,80 @@ export class Animation extends AttributeOwner implements IListable {
         this.id = new StringAttribute({
             plugin: this.plugin,
             id: "id",
-            name: "ID", description: "ID of the animation draft.",
+            name: i18next.t("objects.animation.id.name"),
+            description: i18next.t("objects.animation.id.description"),
             required: true
         })
 
         this.x = new NumberAttribute({
             plugin: this.plugin,
             id: "x",
-            name: "X", description: "",
+            name: i18next.t("objects.animation.x.name"),
+            description: i18next.t("objects.animation.x.description"),
             required: false, defaultValue: 0
         })
 
         this.y = new NumberAttribute({
             plugin: this.plugin,
             id: "y",
-            name: "Y", description: "",
+            name: i18next.t("objects.animation.y.name"),
+            description: i18next.t("objects.animation.y.description"),
             required: false, defaultValue: 0
         })
 
         this.shift = new NumberAttribute({
             plugin: this.plugin,
             id: "shift",
-            name: "Shift", description: "",
+            name: i18next.t("objects.animation.shift.name"),
+            description: i18next.t("objects.animation.shift.description"),
             required: false
         })
 
         this.frameShift = new NumberAttribute({
             plugin: this.plugin,
             id: "frame shift",
-            name: "Frame shift", description: "",
+            name: i18next.t("objects.animation.frame_shift.name"),
+            description: i18next.t("objects.animation.frame_shift.description"),
             required: false, defaultValue: 1
         })
 
         this.onFire = new BooleanAttribute({
             plugin: this.plugin,
             id: "on fire",
-            name: "On fire", description: "",
+            name: i18next.t("objects.animation.on_fire.name"),
+            description: i18next.t("objects.animation.on_fire.description"),
             required: false, defaultValue: false
         })
 
         this.onCrime = new BooleanAttribute({
             plugin: this.plugin,
             id: "on crime",
-            name: "On crime", description: "",
+            name: i18next.t("objects.animation.on_crime.name"),
+            description: i18next.t("objects.animation.on_crime.description"),
             required: false, defaultValue: false
         })
 
         this.isBurning = new BooleanAttribute({
             plugin: this.plugin,
             id: "is burning",
-            name: "Is burning", description: "",
+            name: i18next.t("objects.animation.is_burning.name"),
+            description: i18next.t("objects.animation.is_burning.description"),
             required: false, defaultValue: false
         })
 
         this.inWinter = new BooleanAttribute({
             plugin: this.plugin,
             id: "in winter",
-            name: "In winter", description: "",
+            name: i18next.t("objects.animation.in_winter.name"),
+            description: i18next.t("objects.animation.in_winter.description"),
             required: false, defaultValue: false
         })
 
         this.inSummer = new BooleanAttribute({
             plugin: this.plugin,
             id: "in summer",
-            name: "In summer", description: "",
+            name: i18next.t("objects.animation.in_summer.name"),
+            description: i18next.t("objects.animation.in_summer.description"),
             required: false, defaultValue: false
         })
 
@@ -117,12 +128,17 @@ export class Animation extends AttributeOwner implements IListable {
         this.seed = new NumberAttribute({
             plugin: this.plugin,
             id: "seed",
-            name: "Seed", description: "",
+            name: i18next.t("objects.animation.seed.name"),
+            description: i18next.t("objects.animation.seed.description"),
             required: false,
         })
 
 
-        this.color = loadColor(this.plugin)
+        this.color = loadColor(
+            this.plugin,
+            i18next.t("objects.animation.color.name"),
+            i18next.t("objects.animation.color.description")
+        )
         // TODO: "night light probability"
         // TODO: "rotation aware"
 

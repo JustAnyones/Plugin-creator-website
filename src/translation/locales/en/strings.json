@@ -1,0 +1,72 @@
+{
+  "attributes": {
+    "color": {
+      "name": "Color",
+      "description": ""
+    },
+    "colors": {
+      "name": "Colors",
+      "description": ""
+    }
+  },
+
+  "drafts": {
+
+  },
+
+
+  "objects": {
+    "animation": {
+      "id": {
+        "name": "ID",
+        "description": "ID of the animation draft."
+      },
+      "x": {
+        "name": "X",
+        "description": "The pixel location in x direction (to the right) relative to the call-site's origin."
+      },
+      "y": {
+        "name": "Y",
+        "description": "The pixel location in y direction (downwards) relative to the call-site's origin."
+      },
+      "shift": {
+        "name": "Shift",
+        "description": "Shifts the rendered frame. E.g. if frame 2 is to be rendered but shift is set to 1 then frame 3 will be rendered instead."
+      },
+      "frame_shift": {
+        "name": "Frame shift",
+        "description": ""
+      },
+      "on_fire": {
+        "name": "Draw on fire",
+        "description": "Whether the animation will be drawn if there is currently a fire in the city."
+      },
+      "on_crime": {
+        "name": "Draw on crime",
+        "description": "Whether the animation will be drawn if there is currently a crime in the city."
+      },
+      "is_burning": {
+        "name": "Draw while burning",
+        "description": "Whether the animation will be drawn if the owning building is currently on fire."
+      },
+      "in_winter": {
+        "name": "Draw in winter",
+        "description": "Whether the animation will be drawn during winter."
+      },
+      "in_summer": {
+        "name": "Draw in summer",
+        "description": "Whether the animation will be drawn during summer."
+      },
+      "seed": {
+        "name": "Seed",
+        "description": "Random seed value for random dependent stuff like light switching. Can be set manually to let multiple spots behave in the same way."
+      },
+      "color": {
+        "name": "Color",
+        "description": "A tint color for this animation spot. This will be applied besides other tint colors like daytime shading and animation color."
+      }
+    }
+  },
+
+  "inter": "interpolated {{val}}"
+}

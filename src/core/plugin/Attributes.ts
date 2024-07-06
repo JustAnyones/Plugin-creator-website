@@ -1,3 +1,4 @@
+import i18next from "@/translation/definition";
 import { FactoryAttribute } from "../attribute/FactoryAttribute";
 import { ListAttribute } from "../attribute/ListAttribute";
 import { Plugin } from "./Plugin";
@@ -33,21 +34,21 @@ export function loadAnimationFg(plugin: Plugin) {
     })
 }
 
-export function loadColor(plugin: Plugin) {
+export function loadColor(plugin: Plugin, name?: string, description?: string) {
     return new FactoryAttribute<Color>({
         plugin: plugin, id: "color",
-        name: "Color",
-        description: "",
+        name: name || i18next.t("attributes.color.name"),
+        description: description || i18next.t("attributes.color.description"),
         required: false,
         factory: new ColorFactory()
     })
 }
 
-export function loadColors(plugin: Plugin) {
+export function loadColors(plugin: Plugin, name?: string, description?: string) {
     return new ListAttribute<Color>({
         plugin: plugin, id: "colors",
-        name: "Colors",
-        description: "",
+        name: name || i18next.t("attributes.colors.name"),
+        description: description || i18next.t("attributes.colors.description"),
         required: false,
         factory: new ColorFactory()
     })
