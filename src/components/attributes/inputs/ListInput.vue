@@ -30,7 +30,7 @@ import {ListAttribute} from "@/core/attribute/ListAttribute";
 import Collapsable from "@/components/elements/core/Collapsable.vue";
 import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 import {AttributeOwner} from "@/core/plugin/AttributeOwner";
-import Button from '@/components/elements/Button.vue';
+import Button from "primevue/button";
 interface Props {
   attribute: ListAttribute<AttributeOwner & IListable>
 }

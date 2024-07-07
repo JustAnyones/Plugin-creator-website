@@ -26,8 +26,8 @@
 <script setup lang="ts">
 
 import {Ref, ref, UnwrapRef} from "vue";
-import Multiselect from '@vueform/multiselect'
-import Button from "@/components/elements/Button.vue";
+import Button from "primevue/button";
+import Select from "primevue/select"
 import JSZip from "jszip";
 import FileSaver from 'file-saver';
 
@@ -46,15 +46,15 @@ function capitalizeFirstLetter(string: string) {
   let first_letter = string.charAt(0)
   return first_letter.toUpperCase() + string.substring(1)
 }
-var selected_type = null;
 
 const toast = useToast();
 
 
-const typeSelector = ref(null);
-const showManifest = ref(true);
 const zipFileUpload = ref(null);
+const selectedDraftType = ref(null);
 const showPreviewPanel = ref(NODE_ENV === "development");
+
+const types = Array.from(Types.getTypes(), (draftType) => draftType.tag);
 
 const version = __APP_VERSION__
 
@@ -77,19 +77,19 @@ function showWarningToast(summary: string, detail: string, life: number = 10000)
 }
 
 function addNewDraft() {
-    if (selected_type === null) {
+    if (selectedDraftType.value === null) {
       showErrorToast(
           "No draft type specified",
           "Please specify a draft type before trying to add one."
       )
     } else {
 
-      let draft = new DraftFactory().fromType(selected_type, plugin.value)
+      let draft = new DraftFactory().fromType(selectedDraftType.value, plugin.value)
       if (!plugin.value.manifest.author.isEmpty())
         draft.author.value = plugin.value.manifest.author.value
 
       plugin.value.addDraft(draft);
-      typeSelector.value.clear()
+      selectedDraftType.value = null;
     }
 }
 
@@ -361,18 +361,27 @@ window.onerror = function (msg, url, line, col, error) {
 
           <!-- Type selector for new draft object -->
           <div class="type-selector">
-            <multiselect
-              ref="typeSelector"
-              v-model="selected_type"
-              :options="Array.from(Types.getTypes(), (draftType) => draftType.tag)"
-              :show-labels="false"
-              :searchable="true"
+            <Select
+              style="width: 100%;"
+              v-model="selectedDraftType"
+              :options="types"
+              filter  
               placeholder="Select draft type"
             >
-              <template v-slot:option="{ option }">
-                {{ capitalizeFirstLetter(option.label) }}
+              <template #value="slotProps">
+                <div v-if="slotProps.value" class="flex items-center">
+                  <div>{{ capitalizeFirstLetter(slotProps.value) }}</div>
+                </div>
+                <span v-else>
+                    {{ slotProps.placeholder }}
+                </span>
               </template>
-            </multiselect>
+              <template #option="slotProps">
+                <div class="flex items-center">
+                  <div>{{ capitalizeFirstLetter(slotProps.option) }}</div>
+                </div>
+              </template>
+            </Select>
             <Button @click="addNewDraft">Add</Button>
           </div>
         </div>
@@ -444,7 +453,6 @@ window.onerror = function (msg, url, line, col, error) {
   </div>
 
 </template>
-<style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
 /*.page-container {
   display: flex;

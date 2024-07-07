@@ -29,7 +29,7 @@ import {IListable} from "@/core/attribute/interfaces/Interfaces";
 import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 import {AttributeOwner} from "@/core/plugin/AttributeOwner";
 import { FactoryAttribute } from '@/core/attribute/FactoryAttribute';
-import Button from '@/components/elements/Button.vue';
+import Button from "primevue/button";
 interface Props {
   attribute: FactoryAttribute<AttributeOwner & IListable>
 }

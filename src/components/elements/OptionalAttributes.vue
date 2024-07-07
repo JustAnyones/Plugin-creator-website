@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import OptionalAttribute from "@/components/attributes/OptionalAttribute.vue";
-import Multiselect from "@vueform/multiselect";
-import {defineProps, nextTick, Ref, ref} from 'vue';
+import MultiSelect from 'primevue/multiselect';
+import {defineProps, nextTick, Ref, ref, watch} from 'vue';
 import StringInput from "@/components/attributes/inputs/StringInput.vue";
 import NumberInput from "@/components/attributes/inputs/NumberInput.vue";
 import BooleanInput from "@/components/attributes/inputs/BooleanInput.vue";
@@ -20,21 +20,23 @@ interface Props {
 const props = defineProps<Props>()
 
 
-const showDraftContent = ref(true);
-const optionalAttributeSelector = ref(null);
-const selectedOptionalAttributes: Ref<Array<any>> = ref([]);
+const availableAttributes = Array.from(props.object.getOptionalAttributes(), (attr) => ({
+  value: attr.name, label: attr.name, attribute: attr
+}));
 
-async function deselectOptionalAttribute(item) {
-  item.attribute.reset()
-  await nextTick()
-  optionalAttributeSelector.value.deselect(item)
+const showDraftContent = ref(true);
+const selectedAttributes: Ref<Array<any>> = ref([]);
+
+function deselectAttribute(index: number) {
+  selectedAttributes.value[index].attribute.reset()
+  selectedAttributes.value.splice(index, 1);
 }
 
 // Load optional attributes on initialization of the container
 console.log("Initializing OptionalAttributes")
 for (const attr of props.object.getOptionalAttributes()) {
   if (!attr.isDefault()) {
-    selectedOptionalAttributes.value.push({
+    selectedAttributes.value.push({
       value: attr.name, label: attr.name, attribute: attr
     })
   }
@@ -50,37 +52,54 @@ const Inputs = {
   FactoryInput
 }
 
+// We need to scan the list to find if anything was removed and reset it
+watch(() => selectedAttributes.value, async (newObj, oldObj) => {
+  for (let i = 0; i < oldObj.length; i++) {
+    let found = false;
+    for (let j = 0; j < newObj.length; j++) {
+      if (oldObj[i].attribute === newObj[j].attribute) {
+        found = true
+        break
+      }
+    }
+
+    if (!found) {
+      oldObj[i].attribute.reset()
+    }
+  }
+})
+
 </script>
 <template>
   <h3>Optional attributes</h3>
   <p>{{ props.description }}</p>
-  <multiselect
-      class="optional-attribute-multiselect"
-      ref="optionalAttributeSelector"
-      v-model="selectedOptionalAttributes"
-      mode="multiple"
-      :options="Array.from(props.object.getOptionalAttributes(), (attr) => ({
-            value: attr.name, label: attr.name, attribute: attr
-      }))"
-      :object="true"
-      :show-labels="false"
-      :searchable="true"
-      :close-on-select="true"
-      placeholder="Select optional attributes"
-      :canClear="false"
+
+  <MultiSelect
+    v-model="selectedAttributes"
+    :options="availableAttributes"
+    filter
+    optionLabel="label"
+    placeholder="Select optional attributes"
+    style="width: 100%"
+    :virtualScrollerOptions="{ itemSize: 50 }"
   >
-    <template v-slot:option="{ option }">
-      {{ option.label }}
+    <template #option="slotProps">
+      <div class="flex items-center">
+        <div>{{ slotProps.option.label }}</div>
+      </div>
     </template>
-  </multiselect>
+    <template #value>
+      <div v-if="selectedAttributes.length > 0">{{ selectedAttributes.length }} attributes selected</div>
+    </template>
+  </MultiSelect>
 
   <!-- Actually list all the optional attributes -->
-  <div :key="item.attribute.id" v-for="item in selectedOptionalAttributes">
+  <div :key="item.attribute.id" v-for="(item, index) in selectedAttributes">
     <OptionalAttribute
         :name="item.attribute.name"
         :description="item.attribute.description"
         :errors="item.attribute.errors"
-        @pop="deselectOptionalAttribute(item)"
+        @pop="deselectAttribute(index)"
         @raise-error="showDraftContent = true"
     >
       <component
@@ -92,9 +111,6 @@ const Inputs = {
 </template>
 
 <style scoped>
-.optional-attribute-multiselect {
-  margin-bottom: 20px;
-}
 h1, h2, h3, h4, h5, h6 {
   word-wrap: anywhere;
   margin: 10px 10px 10px 0px;
