@@ -13,14 +13,15 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@primevue/themes": "^4.0.0",
     "@vueform/multiselect": "^2.6.2",
     "file-saver": "^2.0.5",
     "i18next": "^23.11.5",
     "jszip": "^3.10.1",
-    "primevue": "^3.34.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.0",
     "uuid": "^9.0.0",
-    "vue": "^3.3.4",
-    "vue-collapsed": "^1.2.7"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",

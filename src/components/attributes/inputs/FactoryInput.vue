@@ -29,6 +29,7 @@ import {IListable} from "@/core/attribute/interfaces/Interfaces";
 import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 import {AttributeOwner} from "@/core/plugin/AttributeOwner";
 import { FactoryAttribute } from '@/core/attribute/FactoryAttribute';
+import Button from '@/components/elements/Button.vue';
 interface Props {
   attribute: FactoryAttribute<AttributeOwner & IListable>
 }
@@ -38,11 +39,13 @@ const props = defineProps<Props>()
 
 <template>
   <!-- TODO: Make this cleaner -->
-  <button
-    v-for="(callback, name) in props.attribute.options()"
-    @click="props.attribute.value = callback(props.attribute.plugin)">
-    {{ name }}
-  </button>
+  <div>
+    <Button
+      v-for="(callback, name) in props.attribute.options()"
+      @click="props.attribute.value = callback(props.attribute.plugin)">
+      {{ name }}
+    </Button>
+  </div>
 
   <AttributeContainer
     v-if="props.attribute.value !== null"

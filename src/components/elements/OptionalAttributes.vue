@@ -95,4 +95,8 @@ const Inputs = {
 .optional-attribute-multiselect {
   margin-bottom: 20px;
 }
+h1, h2, h3, h4, h5, h6 {
+  word-wrap: anywhere;
+  margin: 10px 10px 10px 0px;
+}
 </style>

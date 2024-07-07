@@ -30,6 +30,7 @@ import {ListAttribute} from "@/core/attribute/ListAttribute";
 import Collapsable from "@/components/elements/core/Collapsable.vue";
 import AttributeContainer from "@/components/elements/AttributeContainer.vue";
 import {AttributeOwner} from "@/core/plugin/AttributeOwner";
+import Button from '@/components/elements/Button.vue';
 interface Props {
   attribute: ListAttribute<AttributeOwner & IListable>
 }
@@ -42,7 +43,9 @@ function add(object) {
 
 <template>
   <!-- TODO: Make this cleaner -->
-  <button v-for="(callback, name) in props.attribute.options()" @click="add(callback(props.attribute.plugin))">{{ name }}</button>
+  <div>
+    <Button v-for="(callback, name) in props.attribute.options()" @click="add(callback(props.attribute.plugin))">{{ name }}</Button>
+  </div>
 
   <Collapsable
       v-for="(item, index) in props.attribute.items"

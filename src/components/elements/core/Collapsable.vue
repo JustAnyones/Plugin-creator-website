@@ -27,7 +27,8 @@
 
 import {defineProps, ref} from 'vue';
 
-import {Collapse} from 'vue-collapsed'
+import Panel from 'primevue/panel';
+import Button from 'primevue/button';
 
 interface Props {
   title: String,
@@ -36,54 +37,32 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const isCollapsed = ref(true);
+const isCollapsed = ref(false);
 
 defineEmits(['pop'])
 </script>
 
 <template>
-    <div class="background">
-        <div class="compact">
-          <component :is="props.heading ?? 'h3'" @click="isCollapsed = !isCollapsed">{{ props.title }}</component>
-          <a v-if="props.removable ?? false" class="remove-hyperlink" href="#" @click="(e) => {
-            e.preventDefault();
-            $emit('pop')
-          }">
-            <font-awesome-icon :icon="['fas', 'trash']" />
-          </a>
-        </div>
-        <Collapse :when="isCollapsed" class="collapse">
-            <slot></slot>
-        </Collapse>
-    </div>
+
+  <Panel :collapsed="isCollapsed" toggleable>
+    <template #header>
+      <div class="compact">
+        <component :is="props.heading ?? 'h3'" @click="isCollapsed = !isCollapsed">{{ props.title }}</component>
+      </div>
+    </template>
+    <template #icons>
+      <Button v-if="props.removable ?? false" icon="pi pi-times" severity="danger" rounded text @click="(e) => {
+        e.preventDefault();
+        $emit('pop')
+      }" />
+    </template>
+    <slot></slot>
+  </Panel>
 </template>
 
 <style scoped>
-.compact {
-  display: flex;
-}
-
-a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 h1, h2, h3, h4, h5, h6 {
   word-wrap: anywhere;
   margin: 10px 10px 10px 0px;
-}
-
-.background {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding-right: 5px;
-  padding-left: 5px;
-  background-color: #f5f5f5;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
 }
 </style>
