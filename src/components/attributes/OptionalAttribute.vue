@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import Attribute from "@/components/attributes/Attribute.vue";
+import Button from 'primevue/button';
 interface Props {
   name: string
   description: string
@@ -18,12 +19,10 @@ defineEmits(['pop', 'raiseError'])
       :errors="props.errors"
       @raise-error="$emit('raiseError')"
   >
-    <a href="#" class="remove-hyperlink" @click="(e) => {
+    <Button icon="pi pi-times" severity="danger" rounded text @click="(e) => {
       e.preventDefault();
       $emit('pop')
-    }">
-      <font-awesome-icon :icon="['fas', 'trash']" />
-    </a>
+    }" />
     <slot></slot>
   </Attribute>
 </template>

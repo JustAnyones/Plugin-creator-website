@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import {defineProps} from 'vue';
 import {FileAttribute} from "@/core/attribute/FileAttribute";
+import Button from 'primevue/button';
 
 interface Props {
   attribute: FileAttribute,
@@ -70,12 +71,10 @@ function remove() {
 
   <div v-else class="compact">
     <p>Selected: {{ props.attribute.value }}</p>
-    <a class="remove-hyperlink" href="#" @click="(e) => {
-        e.preventDefault();
-        remove()
-      }">
-      <font-awesome-icon :icon="['fas', 'trash']" />
-    </a>
+    <Button icon="pi pi-times" severity="danger" rounded text @click="(e) => {
+      e.preventDefault();
+      remove()
+    }" />
   </div>
 
 </template>
