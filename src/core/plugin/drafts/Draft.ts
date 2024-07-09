@@ -99,6 +99,8 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
     once: BooleanAttribute
     mute: BooleanAttribute
     privileged: StringAttribute
+    requirePrivileges: BooleanAttribute
+    requireSuperPrivileges: BooleanAttribute
     inherit: BooleanAttribute
     override: BooleanAttribute
     minVersion: NumberAttribute
@@ -173,6 +175,19 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
             plugin: this.plugin, id: "privileged",
             name: "Privileged key", description: "Privileged key for your draft. Allows to use special features, which " +
                 "are restricted to trusted plugin creators only."
+        })
+        this.requirePrivileges = new BooleanAttribute({
+            plugin: this.plugin, id: "require privileges",
+            name: "Require privileges",
+            description: "Whether the draft requires features such as monthly income, frame placement, etc.",
+            required: false, defaultValue: false
+        })
+        this.requireSuperPrivileges = new BooleanAttribute({
+            plugin: this.plugin, id: "require super privileges",
+            name: "Require super privileges",
+            description: "Whether the draft requires features that are restricted to DSA.",
+            required: false, defaultValue: false,
+            disabled: true
         })
         this.mute = new BooleanAttribute({
             plugin: this.plugin, id : "mute",

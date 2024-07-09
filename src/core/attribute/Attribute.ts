@@ -27,12 +27,13 @@ import {Resettable, Validatable} from "./interfaces/Interfaces";
 import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    plugin: Plugin;
-    id: string;
-    name: string;
-    description: string;
-    required?: boolean;
-    defaultValue?: any | (() => any);
+    plugin: Plugin
+    id: string
+    name: string
+    description: string
+    required?: boolean
+    defaultValue?: any | (() => any)
+    disabled?: boolean
     customValidator?: (() => void)
 }
 
@@ -69,20 +70,22 @@ export abstract class Attribute implements Resettable, Validatable {
     public required: boolean
 
     /**
+     * Whether this option can actually be changed through the UI.
+     */
+    readonly disabled: boolean
+
+    /**
      * The current raw value of the attribute.
-     * @private
      */
     protected currentValue: any
 
     /**
      * Default value of the attribute.
-     * @private
      */
     protected readonly defaultValue: any
 
     /**
      * An array that holds attribute errors. Empty, if no errors.
-     * @private
      */
     errors: Array<string> = [];
 
@@ -178,7 +181,12 @@ export abstract class Attribute implements Resettable, Validatable {
     }
 
     constructor(
-        {plugin, id, name, description, required=false, defaultValue=null, customValidator}: ConstructorParams
+        {
+            plugin, id, name, description,
+            required=false, defaultValue=null,
+            disabled=false,
+            customValidator
+        }: ConstructorParams
     ) {
         this.plugin = plugin;
         this.id = id;
@@ -189,7 +197,8 @@ export abstract class Attribute implements Resettable, Validatable {
             defaultValue = defaultValue()
         }
         this.defaultValue = defaultValue
-        this.currentValue = defaultValue;
+        this.currentValue = defaultValue
+        this.disabled = disabled
         this.customValidator = customValidator
     }
 

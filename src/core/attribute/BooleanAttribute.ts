@@ -27,24 +27,31 @@ import {Attribute} from "./Attribute";
 import {Plugin} from "../plugin/Plugin";
 
 interface ConstructorParams {
-    plugin: Plugin;
-    id: string;
-    name: string;
-    description: string;
-    required?: boolean;
-    defaultValue?: boolean | null;
+    plugin: Plugin
+    id: string
+    name: string
+    description: string
+    required?: boolean
+    defaultValue?: boolean | null
+    disabled?: boolean
     customValidator?: (() => void)
 }
 
 export class BooleanAttribute extends Attribute {
 
     constructor(
-        {plugin, id, name, description, required=false, defaultValue=false, customValidator}: ConstructorParams,
+        {
+            plugin, id, name, description,
+            required=false, defaultValue=false,
+            disabled=false,
+            customValidator
+        }: ConstructorParams,
     ) {
         super({
             plugin: plugin, id: id,
             name: name, description: description,
             required: required, defaultValue: defaultValue,
+            disabled: disabled,
             customValidator: customValidator
         })
     }
