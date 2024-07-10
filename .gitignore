@@ -17,7 +17,7 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-/docs/dist/
+/docs/site/
 __pycache__
 
 # Editor directories and files

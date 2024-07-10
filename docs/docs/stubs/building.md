@@ -1,9 +1,0 @@
-# {{}}
-
-
-yada yada yada
-
-## Attributes
-
-
-{{}}

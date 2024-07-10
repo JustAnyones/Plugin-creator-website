@@ -1,17 +1,11 @@
-# Welcome to MkDocs
+# Welcome to TheoTown plugin documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This documentation page is currently work-in-progress.
 
-## Commands
+In the future it will hold documentation for all draft types.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Work left to do:
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- [] Link to the documentation from PCA starting page
+- [] Add links to specific attribute documentation from PCA
+- [] Setup attribute inheritance to share "base" draft definitions with other drafts.
