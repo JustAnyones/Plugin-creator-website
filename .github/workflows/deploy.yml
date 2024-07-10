@@ -26,6 +26,13 @@ jobs:
           npm install
           npm run build
 
+      - name: Build the docs
+        run: |
+          pip install poetry
+          poetry install
+          poetry run mkdocs build
+        working-directory: ./docs
+
       - name: Sync web project files
         uses: SamKirkland/web-deploy@v1
         with:
@@ -35,13 +42,6 @@ jobs:
           ssh-port: 22
           source-path: ./dist/
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
-
-      - name: Build the docs
-        run: |
-          pip install poetry
-          poetry install
-          poetry run mkdocs build
-        working-directory: ./docs
 
       - name: Sync documentation files
         uses: SamKirkland/web-deploy@v1
