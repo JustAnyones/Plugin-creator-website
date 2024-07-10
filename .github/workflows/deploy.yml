@@ -16,12 +16,17 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Build Project
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build the web project
         run: |
           npm install
           npm run build
 
-      - name: Sync Files
+      - name: Sync web project files
         uses: SamKirkland/web-deploy@v1
         with:
           target-server: ${{ secrets.SERVER_IP }}
@@ -30,3 +35,8 @@ jobs:
           ssh-port: 22
           source-path: ./dist/
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
+
+      - name: Build the docs
+        run: |
+          pip install poetry
+        working-directory: ./docs
