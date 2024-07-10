@@ -42,3 +42,13 @@ jobs:
           poetry install
           poetry run mkdocs build
         working-directory: ./docs
+
+      - name: Sync documentation files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ secrets.SERVER_IP }}
+          remote-user: deployment
+          private-ssh-key: ${{ secrets.SSH_KEY }}
+          ssh-port: 22
+          source-path: ./docs/site/
+          destination-path: /var/www/vhosts/pca.svetikas.lt/public/docs/
