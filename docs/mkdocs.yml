@@ -3,9 +3,13 @@ theme:
   name: material
 nav:
   - Welcome: index.md
-  - Getting started: getting-started.md
-  - Drafts: getting-started.md
-  - Plugin manifest: manifest.md
+  - "Getting started": getting-started.md
+  - Drafts: drafts.md
+  - "Plugin manifest": manifest.md
+  # TODO: do this automatically
+  - "Draft types":
+    - Animation: draft-types/animation.md
+    - Base: draft-types/base.md
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -14,6 +18,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - "mkdocs_custom"
   - "admonition"
   - markdown_include.include:

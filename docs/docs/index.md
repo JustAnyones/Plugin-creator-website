@@ -1,8 +1,8 @@
-# Welcome to TheoTown plugin documentation
+# Welcome
 
-This documentation page is currently work-in-progress.
+Welcome to the documentation page for TheoTown plugins.
 
-In the future it will hold documentation for all draft types.
+This page is currently work-in-progress. In the future it will hold documentation for all draft types.
 
 Work left to do:
 
