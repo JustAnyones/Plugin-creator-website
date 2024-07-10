@@ -39,4 +39,6 @@ jobs:
       - name: Build the docs
         run: |
           pip install poetry
+          poetry install
+          poetry run mkdocs build
         working-directory: ./docs
