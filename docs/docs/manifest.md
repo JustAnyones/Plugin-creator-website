@@ -119,5 +119,6 @@ In this example we limit our plugin to iOS and PC platforms.
 ### category
 ::: type: boolean
 ::: default: true
+::: version-added: 1.11.72
 
 Whether the plugin should show up in the plugins category.
