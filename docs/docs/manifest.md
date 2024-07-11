@@ -100,7 +100,9 @@ rather than failing with an error message.
 An array of platforms that the plugin can run under. Generally, this should only be used in case of
 Lua or shader plugins as regular plugins should be compatible with every platform.
 
-Possible values: `...`, `...`.
+Internally, the platform is determined by `ApplicationType` enumerable which is provided by libgdx.
+
+Supported values: `android`, `desktop`, `ios`.
 
 #### Example
 
@@ -110,6 +112,12 @@ In this example we limit our plugin to iOS and PC platforms.
 {
     "id": "$my_amazing_plugin_manifest00",
     "title": "My amazing plugin",
-    "platforms": ["pc", "ios"] // TODO: this is wrong actually
+    "platforms": ["desktop", "ios"]
 }
 ```
+
+### category
+::: type: boolean
+::: default: true
+
+Whether the plugin should show up in the plugins category.
