@@ -1,6 +1,9 @@
 # Welcome
 
-Welcome to the documentation page for TheoTown plugins.
+Welcome to the documentation page for TheoTown plugin system.
+
+Using plugins you can add your own buildings to the game without modifying the apk (don't do the latter one, we really don't like it).
+You may even share them with others, for example by using this the official forums or the plugin store.
 
 This page is currently work-in-progress. In the future it will hold documentation for all draft types.
 

@@ -1,4 +1,4 @@
-site_name: TheoTown plugin documentation
+site_name: TheoTown plugin system
 theme:
   name: material
 nav:
@@ -35,6 +35,9 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.arithmatex:
       generic: true
+  - attr_list
+  - md_in_html
+
   - "mkdocs_custom"
   - "admonition"
   - markdown_include.include:
