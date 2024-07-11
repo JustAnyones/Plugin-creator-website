@@ -9,6 +9,8 @@ python = "^3.11"
 mkdocs = "^1.6.0"
 typing-extensions = "^4.12.2"
 mkdocs-material = "^9.5.28"
+mkdocs-awesome-pages-plugin = "^2.9.2"
+markdown-include = "^0.8.1"
 
 [build-system]
 requires = ["poetry-core"]
