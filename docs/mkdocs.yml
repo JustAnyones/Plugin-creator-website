@@ -19,10 +19,10 @@ nav:
     - Meta: objects/meta.md
     - Smoke: objects/smoke.md
     - Spawners:
-      - "Biome spawner": objects/spawners/biome-spawner.md
+      #- "Biome spawner": objects/spawners/biome-spawner.md
       - "Car spawner": objects/spawners/car-spawner.md
       - "Helicopter spawner": objects/spawners/helicopter-spawner.md
-      - "Legacy spawner": objects/spawners/legacy-spawner.md
+      #- "Legacy spawner": objects/spawners/legacy-spawner.md
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
