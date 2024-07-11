@@ -9,7 +9,9 @@ nav:
   # TODO: do this automatically
   - "Draft types":
     - Animation: draft-types/animation.md
-    - Base: draft-types/base.md
+    - Commercial: draft-types/commercial.md
+    - Industrial: draft-types/industrial.md
+    - Residential: draft-types/residential.md
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

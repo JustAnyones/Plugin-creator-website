@@ -18,6 +18,7 @@ coverage
 /cypress/screenshots/
 
 /docs/site/
+/docs/.venv/
 __pycache__
 
 # Editor directories and files

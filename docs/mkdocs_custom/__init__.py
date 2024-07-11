@@ -9,6 +9,8 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from markdown.treeprocessors import Treeprocessor
 
+from .inheritor import AttributeInheritancePreprocessor
+from .types import DataDict
 
 def extend_with_newline(into: list[str], source: list[str]):
     if len(source) == 0:
@@ -119,15 +121,6 @@ class AttributeLineFormatter:
     def get_values(self):
         return self.values
 
-
-def format_attribute_lines(attribute_lines: list[str]):
-    formatter = AttributeLineFormatter(attribute_lines)
-    lines = formatter.format()
-    print(formatter.get_values())
-    return lines
-
-DataDict = dict[str, dict[str, Any]]
-
 class AttributeParsingPreprocessor(Preprocessor):
 
     def __init__(self, md: Markdown, data: DataDict):
@@ -141,89 +134,49 @@ class AttributeParsingPreprocessor(Preprocessor):
 
     @override
     def run(self, lines: list[str]) -> list[str]:
-
         new_lines: list[str] = []
-
-        attribute_container: list[list[str]] = []
-        index = -1
-
-        inAttributes = False
-        analyzingAttribute = False
+        current_attribute_name: str | None = None
+        attribute_container: dict[str, list[str]] = {}
+        in_attributes = False
         for line in lines:
             # Check if we're at the opening of attributes heading
             if line.startswith("## Attributes"):
-                inAttributes = True
+                in_attributes = True
                 new_lines.append(line)
                 continue
             
             # If we encounter another level 2 heading and we're in attributes,
             # that means we exited the attributes are and we stop modifications
-            if (line.startswith("## ") or line.startswith("# ")) and inAttributes:
-                inAttributes = False
+            if (line.startswith("## ") or line.startswith("# ")) and in_attributes:
+                in_attributes = False
                 # Copy over the sorted lines
-                for line_list in sorted(attribute_container, key=lambda element: element[0]):
-                    new_lines.extend(self.parse_attribute_lines(line_list))
+                for attr_name in sorted(attribute_container.keys()):
+                    new_lines.extend(self.parse_attribute_lines(attribute_container[attr_name]))
 
             # If we're not in attributes, copy over the line
-            if not inAttributes:
+            if not in_attributes:
                 new_lines.append(line)
                 continue
 
             # If this line begins with attribute name
             if line.startswith("### "):
-                analyzingAttribute = True
-                attribute_container.append([])
-                index += 1
+                current_attribute_name = line[3:].strip()
+                attribute_container[current_attribute_name] = []
 
             # If we're not analyzing an attribute yet, parse that line
-            if not analyzingAttribute:
+            if current_attribute_name is None:
                 new_lines.append(line)
                 continue
             
             # Otherwise, it's attribute related and slap it into the attribute container
-            attribute_container[index].append(line)
+            attribute_container[current_attribute_name].append(line)
 
         # If at the end of the loop we are still in attributes, that means we reached end of the document
         # so we copy the rest over
-        if inAttributes:
-            for line_list in sorted(attribute_container, key=lambda element: element[0]):
-                new_lines.extend(self.parse_attribute_lines(line_list))
+        if in_attributes:
+            for attr_name in sorted(attribute_container.keys()):
+                new_lines.extend(self.parse_attribute_lines(attribute_container[attr_name]))
 
-        return new_lines
-
-# TODO: implement
-class AttributeInheritancePreprocessor(Preprocessor):
-    """Turn special notes into standardized Markdown admonitions."""
-
-    def __init__(self, md: Markdown, data: DataDict):
-        super().__init__(md)
-
-    @override
-    def run(self, lines: list[str]) -> list[str]:
-        """Preprocess the provided Markdown source text.
-
-        Looks for any lines that match any of the ANNOTATION regexes, for example:
-
-        - `+++ 1.1.0`
-        - `+/- 0.1`
-        - `    --- 2.0 "Support for older PostgreSQL versions"`
-
-        and converts them to the standard `!!!` admonitions used elsewhere.
-
-        Args:
-            lines: List of strings corresponding to the lines of the input file.
-
-        Returns:
-            List of processed strings.
-        """
-        new_lines: list[str] = []
-        for line in lines:
-            if line.startswith("::: inherit-attributes "):
-                #print(line.split(" ")[2])
-                path = line.split(' ')[2]
-                new_lines.append(f"{{!{path}!}}")
-            else:
-                new_lines.append(line)
         return new_lines
 
 class CustomTreeprocessor(Treeprocessor):
@@ -260,7 +213,7 @@ class CustomExtension(Extension):
 
     @override
     def extendMarkdown(self, md: Markdown):
-        md.preprocessors.register(AttributeInheritancePreprocessor(md, self.data), "attribute-inheritance", 1000)
+        md.preprocessors.register(AttributeInheritancePreprocessor(md, self.data), "attribute-inheritance", 100)
         md.preprocessors.register(AttributeParsingPreprocessor(md, self.data), "attribute-parsing", 90)
         md.treeprocessors.register(CustomTreeprocessor(md, self.data), "attribute-sorting2", -999)
 
