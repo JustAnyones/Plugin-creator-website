@@ -31,9 +31,10 @@ jobs:
           pip install poetry
           poetry install
           poetry run mkdocs build
+          mv ./docs/site/ ./dist/docs
         working-directory: ./docs
 
-      - name: Sync web project files
+      - name: Sync files
         uses: SamKirkland/web-deploy@v1
         with:
           target-server: ${{ secrets.SERVER_IP }}
@@ -42,13 +43,3 @@ jobs:
           ssh-port: 22
           source-path: ./dist/
           destination-path: /var/www/vhosts/pca.svetikas.lt/public/
-
-      - name: Sync documentation files
-        uses: SamKirkland/web-deploy@v1
-        with:
-          target-server: ${{ secrets.SERVER_IP }}
-          remote-user: deployment
-          private-ssh-key: ${{ secrets.SSH_KEY }}
-          ssh-port: 22
-          source-path: ./docs/site/
-          destination-path: /var/www/vhosts/pca.svetikas.lt/public/docs/
