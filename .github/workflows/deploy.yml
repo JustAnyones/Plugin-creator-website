@@ -31,7 +31,7 @@ jobs:
           pip install poetry
           poetry install
           poetry run mkdocs build
-          mv ./docs/site/ ./dist/docs
+          mv ./site/ ../dist/docs
         working-directory: ./docs
 
       - name: Sync files
