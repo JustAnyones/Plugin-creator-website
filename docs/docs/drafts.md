@@ -1,3 +1,0 @@
-# Drafts
-
-The term drafts refers to...

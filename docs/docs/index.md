@@ -1,4 +1,4 @@
-# Welcome
+# Home
 
 Welcome to the documentation page for TheoTown plugin system.
 

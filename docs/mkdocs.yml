@@ -1,6 +1,10 @@
 site_name: TheoTown plugin system
 theme:
   name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes 
   palette:
 
     # Palette toggle for automatic mode
@@ -24,27 +28,33 @@ theme:
       toggle:
         icon: material/brightness-4
 nav:
-  - Welcome: index.md
+  - Home: index.md
   - "Getting started": getting-started.md
-  - Drafts: drafts.md
   - "Plugin manifest": manifest.md
-  - "Draft types":
-    - ... | flat | draft-types/*
-  #- Objects:
-  #  - ... | objects/spawners/*
-  #  - ... | flat | objects/*
-  #  - Spawners
-  - "Objects":
-    - Animation: objects/animation.md
-    - "Frame animation indices": objects/frame-animation-indices.md
-    - Frame: objects/frame.md
-    - Meta: objects/meta.md
-    - Smoke: objects/smoke.md
-    - Spawners:
-      #- "Biome spawner": objects/spawners/biome-spawner.md
-      - "Car spawner": objects/spawners/car-spawner.md
-      - "Helicopter spawner": objects/spawners/helicopter-spawner.md
-      #- "Legacy spawner": objects/spawners/legacy-spawner.md
+  - Reference:
+    - Drafts:
+      - draft-types/index.md
+      - ... | flat | draft-types/*
+    #- Objects:
+    #  - ... | objects/spawners/*
+    #  - ... | flat | objects/*
+    #  - Spawners
+    - Objects:
+      - objects/index.md
+      - Animation: objects/animation.md
+      - "Frame animation indices": objects/frame-animation-indices.md
+      - Frame: objects/frame.md
+      - Meta: objects/meta.md
+      - Smoke: objects/smoke.md
+      - Spawners:
+        #- "Biome spawner": objects/spawners/biome-spawner.md
+        - Car spawner: objects/spawners/car-spawner.md
+        - Helicopter spawner: objects/spawners/helicopter-spawner.md
+        #- "Legacy spawner": objects/spawners/legacy-spawner.md
+  - Guides:
+    - guides/index.md
+    - Aadsa dasda sd: encryption.md
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
