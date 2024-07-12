@@ -41,4 +41,4 @@ See here for a video of how real time editing looks like: <br/>
 [https://www.youtube.com/watch?v=EE9qoKTCbZ0](https://www.youtube.com/watch?v=EE9qoKTCbZ0)
 
 The example can be downloaded from here: <br/>
-[realtimelua.zip](assets/guides/realtimelua.zip)
+[realtimelua.zip](../assets/guides/realtimelua.zip)
