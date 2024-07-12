@@ -53,7 +53,7 @@ nav:
         #- "Legacy spawner": objects/spawners/legacy-spawner.md
   - Guides:
     - guides/index.md
-    - Aadsa dasda sd: encryption.md
+    - Real time script editing: guides/real-time-script-editing.md
 
 markdown_extensions:
   - pymdownx.highlight:
