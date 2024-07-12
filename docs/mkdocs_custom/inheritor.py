@@ -13,7 +13,7 @@ def include_attributes_from_lines(lines: list[str], include_header: bool = False
     attribute_section_lines: list[str] = []
     in_attributes = False
     for line in lines:
-        line = line.strip()
+        line = line.rstrip()
 
         # Detect the start of attributes section
         if line == "## Attributes":
