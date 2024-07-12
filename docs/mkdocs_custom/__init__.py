@@ -82,17 +82,57 @@ class AttributeLineFormatter:
         if key == "required":
             self.values["required"] = bool(value)
             return
+        if key == "default":
+            # TODO: don't know how I will want to parse defaults
+            return
 
         print("Unknown key/value pair:", f"{key}: {value}")
-        
+
+    def resolve_concrete_type(self, value: str):
+        array_levels = 0
+        while value.endswith("[]"):
+            value = value[:-2]
+            array_levels = +1
+
+        match value:
+            case "int" | "integer":
+                inner_type = int
+            case "str" | "string":
+                inner_type = str
+            case "float":
+                inner_type = float
+            case "bool" | "boolean":
+                inner_type = bool
+            case _:
+                inner_type = value
+
+        if array_levels == 0:
+            return inner_type
+        if array_levels == 1:
+            return list[inner_type] # pyright: ignore[reportGeneralTypeIssues]
+        if array_levels == 2:
+            return list[list[inner_type]] # pyright: ignore[reportGeneralTypeIssues]
+        raise RuntimeError(f"{array_levels}-dimensional arrays are not supported")
+
     def format_type(self, value: str):
-        self.values["type"] = value
+        split = value.split("|")
+        # If it has optionals
+        # we put optionals in a tuple since there's no such structure in JSON
+        if len(split) > 1:
+            actual_type = tuple(self.resolve_concrete_type(item) for item in split)
+        else:
+            actual_type = self.resolve_concrete_type(value)
+
+        #if not isinstance(actual_type, type):
+        #    print(value, "->", actual_type)
+
+        self.values["type"] = actual_type or value
         self.type_lines.append(f"Type: `{value}`")
 
     def format_version_added(self, value: str):
         self.values["version_added"] = value
         self.version_added_lines.append("")
-        self.version_added_lines.append(f'!!! info "Added in {value}"')
+        self.version_added_lines.append(f'!!! info "Added in version {value}"')
 
     def format_deprecated(self, value: str):
         if len(self.deprecated_lines) == 0:
