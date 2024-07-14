@@ -49,7 +49,7 @@ def include_attributes_from_file(file_path: str) -> list[str]:
 
     return include_attributes_from_lines(lines)
 
-class AttributeInheritancePreprocessor(Preprocessor):
+class AttributeImportPreprocessor(Preprocessor):
 
     def __init__(self, md: Markdown, data: DataDict):
         super().__init__(md)

@@ -64,3 +64,14 @@ It would look like this:
     "text": "Top text\nI'm on the new line now!!!"
 }
 ```
+
+## Arrays
+
+Arrays are used for providing multiple values for an attribute.
+
+```json
+{
+    "id": "$my_new_id00",
+    "aliases": ["$my alternative id", "$my_old_id"]
+}
+```

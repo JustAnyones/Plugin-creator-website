@@ -52,10 +52,7 @@ nav:
       - Meta: attribute-types/meta.md
       - Smoke: attribute-types/smoke.md
       - Spawners:
-        #- "Biome spawner": attribute-types/spawners/biome-spawner.md
-        - Car spawner: attribute-types/spawners/car-spawner.md
-        - Helicopter spawner: attribute-types/spawners/helicopter-spawner.md
-        #- "Legacy spawner": attribute-types/spawners/legacy-spawner.md
+        - ... | flat | attribute-types/spawners/*
   - Guides:
     - guides/index.md
     - Real time script editing: guides/real-time-script-editing.md

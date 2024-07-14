@@ -1,3 +1,4 @@
+from types import GenericAlias
 from xml.etree import ElementTree
 from markdown import Markdown
 from typing import Any
@@ -9,7 +10,8 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from markdown.treeprocessors import Treeprocessor
 
-from .inheritor import AttributeInheritancePreprocessor
+from .inheritor import AttributeImportPreprocessor
+from .mapping import mapping_to_link
 from .types import DataDict
 
 def extend_with_newline(into: list[str], source: list[str]):
@@ -21,6 +23,32 @@ def extend_with_newline(into: list[str], source: list[str]):
 
     into.append("")
     into.extend(source)
+
+def _parse_base_type_to_link(base_type: type | str):
+    array_levels = 0
+    while isinstance(base_type, GenericAlias):
+        array_levels += 1
+        base_type = base_type.__args__[0]
+
+    if array_levels == 0:
+        return mapping_to_link(base_type)
+
+    if array_levels == 1:
+        return f"{mapping_to_link(base_type)} {mapping_to_link('1d-array', False)}"
+
+    if array_levels == 2:
+        return f"{mapping_to_link(base_type)} {mapping_to_link('2d-array', False)}"
+
+    raise RuntimeError("Array levels above 2 unsupported")
+
+def type_to_link(attr_type: type | str | tuple[str | type]) -> str:
+    if isinstance(attr_type, tuple):
+        result = ""
+        for value in attr_type:
+            result += _parse_base_type_to_link(value)
+            result += " or "
+        return result[:-3]
+    return _parse_base_type_to_link(attr_type)
 
 class AttributeLineFormatter:
 
@@ -123,11 +151,8 @@ class AttributeLineFormatter:
         else:
             actual_type = self.resolve_concrete_type(value)
 
-        #if not isinstance(actual_type, type):
-        #    print(value, "->", actual_type)
-
         self.values["type"] = actual_type or value
-        self.type_lines.append(f"Type: `{value}`")
+        self.type_lines.append(f"Type: {type_to_link(actual_type)}")
 
     def format_version_added(self, value: str):
         self.values["version_added"] = value
@@ -237,7 +262,11 @@ class CustomTreeprocessor(Treeprocessor):
 
             if in_attributes:
                 if element.tag == "h3":
-                    if element.text and self.data[element.text].get("required", False):
+
+                    if not element.text:
+                        continue
+
+                    if self.data[element.text].get("required", False):
                         element.text = element.text + " "
                         new_element = Element("span")
                         new_element.text = "*"
@@ -253,7 +282,7 @@ class CustomExtension(Extension):
 
     @override
     def extendMarkdown(self, md: Markdown):
-        md.preprocessors.register(AttributeInheritancePreprocessor(md, self.data), "attribute-inheritance", 100)
+        md.preprocessors.register(AttributeImportPreprocessor(md, self.data), "attribute-import", 100)
         md.preprocessors.register(AttributeParsingPreprocessor(md, self.data), "attribute-parsing", 90)
         md.treeprocessors.register(CustomTreeprocessor(md, self.data), "attribute-sorting2", -999)
 
