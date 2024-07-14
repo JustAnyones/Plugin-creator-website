@@ -44,6 +44,9 @@ nav:
       - attribute-types/index.md
       - attribute-types/base.md
       - Animation: attribute-types/animation.md
+      - Color:
+        - attribute-types/color/index.md
+        - ... | flat | attribute-types/color/*
       - "Frame animation indices": attribute-types/frame-animation-indices.md
       - Frame: attribute-types/frame.md
       - Meta: attribute-types/meta.md
