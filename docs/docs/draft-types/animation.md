@@ -5,9 +5,8 @@ Animation drafts allow you to create custom night lights.
 Animation drafts have the type of `animation`.
 
 ## Attributes
-::: inherit-attributes draft-types/.base.md
+::: inherit-attributes draft-types/.viewport.md
 
-<!-- TODO: add various winter variants -->
 ### frames
 ::: type: Frame[]
 ::: default: [null]
@@ -56,6 +55,11 @@ This means that the frames are assigned into groups.
 The group to draw will depend on the rotation of the underlying building.
 
 Ie if 8 frames were defined then frames 0,1 will be used for the first rotation and so on.
+
+### color
+::: type: Color
+
+A color that can be used to tint the animation.
 
 ### colors
 ::: type: Color[]

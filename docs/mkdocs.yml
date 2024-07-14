@@ -5,6 +5,7 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.indexes 
+    - content.tooltips
   palette:
 
     # Palette toggle for automatic mode
@@ -39,18 +40,19 @@ nav:
     #  - ... | objects/spawners/*
     #  - ... | flat | objects/*
     #  - Spawners
-    - Objects:
-      - objects/index.md
-      - Animation: objects/animation.md
-      - "Frame animation indices": objects/frame-animation-indices.md
-      - Frame: objects/frame.md
-      - Meta: objects/meta.md
-      - Smoke: objects/smoke.md
+    - Attribute types:
+      - attribute-types/index.md
+      - attribute-types/base.md
+      - Animation: attribute-types/animation.md
+      - "Frame animation indices": attribute-types/frame-animation-indices.md
+      - Frame: attribute-types/frame.md
+      - Meta: attribute-types/meta.md
+      - Smoke: attribute-types/smoke.md
       - Spawners:
-        #- "Biome spawner": objects/spawners/biome-spawner.md
-        - Car spawner: objects/spawners/car-spawner.md
-        - Helicopter spawner: objects/spawners/helicopter-spawner.md
-        #- "Legacy spawner": objects/spawners/legacy-spawner.md
+        #- "Biome spawner": attribute-types/spawners/biome-spawner.md
+        - Car spawner: attribute-types/spawners/car-spawner.md
+        - Helicopter spawner: attribute-types/spawners/helicopter-spawner.md
+        #- "Legacy spawner": attribute-types/spawners/legacy-spawner.md
   - Guides:
     - guides/index.md
     - Real time script editing: guides/real-time-script-editing.md
