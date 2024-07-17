@@ -55,7 +55,7 @@ nav:
         - ... | flat | attribute-types/spawners/*
   - Guides:
     - guides/index.md
-    - Real time script editing: guides/real-time-script-editing.md
+    - ... | flat | guides/*
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -69,6 +69,10 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
   - attr_list
   - md_in_html
 

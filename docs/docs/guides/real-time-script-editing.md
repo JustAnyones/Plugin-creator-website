@@ -42,3 +42,9 @@ See here for a video of how real time editing looks like: <br/>
 
 The example can be downloaded from here: <br/>
 [realtimelua.zip](../assets/guides/realtimelua.zip)
+
+<sub>
+This page has been adapted from
+[a topic](https://forum.theotown.com/viewtopic.php?t=10834)
+on the official TheoTown forum.
+</sub>
