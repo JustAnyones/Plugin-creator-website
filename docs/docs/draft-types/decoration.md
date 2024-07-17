@@ -6,4 +6,4 @@ belong to the `$cat_decoration00` category by default.
 Decoration drafts are considered RCI.
 
 ## Attributes
-::: inherit-attributes draft-types/.building.md
+::: inherit-h2 Attributes draft-types/.building.md

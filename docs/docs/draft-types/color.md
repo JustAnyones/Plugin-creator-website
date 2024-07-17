@@ -19,6 +19,6 @@ Or specifying the color using rgba:
 - [a](#a)
 
 ## Attributes
-::: inherit-attributes draft-types/.base.md
-::: inherit-attributes attribute-types/color/hex.md
-::: inherit-attributes attribute-types/color/rgba.md
+::: inherit-h2 Attributes draft-types/.base.md
+::: inherit-h2 Attributes attribute-types/color/hex.md
+::: inherit-h2 Attributes attribute-types/color/rgba.md

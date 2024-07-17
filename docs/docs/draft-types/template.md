@@ -8,7 +8,7 @@ and any draft that uses the template draft as their template will inherit those 
 You can even reference other template drafts using the [template](#template) attribute.
 
 ## Attributes
-::: inherit-attributes draft-types/.base.md
+::: inherit-h2 Attributes draft-types/.base.md
 
 ### additive
 ::: type: boolean

@@ -6,4 +6,4 @@ This is a generic draft that can be used in place
 of concrete building drafts.
 
 ## Attributes
-::: inherit-attributes draft-types/.building.md
+::: inherit-h2 Attributes draft-types/.building.md

@@ -5,7 +5,7 @@ Animation drafts allow you to create custom night lights.
 Animation drafts have the type of `animation`.
 
 ## Attributes
-::: inherit-attributes draft-types/.viewport.md
+::: inherit-h2 Attributes draft-types/.viewport.md
 
 ### frames
 ::: type: Frame[]

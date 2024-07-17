@@ -43,7 +43,9 @@ nav:
     - Attribute types:
       - attribute-types/index.md
       - attribute-types/base.md
+      - Attribute collection: attribute-types/attribute-collection.md
       - Animation: attribute-types/animation.md
+      - Car flags: attribute-types/car-flags.md
       - Color:
         - attribute-types/color/index.md
         - ... | flat | attribute-types/color/*

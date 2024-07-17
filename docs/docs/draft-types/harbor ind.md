@@ -6,4 +6,4 @@ belong to the `$cat_industrial00` category by default.
 Harbor ind drafts are functionally similar to the industrial type.
 
 ## Attributes
-::: inherit-attributes draft-types/.rci.md
+::: inherit-h2 Attributes draft-types/.rci.md

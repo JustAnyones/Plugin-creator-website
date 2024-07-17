@@ -1,5 +1,3 @@
-from types import GenericAlias
-from xml.etree import ElementTree
 from markdown import Markdown
 from typing import Any
 from typing_extensions import override
@@ -10,8 +8,8 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from markdown.treeprocessors import Treeprocessor
 
-from .inheritor import AttributeImportPreprocessor
-from .mapping import mapping_to_link
+from .inclusion import InclusionPreprocessor
+from .mapping import AttributeCollection, type_to_link
 from .types import DataDict
 
 def extend_with_newline(into: list[str], source: list[str]):
@@ -23,32 +21,6 @@ def extend_with_newline(into: list[str], source: list[str]):
 
     into.append("")
     into.extend(source)
-
-def _parse_base_type_to_link(base_type: type | str):
-    array_levels = 0
-    while isinstance(base_type, GenericAlias):
-        array_levels += 1
-        base_type = base_type.__args__[0]
-
-    if array_levels == 0:
-        return mapping_to_link(base_type)
-
-    if array_levels == 1:
-        return f"{mapping_to_link(base_type)} {mapping_to_link('1d-array', False)}"
-
-    if array_levels == 2:
-        return f"{mapping_to_link(base_type)} {mapping_to_link('2d-array', False)}"
-
-    raise RuntimeError("Array levels above 2 unsupported")
-
-def type_to_link(attr_type: type | str | tuple[str | type]) -> str:
-    if isinstance(attr_type, tuple):
-        result = ""
-        for value in attr_type:
-            result += _parse_base_type_to_link(value)
-            result += " or "
-        return result[:-3]
-    return _parse_base_type_to_link(attr_type)
 
 class AttributeLineFormatter:
 
@@ -118,9 +90,13 @@ class AttributeLineFormatter:
 
     def resolve_concrete_type(self, value: str):
         array_levels = 0
+        wrap_in_attribute_collection = False
         while value.endswith("[]"):
             value = value[:-2]
             array_levels = +1
+        if value.endswith("*"):
+            value = value[:-1]
+            wrap_in_attribute_collection = True
 
         match value:
             case "int" | "integer":
@@ -135,6 +111,8 @@ class AttributeLineFormatter:
                 inner_type = value
 
         if array_levels == 0:
+            if wrap_in_attribute_collection:
+                return AttributeCollection(inner_type)
             return inner_type
         if array_levels == 1:
             return list[inner_type] # pyright: ignore[reportGeneralTypeIssues]
@@ -282,7 +260,7 @@ class CustomExtension(Extension):
 
     @override
     def extendMarkdown(self, md: Markdown):
-        md.preprocessors.register(AttributeImportPreprocessor(md, self.data), "attribute-import", 100)
+        md.preprocessors.register(InclusionPreprocessor(md, self.data), "content-inheritor", 100)
         md.preprocessors.register(AttributeParsingPreprocessor(md, self.data), "attribute-parsing", 90)
         md.treeprocessors.register(CustomTreeprocessor(md, self.data), "attribute-sorting2", -999)
 

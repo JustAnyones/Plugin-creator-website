@@ -3,4 +3,4 @@
 Destroyed drafts have the type of `destroyed`.
 
 ## Attributes
-::: inherit-attributes draft-types/.building.md
+::: inherit-h2 Attributes draft-types/.building.md
