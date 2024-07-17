@@ -82,3 +82,17 @@
 
 ### all
 ::: type: boolean
+
+### *
+::: type: boolean
+
+Attribute name in this case is your custom flag.
+
+#### Example
+```json
+{
+    "type": "car",
+    "allocate flag": "my_great_flag",
+    "flag my_great_flag": true
+}
+```
