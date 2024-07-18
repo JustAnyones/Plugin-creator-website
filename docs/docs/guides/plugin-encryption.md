@@ -4,6 +4,13 @@ If you want (or are obligated, in the case of privileged plugins) to protect the
 a system for plugin content encryption.
 
 ## .plugin file creation
+!!! warning "Deprecated"
+    This is an old method of plugin encryption that has been superseded by the
+    new [`.ttplugin`](#ttplugin_file_creation) format.
+
+    While ability to read old `.plugin` files will continue to be supported,
+    the ability to create new ones will be removed in the future.
+
 !!! warning "Note"
     If you want to encrypt a plugin that requires privileges,
     consider using the [`.ttplugin`](#ttplugin_file_creation) format instead.
