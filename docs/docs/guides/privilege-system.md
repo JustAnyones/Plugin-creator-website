@@ -13,12 +13,17 @@ you simply declare whether a draft requires privileges using the `requires privi
 
 Whether the draft actually gets privileged is determined by the game.
 
-- **If you are developing a plugin**
+- **If you are developing a local plugin**
 
     Game will determine if the plugin is privileged by checking whether the game account that
     you are currently logged in as has privileged access.
 
-- **If you are using a plugin**
+- **If you are using a plugin store plugin**
+
+    Game will determine if the plugin is privileged by checking whether the author that
+    uploaded the plugin has privileged access.
+
+- **If you are using a local plugin**
 
     Game will determine if the plugin is privileged by checking whether the user under whom
     the plugin has been signed has privileged access.
