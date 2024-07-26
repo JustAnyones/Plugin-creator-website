@@ -9,7 +9,7 @@ This guide will contain an overview on the privilege system.
 ### Post 1.11.73
 
 In the new privilege system, instead of supplying a privileged key,
-you simply declare whether a draft requires privileges using the `requires privileges` attribute.
+you simply declare whether a draft requires privileges using the `require privileges` attribute.
 
 Whether the draft actually gets privileged is determined by the game.
 
