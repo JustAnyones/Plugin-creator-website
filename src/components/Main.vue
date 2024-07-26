@@ -161,62 +161,6 @@ function exportToZip() {
   });
 }
 
-// https://stackoverflow.com/a/16245768
-function Base64ToBlob(encodedData, contentType='', sliceSize=512) {
-  const byteCharacters = atob(encodedData);
-  const byteArrays = [];
-
-  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    const byteNumbers = new Array(slice.length);
-    for (let i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    const byteArray = new Uint8Array(byteNumbers);
-    byteArrays.push(byteArray);
-  }
-
-  return new Blob(byteArrays, {type: contentType});
-}
-
-
-async function exportToEncryptedPlugin() {
-  if (!areDraftsValid() || !plugin.value.isManifestValid()) return showErrorToast(
-      "Could not export plugin file",
-      "Please ensure all plugin attributes are correct."
-  );
-
-  createZipArchive().generateAsync({type: 'blob'}).then(async function (content) {
-    let formData = new FormData();
-    formData.append(
-        "file",
-        content,
-        "plugin.zip"
-    );
-
-    fetch(
-      "https://api.svetikas.lt/v1/theotown/encrypt",
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-    .then(response => response.json())
-    .then(result => {
-      if (!result.success) throw new Error(result.details)
-      FileSaver.saveAs(Base64ToBlob(result.data), 'plugin.plugin');
-
-    })
-    .catch(
-        error => showErrorToast(
-            "Failed to encrypt your plugin, try again later",
-            error
-        ));
-  });
-}
-
 function getFilename(path: string) {
   return path.split("/").pop()
 }
@@ -404,17 +348,18 @@ window.onerror = function (msg, url, line, col, error) {
 
         <div class="controls">
           <p>
-            Now you can export your plugin to be loaded into the game. If you just want the JSON
-            file that was generated or the manifest, you can download them separately and put
-            it all together by yourself.
+            Now you can export your plugin to be loaded into the game.
+            It is recommended to export the zip archive, as it provides you with a single
+            file that you can just put into the game and it just works. It also acts as PCA
+            project file, allowing you to restore your project from file.
+            If you want to protect the contents
+            of the plugin by encryption, read
+            <a href="https://pca.svetikas.lt/docs/guides/plugin-encryption/">here</a>
+            on how to do so.
           </p>
           <p>
-            If you want something that you can just load into the game and it just works,
-            you can use the export as a zip or as .plugin file. .plugin file in this case
-            encrypts the plugin and protects its contents from others.
-          </p>
-          <p>
-            It is recommended to export the zip archive. It can be used to load your plugin into PCA again.
+            You can also export the generated JSON and manifest files separately,
+            if you prefer to do that instead.
           </p>
 
           <input
@@ -425,10 +370,9 @@ window.onerror = function (msg, url, line, col, error) {
               @change="loadFromZip($event.target)"
           />
           <Button @click="zipFileUpload.click()">Load from zip</Button>
+          <Button @click="exportToZip()">Export as a zip archive</Button>
           <Button @click="exportToJson()">Export JSON file</Button>
           <Button @click="exportToManifest()">Export plugin.manifest file</Button>
-          <Button @click="exportToZip()">Export as a zip archive</Button>
-          <Button @click="exportToEncryptedPlugin()">Export as encrypted .plugin file</Button>
         </div>
 
 
