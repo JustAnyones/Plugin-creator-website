@@ -64,8 +64,7 @@ To encrypt the file, first of all, create a ZIP archive of the `example_plugin` 
 Ensure that it contains a manifest file, otherwise the encryption will fail. Manifest files have
 become a requirement for this new format.
 
-<!-- TODO: add proper link -->
-After you have the ZIP archive, go to the [plugin encryption page](https://forum.theotown/TODO).
+After you have the ZIP archive, go to the [plugin encryption page](https://forum.theotown.com/plugins/export).
 Ensure that you are logged in.
 
 Then follow all the steps on the page and if you're successful, it will yield an encrypted
