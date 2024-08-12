@@ -58,6 +58,12 @@ nav:
   - Guides:
     - guides/index.md
     - ... | flat | guides/*
+    - Fun:
+      - ... | flat | guides/fun/*
+    - Graphics:
+      - ... | flat | guides/graphics/*
+    - Scripting:
+      - ... | flat | guides/scripting/*
 
 markdown_extensions:
   - pymdownx.highlight:
