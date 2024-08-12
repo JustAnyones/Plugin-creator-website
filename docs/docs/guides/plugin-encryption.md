@@ -4,16 +4,13 @@ If you want (or are obligated, in the case of privileged plugins) to protect the
 a system for plugin content encryption.
 
 ## .plugin file creation
-!!! warning "Deprecated"
+
+!!! danger "Deprecated"
     This is an old method of plugin encryption that has been superseded by the
     new [`.ttplugin`](#ttplugin_file_creation) format.
 
-    While ability to read old `.plugin` files will continue to be supported,
-    the ability to create new ones will be removed in the future.
-
-!!! warning "Note"
-    If you want to encrypt a plugin that requires privileges,
-    consider using the [`.ttplugin`](#ttplugin_file_creation) format instead.
+    While the ability to read old `.plugin` files remains, the ability to create
+    new files has been removed in 1.11.81.
 
 Let's assume we want to encrypt our plugin which is in the `example_plugin` sub folder
 in our plugins folder:
@@ -27,24 +24,26 @@ in our plugins folder:
     - sample
 ```
 
-Open up the in-game console and run the command:
+It's very simple, simply open up the in-game console and run the command:
 <!-- JS has nice colors -->
 ```js
 export:{dir:"example_plugin"}
 ```
 
 If everything went successfully, a file should get created under TheoTown folder
-called `example_plugin.plugin`. **Note that the process cannot be reversed so don't delete your folder.**
+called `example_plugin.plugin`.
 
 Now you can share that file with anyone as you would
 with a normal folder archive.
+
+**Note that you cannot restore files from the encrypted file, so don't delete the source folder.**
 
 ## .ttplugin file creation
 
 This a new format, available since version 1.11.73.
 
 It was created to facilitate a new privilege system for which the old format
-was not adequate enough.
+was not adequate.
 
 Let's assume this is your current folder structure with `example_plugin` folder being
 the folder of a plugin you want to encrypt:

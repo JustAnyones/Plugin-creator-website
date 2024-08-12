@@ -1,6 +1,6 @@
 # Animations
 
-First of all, define your animation draft:
+First of all, let's define our animation draft:
 ```json
 [{
     "id": "myanimation",
@@ -20,7 +20,7 @@ First of all, define your animation draft:
 }]
 ```
 
-To use it on a building, you would add it to the animation attribute array:
+Now to use it on a building, we would add it to the animation attribute array like so:
 ```json
 [{
     "id": "buildingwithanimation",
