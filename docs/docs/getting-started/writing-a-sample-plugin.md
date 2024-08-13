@@ -1,4 +1,4 @@
-# Getting started
+# Writing a sample plugin
 
 To get started with plugin making for TheoTown, first we need to cover a few aspects.
 
@@ -27,7 +27,7 @@ We decided to use JSON as it's really simple and easy to read. Such a JSON file 
     "level":1
 }]
 ```
-Every JSON file (let's call it *sample_dsc.json*) in a plugin may contain multiple building descriptions, therefore the file starts with a [b][[/b] and ends with a **]**, noting that this is a listing of something (like building objects, in this case). Never forget these brackets as the plugin might not be loaded without!
+Every JSON file (let's call it *sample_dsc.json*) in a plugin may contain multiple building descriptions, therefore the file starts with a **[** and ends with a **]**, noting that this is a listing of something (like building objects, in this case). Never forget these brackets as the plugin might not be loaded without!
 
 Speaking of objects, the listing contains a number of objects, each starting with **{** and ending with **}**. Multiple objects have to be separated using a comma.
 
@@ -39,7 +39,7 @@ An object consists of multiply "key":"value" pairs that are used to define the p
 * **width** - Tile width of the base of the building. Each tile has a pixel size of 32x16.
 * **height** - Has to be the same as **width**. Therefore, only squared buildings a possible.
 * **frames** - This is the most important part of our definition. The frames (graphics) that are associated to our building. As this property expects an array of frames we have to start with **[** and end with **]**. In that we can define a frame object using the property **bmp** which references to an image file in the same directory. Here it's the file *sample_bmp.png*. The option to provide multiple frames can be used for animations or different building variants.
-* **smoke** - If you want to you can use this property to define a list of smoke spots on the building. Some smoke types like [b]$smoke07[/b] are already defined by TheoTown and may be reused.
+* **smoke** - If you want to you can use this property to define a list of smoke spots on the building. Some smoke types like **$smoke07** are already defined by TheoTown and may be reused.
 Have a look at the [listing of defined smoke types](https://forum.theotown.com/viewtopic.php?p=6653#6653) for more information.
 Note that the position of the spot is relative to the drawing pivot of the building (the left corner of the base).
 * **level** - Here you can set the level of the building, has to be **1** for $ (poor), **2** for $$ (medium) and **3** for \$$$ (rich).
@@ -67,7 +67,7 @@ The red pixel is the pivot point of our building while the blue pixel is where w
 In our example we use this graphics with a size of 32x25 pixels, named *sample_bmp.png*: 
 
 <figure markdown="block">
-![sample plugin](images/sample-plugin.png){: style="width:256x;height:240px;image-rendering:crisp-edges;"}
+![sample plugin](../images/sample-plugin.png){: style="width:256x;height:240px;image-rendering:crisp-edges;"}
 </figure>
 
 Here are some templates for you for the base of different sizes:
@@ -75,22 +75,22 @@ Here are some templates for you for the base of different sizes:
 <!-- Do not tabulate these or it breaks-->
 <div class="grid cards" markdown="block">
 <figure markdown="block">
-![1x1 template](images/1x1_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
+![1x1 template](../images/1x1_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
 <figcaption>1x1 template</figcaption>
 </figure>
 
 <figure markdown="block">
-![2x2 template](images/2x2_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
+![2x2 template](../images/2x2_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
 <figcaption>2x2 template</figcaption>
 </figure>
 
 <figure markdown="block">
-![3x3 template](images/3x3_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
+![3x3 template](../images/3x3_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
 <figcaption>3x3 template</figcaption>
 </figure>
 
 <figure markdown="block">
-![4x4 template](images/4x4_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
+![4x4 template](../images/4x4_template.png){: style="width:256px;height:128px;image-rendering:crisp-edges;"}
 <figcaption>4x4 template</figcaption>
 </figure>
 </div>

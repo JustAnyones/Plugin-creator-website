@@ -1,5 +1,30 @@
 # Car spawner
 
+## Attributes
+
+### cars
+::: type: string[]
+
+An array of car IDs.
+
+### radius
+::: type: integer
+
+Radius for the cars to be spawned. Big radius are heavy on computation, so try to avoid them. To cover the whole map you might use a value like 512.
+
+### count
+::: type: integer
+
+Number of cars that should be spawned.
+
+### targets
+::: type: string[]
+
+An array of building ids that should be targeted by spawned cars.
+If empty, any buildings will be targeted (default behavior).
+Value of `null` will represent the building in which the car spawner is defined (for convenience).
+
+
 ## Example
 
 ```json

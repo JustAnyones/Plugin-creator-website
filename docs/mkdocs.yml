@@ -30,7 +30,8 @@ theme:
         icon: material/brightness-4
 nav:
   - Home: index.md
-  - "Getting started": getting-started.md
+  - Getting started:
+    - getting-started/writing-a-sample-plugin.md
   - "Plugin manifest": manifest.md
   - Reference:
     - Drafts:
@@ -66,6 +67,8 @@ nav:
       - ... | flat | guides/scripting/*
     - OpenGL Shading Language:
       - ... | flat | guides/glsl/*
+  - Resources:
+    - resources/index.md
 
 markdown_extensions:
   - pymdownx.highlight:

@@ -1,5 +1,7 @@
 # Custom loading texts/topics
 
+!!! info "Added in version 1.10.22"
+
 ![](../assets/guides/loading-screen-topic.png)
 
 The short messages that are shown on loading screen are called topics.
