@@ -69,6 +69,7 @@ nav:
       - ... | flat | guides/glsl/*
   - Resources:
     - resources/index.md
+    - ... | flat | resources/*
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -88,6 +89,9 @@ markdown_extensions:
   - pymdownx.tilde
   - attr_list
   - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
   - "mkdocs_custom"
   - "admonition"
