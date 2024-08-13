@@ -37,8 +37,8 @@ Of course there are some caveats because of which real time scripting is not use
 
     For normal scripts you can use `Draft:getScripts()` to access the script objects that are attached to a draft. However, since the real time script is wrapped by the #LuaWrapper you can only get access to that one. The real time script doesn't exist as an usual script object, instead it uses a table that uses the #LuaWrapper as a prototype. This is done so that from the point of view of the real time script, it is a full fledged script object.
 
-See here for a video of how real time editing looks like: <br/>
-[https://www.youtube.com/watch?v=EE9qoKTCbZ0](https://www.youtube.com/watch?v=EE9qoKTCbZ0)
+See here for a video of how real time editing looks like:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EE9qoKTCbZ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The example can be downloaded from here: <br/>
 [realtimelua.zip](../../assets/guides/realtimelua.zip)
