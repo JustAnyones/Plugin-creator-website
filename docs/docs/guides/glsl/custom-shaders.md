@@ -423,7 +423,7 @@ On a side-note: Branching (i.e. if conditions) in shader code should usually be 
 
 I'll call it a day from here. Feel free to tweak the shader yourself. I'd be glad to see your modifications
 [here in the showcase](https://forum.theotown.com/viewforum.php?f=125) or in the store. </br>
-[tutorial_cartoon_shader.zip](../../assets/guides/custom-shaders/tutorial_cartoon_shader.zip)
+[:material-file-download: tutorial_cartoon_shader.zip](../../assets/guides/custom-shaders/tutorial_cartoon_shader.zip)
 
 ## 6. Other useful uniforms and vertex attributes
 

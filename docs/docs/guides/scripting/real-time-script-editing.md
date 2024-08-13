@@ -41,7 +41,7 @@ See here for a video of how real time editing looks like:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EE9qoKTCbZ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The example can be downloaded from here: <br/>
-[realtimelua.zip](../../assets/guides/realtimelua.zip)
+[:material-file-download: realtimelua.zip](../../assets/guides/realtimelua.zip)
 
 <sub>
 This page has been adapted from

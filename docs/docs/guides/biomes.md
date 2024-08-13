@@ -269,7 +269,7 @@ For reference, this is how it would look like if the biome was defined first (i.
 ```
 
 You can download the whole plugin here: </br>
-[candy_land.zip](../assets/guides/biomes/candy_land.zip)
+[:material-file-download: candy_land.zip](../assets/guides/biomes/candy_land.zip)
 
 <sub>
 This page has been adapted from
