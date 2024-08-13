@@ -92,8 +92,8 @@ The json get these shades into the game looks like the following (the file names
 
 After (re-)starting the game there should now be a "Test shader" option available in Settings->Graphics->Shader. After selecting it the game should look and run like before. After all, we just re-defined the default shader.
 
-Here you'll find the shader  to use as a template:</br>
-[sample_shader.zip](../../assets/guides/custom-shaders/sample_shader.zip)
+Here you'll find the shader to use as a template:</br>
+[:material-file-download: sample_shader.zip](../../assets/guides/custom-shaders/sample_shader.zip)
 
 
 Due to the complexity of the topic I will write follow-up tutorials about shaders as I find time to. For now I am happy to finally preset _something_ you can play with. To fully take advantage of shader plugins more knowledge about the GLSL shader language, UV-Coordinates, other uniform variables etc. will be required. The Plugin Creator Tools in the plugin store also contains some shaders that can be used for testing purposes.
