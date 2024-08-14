@@ -2,7 +2,7 @@
 
 !!! info "Added in version 1.10.22"
 
-![](../assets/guides/loading-screen-topic.png)
+![](../assets/guides/loading-screen-topic.png){: style="width:100%;"}
 
 The short messages that are shown on loading screen are called topics.
 Version 1.10.22 lets you add your own topics into the game by defining a draft of type `topic`.

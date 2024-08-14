@@ -1,16 +1,15 @@
 # Ships
 
-Here some graphics:
+Here are some yacht graphics by Lobby and theo:
 
 ![](../assets/guides/ships/yacht_green.png)
 
 ![](../assets/guides/ships/yacht_blue.png)
 
-![](../assets/guides/ships/ship.png)
+As always, please give them credit when you reuse it for a plugin. Don't use it outside of TheoTown without permission.
 
-As always, please give Lobby and theo credit when you reuse it for a plugin. Don't use it outside of TheoTown without permission.
-
-The json looks fairly simple. Use ship as type and provide at least 4 frames. For the yacht it may looks like
+The JSON itself is very simple. Use ship as type and provide at least 4 frames.
+It may look something like:
 ```json
 [
   {

@@ -81,18 +81,18 @@ Please notice that you have to define your car **before** using it in any other 
 As discussed [in this forum post](https://forum.theotown.com/viewtopic.php?p=19902#p19902) you can override existing cars
 in the game by using the same ID. This works as plugins are loaded after internal drafts so that the existing draft will be overridden (in most cases, it doesn't work well for ground drafts for example).
 
-You can find the IDs of predefined cars in the [resources](../resources/index.md).
+You can find the IDs of predefined cars in the [resources](../resources/json.md).
 
 ## 4. Reusing car frames from the game
 As discussed in [this forum thread](https://forum.theotown.com/viewtopic.php?t=2302) we allow you to use our car graphics in your own plugins. However, you have to mention us (Lobby and theo) as authors when distributing it.
 The easiest way to "steal" our car frames is by using the _frame stealing_ feature which we also used [for our people animation](people-animation.md).
-You can do that by using the car IDs found in [resources](../resources/index.md).
+You can do that by using the car IDs found in [resources](../resources/json.md).
 
 Another way to get car frames is by directly copy them into your own graphics. Here we provide some of our car graphics:
 
 ![](../assets/guides/cars/image4.png)
 
-You'll find the bus graphics in the [world texture](../resources/index.md).
+You'll find the bus graphics in the [world texture](../resources/world-texture.md#world_0_0png).
 
 ## Diagonal cars
 

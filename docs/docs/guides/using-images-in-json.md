@@ -20,7 +20,7 @@ For example:
 }]
 ```
 
-![Base 64 image loaded in-game](../assets/guides/base64-ecoding.jpg)
+![Base 64 image loaded in-game](../assets/guides/base64-encoding.png)
 
 - **Why does this feature exist?**
 

@@ -2,7 +2,7 @@
 
 !!! info "Added in version 1.11.23"
 
-![](../assets/guides/biomes/image1.png)
+![](../assets/guides/biomes/image1.png){: style="width:100%;"}
 
 The biome update includes "actual" biomes that aim to add more variety to the game.
 
@@ -39,7 +39,7 @@ These are the parameters a biome can specify that will determine where the biome
 > 
 **"offset"**: 0 (overall probability offset) </br>
 **"coverage"**: 1 (e.g. 0.5 would make appearance less likely) </br>
-**"precedence"**: 1 (overall multiplier, e.g. useful for making sparse tree / decoration spawning)[/quote]
+**"precedence"**: 1 (overall multiplier, e.g. useful for making sparse tree / decoration spawning)
 
 As a rule of thumb you should aim for the following equation to be true:
 
@@ -78,11 +78,11 @@ A different noise distribution will be used for each biome unless a noise_seed w
 
 The minimum p for the default biome is 0.1 so if the probability of all other biomes is smaller than 0.1 the default biome will be used.
 
-## Example
+## Example: coast biome definition
 
 For example the coast biome uses the following definition to spawn near the water only:
 ```json
-[{
+{
     "id": "$biome_coast00",
     "type": "biome",
     "noise scale": 1,
@@ -93,12 +93,12 @@ For example the coast biome uses the following definition to spawn near the wate
     "height radius": 0.05,
     "height factor": 1,
     "offset": -0.5
-}]
+}
 ```
 
 ## Ground spawning
 
-We want to spawn ground dependent on the biome. To do so, we can either define the biomes to spawn in in the ground object:
+We want to spawn ground dependent on the biome. To do so, we can either define the biomes to spawn in in the ground draft:
 ```json
 "biome": ["$mybiomeid", ...]
 ```
@@ -106,7 +106,7 @@ or in the biome itself:
 ```json
 "grounds": ["$mygroundid", ...]
 ```
-Note that in either way you will have to make sure that the object you are referring to was defined before.
+Note that in either way you will have to make sure that the draft you are referring to was defined before.
 
 ## Tree and decoration (building) spawning
 
@@ -172,7 +172,7 @@ While spawn parameters in biomes get used to calculate a probability p this valu
 
 <sub>(sugar is unhealthy, don't eat too much of it)</sub>
 
-![](../assets/guides/biomes/image2.png)
+![](../assets/guides/biomes/image2.png){: style="width:100%;"}
 
 To get you started we prepared a little toy biome for you: Candy land! It features a ground type, tree (candy) and a biome that spawns them. The biome is configured to not spawn too often. The candy is configured to spawn primarily on zero steepness. The ground is configured to spawn everywhere in the biome and to not blend with other ground ("blending": false). Here's the code:
 

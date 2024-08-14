@@ -1,6 +1,6 @@
 # JSON
 
-Here some json content that's actually used in the game. Contents may not be updated regularly.
+Here you can find some json content that's actually used in the game. Contents may not be updated regularly.
 
 !!! warning "The JSON of premium content is not included, to obtain them personally reach out to the developers."
 

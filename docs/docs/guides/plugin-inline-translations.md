@@ -1,5 +1,7 @@
 # Plugin inline translations
 
+!!! info "Added in version 1.5.56"
+
 Until now the only way to translate plugins was by doing it hardcoded in the project itself.
 That means you weren't able to provide translations for your own plugins and rather had
 to offer different variants in order to offer localization.

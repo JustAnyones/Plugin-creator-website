@@ -1,6 +1,6 @@
 # Bus stops
 
-A bus stop can be defined like:
+A bus stop draft can be defined like:
 ```json
 {
     "id": "$my_busstop00",

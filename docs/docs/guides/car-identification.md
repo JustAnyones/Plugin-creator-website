@@ -49,6 +49,7 @@ Service cars can also be tagged the same way. So you can just add new medic cars
 
 I will add support for plugins that aren't updated to these changes (as by default, a override would remove any tag information, therefore outdated plugins wouldn't work anymore). These changes are needed in order to add more rci cars without tampering with the existing ones.
 
+<!-- TODO: move to resources -->
 ## List of tags
 
 - **carres0**

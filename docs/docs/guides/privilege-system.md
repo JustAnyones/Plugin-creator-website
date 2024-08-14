@@ -12,6 +12,18 @@ Some of these features might include, but are not limited to:
 Due to the inherit threat these features have for co-existence within the plugin ecosystem, plugin
 creators wanting to use these features have to apply for a trusted plugin creator status.
 
+## Privileged features
+
+This is an incomplete list of features that are available to privilege drafts.
+Lua functions are not included as they are documented separately.
+
+### Monthly income
+
+You can add monthly income to your drafts by specifying a negative monthly price:
+```json
+"monthly price": -100
+```
+
 ## How it works
 
 ### Pre 1.11.73

@@ -47,7 +47,7 @@ The result of this sample can be seen here:
 
 Let's have a closer look at the sample code. We define two animations which we use then later for the decoration on which the animations should be shown. The important part of the animation definitions is frame stealing of an animation called "$anim_people_source00". We provide these frames for you so you don't have to waste plugin texture space with it. The used image looks like this:
 
-![](../assets/guides/people.png)
+![](../assets/guides/people.png){: style="width:25%;image-rendering:crisp-edges;"}
 
 Remember that people in the game have a size of 1x3 pixels, so we have 16 frames of different people here. We can steal a single frame of the animation by writing
 ```json

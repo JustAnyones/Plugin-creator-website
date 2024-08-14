@@ -5,7 +5,7 @@ a system for plugin content encryption.
 
 ## .plugin file creation
 
-!!! danger "Deprecated"
+!!! danger "Deprecated feature"
     This is an old method of plugin encryption that has been superseded by the
     new [`.ttplugin`](#ttplugin_file_creation) format.
 
