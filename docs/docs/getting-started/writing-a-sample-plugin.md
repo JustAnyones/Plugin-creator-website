@@ -3,7 +3,7 @@
 To get started with plugin making for TheoTown, first we need to cover a few aspects.
 
 ## 1. Structure
-First of all, plugins are stored in an accessible directoy on your device. The exact location varies depending on the platform that you are using:
+First of all, plugins are stored in an accessible directory on your device. The exact location varies depending on the platform that you are using:
 
 * In case of **Android** that is `Android/data/info.flowersoft.theotown.theotown/files`. From the device itself you may not be able to access that location directly. However, TheoTown should appear as some sort of virtual file storage when using the Android Files app (which can also be called by other apps in order to select files for input or output). Alternatively, you can use the built-in file explorer that can be accessed from the game menu when being in the region view.
 * In case of **iOS** you can access the files via the Files app or, when the device is connected to a Mac, in the storage location for your device in the finder.
