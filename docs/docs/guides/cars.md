@@ -5,7 +5,7 @@ This guide details the steps for creating of your own cars and how to use them.
 ## 1. Car definition
 As usual, car plugins are defined by using a json file as textual description of your plugin.
 
-A car plugin's json file can look as simple as this:
+A car draft's json file can look as simple as this:
 ```json
 [
   {
@@ -40,7 +40,7 @@ It documents extra features such as flags and other attributes in greater detail
 
 ## 2. Spawn cars
 Now assume we want our sample building `$sample.plugin.unique.id.res00` from
-[our sample plugin](../getting-started.md) to spawn cars from our car draft `$lobby_carplugin00`.
+[our sample plugin](../getting-started/writing-a-sample-plugin.md) to spawn cars from our car draft `$lobby_carplugin00`.
 We can do that by defining a
 [`car spawner`](../attribute-types/spawners/car-spawner.md) object
 with the following attributes:

@@ -1,0 +1,14 @@
+[{
+  "id": "$compositionexample00",
+  "type": "decoration",
+  "width": 4,
+  "height": 2,
+  "composition": [
+    {"id": "$park01", "x": 0, "y": 1, "frame": 0},
+    {"id": "$road01", "x0": 0, "y0": 0, "x1": 3, "y1": 0},
+    {"id": "$roaddeco_crosswalk00", "x": 1, "y": 0}
+  ],
+  "price":1000,
+  "title":"Composition Example",
+  "text":"This is an example to show how composition buildings may look like."
+}]
