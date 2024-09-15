@@ -14,7 +14,7 @@ const props = defineProps<Props>()
     <label>
       <input
         type="radio"
-        :disabled="props.attribute.disabled"
+        :disabled="props.attribute.readOnly"
         :checked="props.attribute.value === true"
         @input="props.attribute.value = true"
       />
@@ -24,7 +24,7 @@ const props = defineProps<Props>()
     <label>
       <input
         type="radio"
-        :disabled="props.attribute.disabled"
+        :disabled="props.attribute.readOnly"
         :checked="props.attribute.value === false"
         @input="props.attribute.value = false"
       />

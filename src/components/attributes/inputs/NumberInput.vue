@@ -69,6 +69,7 @@ function onInput(event) {
   <input
       type="text"
       class="attribute-input"
+      :disabled="props.attribute.readOnly"
       :value="displayedValue"
       @input="onInput($event)"
   />

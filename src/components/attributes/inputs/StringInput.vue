@@ -48,6 +48,7 @@ function onInput(value) {
       v-if="!long"
       type="text"
       required
+      :disabled="props.attribute.readOnly"
       :value="props.attribute.value"
       class="attribute-input"
       @input="onInput($event.target.value)"
@@ -55,8 +56,9 @@ function onInput(value) {
   <textarea
       v-if="long"
       required
+      :disabled="props.attribute.readOnly"
+      :value="props.attribute.value"
       class="attribute-input"
       @input="onInput($event.target.value)"
-      :value="props.attribute.value"
   />
 </template>

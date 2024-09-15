@@ -65,14 +65,13 @@ export abstract class Attribute implements Resettable, Validatable {
 
     /**
      * Whether this attribute is required for the draft.
-     * @private
      */
     public required: boolean
 
     /**
-     * Whether this option can actually be changed through the UI.
+     * Whether this attribute can be modified through the UI.
      */
-    readonly disabled: boolean
+    public readOnly: boolean
 
     /**
      * The current raw value of the attribute.
@@ -188,17 +187,17 @@ export abstract class Attribute implements Resettable, Validatable {
             customValidator
         }: ConstructorParams
     ) {
-        this.plugin = plugin;
-        this.id = id;
-        this.name = name;
-        this.description = description;
+        this.plugin = plugin
+        this.id = id
+        this.name = name
+        this.description = description
         this.required = required
         if (typeof defaultValue === "function") {
             defaultValue = defaultValue()
         }
         this.defaultValue = defaultValue
         this.currentValue = defaultValue
-        this.disabled = disabled
+        this.readOnly = disabled
         this.customValidator = customValidator
     }
 

@@ -558,7 +558,9 @@ export class BuildingDraft extends BuildingBasedDraft implements BuildingDraftAt
         this.height.required = true;
 
         if (this.type.isRCI()) {
-            this.level.required = true;
+            this.level.required = true
+            this.price.readOnly = true
+            this.monthlyPrice.readOnly = true
         }
     }
 }
