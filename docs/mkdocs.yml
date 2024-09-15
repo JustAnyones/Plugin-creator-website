@@ -6,6 +6,7 @@ theme:
     - navigation.sections
     - navigation.indexes 
     - content.tooltips
+    - content.footnote.tooltips
   palette:
 
     # Palette toggle for automatic mode
@@ -32,6 +33,7 @@ nav:
   - Home: index.md
   - Getting started:
     - getting-started/writing-a-sample-plugin.md
+    - getting-started/installing.md
   - "Plugin manifest": manifest.md
   - Reference:
     - Drafts:
@@ -56,6 +58,8 @@ nav:
       - Smoke: attribute-types/smoke.md
       - Spawners:
         - ... | flat | attribute-types/spawners/*
+    - Technical details:
+      - Loading order: reference/technical/loading-order.md
   - Guides:
     - guides/index.md
     - ... | flat | guides/*
@@ -72,6 +76,7 @@ nav:
     - ... | flat | resources/*
 
 markdown_extensions:
+  - footnotes
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
