@@ -37,7 +37,7 @@ After files get sorted, each file runs through the following logic:
 
 - **if file ends with .ttplugin**
 
-    If file is included inside another plugin, will throw an error.
+    If file is included inside another plugin file such as a zip, will throw an error.
     If file is in a directory or subdirectory where plugin.manifest was defined, will throw an error.
 
     Otherwise, the file will be decrypted/extracted and loaded like a directory immediately.
