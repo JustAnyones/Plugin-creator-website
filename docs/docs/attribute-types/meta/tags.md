@@ -47,7 +47,29 @@ Only for building drafts.
 
 ### firework
 
-Only for animation drafts.
+Used for defining custom fireworks. Only works on animation drafts.
+
+#### alpha
+The direction of the particle(s).
+
+#### speed
+The speed of a particle(s).
+
+#### speed variation
+
+If there should be variation in speed of the particle(s).
+#### n
+The number of particles to spawn.
+
+#### time
+The duration of the particle(s).
+
+#### time variation
+If there should be variation in the duration of the particle(s).
+
+#### next
+The ID of the particle(s) that should spawn after the lifetime of the current particle(s) expired.
+
 
 ```json
 {
@@ -148,3 +170,5 @@ Only for building drafts.
     }
 }
 ```
+
+<!-- TODO: add luawrapper and dsa industry tags -->

@@ -1,6 +1,8 @@
 # Fireworks
 
-In this tutorial, I'm going to show how to make firework. You don't need any graphics because the particles are defined in code.
+Fireworks are not defined as any special format, bus as an animation with a [firework meta tag](../attribute-types/meta/tags.md#firework).
+
+This guide documents how to make your own firework. You won't need any graphics here, because the particle frames are stolen from a game draft.
 
 ```json
 [
