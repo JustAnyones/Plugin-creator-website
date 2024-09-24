@@ -54,7 +54,9 @@ nav:
         - ... | flat | attribute-types/color/*
       - "Frame animation indices": attribute-types/frame-animation-indices.md
       - Frame: attribute-types/frame.md
-      - Meta: attribute-types/meta.md
+      - Meta:
+        - attribute-types/meta/index.md
+        - ... | flat | attribute-types/meta/*
       - Smoke: attribute-types/smoke.md
       - Spawners:
         - ... | flat | attribute-types/spawners/*

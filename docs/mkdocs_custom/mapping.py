@@ -47,6 +47,14 @@ type_mapping: dict[str | type, MappingStruct] = {
     'CarFlags': {
         "name": "Car flags",
         "doc": f"{ROOT_PATH}/attribute-types/car-flags"
+    },
+    'Meta': {
+        "name": "Meta",
+        "doc": f"{ROOT_PATH}/attribute-types/meta"
+    },
+    'Frame': {
+        "name": "Frame",
+        "doc": f"{ROOT_PATH}/attribute-types/frame"
     }
 }
 

@@ -1,3 +1,3 @@
-# Objects
+# Attribute types
 
-These are attribute values that have more complex structure than numbers, booleans or strings.
+This section describes the types of attributes that are more complex than numbers, booleans or strings that game supports. These more complex attributes are usually implemented as JSON objects, however some support custom parsing from a string.
