@@ -1,5 +1,7 @@
 # Animations
 
+<!-- TODO: make this more in depth-->
+
 First of all, let's define our animation draft:
 ```json
 [{

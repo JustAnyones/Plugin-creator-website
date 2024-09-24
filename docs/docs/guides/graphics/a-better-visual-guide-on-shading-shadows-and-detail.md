@@ -1,9 +1,8 @@
 # A better visual guide on shading, shadows and detail
 
-_This is an updated visual guide on shading, shadows, depth and noise.
-To find the old version, click [**this**](https://forum.theotown.com/viewtopic.php?t=13798)._
-
-
+!!! info
+    This is an updated visual guide on shading, shadows, depth and noise.
+    To find the old version, click [**here**](https://forum.theotown.com/viewtopic.php?t=13798).
 
 This visual guide covers
 ^^shading, shadows, depth (windows, parapet), noise, roof and ambient occlusions^^
@@ -26,7 +25,7 @@ This rule must be applied when making structures. Adding outlines to walls will 
 However, one of the most important factors of quality will be your implementation of ^^contrast^^.
 Generally, the higher contrast can be achieved by making darker (decreasing the value, V) colors brighter
 (increasing the saturation, S) and closer to the
-<span style="color:#0000FF">blue (#0000FF; hue, or H = 240</span>,
+<span style="color:#0000FF">blue</span> (<span style="color:#0000FF">#0000FF; hue, or H = 240</span>,
 why darker colors are closer to blue is explained in the second part.) color.
 
 ![](../../assets/guides/better-shading-guide/image3.png)

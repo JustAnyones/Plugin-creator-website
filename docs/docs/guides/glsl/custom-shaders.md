@@ -266,7 +266,7 @@ Some ingredients for a cartoon shader:
 All of these steps must be implemented in the fragment shader as we want to apply these to individual fragments / pixels. The following steps will build up from the default shader codes.
 
 ### Edge detection
-You may have heard of the so called [Sobel operator](https://de.wikipedia.org/wiki/Sobel-Operator) which can be used to calculate edges for any pixel of an image based on its neighboring 8 pixel colors. This is an option, however, we certainly do not want to sample all 8 neighboring pixels because that's quite expensive (in fact, texture lookups are probably the most computationally expensive operation in fragment shaders and you should reduce them as much as possible). Instead, we can e.g. use the left and upper neighbor pixel colors and compare them to the center, only.
+You may have heard of the so called [Sobel operator](https://de.wikipedia.org/wiki/Sobel-Operator) which can be used to calculate edges for any pixel of an image based on its neighbouring 8 pixel colors. This is an option, however, we certainly do not want to sample all 8 neighbouring pixels because that's quite expensive (in fact, texture lookups are probably the most computationally expensive operation in fragment shaders and you should reduce them as much as possible). Instead, we can e.g. use the left and upper neighbour pixel colors and compare them to the center, only.
 
 Code-wise this may look like this:
 
@@ -278,11 +278,11 @@ vec4 diff = abs(col - leftCol) + abs(col - upCol);
 float edge = length(diff);
 ```
 
-The dUnit variable is a uniform float value that contains the distance between two pixels in the world texture in UV-Coordinates. It's effectively 1 / size of the world texture. We can use it to calculate the locations of the neighboring pixels for the lookups. When we visualize these edges it looks like this:
+The dUnit variable is a uniform float value that contains the distance between two pixels in the world texture in UV-Coordinates. It's effectively 1 / size of the world texture. We can use it to calculate the locations of the neighbouring pixels for the lookups. When we visualize these edges it looks like this:
 
 ![](../../assets/guides/custom-shaders/image5.png)
 
-As you can see this filter also detect edges in regions with noise like on the trees. Furthermore, since we only compare the center pixel to the left and upper neighboring pixels, we cannot show edges to transparency on the right or bottom side of buildings (as these pixels will be transparent as well).
+As you can see this filter also detect edges in regions with noise like on the trees. Furthermore, since we only compare the center pixel to the left and upper neighbouring pixels, we cannot show edges to transparency on the right or bottom side of buildings (as these pixels will be transparent as well).
 
 So we _may_ need to sample two more neighbors after all:
 ```glsl
@@ -327,7 +327,7 @@ This way we get this:
 
 There's definitely some smoothing involved here. However, look at these strange lines above the buildings. Since our shader does not care about frame boundaries (i.e. the boundaries of the drawn images) surrounding non transparent areas of the world texture can _bleed_ in.
 
-So how do we fix this? One approach is to multiply the color of neighboring pixels by the center alpha value and to ensure that the center alpha will also be the overall resulting transparency of the fragment:
+So how do we fix this? One approach is to multiply the color of neighbouring pixels by the center alpha value and to ensure that the center alpha will also be the overall resulting transparency of the fragment:
 
 ```glsl
 vec4 col = ((leftCol + upCol + rightCol + downCol) * center.a + 2.0 * center) / 6.0;

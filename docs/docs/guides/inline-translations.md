@@ -1,4 +1,4 @@
-# Plugin inline translations
+# Inline translations
 
 !!! info "Added in version 1.5.56"
 

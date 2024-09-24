@@ -150,7 +150,7 @@ If you use auto spawn in your trees / ground they will be spawned in an appropri
 
 ## Spawn parameters for ground, tree and building
 
-Like for biomes you can use the presented [Biome parameters](#biome_parameters) also in the context of spawn definitions for more variety. In a biome this may look like:
+Like for biomes you can use the presented [biome parameters](#biome_parameters) also in the context of spawn definitions for more variety. In a biome this may look like:
 ```json
 "ground": [{
     "id": "$mygroundid",

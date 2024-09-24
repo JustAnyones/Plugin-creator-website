@@ -2,7 +2,7 @@
 
 A common issue in writing plugins is code duplication as you use the same code over and over again to define similar things. A solution to this problem are templates.
 
-Let's say your code (simplified) looks something like this :json 
+Let's say your code (simplified) looks something like this:
 ```json
 [
   {
@@ -72,7 +72,7 @@ For convenience it can be useful to inherit from multiple templates, you can do 
 "template":["$templateid0", "$templateid1", ...]
 ```
 
-## Example with busses
+## Example with buses
 
 Here's how the code for a single bus would look like without templates:
 ```json
@@ -89,7 +89,7 @@ Here's how the code for a single bus would look like without templates:
 }
 ```
 
-This code wouldn't be an issue if you have just a few busses, but here 9 different bus types are needed, so templates were introduced.
+This code wouldn't be an issue if you have just a few buses, but here 9 different bus types are needed, so templates were introduced.
 
 Let's define the template:
 ```json
