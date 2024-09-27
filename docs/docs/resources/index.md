@@ -1,3 +1,6 @@
-# Resource index
+# Resources
 
-This will contain JSON and texture resources.
+This contains game resources that are allowed for your plugin creation:
+
+- [JSON contents](json.md)
+- [World texture](world-texture.md)
