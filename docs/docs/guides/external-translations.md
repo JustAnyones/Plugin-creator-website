@@ -49,20 +49,20 @@ which makes your code a bit cleaner :teach
 Translations can be put in separate files e.g. like (let's call it translations.json)
 ```json
 [{
-    "id":"$myparkplugin_translations00",
-    "type":"translation",
-    "*":{ // * is the fallback if no more appropriate translation is available; it's like the first case of inline translations
-      "draft_mypark00_title":"Park",
-      "draft_mypark01_text":"A small but nice park.",
-      "draft_mypark00_title":"Fountain",
-      "draft_mypark01_text":"Have some fresh water."
-    },
-    "de":{
-      "draft_mypark00_title":"Parkanlage",
-      "draft_mypark01_text":"Ein kleiner aber gemütlicher Park.",
-      "draft_mypark00_title":"Springbrunnen",
-      "draft_mypark01_text":"Hier gibt es kühles Nass."
-    }
+  "id": "$myparkplugin_translations00",
+  "type": "translation",
+  "*": { // * is the fallback if no more appropriate translation is available; it's like the first case of inline translations
+    "draft_mypark00_title": "Park",
+    "draft_mypark01_text": "A small but nice park.",
+    "draft_mypark00_title": "Fountain",
+    "draft_mypark01_text": "Have some fresh water."
+  },
+  "de": {
+    "draft_mypark00_title": "Parkanlage",
+    "draft_mypark01_text": "Ein kleiner aber gemütlicher Park.",
+    "draft_mypark00_title": "Springbrunnen",
+    "draft_mypark01_text": "Hier gibt es kühles Nass."
+  }
 }]
 ```
 

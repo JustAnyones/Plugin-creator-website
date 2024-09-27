@@ -83,16 +83,16 @@ The minimum p for the default biome is 0.1 so if the probability of all other bi
 For example the coast biome uses the following definition to spawn near the water only:
 ```json
 {
-    "id": "$biome_coast00",
-    "type": "biome",
-    "noise scale": 1,
-    "noise offset": 0.5,
-    "noise factor": 0.5,
-    "noise variance": 2,
-    "height center": 0,
-    "height radius": 0.05,
-    "height factor": 1,
-    "offset": -0.5
+  "id": "$biome_coast00",
+  "type": "biome",
+  "noise scale": 1,
+  "noise offset": 0.5,
+  "noise factor": 0.5,
+  "noise variance": 2,
+  "height center": 0,
+  "height radius": 0.05,
+  "height factor": 1,
+  "offset": -0.5
 }
 ```
 
@@ -153,16 +153,16 @@ If you use auto spawn in your trees / ground they will be spawned in an appropri
 Like for biomes you can use the presented [biome parameters](#biome_parameters) also in the context of spawn definitions for more variety. In a biome this may look like:
 ```json
 "ground": [{
-    "id": "$mygroundid",
-    ... // Spawn parameters
+  "id": "$mygroundid",
+  ... // Spawn parameters
 }],
 "tree": [{
-    "id": "$mytreeid",
-    ... // Spawn parameters
+  "id": "$mytreeid",
+  ... // Spawn parameters
 }],
 "building": [{
-    "id": "$mybuildingid",
-    ... // Spawn parameters
+  "id": "$mybuildingid",
+  ... // Spawn parameters
 }]
 ```
 
@@ -178,46 +178,46 @@ To get you started we prepared a little toy biome for you: Candy land! It featur
 
 ```json
 [
-    {
-        "id": "$ground_candy00",
-        "type": "ground",
-        "template": "$template_ground",
-        "blending": false,
-        "frames": {"bmp": "ground.png", "handle y": 9},
-        "border frames": {"bmp": "ground.png", "handle y": 9, "copies": 15},
-        "map color": {"r": 255, "g": 220, "b": 240}
-    },
+  {
+    "id": "$ground_candy00",
+    "type": "ground",
+    "template": "$template_ground",
+    "blending": false,
+    "frames": {"bmp": "ground.png", "handle y": 9},
+    "border frames": {"bmp": "ground.png", "handle y": 9, "copies": 15},
+    "map color": {"r": 255, "g": 220, "b": 240}
+  },
 
-    {
-        "id": "$tree_candy00",
-        "type": "tree",
-        "frames": {"bmp": "candy.png", "w": 32, "count": 4},
-        "map color": {"r": 220, "g": 80, "b": 80}
-    },
+  {
+    "id": "$tree_candy00",
+    "type": "tree",
+    "frames": {"bmp": "candy.png", "w": 32, "count": 4},
+    "map color": {"r": 220, "g": 80, "b": 80}
+  },
 
-    {
-        "id": "$biome_candy00",
-        "type": "biome",
+  {
+    "id": "$biome_candy00",
+    "type": "biome",
 
-        "title": "Candy Land",
-        "preview frames": {"bmp": "preview.png", "handle y": 0},
+    "title": "Candy Land",
+    "preview frames": {"bmp": "preview.png", "handle y": 0},
 
-        "noise factor": 1,
-        "noise scale": 4,
-        "coverage": 0.3,
+    "noise factor": 1,
+    "noise scale": 4,
+    "coverage": 0.3,
 
-        "ground": ["$ground_candy00"],
+    "ground": ["$ground_candy00"],
 
-        "tree": {
-            "id": "$tree_candy00",
-            "noise factor": 1,
-            "noise scale": 0.5,
-            "deriv factor": 1,
-            "deriv radius": 0.5,
-            "offset": -1,
-            "precedence": 0.3
-        }
+    "tree": {
+      "id": "$tree_candy00",
+      "noise factor": 1,
+      "noise scale": 0.5,
+      "deriv factor": 1,
+      "deriv radius": 0.5,
+      "offset": -1,
+      "precedence": 0.3
     }
+  }
 ]
 ```
 Since it's contained within a single file we have full control over the order in which things are loaded.
@@ -225,46 +225,46 @@ Since it's contained within a single file we have full control over the order in
 For reference, this is how it would look like if the biome was defined first (i.e. because it is part of the game):
 ```json
 [
-    {
-        "id": "$biome_candy00",
-        "type": "biome",
+  {
+    "id": "$biome_candy00",
+    "type": "biome",
 
-        "title": "Candy Land",
-        "preview frames": {"bmp": "preview.png", "handle y": 0},
+    "title": "Candy Land",
+    "preview frames": {"bmp": "preview.png", "handle y": 0},
 
-        "noise factor": 1,
-        "noise scale": 4,
-        "coverage": 0.3
-    },
+    "noise factor": 1,
+    "noise scale": 4,
+    "coverage": 0.3
+  },
 
-    {
-        "id": "$ground_candy00",
-        "type": "ground",
-        "template": "$template_ground",
-        "blending": false,
-        "frames": {"bmp": "ground.png", "handle y": 9},
-        "border frames": {"bmp": "ground.png", "handle y": 9, "copies": 15},
-        "map color": {"r": 255, "g": 220, "b": 240},
+  {
+    "id": "$ground_candy00",
+    "type": "ground",
+    "template": "$template_ground",
+    "blending": false,
+    "frames": {"bmp": "ground.png", "handle y": 9},
+    "border frames": {"bmp": "ground.png", "handle y": 9, "copies": 15},
+    "map color": {"r": 255, "g": 220, "b": 240},
 
-        "biome": ["$biome_candy00"]
-    },
+    "biome": ["$biome_candy00"]
+  },
 
-    {
-        "id": "$tree_candy00",
-        "type": "tree",
-        "frames": {"bmp": "candy.png", "w": 32, "count": 4},
-        "map color": {"r": 220, "g": 80, "b": 80},
+  {
+    "id": "$tree_candy00",
+    "type": "tree",
+    "frames": {"bmp": "candy.png", "w": 32, "count": 4},
+    "map color": {"r": 220, "g": 80, "b": 80},
 
-        "biome": {
-            "id": "$biome_candy00",
-            "noise factor": 1,
-            "noise scale": 0.5,
-            "deriv factor": 1,
-            "deriv radius": 0.5,
-            "offset": -1,
-            "precedence": 0.3
-        }
+    "biome": {
+      "id": "$biome_candy00",
+      "noise factor": 1,
+      "noise scale": 0.5,
+      "deriv factor": 1,
+      "deriv radius": 0.5,
+      "offset": -1,
+      "precedence": 0.3
     }
+  }
 ]
 ```
 

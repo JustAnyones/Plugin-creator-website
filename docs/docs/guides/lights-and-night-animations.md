@@ -44,37 +44,37 @@ You can also use this tool to fetch in-game night definitions for manual animati
 
 ```json
 [
-    {
-        "id": "$nightanimation123",
-        "type": "animation",
-        "light": true,
-        "light switching": true,
-        "frames": [{
-            "bmp": "HTHLM1.png",
-            "count": 1,
-            "h": 32,
-            "w": 32
-        }],
-        "rotation aware": false
-    },
-    {
-        "type": "residential",
-        "id": "$greenhalftimbredhouse",
-        "text": "A house", 
-        "author": "FVI",
-        "ordinal": 1,
-        "meta": {"pca": {
-            "version": "4.0.3"
-        }},
-        "frames": [{
-            "bmp": "HTH5.png"
-        }],
-        "width": 1,
-        "height": 1,
-        "needs road": false,
-        "draw ground": true, 
-        "animation": [{"id": "$nightanimation123", "x": 0,"y": -25}]
-    }
+  {
+    "id": "$nightanimation123",
+    "type": "animation",
+    "light": true,
+    "light switching": true,
+    "frames": [{
+      "bmp": "HTHLM1.png",
+      "count": 1,
+      "h": 32,
+      "w": 32
+    }],
+    "rotation aware": false
+  },
+  {
+    "type": "residential",
+    "id": "$greenhalftimbredhouse",
+    "text": "A house", 
+    "author": "FVI",
+    "ordinal": 1,
+    "meta": {"pca": {
+      "version": "4.0.3"
+    }},
+    "frames": [{
+      "bmp": "HTH5.png"
+    }],
+    "width": 1,
+    "height": 1,
+    "needs road": false,
+    "draw ground": true, 
+    "animation": [{"id": "$nightanimation123", "x": 0,"y": -25}]
+  }
 ]
 ```
 

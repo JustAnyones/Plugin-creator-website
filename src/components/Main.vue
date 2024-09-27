@@ -278,7 +278,7 @@ window.onerror = function (msg, url, line, col, error) {
     <div class="main-content">
 
       <div class="generator-panel">
-        <h2>Plugin creator for TheoTown</h2>
+        <h2>Plugin Creator for TheoTown</h2>
 
         <div class="generator-header">
 
@@ -287,6 +287,10 @@ window.onerror = function (msg, url, line, col, error) {
               To begin creating your plugin, please create a manifest of the plugin first. Manifest is a file that
               helps TheoTown to identify and manage your plugin through a graphical interface. Your plugin will also
               show up under local plugins list and the plugins toolbar.
+            </p>
+            <p>
+              If you're new to plugin creation, you might want to check out the documentation
+              <a href="https://pca.svetikas.lt/docs/getting-started/writing-a-sample-plugin/"> here</a>.
             </p>
             <AttributeContainer
                 :attribute-owner="plugin.manifest"

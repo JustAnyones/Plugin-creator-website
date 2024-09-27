@@ -67,7 +67,7 @@ Last but not least we want to put a crossing on the road. For that we will use t
 
 **Done!**
 
-Let's insert these objects into the composition array above and we get :json 
+Let's insert these objects into the composition array above and we get:
 ```json
 [{
   "id": "$compositionexample00",

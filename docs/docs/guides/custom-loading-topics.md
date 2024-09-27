@@ -11,11 +11,11 @@ That draft's text will then be shown if the topic gets displayed by the game.
 It's as simple as that:
 ```json
 [{
-    "id": "$topic_custom_unique_id",
-    "type": "topic",
-    "text":"Some custom text",        // Text to show
-    "weight": 10,                     // 1 by default
-    "color": {"r": 255,"g": 0,"b": 0} // Color, yellow by default
+  "id": "$topic_custom_unique_id",
+  "type": "topic",
+  "text": "Some custom text",         // Text to show
+  "weight": 10,                       // 1 by default
+  "color": {"r": 255, "g": 0, "b": 0} // Color, yellow by default
 }]
 ```
 

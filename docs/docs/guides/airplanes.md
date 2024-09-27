@@ -7,15 +7,15 @@ Adding you own airplane to the game is straight forward. After you created your 
 You can define your airplane draft like so:
 ```json
 [{
-    "id":"$lobby_airplane_mygreatairplane00",
-    "type":"airplane",
-    "frames":[{"bmp":"airplane.png","w":96,"count":4,"handle x":48,"handle y":40}],
-    "title":"Big airplane",
-    "text":"I'm the description.",
-    "price":1000000,
-    "fly height":200,
-    "capacity":375,
-    "speed":1
+  "id":"$lobby_airplane_mygreatairplane00",
+  "type":"airplane",
+  "frames":[{"bmp":"airplane.png","w":96,"count":4,"handle x":48,"handle y":40}],
+  "title":"Big airplane",
+  "text":"I'm the description.",
+  "price":1000000,
+  "fly height":200,
+  "capacity":375,
+  "speed":1
 }]
 ```
 

@@ -34,27 +34,27 @@ obtain a trusted plugin creator code that you would supply in a draft definition
 
 ```json
 [{
-    "id":"$police00",
-    "type":"police",
-    "width":2,
-    "height":2,
-    "frames":[{"x":1792,"y":1024,"w":64,"h":48}],
-    "frames winter":[{"x":960,"y":810,"w":64,"h":48,"offset x":1024,"offset y":2048}],
-    "animation":[
-      {"id":"2x2l", "x":14, "y":-22},
-      {"id":"2x2l", "x":20, "y":-14},
-      {"id":"2x2l", "x":30, "y":-14},
-      {"id":"2x2l", "x":32, "y":-13},
-      {"id":"2x2l", "x":42, "y":-11}
-    ],
-    "price":18000,
-    "monthly price":-3000, // If we want to have monthly income, we need the privileged tag
-    "privileged": "your code that you obtained from the developers",
-    "influence police":100,
-    "requirement":{"requirements":[{"type":"RANK", "data":{"lvl":5}}]},
-    "performance":true,
-    "pedestrian": "$pedestrian_police00",
-    "pedestrian count": 1
+  "id":"$police00",
+  "type":"police",
+  "width":2,
+  "height":2,
+  "frames":[{"x":1792,"y":1024,"w":64,"h":48}],
+  "frames winter":[{"x":960,"y":810,"w":64,"h":48,"offset x":1024,"offset y":2048}],
+  "animation":[
+    {"id":"2x2l", "x":14, "y":-22},
+    {"id":"2x2l", "x":20, "y":-14},
+    {"id":"2x2l", "x":30, "y":-14},
+    {"id":"2x2l", "x":32, "y":-13},
+    {"id":"2x2l", "x":42, "y":-11}
+  ],
+  "price":18000,
+  "monthly price":-3000, // If we want to have monthly income, we need the privileged tag
+  "privileged": "your code that you obtained from the developers",
+  "influence police":100,
+  "requirement":{"requirements":[{"type":"RANK", "data":{"lvl":5}}]},
+  "performance":true,
+  "pedestrian": "$pedestrian_police00",
+  "pedestrian count": 1
 }]
 ```
 

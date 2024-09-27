@@ -24,14 +24,14 @@ JSON-files are used to describe buildings in TheoTown. That said, they are (simi
 We decided to use JSON as it's really simple and easy to read. Such a JSON file may look like
 ```json
 [{
-    "id":"$sample.plugin.unique.id.res00",
-    "type":"residential",
-    "author":"Lobby & theotheoderich",
-    "width":1,
-    "height":1,
-    "frames":[{"bmp":"sample_bmp.png"}],
-    "smoke":[{"id":"$smoke07","x":15,"y":-17}],
-    "level":1
+  "id": "$sample.plugin.unique.id.res00",
+  "type": "residential",
+  "author": "Lobby & theotheoderich",
+  "width": 1,
+  "height": 1,
+  "frames": [{"bmp": "sample_bmp.png"}],
+  "smoke": [{"id": "$smoke07", "x": 15, "y": -17}],
+  "level": 1
 }]
 ```
 Every JSON file (let's call it *sample_dsc.json*) in a plugin may contain multiple building descriptions, therefore the file starts with a **[** and ends with a **]**, noting that this is a listing of something (like building objects, in this case). Never forget these brackets as the plugin might not be loaded without them!

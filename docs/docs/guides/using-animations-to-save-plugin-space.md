@@ -33,9 +33,9 @@ _Keep in mind that it is IMPORTANT to define the animation and have the building
 Make sure to remember what ID you used for your animation.
 ```json
 {
-    "type": "animation",
-    "id": "uniqueid",
-    "frames": [{"bmp": "buildingtop.png"}]
+  "type": "animation",
+  "id": "uniqueid",
+  "frames": [{"bmp": "buildingtop.png"}]
 }
 ```
 
@@ -51,13 +51,13 @@ If you want to do it yourself, you'll have to use the "animation" attribute to d
 
 ```json
 {
-    "animation": [{"id": "uniqueid", "x": 18, "y": -17}],
-    "id": "uniqueid1",
-    "type": "decoration",
-    "width": 2,
-    "height": 2,
-    "frames": [{"bmp": "buildingbase.png"}],
-    "draw ground": true
+  "animation": [{"id": "uniqueid", "x": 18, "y": -17}],
+  "id": "uniqueid1",
+  "type": "decoration",
+  "width": 2,
+  "height": 2,
+  "frames": [{"bmp": "buildingbase.png"}],
+  "draw ground": true
 }
 ```
 
@@ -68,16 +68,16 @@ I made the base a bit darker to make it easier to differentiate the base from th
 Since the top floor is 7 pixels tall, I'll add a new animation and lower the Y value by 7.
 ```json
 {
-    "animation": [
-        {"id": "uniqueid", "x": 18, "y": -17},
-        {"id": "uniqueid", "x": 18, "y": -24}
-    ],
-    "id": "uniqueid2",
-    "type": "decoration",
-    "width": 2,
-    "height": 2,
-    "frames": [{"bmp": "buildingbase.png"}],
-    "draw ground": true
+  "animation": [
+    {"id": "uniqueid", "x": 18, "y": -17},
+    {"id": "uniqueid", "x": 18, "y": -24}
+  ],
+  "id": "uniqueid2",
+  "type": "decoration",
+  "width": 2,
+  "height": 2,
+  "frames": [{"bmp": "buildingbase.png"}],
+  "draw ground": true
 }
 ```
 
@@ -85,21 +85,21 @@ Since the top floor is 7 pixels tall, I'll add a new animation and lower the Y v
 
 ```json
 {
-    "animation": [
-        {"id": "uniqueid", "x": 18, "y": -17},
-        {"id": "uniqueid", "x": 18, "y": -24},
-        {"id": "uniqueid", "x": 18, "y": -31},
-        {"id": "uniqueid", "x": 18, "y": -38},
-        {"id": "uniqueid", "x": 18, "y": -45},
-        {"id": "uniqueid", "x": 18, "y": -52},
-        {"id": "uniqueid", "x": 18, "y": -59}
-    ],
-    "id": "uniqueid3",
-    "type": "decoration",
-    "width": 2,
-    "height": 2,
-    "frames": [{"bmp": "buildingbase.png"}],
-    "draw ground": true
+  "animation": [
+    {"id": "uniqueid", "x": 18, "y": -17},
+    {"id": "uniqueid", "x": 18, "y": -24},
+    {"id": "uniqueid", "x": 18, "y": -31},
+    {"id": "uniqueid", "x": 18, "y": -38},
+    {"id": "uniqueid", "x": 18, "y": -45},
+    {"id": "uniqueid", "x": 18, "y": -52},
+    {"id": "uniqueid", "x": 18, "y": -59}
+  ],
+  "id": "uniqueid3",
+  "type": "decoration",
+  "width": 2,
+  "height": 2,
+  "frames": [{"bmp": "buildingbase.png"}],
+  "draw ground": true
 }
 ```
 
@@ -112,49 +112,49 @@ And now we have the very tall variant that we wanted!
 Here is the full code:
 ```json
 [
-    {
-        "type": "animation",
-        "id": "uniqueid",
-        "frames": [{"bmp": "buildingtop.png"}]
-    },
-    {
-        "animation": [{"id": "uniqueid", "x": 18, "y": -17}],
-        "id": "uniqueid1",
-        "type": "decoration",
-        "width": 2,
-        "height": 2,
-        "frames": [{"bmp": "buildingbase.png"}],
-        "draw ground": true
-    },
-    {
-        "animation": [
-            {"id": "uniqueid", "x": 18, "y": -17},
-            {"id": "uniqueid", "x": 18, "y": -24}
-        ],
-        "id": "uniqueid2",
-        "type": "decoration",
-        "width": 2,
-        "height": 2,
-        "frames": [{"bmp": "buildingbase.png"}],
-        "draw ground": true
-    },
-    {
-        "animation": [
-            {"id": "uniqueid", "x": 18, "y": -17},
-            {"id": "uniqueid", "x": 18, "y": -24},
-            {"id": "uniqueid", "x": 18, "y": -31},
-            {"id": "uniqueid", "x": 18, "y": -38},
-            {"id": "uniqueid", "x": 18, "y": -45},
-            {"id": "uniqueid", "x": 18, "y": -52},
-            {"id": "uniqueid", "x": 18, "y": -59}
-        ],
-        "id": "uniqueid3",
-        "type": "decoration",
-        "width": 2,
-        "height": 2,
-        "frames": [{"bmp": "buildingbase.png"}],
-        "draw ground": true
-    }
+  {
+    "type": "animation",
+    "id": "uniqueid",
+    "frames": [{"bmp": "buildingtop.png"}]
+  },
+  {
+    "animation": [{"id": "uniqueid", "x": 18, "y": -17}],
+    "id": "uniqueid1",
+    "type": "decoration",
+    "width": 2,
+    "height": 2,
+    "frames": [{"bmp": "buildingbase.png"}],
+    "draw ground": true
+  },
+  {
+    "animation": [
+      {"id": "uniqueid", "x": 18, "y": -17},
+      {"id": "uniqueid", "x": 18, "y": -24}
+    ],
+    "id": "uniqueid2",
+    "type": "decoration",
+    "width": 2,
+    "height": 2,
+    "frames": [{"bmp": "buildingbase.png"}],
+    "draw ground": true
+  },
+  {
+    "animation": [
+      {"id": "uniqueid", "x": 18, "y": -17},
+      {"id": "uniqueid", "x": 18, "y": -24},
+      {"id": "uniqueid", "x": 18, "y": -31},
+      {"id": "uniqueid", "x": 18, "y": -38},
+      {"id": "uniqueid", "x": 18, "y": -45},
+      {"id": "uniqueid", "x": 18, "y": -52},
+      {"id": "uniqueid", "x": 18, "y": -59}
+    ],
+    "id": "uniqueid3",
+    "type": "decoration",
+    "width": 2,
+    "height": 2,
+    "frames": [{"bmp": "buildingbase.png"}],
+    "draw ground": true
+  }
 ]
 ```
 

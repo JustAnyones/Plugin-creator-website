@@ -28,11 +28,11 @@ As it's a building of type park it will be put into the park category automatica
 So let's define a new category for camping:
 ```json
 {
-    "id":"$cat_lobby_camp00",
-    "type":"category",
-    "title":"Camping",
-    "frames":[{"bmp":"icon.png"}],
-    "ordinal":10
+  "id":"$cat_lobby_camp00",
+  "type":"category",
+  "title":"Camping",
+  "frames":[{"bmp":"icon.png"}],
+  "ordinal":10
 }
 ```
 As icon we use this 26x26 pixel sized image:
@@ -42,14 +42,14 @@ As icon we use this 26x26 pixel sized image:
 I recommend to always use a size of 26x26 pixels for icons for consistency. In order to put our plugin into this category we have to specify the category manually:
 ```json
 {
-    "id":"$lobby_camp_dummy00",
-    "type":"park",
-    "category":"$cat_lobby_camp00",    // This way we define the category to put this park into
-    "title":"Plain area",
-    "text":"Just a plain area.",
-    "width":1,
-    "height":1,
-    "frames":[{"bmp":"dummy.png"}]
+  "id":"$lobby_camp_dummy00",
+  "type":"park",
+  "category":"$cat_lobby_camp00",    // This way we define the category to put this park into
+  "title":"Plain area",
+  "text":"Just a plain area.",
+  "width":1,
+  "height":1,
+  "frames":[{"bmp":"dummy.png"}]
 }
 ```
 Pay attention on that the category you're referring to has to be defined before your plugin. Otherwise it cannot be assigned. The result looks now like this:
@@ -59,11 +59,11 @@ Pay attention on that the category you're referring to has to be defined before 
 Now you may want to put your category to a more meaningful position: behind the existing park category. To do so, we can use the attribute ordinal which can be also used to order items within a category:
 ```json
 {
-    "id":"$cat_lobby_camp00",
-    "type":"category",
-    "title":"Camping",
-    "frames":[{"bmp":"icon.png"}],
-    "ordinal":10    // Specify own position (after park, in this case)
+  "id":"$cat_lobby_camp00",
+  "type":"category",
+  "title":"Camping",
+  "frames":[{"bmp":"icon.png"}],
+  "ordinal":10    // Specify own position (after park, in this case)
 }
 ```
 The number you provide for ordinal determines which position should be used, with 0 being the first place. The result:
@@ -73,16 +73,16 @@ The number you provide for ordinal determines which position should be used, wit
 Last but not least we may want to use another preview for our cool plank area. To do so, we can provide a preview frame like this in our plugin:
 ```json
 {
-    "id":"$lobby_camp_dummy00",
-    "type":"park",
-    "category":"$cat_lobby_camp00",
-    "title":"Plain area",
-    "text":"Just a plain area.",
-    "width":1,
-    "height":1,
-    "frames":[{"bmp":"dummy.png"}],
-    "preview frames":[{"bmp":"icon.png"}]   // A single frames to use for preview
-  }
+  "id":"$lobby_camp_dummy00",
+  "type":"park",
+  "category":"$cat_lobby_camp00",
+  "title":"Plain area",
+  "text":"Just a plain area.",
+  "width":1,
+  "height":1,
+  "frames":[{"bmp":"dummy.png"}],
+  "preview frames":[{"bmp":"icon.png"}]   // A single frames to use for preview
+}
 ```
 
 Result:
@@ -125,12 +125,12 @@ You can also nest categories under other categories by specifying the `category`
 the category itself:
 ```json
 {
-    "id":"$cat_lobby_camp00",
-    "type":"category",
-    "category": "$cat_park00",
-    "title":"Camping",
-    "frames":[{"bmp":"icon.png"}],
-    "ordinal":10
+  "id":"$cat_lobby_camp00",
+  "type":"category",
+  "category": "$cat_park00",
+  "title":"Camping",
+  "frames":[{"bmp":"icon.png"}],
+  "ordinal":10
 }
 ```
 
@@ -167,13 +167,13 @@ Say, we want to share `$cat_lobby_camp00` category in 2 of our plugins.
 We would simply define the category with the `once` attribute for both plugins:
 ```json
 {
-    "id":"$cat_lobby_camp00",
-    "type":"category",
-    "category": "$cat_park00",
-    "title":"Camping",
-    "frames":[{"bmp":"icon.png"}],
-    "once": true,
-    "ordinal":10
+  "id":"$cat_lobby_camp00",
+  "type":"category",
+  "category": "$cat_park00",
+  "title":"Camping",
+  "frames":[{"bmp":"icon.png"}],
+  "once": true,
+  "ordinal":10
 }
 ```
 
