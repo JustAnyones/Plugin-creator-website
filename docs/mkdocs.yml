@@ -57,6 +57,10 @@ nav:
       - Meta:
         - attribute-types/meta/index.md
         - ... | flat | attribute-types/meta/*
+      - Requirement:
+        - attribute-types/requirement/index.md
+        - Types:
+          - ... | flat | attribute-types/requirement/types/*
       - Smoke: attribute-types/smoke.md
       - Spawners:
         - ... | flat | attribute-types/spawners/*
