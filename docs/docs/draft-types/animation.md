@@ -30,7 +30,7 @@ If set to true the game's shading (ie for night) will not be applied to the anim
 ::: default: false
 
 If set to true the animation will only be shown during night with some probabilistic
-switching behavior dependent on the using object.
+switching behaviour dependent on the using object.
 
 ### night light probability
 ::: type: float

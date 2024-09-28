@@ -55,7 +55,25 @@ type_mapping: dict[str | type, MappingStruct] = {
     'Frame': {
         "name": "Frame",
         "doc": f"{ROOT_PATH}/attribute-types/frame"
-    }
+    },
+
+    'DraftRequirement': {
+        "name": "Requirement",
+        "doc": f"{ROOT_PATH}/attribute-types/requirement"
+    },
+    'NestedDraftRequirement': {
+        "name": "Nested requirement",
+        "doc": f"{ROOT_PATH}/attribute-types/requirement/#deprecated_method"
+    },
+
+    'LegacySpawner': {
+        "name": "Legacy spawner",
+        "doc": f"{ROOT_PATH}/attribute-types/spawners/legacy-spawner/"
+    },
+    'BiomeSpawner': {
+        "name": "Biome spawner",
+        "doc": f"{ROOT_PATH}/attribute-types/spawners/biome-spawner"
+    },
 }
 
 def mapping_to_link(type: BaseConcreteType, quote: bool = True):
