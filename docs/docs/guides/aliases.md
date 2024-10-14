@@ -1,8 +1,6 @@
 # ID aliases
 
-!!! info "Added in version 1.8.96"
-
-A new feature introduced with version 1.8.96 are plugin ids aliases. They can be useful if you want to change the ids of objects that can be used by others (e.g. light definitions). Since changing the ids would break plugins that depend on the former ids you can now specify aliases for the id under which the plugin can be found, too.
+A feature that has been introduced with version 1.8.96 is plugin id aliases. They can be useful if you want to change the ids of objects that can be used by others (e.g. light definitions). Since changing the ids would break plugins that depend on the former ids you can now specify aliases for the id under which the plugin can be found, too.
 
 Let's assume you have the following json code:
 ```json

@@ -1,6 +1,12 @@
 # Writing documentation
 
+This contains the general guidelines for writing documentation pages.
+
 Documentation pages should use indentation with 4 spaces.
+
+The style of writing should be such:
+
+- Articles should use [**Editorial we**](https://en.wikipedia.org/wiki/We#Editorial_we) style of writing.
 
 This documentation implements a custom preprocessor declarations.
 

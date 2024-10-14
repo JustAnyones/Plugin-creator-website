@@ -1,10 +1,10 @@
 # Lights and night animations
 
-Before starting, it is recommended that you to check out the [animation guide](animations.md).
-Best results with help of _paint.net_.
-
-## Information
 ![Animation feature preview](../assets/guides/animation-preview.png)
+
+!!! info
+    Before starting, it is recommended that you to check out the [animation guide](animations.md).
+    Best results with help of _paint.net_.
 
 Night light definitions are practically the same thing as animations. They are defined the same way as animations, but have a few additional attributes. These attributes are:
 ```json
