@@ -177,18 +177,4 @@ Only for building drafts.
 
 Whether the building is considered a rocket supplier and should spawn supply trucks.
 
-### luawrapper
-
-```json
-{
-    "script": "#LuaWrapper",        // Use the wrapper as primary script
-    "meta": {
-        "luawrapper": {
-            "script": "myscript.lua",   // This is your script file
-            "dev": true                 // Actually enable real time editing
-        }
-    }
-}
-```
-
 <!-- TODO: add tags that are loaded by getDraftsWithTag -->

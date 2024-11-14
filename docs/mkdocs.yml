@@ -57,6 +57,7 @@ nav:
       - Meta:
         - attribute-types/meta/index.md
         - ... | flat | attribute-types/meta/*
+        - "Real time script editing": "./guides/scripting/real-time-script-editing/"
       - Requirement:
         - attribute-types/requirement/index.md
         - Types:

@@ -2,7 +2,7 @@
 
 This contains the general guidelines for writing documentation pages.
 
-Documentation pages should use indentation with 4 spaces.
+Documentation pages should use indentation with 4 spaces. JSON content should be indented with 2 spaces, including a whitespace between `key: value` pairs.
 
 The style of writing should be such:
 
