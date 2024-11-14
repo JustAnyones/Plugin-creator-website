@@ -141,7 +141,7 @@ Since version 1.10.62 you can also include bus stops in your compositions. Lines
 {"id": "$busstop00", "x":1, "y":0, "level":0}
 ```
 
-## Tool
+## Composition creation tool
 To make building up a composition easier there's a tool to convert a selected rectangle from a city to corresponding json code. It's part of the **Plugin Creator Tools** that you may find in the Plugin Store (you may find it via search function or listed in Categories->Tools).
 
 Once you have installed the tool(s) you can select it from the toolbar. After that mark the area you want to create a json composition code for. The code will be copied into your clipboard then. This may look like:

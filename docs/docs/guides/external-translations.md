@@ -1,7 +1,7 @@
 # External translations
 
 An easy way to provide translations for your plugins is given by
-[inline translations](plugin-inline-translations.md).
+[inline translations](inline-translations.md).
 However, these can be hard to maintain if you want to collaborate on translations
 for larger projects.
 So the idea here is to separate translations into separate files that contain nothing else than translations.
@@ -44,7 +44,7 @@ What you can do instead is to have the sole definitions in one file (e.g. main.j
 ]
 ```
 
-which makes your code a bit cleaner :teach 
+which makes your code a bit cleaner.
 
 Translations can be put in separate files e.g. like (let's call it translations.json)
 ```json
@@ -75,7 +75,7 @@ depending on placement, "_title" or "_text" appended.
 This structure allows you to even split up the translations for different languages into different files, e.g. into translations.json and translations_de.json.
 Also note that for translations there's no specific order to obey. The objects you translate don't have to be already defined.
 
-You can access translations from Lua using the
+This method also allows you to access translations from Lua using the
 [`TheoTown.translate`](https://doc.theotown.com/modules/TheoTown.html#translate) function:
 ```lua
 print(TheoTown.translate('draft_mypark00_title'))
