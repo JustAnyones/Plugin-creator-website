@@ -5,7 +5,7 @@ the use of local plugins in the online mode.
 
 It must be included at the root directory of your plugin and must be named exactly `plugin.manifest` for the game to recognize it.
 
-This file is a requirement if you want to create an encrypted `.plugin` file and use privileged features.
+This file is a requirement if you want to create an encrypted `.ttplugin` file and use privileged features.
 
 ## Minimal example
 
@@ -14,12 +14,12 @@ An example manifest file could look like this:
 **plugin.manifest:**
 ```json
 {
-    "id":"$justanyone_dsa_manifest00",
-    "version":42,
-    "title":"DSA Integration",
-    "text": "This integration adds better supply systems, few new service cars, a new road which is faster and cheaper, a new disaster, DSA flags, new buildings, a lot of events, a space dimension to explore, new methods to earn money and much more.",
-    "author": "JustAnyone",
-    "thumbnail": "iap.png"
+  "id": "$justanyone_dsa_manifest00",
+  "version": 42,
+  "title": "DSA Integration",
+  "text": "This integration adds better supply systems, few new service cars, a new road which is faster and cheaper, a new disaster, DSA flags, new buildings, a lot of events, a space dimension to explore, new methods to earn money and much more.",
+  "author": "JustAnyone",
+  "thumbnail": "iap.png"
 }
 ```
 
@@ -65,7 +65,7 @@ The path to the plugin thumbnail image.
 ::: type: string
 ::: version-added: 1.8.16
 
-A URL from where the plugin can be obtained from.
+A URL that points to a place from where the plugin can be obtained.
 
 ### min version
 ::: type: integer
