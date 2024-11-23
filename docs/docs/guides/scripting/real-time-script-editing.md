@@ -9,12 +9,12 @@ Right now your json to include a script may look like that:
 
 For real time scripting use this form:
 ```json
-"script":"#LuaWrapper",            // Use the wrapper as primary script
-"meta":{
-    "luawrapper":{
-        "script":"myscript.lua",   // This is your script file
-        "dev":true                 // Actually enable real time editing
-    }
+"script": "#LuaWrapper",        // Use the wrapper as primary script
+"meta": {
+  "luawrapper": {
+    "script": "myscript.lua",   // This is your script file
+    "dev": true                 // Actually enable real time editing
+  }
 }
 ```
 

@@ -9,3 +9,4 @@ Game uses this meta object for the following purposes:
 - [Tags](tags.md)
 - [Water mask](water-mask.md)
 - [Real time script editing](../../guides/scripting/real-time-script-editing.md)
+- [Composition removal group](../../guides/compositions.md#removal_group)

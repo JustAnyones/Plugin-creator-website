@@ -161,6 +161,69 @@ Note that it's up to you to add at least an id as well as a building type (e.g. 
     - The tool does not always handle road curves correctly.
     - Road levels aren't supported, yet.
 
+## Removal group
+
+!!! info "Added in version 1.10.92"
+
+Compositions can be used to represent non-square buildings using hidden square buildings. The problem arises when players try to demolish a part of that composition leaving a gap in the building. To destroy all parts of the composition when only one part gets demolished, a removal group can be used. This technique is used by the "Parliament of Budapest" plugin by kekman.
+
+The implementation would look something like:
+```json
+[
+  {
+    "id": "$building_general_template00",
+    "type": "template",
+    // Make sure they can't dissect the building in pieces and place it standalone without the composition
+    "pickable": false,
+    "moveable": false,
+    // The important part
+    "script": "#RemovalGroup", // required: RemovalGroup is a helper script that handles removal groups
+    "meta": {
+      "removal group": {
+        "id": "ourbuildinggroup" // connected buildings that have the same removal group will be removed
+      }
+    }
+  },
+
+  // Our 2 building pieces
+  // We hide them from the build menu and use the above template
+  {
+    "id": "$building_part1",
+    "type": "decoration",
+    "template": "$building_general_template00",
+    "width": 9,
+    "height": 9,
+    "frames": [], // some frames
+    "rotation aware": true,
+    "hidden": true
+  },
+  {
+    "id": "$building_part2",
+    "type": "decoration",
+    "template": "$building_general_template00",
+    "width": 9,
+    "height": 9,
+    "frames": [], // some frames
+    "rotation aware": true,
+    "hidden": true
+  },
+
+  // The actual building our player sees
+  // Uses the above template and consists of our building parts
+  {
+    "id": "$our_building_composition00",
+    "type": "decoration",
+    "template": "$building_general_template00",
+    "width": 18,
+    "height": 9,
+    "composition": [
+      {"id": "$building_part1", "x": 9, "y": 0, "frame": 0},
+      {"id": "$building_part2", "x": 0, "y": 0, "frame": 0}
+    ]
+  }
+]
+```
+
 <sub>
 This page has been adapted from
 [a topic](https://forum.theotown.com/viewtopic.php?t=9694)

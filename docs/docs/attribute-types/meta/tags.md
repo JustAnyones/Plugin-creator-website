@@ -1,6 +1,6 @@
 # Tags
 
-This is an object that contains tags.
+This is an object of the meta object that contains tags.
 
 ## Supported tags
 
@@ -113,43 +113,114 @@ For drafts that declare themselves as the budget item.
 
 ### fire brigade
 
-Only for car drafts.
+**Only for car drafts.**
 
-### medic
-
-Only for car drafts.
-
-### police
-
-Only for car drafts.
-
-### swat
-
-Only for car drafts.
-
-### console
-
-Useful for implementing a console in a draft.
+Used to mark a car draft as fire brigade car.
 
 ```json
 {
-    "console": {
-        "commands": {
-            "any command name here": {
-                // fun actions and conditions here
-            }
-        }
+  "meta": {
+    "tags": {
+      "fire brigade": {}
     }
+  }
+}
+```
+
+### medic
+
+**Only for car drafts.**
+
+Used to mark a car draft as medic car.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "medic": {}
+    }
+  }
+}
+```
+
+### police
+
+**Only for car drafts.**
+
+Used to mark a car draft as police car.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "police": {}
+    }
+  }
+}
+```
+
+### swat
+
+**Only for car drafts.**
+
+Used to mark a car draft as swat car.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "swat": {}
+    }
+  }
+}
+```
+
+### console
+
+Used to implement a console command with a draft. Multiple commands can be defined.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "console": {
+        "commands": {
+          "mycustomcommand1": {
+            // Fun actions and conditions
+            "condition": {...},
+            "actions": [
+              {"type": "feedback", "id": "Condition ok"},
+            ],
+            "else actions": [
+              {"type": "feedback", "id": "Condition not ok"}
+            ]
+          },
+          "mycustomcommand2": {
+            // Fun actions and conditions
+            "condition": {...},
+            "actions": [
+              {"type": "feedback", "id": "Condition ok"},
+            ],
+            "else actions": [
+              {"type": "feedback", "id": "Condition not ok"}
+            ]
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
 ### build rail
 
-Only for building drafts.
+**Only for building drafts.**
 
 ```json
 {
-    "build rail": {
+  "meta": {
+    "tags": {
+        "build rail": {
         "id": "", // rail or road ID
         "offsets": [], // optional int array
 
@@ -157,7 +228,9 @@ Only for building drafts.
         "level": 0, // int
         "all": false, // bool
         "dir": 1 // int
+      }
     }
+  }
 }
 ```
 
@@ -173,8 +246,149 @@ Only for building drafts.
 
 ### dsa rocket supplier
 
-Only for building drafts.
+**Only for building drafts.**
 
-Whether the building is considered a rocket supplier and should spawn supply trucks.
+Whether the building is considered a rocket supplier and should spawn supply trucks for the launchpad.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "dsa rocket supplier": {}
+    }
+  }
+}
+```
+
+
 
 <!-- TODO: add tags that are loaded by getDraftsWithTag -->
+
+### destroyed tree
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for destroyed trees. If no such drafts are defined, `$destroyedtile` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed tree": {}
+    }
+  }
+}
+```
+
+### destroyed tree radioactive
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for radioactive destroyed trees. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed tree radioactive": {}
+    }
+  }
+}
+```
+
+### destroyed building
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for destroyed buildings. If no such drafts are defined, `$destroyedtile` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed building": {}
+    }
+  }
+}
+```
+
+### destroyed building radioactive
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for radioactive destroyed buildings. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed building radioactive": {}
+    }
+  }
+}
+```
+
+### destroyed road
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for destroyed roads. If no such drafts are defined, `$destroyedtile` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed road": {}
+    }
+  }
+}
+```
+
+### destroyed road radioactive
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for radioactive destroyed roads. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed road radioactive": {}
+    }
+  }
+}
+```
+
+
+### destroyed plain
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for destroyed wires, rail and fences. If no such drafts are defined, `$destroyedtile` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed plain": {}
+    }
+  }
+}
+```
+
+### destroyed plain radioactive
+
+**Only for building drafts.**
+
+Whether to consider this building as a replacement for radioactive destroyed wires, rail and fences. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "destroyed plain radioactive": {}
+    }
+  }
+}
+```
