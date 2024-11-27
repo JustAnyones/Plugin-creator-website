@@ -28,7 +28,7 @@ Your buildings will probably use mostly in-game night definitions.
 However, you can add your custom ones that fit the game style if the shape you're looking for is unavailable.
 The default window light animation color is **FFFBE5** and a gaussian blur of around 4 (_paint.net_ value).
 
-## Animations made easy
+## Tool for aligning animations easier
 
 Counting x and y coordinates for each window might be tiring and take a lot of time.
 The easiest and most user-friendly solution is to use
@@ -77,6 +77,63 @@ You can also use this tool to fetch in-game night definitions for manual animati
   }
 ]
 ```
+
+## Rotation aware night animations
+
+As you may know, rotation aware buildings require to have frames that are multiples of 2 or 4. The same applies for rotation aware light animations too. Otherwise, you might not get the expected result.
+
+Let's assume we have these shining graphics for the building itself and the animation (made by THEMAX):
+
+![](../assets/guides/night-animations/normal.png)
+![](../assets/guides/night-animations/night.png)
+
+Then our JSON will look like so:
+```json
+[
+  {
+    "id": "$Themax_example_kiosk_night",
+    "type": "animation",
+    "light": true,
+    "light switching": true,
+    "frames": [
+      {
+        "bmp": "night.png",
+        "count": 4,
+        "h": 32,
+        "w": 32
+      }
+    ],
+    "rotation aware": true
+  },
+  {
+    "id": "$Themax_example_kiosk",
+    "type": "decoration",
+    "author": "Themax",
+    "width": 1,
+    "height": 1,
+    "frames": [
+      {
+        "bmp": "normal.png",
+        "count": 4,
+        "h": 32,
+        "w": 32
+      }
+    ],
+    "animation": [{"id": "$Themax_example_kiosk_night", "x":0,"y":-25}],
+    "rotation aware": true,
+    "draw ground": true,
+    "needs road": false,
+    "text": "A newspaper kiosk based on those you can find in Paris.",
+    "title": "Paris newspaper kiosk"
+  }
+]
+```
+
+Here is our JSON, first we define a night-animation draft, and set up a single frame sheet with `"count"`, `"h"` and `"w"` corresponding to the total width of the frame divided by 4. Alternatively, you can just provide 4 separate frames. Most importantly, we add a `"rotation aware": true` (mandatory, otherwise it won't work).
+
+Once that's done, reference the animation from the building and you should be good to go, adjust the `"y"` part accordingly so it matches your texture. 
+
+There we go, now we have a working rotation aware building with rotation aware functionality. You may also use `"frame": index` in your animation object for greater control and other attributes as documented by the animation attribute object and the draft.
 
 <sub>
 This page has been adapted from
