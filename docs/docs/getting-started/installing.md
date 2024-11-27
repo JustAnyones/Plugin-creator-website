@@ -1,7 +1,11 @@
 # Installing a plugin
 
-Let's assume you found a plugin you like and downloaded the plugin file to your device. The installation of the said file is
+Let's assume you found a plugin you like and downloaded the plugin file (.ttplugin, .plugin or .zip) to your device. The installation of the said file is
 very simple. You would grab the plugin file and place it in the TheoTown plugins folder.
+
+!!! note ".zip file compatibility"
+    Game should be able to automatically load a plugin that is contained inside a zip file, however it can fail due to
+    compatibility issues and you might have to unzip the file manually for the game to read the plugin.
 
 Depending on the platform, folder can be found at these directories:
 
@@ -21,12 +25,14 @@ Depending on the platform, folder can be found at these directories:
 
     `/storage/emulated/0/Android/data/info.flowersoft.theotown.theotown/files/plugins`
 
-If you're having difficulty accessing those directories, you may access the plugin directory through the in-built TheoTown file manager
+- iOS:
+
+    Search "TheoTown" in the file manager app and put it in the plugins folder.
+
+If you're having difficulty accessing those directories, you may access the plugin directory through in-built TheoTown file manager
 that is available from the region view menu.
 
-!!! note ".zip file compatibility"
-    Game should be able to automatically load the plugin that is contained inside a zip file, however it can fail due to
-    compatibility issues and you might have to unzip the file manually for the game to read the plugin.
+![](../assets/file-manager.png)
 
 ## Video guide for Android
 

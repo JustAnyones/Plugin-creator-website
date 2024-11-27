@@ -40,7 +40,7 @@ This pedestrian type would spawn automatically for all rci types and levels in t
 - **level 2**
 - **level 3**
 
-These are expected to be floating point numbers. The default value for all of them is 1. Use [b]"auto spawn":false[/b] to set the default value to 0.
+These are expected to be floating point numbers. The default value for all of them is 1. Use **"auto spawn": false** to set the default value to 0.
 
 ## Roads
 

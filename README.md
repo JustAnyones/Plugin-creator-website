@@ -1,6 +1,10 @@
 # Plugin creator website
 
-This template should help get you started developing with Vue 3 in Vite.
+This repository contains the 4th version of Plugin Creator for TheoTown written in Vue 3.
+
+## Writing documentation
+
+Plugin creator website also hosts plugin system documentation at https://pca.svetikas.lt/docs. The source code for this documentation can be found in the docs/docs directory.
 
 ## Recommended IDE Setup
 
