@@ -94,6 +94,37 @@ Another way to get car frames is by directly copy them into your own graphics. H
 
 You'll find the bus graphics in the [world texture](../resources/world-texture.md#world_0_0png).
 
+## Car chains
+
+!!! info "Added in version 1.3.85"
+
+You can define a chain of cars that behaves as one vehicle. See here an example:
+
+![](../assets/guides/cars/chains.png)
+
+The garbage trucks were appended to the fire brigade truck to form long, connected vehicles. A better use would be for example a tram or a bending bus. There's basically no limit in the length of the chain.
+
+To append cars to a car just use the [tail attribute](../draft-types/car.md#tail) `"tail": ["anotherCarId", ...]`.
+To append the car itself just use null as convenient placeholder.
+So a chain of a car of length 3 would have a tail of length 2: `"tail": [null, null]`.
+
+The car ids used in a tail array have to be already defined. Only the first variant (4 frames make up a variant) will be used for each car in a tail. You may use the empty/invisible car $car_null00 as placeholder between cars in a chain if sufficient.
+
+The code to achieve the fire-garbage-trains as shown above:
+```json
+[
+  {
+    "override": true,
+    "id": "$carfirebrigade00",
+    "type": "car",
+    "frames": [{"x": 512, "y": 657, "w": 32, "h": 18, "count": 4}],
+    "tail": ["$garbagetruck00", "$garbagetruck00", "$garbagetruck00", "$garbagetruck00"]
+  }
+]
+```
+
+No extra graphics needed.
+
 ## Diagonal cars
 
 !!! info "Added in version 1.9.68"
