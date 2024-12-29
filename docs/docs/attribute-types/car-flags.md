@@ -83,6 +83,9 @@
 ### all
 ::: type: boolean
 
+### snow plow
+::: type: boolean
+
 ### *
 ::: type: boolean
 
