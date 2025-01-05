@@ -10,5 +10,8 @@ class CategoryDraft(ViewportDraft):
     Either [frames](#frames) or [preview frames](#preview_frames) are required.
     """
 
+    __name__ = "Category"
+    __file__ = "category.md"
+
     def __init__(self):
         super().__init__()
