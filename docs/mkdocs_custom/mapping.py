@@ -42,7 +42,7 @@ type_mapping: dict[str | type, MappingStruct] = {
     },
     'Color': {
         "name": "Color",
-        "doc":  f"{ROOT_PATH}/attribute-types/color/index"
+        "doc":  f"{ROOT_PATH}/attribute-types/color"
     },
     'CarFlags': {
         "name": "Car flags",
@@ -55,6 +55,10 @@ type_mapping: dict[str | type, MappingStruct] = {
     'Frame': {
         "name": "Frame",
         "doc": f"{ROOT_PATH}/attribute-types/frame"
+    },
+    'AnimationDate': {
+        "name": "Animation date",
+        "doc": f"{ROOT_PATH}/attribute-types/animation/date"
     },
 
     'DraftRequirement': {
