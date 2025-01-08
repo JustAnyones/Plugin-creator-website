@@ -7,15 +7,19 @@ Animation drafts are used to define an animation. To actually attach an animatio
 ### id
 ::: type: string
 
-Animation draft ID.
+ID of the animation draft to use.
 
 ### x
 ::: type: int
+
+Position of the animation on a horizontal axis. Value of 0 is at the leftmost edge.
 
 **By default**, the value will be 0.
 
 ### y
 ::: type: int
+
+Position of the animation on a vertical axis. Value of 0 is on the middle of the tile.
 
 **By default**, the value will be 0.
 
