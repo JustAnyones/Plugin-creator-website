@@ -340,19 +340,22 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
             this.author.value = authorName;
         }
 
-        let date = new Date().getTime()
+        let date = new Date()
+        let timestamp = date.getTime()
         let fmt = {
-            year: Intl.DateTimeFormat('en', {year: "numeric"}).format(date),
-            month: Intl.DateTimeFormat('en', {month: "2-digit"}).format(date),
-            day: Intl.DateTimeFormat('en', {day: "2-digit"}).format(date),
-            hour: Intl.DateTimeFormat('en', {hour: "2-digit", hour12: false}).format(date),
-            minute: Intl.DateTimeFormat('en', {minute: "2-digit"}).format(date),
+            year: Intl.DateTimeFormat('en', {year: "numeric"}).format(timestamp),
+            month: Intl.DateTimeFormat('en', {month: "2-digit"}).format(timestamp),
+            day: Intl.DateTimeFormat('en', {day: "2-digit"}).format(timestamp),
+            hour: Intl.DateTimeFormat('en', {hour: "2-digit", hour12: false}).format(timestamp),
+            minute: Intl.DateTimeFormat('en', {minute: "2-digit"}).format(timestamp),
+            second: Intl.DateTimeFormat('en', {second: "2-digit"}).format(timestamp),
         }
 
         this.id.value = `$`;
         this.id.value += `${authorName.replace(" ", "_").toLowerCase()}`;
         this.id.value += `.${type.tag}`;
-        this.id.value += `.${fmt.year}-${fmt.month}-${fmt.day}-${fmt.hour}:${fmt.minute}`;
+        this.id.value += `.${fmt.year}-${fmt.month}-${fmt.day}-${fmt.hour}:${fmt.minute}:${fmt.second}`;
+        this.id.value += `.${date.getMilliseconds()}`;
     }
 
     /**
