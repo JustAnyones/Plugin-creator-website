@@ -1,3 +1,4 @@
+# pyright: reportImplicitRelativeImport=false
 from viewport import ViewportDraft
 
 class CategoryDraft(ViewportDraft):
