@@ -1,6 +1,7 @@
 # pyright: reportImplicitRelativeImport=false
 from base import Attribute
 from spawnable import SpawnableDraft
+from stubs import Aspect, CarFlag, Influence
 from viewport import ViewportDraft
 
 class BuildingBasedDraft(ViewportDraft):
@@ -14,6 +15,14 @@ class BuildingBasedDraft(ViewportDraft):
 
     def __init__(self):
         super().__init__()
+
+CAR_FLAG_DESC = """
+For buildings that need road these flags will be used to determine
+whether a given neighbouring road counts as a connection.
+
+At least one of the given flags must match with the flags
+of the neighbouring road.
+"""
 
 class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
@@ -179,6 +188,651 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             deprecated="""
             This attribute is a relict from a time when separate animation objects were not a thing yet.
             Use the more powerful [animation](#animation) attribute instead.
+            """
+        )
+        self.price: Attribute = Attribute(
+            "price",
+            "integer",
+            """
+            The price to construct the building. If the building costs diamonds the price won't be charged.
+
+            Negative values require privileges.
+            """
+        )
+        self.addPrice: Attribute = Attribute(
+            "add price",
+            "string[]",
+            """
+            Array of draft IDs.
+            """
+        )
+        self.monthlyPrice: Attribute = Attribute(
+            "monthly price",
+            "integer",
+            """
+            The monthly costs of this building. Negative values mean income and require privileges.
+            """
+        )
+        self.diamondPrice: Attribute = Attribute(
+            "diamond price",
+            "integer",
+            """
+            The diamond price to build this building.
+            Will be ignored in case the building was unlocked by a feature.
+
+            On premium platforms, the value will be 0.
+            """
+        )
+        self.budgetItem: Attribute = Attribute(
+            "budget item",
+            "string",
+            """
+            ID of the draft that has the `"budget item"` meta tag defined.
+
+            Monthly income or expenses show up under the budget item.
+            """
+        )
+        self.bulldozePrice: Attribute = Attribute(
+            "bulldoze price",
+            "integer",
+            """
+            The price to bulldoze the building.
+
+            Negative values require privileges.
+            """
+        )
+        self.power: Attribute = Attribute(
+            "power",
+            "integer",
+            """
+            Positive values produce and negative values consume the resource.
+
+            Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+            """
+        )
+        self.water: Attribute = Attribute(
+            "water",
+            "integer",
+            """
+            Positive values produce and negative values consume the resource.
+
+            Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+            """
+        )
+        self.capacity: Attribute = Attribute(
+            "capacity",
+            "integer",
+            """
+            Capacity for passenger related calculations.
+
+            **By default**, the value will be 0.
+            """
+        )
+        self.destroyable: Attribute = Attribute(
+            "destroyable",
+            "boolean",
+            """
+            Whether the building is destroyable by disasters.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.destroyableByFunction: Attribute = Attribute(
+            "destroyable by fun",
+            "boolean",
+            """
+            Whether the building is destroyable by fun actions.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.destruction: Attribute = Attribute(
+            "destruction",
+            "string",
+            """
+            The ID of a building that will be used to replace the destructed building.
+
+            Must be either 1x1 in which case it will fill up the area of the destructed building,
+            or match the size of the destructed building.
+            """
+        )
+        self.burnable: Attribute = Attribute(
+            "burnable",
+            "boolean",
+            """
+            Whether the building can be set on fire.
+
+            By default will inherit the value of the [destroyable](#destroyable) attribute.
+            """
+        )
+        self.useFireFrames: Attribute = Attribute(
+            "use fire frames",
+            "boolean",
+            """
+            Whether the building will draw the usual fire when burning.
+
+            Can be disabled to draw a custom fire animation.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.maxCount: Attribute = Attribute(
+            "max count",
+            "integer",
+            """
+            The maximum permitted occurrences of the building within the city.
+
+            **By default**, the value will be -1 which indicates no limit.
+            """
+        )
+        self.priceFactor: Attribute = Attribute(
+            "price factor",
+            "float",
+            """
+            Factor by which subsequent building prices will be multiplied by.
+            """
+        )
+        self.waterWaste: Attribute = Attribute(
+            "water waste",
+            "float",
+            """
+            Positive values indicate that the building causes water pollution.
+            Negative values reduce water pollution.
+            """
+        )
+        self.drawGround: Attribute = Attribute(
+            "draw ground",
+            "boolean",
+            """
+            If true the ground below the building will be drawn. Useful when the building has transparent parts in the ground.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.frameAlignmentArea: Attribute = Attribute(
+            "frame alignment area",
+            "boolean",
+            """
+            If true the building will be built using an area tool.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.frameAlignment: Attribute = Attribute(
+            "frame alignment",
+            "boolean",
+            """
+            If true the building will be built using a line tool unless [frame alignment area](#frame_alignment_area) is true.
+
+            By default will inherit the value of the [frame alignment area](#frame_alignment_area) attribute.
+            """
+        )
+        self.alignable: Attribute = Attribute(
+            "alignable",
+            "boolean",
+            """
+            If true the building will align with neighbouring buildings.
+
+            By default will inherit the value of the [frame alignment](#frame_alignment) attribute.
+            """
+        )
+        self.rotationAware: Attribute = Attribute(
+            "rotation aware",
+            "boolean",
+            """
+            If true the building will dedicate frames for use in rotation.
+
+            **By default**, the value will be true, if the draft is [alignable](#alignable) and has at least 4 frames or it is a composition building.
+            """
+        )
+        self.extRotationAware: Attribute = Attribute(
+            "ext rotation aware",
+            "boolean",
+            """
+            If true the building will use 16 frames per variant to model joining with nearby buildings.
+
+            **By default**, the value will be true, if the draft is [rotation aware](#rotation_aware)
+            and has [frame alignment](#frame_alignment) or [frame alignment area](#frame_alignment_area) attributes set to true.
+            """
+        )
+        self.selectableFrames: Attribute = Attribute(
+            "selectable frames",
+            "boolean",
+            """
+            Whether the user can manually select a frame upon building.
+
+            **By default**, the value will be true, if [frame alignment](#frame_alignment) attribute is false.
+            """
+        )
+        self.volatile: Attribute = Attribute(
+            "volatile",
+            "boolean",
+            """
+            Not in use.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.useFence: Attribute = Attribute(
+            "use fence",
+            "string[]",
+            """
+            Array of fence draft IDs. A random fence will be chosen to be placed around a building.
+
+            **By default**, the behaviour is disabled.
+            """
+        )
+        self.ships: Attribute = Attribute(
+            "ships",
+            "string[]",
+            """
+            Array of ship draft IDs.
+            """
+        )
+        self.shipCount: Attribute = Attribute(
+            "ship count",
+            "integer",
+            """
+            **By default**, the value will be equal to building's [width](#width).
+            """
+        )
+        self.shipRadius: Attribute = Attribute(
+            "ship radius",
+            "integer",
+            """
+            **By default**, the value will be 128.
+            """
+        )
+        self.helicopterSpawner: Attribute = Attribute(
+            "helicopter spawner",
+            "HelicopterSpawner",
+        )
+        self.carSpawner: Attribute = Attribute(
+            "car spawner",
+            "CarSpawner",
+        )
+        self.explodes: Attribute = Attribute(
+            "explodes",
+            "boolean",
+            """
+            Whether building will explode upon being burnt down (that is, after a while of burning).
+
+            **By default**, the value will be false.
+            """
+        )
+        self.explosionRadius: Attribute = Attribute(
+            "explosion radius",
+            "integer",
+            """
+            For exploding buildings only, the radius of the explosion.
+
+            **By default**, the value will be 16.
+            """
+        )
+        self.nuclear: Attribute = Attribute(
+            "nuclear",
+            "boolean",
+            """
+            Whether the explosion of the building will be nuclear.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.disaster: Attribute = Attribute(
+            "disaster",
+            "boolean",
+            """
+            Whether the existence of the building should be considered as a disaster.
+
+            When city is in a disaster state, game may play disaster music, the city growth will halt.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.removable: Attribute = Attribute(
+            "removable",
+            "boolean",
+            """
+            Whether the draft can be removed from the city by player build tools.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.mapColor: Attribute = Attribute(
+            "map color",
+            "Color",
+        )
+        self.pickable: Attribute = Attribute(
+            "pickable",
+            "boolean",
+            """
+            Whether the building can be picked by picking tool.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.renameable: Attribute = Attribute(
+            "renameable",
+            "boolean",
+            """
+            Whether the building can be renamed by the player.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.performance: Attribute = Attribute(
+            "performance",
+            "boolean",
+            """
+            Whether the performance of the building can be adjusted.
+            Performance impacts influences, aspects, costs and income.
+
+            **By default**, the value will be false.
+            """
+        )
+        self.powerRadius: Attribute = Attribute(
+            "power radius",
+            "integer",
+            """
+            The maximum value is 10 unless privileged.
+
+            **By default**, the value will be 5.
+            """
+        )
+        self.idleBuildTime: Attribute = Attribute(
+            "idle build time",
+            "boolean",
+            """
+            Whether the building can get build progress through idle time.
+
+            **By default**, the value will be true.
+            """
+        )
+        self.randomizeAnimation: Attribute = Attribute(
+            "randomize animation",
+            "boolean",
+            """
+            **By default**, the value will be false.
+            """
+        )
+        self.randomizeLights: Attribute = Attribute(
+            "randomize lights",
+            "boolean",
+            """
+            **By default**, the value will be true.
+            """
+        )
+        # Fun actions
+        self.fun: Attribute = Attribute(
+            "fun",
+            "Fun",
+        )
+        self.onClickFun: Attribute = Attribute(
+            "on click fun",
+            "Fun",
+        )
+        self.randomFun: Attribute = Attribute(
+            "random fun",
+            "Fun",
+        )
+        self.onEventFun: Attribute = Attribute(
+            "on event fun",
+            "Fun",
+        )
+        self.onBuiltFun: Attribute = Attribute(
+            "on built fun",
+            "Fun",
+        )
+        self.onDestroyFun: Attribute = Attribute(
+            "on destroy fun",
+            "Fun",
+        )
+        self.hiddenOnClick: Attribute = Attribute(
+            "hidden on click",
+            "boolean",
+            """
+            **By default**, the value will be false.
+            """
+        )
+        self.smoke: Attribute = Attribute(
+            "smoke",
+            "Smoke[]",
+        )
+        self.animation: Attribute = Attribute(
+            "animation",
+            "Animation[]",
+        )
+        self.frameAnimationIndices: Attribute = Attribute(
+            "frame animation indices",
+            "integer[][]",
+        )
+        self.animationFg: Attribute = Attribute(
+            "animation fg",
+            "Animation[]",
+        )
+        self.frameAnimationFgIndices: Attribute = Attribute(
+            "frame animation fg indices",
+            "integer[][]",
+        )
+        self.buildTime: Attribute = Attribute(
+            "build time",
+            "integer",
+            """
+            The build time of the building in days.
+            """
+        )
+        self.buildTimeFactor: Attribute = Attribute(
+            "build time factor",
+            "float",
+        )
+        self.freeBuildTimeSkip: Attribute = Attribute(
+            "free build time skip",
+            "boolean",
+            """
+            Whether the build time can be skipped for free in freemium versions.
+            """
+        )
+        self.serviceCars: Attribute = Attribute(
+            "service cars",
+            "integer",
+        )
+        self.serviceCarTags: Attribute = Attribute(
+            "service car tags",
+            "string[]",
+            "Array of tags."
+        )
+        
+        # Generate "road flags *" attributes
+        for flag in CarFlag:
+            copy = flag.copy()
+            copy.name = "road flags " + copy.name
+            copy.description = CAR_FLAG_DESC
+            self.generated[copy.name] = copy
+
+        self.allocateRoadFlags: Attribute = Attribute(
+            "allocate road flags",
+            "string|string[]",
+            """
+            Allocates a custom car flag.
+
+            Note that there is a max limit of 32 custom flags.
+            """
+        )
+
+        self.nightLightProbability: Attribute = Attribute(
+            "night light probability",
+            "float",
+        )
+        self.rciCars: Attribute = Attribute(
+            "rci cars",
+            "integer",
+        )
+        self.easyRemove: Attribute = Attribute(
+            "easy remove",
+            "boolean",
+        )
+        self.supportsSlope: Attribute = Attribute(
+            "supports slope",
+            "boolean",
+        )
+        self.supportsTerrain: Attribute = Attribute(
+            "supports terrain",
+            "boolean",
+        )
+        self.supportsShoreline: Attribute = Attribute(
+            "supports shoreline",
+            "boolean",
+        )
+        self.drawWaterBorders: Attribute = Attribute(
+            "draw water borders",
+            "boolean",
+        )
+        self.drawWaterGround: Attribute = Attribute(
+            "draw water ground",
+            "boolean|string",
+            """
+            Whether water will be drawn under the building even
+            if there's ground.
+            Useful for semi transparent buildings that use this feature
+            to incorporate water into their visuals.
+
+            If a string is provided, ground draft by the specified ID
+            will be used for drawing.
+            """
+        )
+        self.moveable: Attribute = Attribute(
+            "moveable",
+            "boolean",
+            """
+            Whether the building can be moved by move building tool.
+            """
+        )
+        self.zone: Attribute = Attribute(
+            "zone",
+            "string",
+            """
+            ID of the zone draft to use.
+            """
+        )
+        self.buildZone: Attribute = Attribute(
+            "build zone",
+            "boolean",
+        )
+        self.conductive: Attribute = Attribute(
+            "conductive",
+            "boolean",
+            """
+            Whether the building will connect to normal power lines.
+            """
+        )
+        self.superConductive: Attribute = Attribute(
+            "super conductive",
+            "boolean",
+            """
+            Whether the building will connect to normal power lines
+            and high voltage ones.
+            """
+        )
+        self.highVoltageOnly: Attribute = Attribute(
+            "high voltage only",
+            "boolean",
+            """
+            Whether the building will connect to high voltage lines.
+            """
+        )
+        self.liquid: Attribute = Attribute(
+            "liquid",
+            "boolean",
+            """
+            Whether the building will conduct water like a pipe.
+            """
+        )
+        self.drawZone: Attribute = Attribute(
+            "draw zone",
+            "boolean",
+        )
+        self.habitants: Attribute = Attribute(
+            "habitants",
+            "integer",
+            """
+            For residential buildings: The amount of inhabitants.
+            """
+        )
+        self.workers: Attribute = Attribute(
+            "workers",
+            "integer",
+            """
+            For commercial and industrial buildings: The amount of workers.
+            """
+        )
+        self.people: Attribute = Attribute(
+            "people",
+            "integer",
+            """
+            Unified type that provides habitants or workers depending on the RCI type.
+            """
+        )
+        self.autoBuild: Attribute = Attribute(
+            "auto build",
+            "boolean",
+            """
+            For RCI buildings only.
+
+            Determines whether the building can be built automatically by the game on corresponding zones and given demand.
+            """
+        )
+        self.autoBuildFactor: Attribute = Attribute(
+            "auto build factor",
+            "float",
+            """
+            The auto build factor can be used to tweak the auto spawn rate of the building.
+
+            Higher values will cause the building to be built more likely.
+            """
+        )
+        self.rebuild: Attribute = Attribute(
+            "rebuild",
+            "boolean",
+        )
+        self.upgrades: Attribute = Attribute(
+            "upgrades",
+            " Upgrade[]",
+        )
+        self.influencePreview: Attribute = Attribute(
+            "influence preview",
+            "boolean",
+            """
+            Whether a preview of the building's influences should be rendered.
+
+            **By default**, the value will be true.
+            """
+        )
+        # Generate influence attributes
+        for inf in Influence:
+            self.generated[inf.name] = inf.copy()
+        
+        # Generate aspects
+        for asp in Aspect:
+            provideAspect = asp.copy()
+            capacityAspect = asp.copy()
+
+            provideAspect.name = f"provide aspect {asp.value.name}"
+            capacityAspect.name = f"aspect {asp.value.name} capacity"
+            self.generated[provideAspect.name] = provideAspect
+            self.generated[capacityAspect.name] = capacityAspect
+        
+        self.pedestrian: Attribute = Attribute(
+            "pedestrian",
+            "string",
+            """
+            ID of a pedestrian draft.
+            """
+        )
+        self.pedestrianCount: Attribute = Attribute(
+            "pedestrian count",
+            "integer",
+            """
+            **By default**, the value will be 0.
             """
         )
 

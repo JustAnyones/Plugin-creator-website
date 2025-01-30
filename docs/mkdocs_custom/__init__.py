@@ -93,7 +93,7 @@ class AttributeLineFormatter:
         wrap_in_attribute_collection = False
         while value.endswith("[]"):
             value = value[:-2]
-            array_levels = +1
+            array_levels += 1
         if value.endswith("*"):
             value = value[:-1]
             wrap_in_attribute_collection = True

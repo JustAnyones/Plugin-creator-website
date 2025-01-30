@@ -55,7 +55,7 @@ Now to use it on a building, we would add it to the animation attribute array li
 You can find extra attributes for animation drafts [here](../draft-types/animation.md) and animation objects [here](../attribute-types/animation/index.md).
 
 The [Domkisas Embassy](https://forum.theotown.com/plugins/list?term=%3A198) plugin makes heavy use of animations
-[to save texture space](../using-animations-to-save-plugin-space.md):
+[to save texture space](using-animations-to-save-plugin-space.md):
 
 ![](../assets/guides/animation/embassy.png)
 

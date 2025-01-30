@@ -36,6 +36,10 @@ type_mapping: dict[str | type, MappingStruct] = {
         "name": "array",
         "doc":  f"{ROOT_PATH}/attribute-types/base#array"
     },
+    '2d-array': {
+        "name": "2D array",
+        "doc":  f"{ROOT_PATH}/attribute-types/base#array"
+    },
     'attribute-collection': {
         "name": "Attribute collection",
         "doc": f"{ROOT_PATH}/attribute-types/attribute-collection"
