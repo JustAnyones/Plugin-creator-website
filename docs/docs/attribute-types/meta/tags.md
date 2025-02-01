@@ -2,6 +2,8 @@
 
 This is an object of the meta object that contains tags. You can define multiple tags in the same meta object.
 
+Adding custom tags may be useful as you can fetch drafts via tags using [`Draft.getDrafts("meta tag")`](https://doc.theotown.com/modules/Draft.html#getDrafts).
+
 <!-- TODO: add tags that are loaded by Lua -->
 
 ## Animation tags
