@@ -1,8 +1,20 @@
+import enum
 import textwrap
 import sys
 
 from collections import Counter
 from dataclasses import dataclass
+
+class ChangeType(enum.Enum):
+    ADDED = "version-added"
+    REMOVED = "version-removed"
+    CHANGED = "version-changed"
+
+@dataclass
+class AttributeChange:
+    type: ChangeType
+    version: str
+    change: str | None = None
 
 @dataclass
 class Attribute:
@@ -10,10 +22,10 @@ class Attribute:
     type: str
     description: str = ""
 
-    version_added: str | None = None
     deprecated: str | None = None
     required: bool = False
     default: str | None = None
+    changes: list[AttributeChange] | None = None
 
 
 class BaseDraft:
@@ -22,7 +34,10 @@ class BaseDraft:
     __file__ = "base.md"
 
     def __init__(self):
-        super().__init__()
+        # Stores attributes that are generated automatically
+        # Usually something like influences, flags, etc.
+        self.generated: dict[str, Attribute] = {}
+
         self.id = Attribute(
             "id",
             "string",
@@ -80,14 +95,18 @@ class BaseDraft:
             "require privileges",
             "boolean",
             "Whether the draft requires features such as monthly income, frame placement, etc.",
-            version_added="1.11.73",
+            changes=[
+                AttributeChange(ChangeType.ADDED, "1.11.73")
+            ],
             default="false"
         )
         self.requireSuperPrivileges = Attribute(
             "require super privileges",
             "boolean",
             "Whether the draft requires features that are restricted to official game content such as DSA.",
-            version_added="1.11.73",
+            changes=[
+                AttributeChange(ChangeType.ADDED, "1.11.73")
+            ],
             default="false"
         )
         self.inherit = Attribute(
@@ -170,7 +189,17 @@ class BaseDraft:
         self.index = Attribute(
             "index",
             "boolean",
-            "Whether to allow the draft to be indexed by Lua methods."
+            """
+            Whether to allow the draft to be indexed by Lua methods.
+
+            **By default**, the value will be true unless the draft is of type "script", "data" or "scenario".
+            """,
+            changes=[
+                AttributeChange(
+                    ChangeType.CHANGED, "1.12.12",
+                    "The default value was changed to false for script, data and scenario drafts."
+                )
+            ],
         )
 
         self.notImplemented = Attribute(
@@ -395,6 +424,20 @@ class BaseDraft:
             "string[]",
             "Like [script](#script), but for multiple scripts."
         )
+        self.requireScenario: Attribute = Attribute(
+            "require scenario",
+            "string|string[]",
+            """
+            Array of scenario IDs in which this draft can be used.
+            It will be unloaded when entering a city that is not one of these scenarios.
+
+            Privileged context is required to use this attribute as
+            it could be used to cheat inside a scenario.
+            """,
+            changes=[
+                AttributeChange(ChangeType.ADDED, "1.12.12")
+            ]
+        )
 
     def to_md_page(self, f=sys.stdout):
         attributes: list[Attribute] = []
@@ -419,9 +462,18 @@ class BaseDraft:
         for attr in sorted(attributes, key=lambda x: x.name):
             print(f"### {attr.name}", file=f)
             print(f"::: type: {attr.type}", file=f)
+
+            # Notify about deprecation first
             if attr.deprecated:
-                
                 print(f"::: deprecated: {textwrap.dedent(attr.deprecated).strip().replace("\n", " ")}", file=f)
+
+            # Then list all the changes over time
+            if attr.changes and len(attr.changes) > 0:
+                sorted_changes = sorted(attr.changes, key=lambda x: x.version)
+                for change in sorted_changes:
+                    print(f"::: {change.type.value}: {change.version}", file=f)
+            
+            # And only then provide the description
             print(file=f)
             print(textwrap.dedent(attr.description).strip(), file=f)
             print(file=f)

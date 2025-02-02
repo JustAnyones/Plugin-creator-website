@@ -85,12 +85,11 @@ Unique identifier of the draft.
 
 ### index
 ::: type: boolean
+::: version-changed: 1.12.12
 
 Whether to allow the draft to be indexed by Lua methods.
 
 **By default**, the value will be true unless the draft is of type "script", "data" or "scenario".
-
-https://github.com/TheoTown-Team/game-x/commit/f65dae45f91550c5402599ea9cef666cb7622ec3
 
 ### inherit
 ::: type: boolean
@@ -195,11 +194,23 @@ Allows the use of special features, which are restricted to trusted plugin creat
 
 ### require privileges
 ::: type: boolean
+::: version-added: 1.11.73
 
 Whether the draft requires features such as monthly income, frame placement, etc.
 
+### require scenario
+::: type: string|string[]
+::: version-added: 1.12.12
+
+Array of scenario IDs in which this draft can be used.
+It will be unloaded when entering a city that is not one of these scenarios.
+
+Privileged context is required to use this attribute as
+it could be used to cheat inside a scenario.
+
 ### require super privileges
 ::: type: boolean
+::: version-added: 1.11.73
 
 Whether the draft requires features that are restricted to official game content such as DSA.
 
