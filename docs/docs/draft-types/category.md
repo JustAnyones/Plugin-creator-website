@@ -86,10 +86,11 @@ Unique identifier of the draft.
 ### index
 ::: type: boolean
 ::: version-changed: 1.12.12
+::: version-changed: 1.12.13
 
 Whether to allow the draft to be indexed by Lua methods.
 
-**By default**, the value will be true unless the draft is of type "script", "data" or "scenario".
+**By default**, the value will be true unless the draft is scenario draft.
 
 ### inherit
 ::: type: boolean

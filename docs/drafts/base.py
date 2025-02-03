@@ -192,12 +192,16 @@ class BaseDraft:
             """
             Whether to allow the draft to be indexed by Lua methods.
 
-            **By default**, the value will be true unless the draft is of type "script", "data" or "scenario".
+            **By default**, the value will be true unless the draft is scenario draft.
             """,
             changes=[
                 AttributeChange(
                     ChangeType.CHANGED, "1.12.12",
                     "The default value was changed to false for script, data and scenario drafts."
+                ),
+                AttributeChange(
+                    ChangeType.CHANGED, "1.12.13",
+                    "The default value was changed to true for script and data drafts."
                 )
             ],
         )
