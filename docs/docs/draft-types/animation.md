@@ -92,7 +92,7 @@ If the value is greater than 1, the game will generate additional frames that gr
 ### ping pong
 ::: type: boolean
 
-If true, animation loop back-and-forth to create the "ping pong" effect, where the sequence of frames goes forward and then reverses direction, offering a bouncing effect for animations.
+If true, the animation will loop back-and-forth to create the "ping pong" effect, where the sequence of frames goes forward and then reverses direction, offering a bouncing effect.
 
 **By default**, the value will be false.
 
