@@ -29,8 +29,7 @@ First of all, let's define our animation draft:
         "move x": 10, // Our animation will be in x=10
         "move y": 16  // and y=16
       }     
-    ],
-    "handle interpolation": 5 // 5 ticks between moment 1 and moment 2
+    ]
   }
 ]
 ```
