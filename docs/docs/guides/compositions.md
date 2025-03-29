@@ -98,6 +98,8 @@ As you can see it's possible to rotate the composition. If rotation aware buildi
 
 ![](../assets/guides/compositions/image.png)
 
+For road decorations and bus stops you can provide a **level** attribute (0 by default).
+
 ```json
 [{
   "id": "$compositionexample01",
@@ -113,8 +115,6 @@ As you can see it's possible to rotate the composition. If rotation aware buildi
 }]
 ```
 
-For road decorations and bus stops you can provide a **level** attribute (0 by default).
-
 New attributes were added for roads in compositions, namely:
 
 ### l0, l1
@@ -129,7 +129,7 @@ The default values are 0 which means on ground (also in context of terrain; road
 By default, the roads in road compositions join to other roads. However, in some cases you may not want that to happen. Now you can prevent that by using:
 >
 ```json
-"join":false
+"join": false
 ```
 >
 The road will still align to other roads that it intersects.

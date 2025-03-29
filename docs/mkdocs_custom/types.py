@@ -1,3 +1,3 @@
-from typing import Any # pyright: ignore[reportAny]
+from typing import Any
 
 DataDict = dict[str, dict[str, Any]]

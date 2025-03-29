@@ -115,9 +115,9 @@ class AttributeLineFormatter:
                 return AttributeCollection(inner_type)
             return inner_type
         if array_levels == 1:
-            return list[inner_type] # pyright: ignore[reportGeneralTypeIssues]
+            return list[inner_type]
         if array_levels == 2:
-            return list[list[inner_type]] # pyright: ignore[reportGeneralTypeIssues]
+            return list[list[inner_type]]
         raise RuntimeError(f"{array_levels}-dimensional arrays are not supported")
 
     def format_type(self, value: str):
@@ -183,7 +183,8 @@ class AttributeParsingPreprocessor(Preprocessor):
         in_attributes = False
         for line in lines:
             # Check if we're at the opening of attributes heading
-            if line.startswith("## Attributes"):
+            is_attribute_start = line.startswith("## Attributes")
+            if is_attribute_start:
                 in_attributes = True
                 new_lines.append(line)
                 continue

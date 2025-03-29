@@ -1,0 +1,6 @@
+# Empty
+
+## Example
+```json
+"frames": []
+```
