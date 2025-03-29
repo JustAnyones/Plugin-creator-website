@@ -395,7 +395,7 @@ window.onerror = function (msg, url, line, col, error) {
 
     <div class="footer">
       <a href="https://github.com/JustAnyones/Plugin-creator-website">
-        &copy; Plugin creator website {{version}} by JustAnyone 2024
+        &copy; Plugin creator website {{version}} by JustAnyone 2025
       </a>
     </div>
   </div>
