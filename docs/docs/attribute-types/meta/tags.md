@@ -333,6 +333,23 @@ ID of a train to spawn at this station. `$train00` by default.
 
 
 
+## Bus stop tags
+
+These are tags that are only supported by bus stop drafts.
+
+### default_busstop
+
+```json
+{
+  "meta": {
+    "tags": {
+      "default_busstop": {}
+    }
+  }
+}
+```
+
+
 ## Car tags
 
 These are tags that are only supported by car drafts.
