@@ -26,7 +26,7 @@ Let's have a look at how changing the existing water can be achieved now:
 ```
 
 ![](../assets/guides/custom-water/water_tiles.png)
-![](../assets/guides/custom-water/sparkle_tiles.png) <!-- TODO: reconcile -->
+![](../assets/guides/custom-water/sparkle_tiles.png)
 
 As you can see the graphics are now tile based. The game switches between the various frames smoothly so you might not need as many frames as used in here. The optional sparkle frames are used as an overlay of unshaded sparkle effects that will also be animated.
 
