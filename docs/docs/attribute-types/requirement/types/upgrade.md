@@ -10,7 +10,7 @@ Used to specify a required building upgrade for the requirement to be fulfilled.
 
 ## Example
 
-The following example requires the city to be at level 23.
+The following example requires the current building to have `$building_upgrade_00` upgrade.
 
 ```json
 "requirements": [
