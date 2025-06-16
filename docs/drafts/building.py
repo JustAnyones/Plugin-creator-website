@@ -1,5 +1,5 @@
 # pyright: reportImplicitRelativeImport=false
-from base import Attribute
+from base import Attribute, AttributeChange, ChangeType
 from spawnable import SpawnableDraft
 from stubs import Aspect, CarFlag, Influence
 from viewport import ViewportDraft
@@ -267,6 +267,18 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             **By default**, the value will be 0.
             """
+        )
+        self.depotCapacity: Attribute = Attribute(
+            "depot capacity",
+            "integer",
+            """
+            Amount of vehicles that can be stored in a depot building.
+
+            **By default**, the value will be 0.
+            """,
+            changes=[
+                AttributeChange(ChangeType.ADDED, "1.12.26")
+            ]
         )
         self.destroyable: Attribute = Attribute(
             "destroyable",

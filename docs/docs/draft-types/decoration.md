@@ -201,6 +201,14 @@ Used for attribute calculations as more dense buildings usually have higher expe
 **By default**, if the value is -1, the game will calculate it on its own
 by diving the number of people in the building by the building's area.
 
+### depot capacity
+::: type: integer
+::: version-added: 1.12.26
+
+Amount of vehicles that can be stored in a depot building.
+
+**By default**, the value will be 0.
+
 ### destroyable
 ::: type: boolean
 
