@@ -282,6 +282,63 @@ Whether to consider the building as a metro station.
 }
 ```
 
+### metro_station
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+Whether to consider the building as a metro station.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "metro_station": {}
+    }
+  }
+}
+```
+
+### metro_depot
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+Whether to consider the building as a metro depot where metro cars are dispatched from.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "metro_depot": {}
+    }
+  }
+}
+```
+
+### freight_train_platform
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+Whether to consider the building as a freight train platform.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "freight_train_platform": {}
+    }
+  }
+}
+```
+
 ### policehelicopter
 
 ```json
@@ -338,6 +395,11 @@ ID of a train to spawn at this station. `$train00` by default.
 These are tags that are only supported by bus stop drafts.
 
 ### default_busstop
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
 
 ```json
 {
@@ -546,6 +608,25 @@ Used to mark a car draft as a garbage truck.
 }
 ```
 
+### ts_normal_bus
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+Whether to consider the vehicle as a bus that is used in the bus system.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "ts_normal_bus": {}
+    }
+  }
+}
+```
+
 ### medic
 
 Used to mark a car draft as a medic car.
@@ -675,6 +756,78 @@ Whether the road decoration is considered to be a car accident.
 
 
 
+
+## Train car tags
+
+These are tags that are only supported by train car drafts.
+
+### short_distance_passenger_train
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "short_distance_passenger_train": {}
+    }
+  }
+}
+```
+
+### long_distance_passenger_train
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "long_distance_passenger_train": {}
+    }
+  }
+}
+```
+
+### freight_train
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "freight_train": {}
+    }
+  }
+}
+```
+
+### heavy_freight_train
+
+!!! warning "Unstable"
+
+    This feature is part of the ongoing transport update
+    and may be subject to change in the future.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "heavy_freight_train": {}
+    }
+  }
+}
+```
 
 ## Tree tags
 
