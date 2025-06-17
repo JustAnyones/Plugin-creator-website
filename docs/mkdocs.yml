@@ -115,6 +115,8 @@ markdown_extensions:
   - toc:
       permalink: "#"
       separator: "_"
+  - pymdownx.details
+  - pymdownx.superfences
 
 plugins:
   - search

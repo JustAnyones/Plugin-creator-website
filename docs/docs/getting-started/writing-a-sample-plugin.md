@@ -38,7 +38,7 @@ Every JSON file (let's call it *sample_dsc.json*) in a plugin may contain multip
 
 Speaking of objects, the listing contains a number of objects, each starting with **{** and ending with **}**. Multiple objects have to be separated using a comma.
 
-An object consists of multiply "key":"value" pairs that are used to define the properties of the object. Step for step:
+An object consists of multiple `"key": "value"` pairs that are used to define the properties of the object. Step for step:
 
 * **id** - Each object has to have a unique id to identify it. So you should add some specific information about the plugin to ensure nobody else ever gonna use this id. Avoid changes to the id afterwards, as it is used to identify buildings in saved cities. Buildings with unknown id cannot be loaded.
 * **type** - States the type of the plugin. See [the advanced topic](https://www.theotown.com/forum/viewtopic.php?f=41&t=1355) for more types. We will call objects that have types _drafts_.
