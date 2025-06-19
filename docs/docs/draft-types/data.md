@@ -59,12 +59,16 @@ This will automatically be set to true if final is set to true or if your draft 
 ### icon frames
 ::: type: Frame[]
 
+Frames that will be used for the top left corner of the building dialog.
 
+Size of the frames should be 26x26 pixels.
 
 ### icon frames winter
 ::: type: Frame[]
 
+Frames that will be used during winter for the top left corner of the building dialog.
 
+Size of the frames should be 26x26 pixels.
 
 ### id
 ::: type: string
@@ -93,7 +97,9 @@ The maximum game version that will run the draft.
 ### meta
 ::: type: Meta
 
+A special attribute that allows you to store additional metadata about the draft.
 
+Read more about it in the [Meta documentation](../guides/drafts/meta.md).
 
 ### min version
 ::: type: integer
@@ -314,7 +320,9 @@ Like template, but accepts multiple IDs.
 ### text
 ::: type: string
 
-Description, usually of the building.
+Description, usually of the building. Should be English if distributed.
+
+**By default**, the value will be null.
 
 ### text id
 ::: type: string
@@ -324,7 +332,9 @@ Description, usually of the building.
 ### title
 ::: type: string
 
-Title, usually of the building.
+Title, usually of the building. Should be English if distributed.
+
+**By default**, the value will be null.
 
 ### title id
 ::: type: string

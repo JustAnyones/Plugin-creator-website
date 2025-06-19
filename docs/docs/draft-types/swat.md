@@ -9,9 +9,9 @@ Swat drafts have the type of `swat` and belong to the `$cat_police00` category b
 Whether the draft is active and should be loaded by the game.
 
 ### add price
-::: type: string[]
+::: type: string|string[]
 
-Array of draft IDs.
+A single ID or array of IDs of other drafts whose building price should be added when building this building.
 
 ### alias
 ::: type: string
@@ -44,12 +44,15 @@ Note that there is a max limit of 32 custom flags.
 If set and the building has multiple frames, then these frames will be used for animation.
 Normally multiple frames will be used for different variants of a building and or rotation awareness.
 
+User will no longer be able to select a specific frame manually.
+
 **By default**, the value will be false.
 
 ### animation
 ::: type: Animation[]
 
-
+Similar to [smoke](#smoke), can be used to place animations on your building.
+Position is relative to pivot point of the building.
 
 ### animation fg
 ::: type: Animation[]
@@ -59,25 +62,25 @@ Normally multiple frames will be used for different variants of a building and o
 ### aspect body disposal capacity
 ::: type: integer
 
-
+The body capacity of a deceased processing facility.
 
 ### aspect education high capacity
 ::: type: integer
 
-
+The student capacity of a high school.
 
 ### aspect education low capacity
 ::: type: integer
 
-
+The student capacity of a school.
 
 ### aspect health care capacity
 ::: type: integer
 
-
+The patient capacity of a hospital.
 
 ### aspect waste disposal capacity
-::: type: integer
+::: type: The garbage capacity of a garbage processing facility.
 
 
 
@@ -89,9 +92,11 @@ The name of the author behind the draft.
 ### auto build
 ::: type: boolean
 
-For RCI buildings only.
+**Only supported by RCI drafts.**
 
 Determines whether the building can be built automatically by the game on corresponding zones and given demand.
+
+**By default**, the value will be true.
 
 ### auto build factor
 ::: type: float
@@ -110,7 +115,11 @@ Used for spawning draft objects on the map during generation.
 
 ID of the draft that has the `"budget item"` meta tag defined.
 
-Monthly income or expenses show up under the budget item.
+Buildings that have monthly income or spendings usually appear in the budget view in the associated category,
+that is e.g. parks for buildings of type park.
+
+You can define your own type of budget, called budget item.
+That is a data object that will be used to provide a name for the item.
 
 ### build height
 ::: type: integer
@@ -178,6 +187,8 @@ Composition buildings must be rotation aware.
 ::: type: boolean
 
 Whether the building will connect to normal power lines.
+
+**By default**, the value will be true.
 
 ### deco frames
 ::: type: Frame[]
@@ -272,6 +283,8 @@ to incorporate water into their visuals.
 If a string is provided, ground draft by the specified ID
 will be used for drawing.
 
+**By default**, the value will be true.
+
 ### draw zone
 ::: type: boolean
 
@@ -331,17 +344,22 @@ If true the building will be built using an area tool.
 ### frame animation indices
 ::: type: integer[][]
 
-
+Animation indices are used to specify which animations should be visible for which frames.
 
 ### frames
 ::: type: Frame[]
+
+Graphic frames definition of the draft.
+
+At least one frame has to be given. If multiple frames are given, player may select one of them in the game.
 
 Required unless you are using a composition.
 
 ### frames winter
 ::: type: Frame[]
 
-
+Works the same as [frames](#frames), but during winter time.
+If you define it you have to provide the same number of frames as in [frames](#frames).
 
 ### free build time skip
 ::: type: boolean
@@ -371,10 +389,16 @@ Array of Viewport draft IDs.
 ### habitants
 ::: type: integer
 
-For residential buildings: The amount of inhabitants.
+**Only supported by residential type drafts.**
+
+Number of habitants in the building.
+
+**By default**, the value will be inferred from building size.
 
 ### height
 ::: type: integer
+
+Tile height of the base of the building.
 
 Must be of equal value to the [width](#width) attribute unless it's a composition.
 
@@ -407,12 +431,16 @@ Whether the building will connect to high voltage lines.
 ### icon frames
 ::: type: Frame[]
 
+Frames that will be used for the top left corner of the building dialog.
 
+Size of the frames should be 26x26 pixels.
 
 ### icon frames winter
 ::: type: Frame[]
 
+Frames that will be used during winter for the top left corner of the building dialog.
 
+Size of the frames should be 26x26 pixels.
 
 ### id
 ::: type: string
@@ -589,9 +617,9 @@ Whether to modify a draft of the same ID by inheriting values.
 ### level
 ::: type: integer
 
-Represents wealth level of the building. Level ranges from 1 to 3. 
+**Only supported by RCI buildings.**
 
-Only supported by RCI buildings.
+Represents wealth level of the building. Level ranges from 1 to 3. 
 
 **By default**, the value will be 1.
 
@@ -603,7 +631,9 @@ Whether the building will conduct water like a pipe.
 ### map color
 ::: type: Color
 
+**Only supported by terrain drafts.**
 
+Specifies the color of the building on the map.
 
 ### max count
 ::: type: integer
@@ -620,7 +650,9 @@ The maximum game version that will run the draft.
 ### meta
 ::: type: Meta
 
+A special attribute that allows you to store additional metadata about the draft.
 
+Read more about it in the [Meta documentation](../guides/drafts/meta.md).
 
 ### min version
 ::: type: integer
@@ -759,7 +791,8 @@ ID of a pedestrian draft.
 ### people
 ::: type: integer
 
-Unified type that provides habitants or workers depending on the RCI type.
+**Only supported by RCI type drafts.**
+Unified type that specifies [habitants](#habitants) or [workers](#workers) depending on the RCI type.
 
 ### performance
 ::: type: boolean
@@ -772,16 +805,18 @@ Performance impacts influences, aspects, costs and income.
 ### pickable
 ::: type: boolean
 
-Whether the building can be picked by picking tool.
+Whether the building can be picked via eye dropper tool.
 
 **By default**, the value will be true.
 
 ### power
 ::: type: integer
 
-Positive values produce and negative values consume the resource.
+Produced amount of energy by this building in kWh. Positive values produce and negative values consume the resource.
 
 Maximum possible value is determined by $	ext{width} 	imes 	ext{height} 	imes 10000$, unless you're using privileges.
+
+**By default**, the value will be inferred from building size.
 
 ### power radius
 ::: type: integer
@@ -825,7 +860,7 @@ Frames that will be used for preview in the toolbar instead of regular frames du
 ### price
 ::: type: integer
 
-The price to construct the building. If the building costs diamonds the price won't be charged.
+The price to construct the building. If the building costs diamonds, the price won't be charged.
 
 Negative values require privileges.
 
@@ -844,30 +879,33 @@ Allows the use of special features, which are restricted to trusted plugin creat
 ### provide aspect body disposal
 ::: type: integer
 
-
+The body capacity of a deceased processing facility.
 
 ### provide aspect education high
 ::: type: integer
 
-
+The student capacity of a high school.
 
 ### provide aspect education low
 ::: type: integer
 
-
+The student capacity of a school.
 
 ### provide aspect health care
 ::: type: integer
 
-
+The patient capacity of a hospital.
 
 ### provide aspect waste disposal
-::: type: integer
+::: type: The garbage capacity of a garbage processing facility.
 
 
 
 ### random frame
 ::: type: boolean
+
+If true, every time you place the building,
+a random frame from the [frame array](#frames) will be selected 
 
 **By default**, the value will be true.
 
@@ -894,7 +932,10 @@ Allows the use of special features, which are restricted to trusted plugin creat
 ### rebuild
 ::: type: boolean
 
+Whether the RCI building will rebuild instead of being replaced by another.
+Useful if your population drops suddenly, but you want the city to remain looking the same.
 
+**By default**, the value will be true.
 
 ### removable
 ::: type: boolean
@@ -1198,6 +1239,7 @@ of the neighbouring road.
 ::: type: boolean
 
 If true the building will dedicate frames for use in rotation.
+In this case you have to provide a multiple of 4 frames.
 
 **By default**, the value will be true, if the draft is [alignable](#alignable) and has at least 4 frames or it is a composition building.
 
@@ -1290,7 +1332,10 @@ Whether the draft will show a new marker in the toolbar.
 ### smoke
 ::: type: Smoke[]
 
+List of smoke sources.
+Position is relative to pivot point of the building.
 
+See [here](https://forum.theotown.com/viewtopic.php?p=6653) for the listing of defined smoke types.
 
 ### sound click
 ::: type: obj
@@ -1333,20 +1378,31 @@ Used for spawning draft objects on the map during generation.
 Whether the building will connect to normal power lines
 and high voltage ones.
 
+**By default**, the value will be false.
+
 ### supports shoreline
 ::: type: boolean
 
+If set to false the building cannot be built if there is coast under it.
 
+**By default**, the value will be true.
 
 ### supports slope
 ::: type: boolean
 
+Determines whether this building handles slopes on it's own (graphically).
+Enabling this will not draw the concrete blocks under the building.
+Usually only recommended for decorations and in combination with [draw ground](#draw_ground) attribute set to true.
 
+**By default**, the value will be false.
 
 ### supports terrain
 ::: type: boolean
 
+Indicates whether this building can be placed on terrain in general
+(if not the building will only be placeable on flat areas).
 
+**By default**, the value will be true.
 
 ### template
 ::: type: string
@@ -1366,7 +1422,9 @@ Like template, but accepts multiple IDs.
 ### text
 ::: type: string
 
-Description, usually of the building.
+Description, usually of the building. Should be English if distributed.
+
+**By default**, the value will be null.
 
 ### text id
 ::: type: string
@@ -1376,7 +1434,9 @@ Description, usually of the building.
 ### title
 ::: type: string
 
-Title, usually of the building.
+Title, usually of the building. Should be English if distributed.
+
+**By default**, the value will be null.
 
 ### title id
 ::: type: string
@@ -1389,9 +1449,17 @@ Title, usually of the building.
 A special attribute that determines what kind of attributes and abilities a draft has.
 
 ### upgrades
-::: type:  Upgrade[]
+::: type: Upgrade[]
 
+Defines the upgrades the building can have.
 
+Some additional notes:
+- price, monthly price, water, power and influences will be
+added to corresponding values of the building when the upgrade is applied
+
+- You can also provide animations as for regular buildings, but not smoke
+- You can set "only one":true in an upgrade to state that no other upgrade may be active at the same time.
+    We use this for example for the radio station were you can have selected only one program at the same time.
 
 ### use fence
 ::: type: string[]
@@ -1419,9 +1487,11 @@ Not in use.
 ### water
 ::: type: integer
 
-Positive values produce and negative values consume the resource.
+Produced amount of water by this building in L/h. Positive values produce and negative values consume the resource.
 
 Maximum possible value is determined by $	ext{width} 	imes 	ext{height} 	imes 10000$, unless you're using privileges.
+
+**By default**, the value will be inferred from building size.
 
 ### water border frames
 ::: type: Frame[]
@@ -1442,12 +1512,18 @@ Negative values reduce water pollution.
 ### width
 ::: type: integer
 
+Tile width of the base of the building.
+
 Must be of equal value to the [height](#height) attribute unless it's a composition.
 
 ### workers
 ::: type: integer
 
-For commercial and industrial buildings: The amount of workers.
+**Only supported by commercial and industrial type drafts.**
+
+Number of workers in the building.
+
+**By default**, the value will be inferred from building size.
 
 ### zone
 ::: type: string
