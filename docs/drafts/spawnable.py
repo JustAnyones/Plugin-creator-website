@@ -14,7 +14,9 @@ class SpawnableDraft(BaseDraft):
         self.spawn: Attribute = Attribute(
             "spawn",
             "LegacySpawner",
-            "Used for spawning draft objects on the map during generation.",
+            """
+            Used for spawning draft objects on the map during generation.
+            """,
             deprecated="""
             Following the biome update this method of building spawning is considered obsolete.
             Use the new [biomes](#biomes) attribute instead.

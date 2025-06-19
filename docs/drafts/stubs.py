@@ -11,11 +11,11 @@ class CustomEnum(Enum):
         return copy.copy(self.value)
 
 class Aspect(CustomEnum):
-    EDUCATION_LOW = Attribute("education low", "integer")
-    EDUCATION_HIGH = Attribute("education high", "integer")
-    HEALTH_CARE = Attribute("health care", "integer")
-    WASTE_DISPOSAL = Attribute("waste disposal", "integer")
-    BODY_DISPOSAL = Attribute("body disposal", "integer")
+    EDUCATION_LOW = Attribute("education low", "integer", "The student capacity of a school.")
+    EDUCATION_HIGH = Attribute("education high", "integer", "The student capacity of a high school.")
+    HEALTH_CARE = Attribute("health care", "integer", "The patient capacity of a hospital.")
+    WASTE_DISPOSAL = Attribute("waste disposal", "The garbage capacity of a garbage processing facility.")
+    BODY_DISPOSAL = Attribute("body disposal", "integer", "The body capacity of a deceased processing facility.")
 
 class Influence(CustomEnum):
     POLLUTION = Attribute("influence pollution", "integer")

@@ -8,6 +8,9 @@ class ViewportDraft(BaseDraft):
         self.frames: Attribute = Attribute(
             "frames",
             "Frame[]",
+            """
+            Graphic frames definition of the draft.
+            """
         )
         self.framesWinter: Attribute = Attribute(
             "frames winter",

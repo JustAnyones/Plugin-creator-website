@@ -137,12 +137,21 @@ class BaseDraft:
         self.title = Attribute(
             "title",
             "string",
-            "Title, usually of the building."
+            """
+            Title, usually of the building. Should be English if distributed.
+
+            **By default**, the value will be null.
+            """
+
         )
         self.text = Attribute(
             "text",
             "string",
-            "Description, usually of the building."
+            """
+            Description, usually of the building. Should be English if distributed.
+
+            **By default**, the value will be null.
+            """
         )
 
         self.hidden = Attribute(
@@ -231,7 +240,12 @@ class BaseDraft:
 
         self.meta = Attribute(
             "meta",
-            "Meta"
+            "Meta",
+            """
+            A special attribute that allows you to store additional metadata about the draft.
+
+            Read more about it in the [Meta documentation](../guides/drafts/meta.md).
+            """
         )
 
         self.title_id = Attribute(
@@ -262,14 +276,24 @@ class BaseDraft:
             "Frames that will be used for preview in the toolbar instead of regular frames during winter."
         )
 
-        self.icon_frames = Attribute(
+        self.iconFrames = Attribute(
             "icon frames",
-            "Frame[]"
+            "Frame[]",
+            """
+            Frames that will be used for the top left corner of the building dialog.
+            
+            Size of the frames should be 26x26 pixels.
+            """
         )
 
-        self.icon_frames_winter = Attribute(
+        self.iconFramesWinter = Attribute(
             "icon frames winter",
-            "Frame[]"
+            "Frame[]",
+            """
+            Frames that will be used during winter for the top left corner of the building dialog.
+            
+            Size of the frames should be 26x26 pixels.
+            """
         )
 
         self.show_new_marker = Attribute(
@@ -319,7 +343,7 @@ class BaseDraft:
             "boolean"
         )
 
-        self.sound_click = Attribute(
+        self.soundClick = Attribute(
             "sound click",
             "obj",
             """

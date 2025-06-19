@@ -40,13 +40,21 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.width: Attribute = Attribute(
             "width",
             "integer",
-            "Must be of equal value to the [height](#height) attribute unless it's a composition.",
+            """
+            Tile width of the base of the building.
+
+            Must be of equal value to the [height](#height) attribute unless it's a composition.
+            """,
             required=True
         )
         self.height: Attribute = Attribute(
             "height",
             "integer",
-            "Must be of equal value to the [width](#width) attribute unless it's a composition.",
+            """
+            Tile height of the base of the building.
+            
+            Must be of equal value to the [width](#width) attribute unless it's a composition.
+            """,
             required=True
         )
         self.composition: Attribute = Attribute(
@@ -65,10 +73,18 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             **By default**, the value will be true.
             """
         )
-        self.frames.description = "Required unless you are using a composition."
+        self.frames.description += """
+        At least one frame has to be given. If multiple frames are given, player may select one of them in the game.
+        
+        Required unless you are using a composition.
+        """
         self.framesWinter: Attribute = Attribute(
             "frames winter",
-            "Frame[]"
+            "Frame[]",
+            """
+            Works the same as [frames](#frames), but during winter time.
+            If you define it you have to provide the same number of frames as in [frames](#frames).      
+            """
         )
         self.decoFrames: Attribute = Attribute(
             "deco frames",
@@ -97,7 +113,12 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.randomFrame: Attribute = Attribute(
             "random frame",
             "boolean",
-            "**By default**, the value will be true."
+            """
+            If true, every time you place the building,
+            a random frame from the [frame array](#frames) will be selected 
+            
+            **By default**, the value will be true.
+            """
         )
         self.groundTiles: Attribute = Attribute(
             "ground tiles",
@@ -151,9 +172,9 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "level",
             "integer",
             """
-            Represents wealth level of the building. Level ranges from 1 to 3. 
+            **Only supported by RCI buildings.**
 
-            Only supported by RCI buildings.
+            Represents wealth level of the building. Level ranges from 1 to 3. 
 
             **By default**, the value will be 1.
             """
@@ -183,6 +204,8 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             If set and the building has multiple frames, then these frames will be used for animation.
             Normally multiple frames will be used for different variants of a building and or rotation awareness.
 
+            User will no longer be able to select a specific frame manually.
+
             **By default**, the value will be false.
             """,
             deprecated="""
@@ -194,16 +217,16 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "price",
             "integer",
             """
-            The price to construct the building. If the building costs diamonds the price won't be charged.
+            The price to construct the building. If the building costs diamonds, the price won't be charged.
 
             Negative values require privileges.
             """
         )
         self.addPrice: Attribute = Attribute(
             "add price",
-            "string[]",
+            "string|string[]",
             """
-            Array of draft IDs.
+            A single ID or array of IDs of other drafts whose building price should be added when building this building. 
             """
         )
         self.monthlyPrice: Attribute = Attribute(
@@ -229,7 +252,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             ID of the draft that has the `"budget item"` meta tag defined.
 
-            Monthly income or expenses show up under the budget item.
+            Buildings that have monthly income or spendings usually appear in the budget view in the associated category,
+            that is e.g. parks for buildings of type park.
+            
+            You can define your own type of budget, called budget item.
+            That is a data object that will be used to provide a name for the item.
             """
         )
         self.bulldozePrice: Attribute = Attribute(
@@ -245,18 +272,22 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "power",
             "integer",
             """
-            Positive values produce and negative values consume the resource.
+            Produced amount of energy by this building in kWh. Positive values produce and negative values consume the resource.
 
             Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+
+            **By default**, the value will be inferred from building size.
             """
         )
         self.water: Attribute = Attribute(
             "water",
             "integer",
             """
-            Positive values produce and negative values consume the resource.
+            Produced amount of water by this building in L/h. Positive values produce and negative values consume the resource.
 
             Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+            
+            **By default**, the value will be inferred from building size.
             """
         )
         self.capacity: Attribute = Attribute(
@@ -393,6 +424,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "boolean",
             """
             If true the building will dedicate frames for use in rotation.
+            In this case you have to provide a multiple of 4 frames.
 
             **By default**, the value will be true, if the draft is [alignable](#alignable) and has at least 4 frames or it is a composition building.
             """
@@ -513,12 +545,18 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.mapColor: Attribute = Attribute(
             "map color",
             "Color",
+            """
+            **Only supported by terrain drafts.**
+
+            Specifies the color of the building on the map.        
+            """# TODO: also supported by zones, but they arent buildings
         )
+        # TODO: mapColorWinter
         self.pickable: Attribute = Attribute(
             "pickable",
             "boolean",
             """
-            Whether the building can be picked by picking tool.
+            Whether the building can be picked via eye dropper tool.
 
             **By default**, the value will be true.
             """
@@ -609,14 +647,27 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.smoke: Attribute = Attribute(
             "smoke",
             "Smoke[]",
+            """
+            List of smoke sources.
+            Position is relative to pivot point of the building.
+
+            See [here](https://forum.theotown.com/viewtopic.php?p=6653) for the listing of defined smoke types.
+            """
         )
         self.animation: Attribute = Attribute(
             "animation",
             "Animation[]",
+            """
+            Similar to [smoke](#smoke), can be used to place animations on your building.
+            Position is relative to pivot point of the building.
+            """
         )
         self.frameAnimationIndices: Attribute = Attribute(
             "frame animation indices",
             "integer[][]",
+            """
+            Animation indices are used to specify which animations should be visible for which frames.
+            """
         )
         self.animationFg: Attribute = Attribute(
             "animation fg",
@@ -686,14 +737,32 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.supportsSlope: Attribute = Attribute(
             "supports slope",
             "boolean",
+            """
+            Determines whether this building handles slopes on it's own (graphically).
+            Enabling this will not draw the concrete blocks under the building.
+            Usually only recommended for decorations and in combination with [draw ground](#draw_ground) attribute set to true.
+
+            **By default**, the value will be false.
+            """
         )
         self.supportsTerrain: Attribute = Attribute(
             "supports terrain",
             "boolean",
+            """
+            Indicates whether this building can be placed on terrain in general
+            (if not the building will only be placeable on flat areas).
+
+            **By default**, the value will be true.
+            """
         )
         self.supportsShoreline: Attribute = Attribute(
             "supports shoreline",
             "boolean",
+            """
+            If set to false the building cannot be built if there is coast under it.
+
+            **By default**, the value will be true.
+            """
         )
         self.drawWaterBorders: Attribute = Attribute(
             "draw water borders",
@@ -710,6 +779,8 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             If a string is provided, ground draft by the specified ID
             will be used for drawing.
+
+            **By default**, the value will be true.
             """
         )
         self.moveable: Attribute = Attribute(
@@ -735,6 +806,8 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "boolean",
             """
             Whether the building will connect to normal power lines.
+
+            **By default**, the value will be true.
             """
         )
         self.superConductive: Attribute = Attribute(
@@ -743,6 +816,8 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             Whether the building will connect to normal power lines
             and high voltage ones.
+
+            **By default**, the value will be false.
             """
         )
         self.highVoltageOnly: Attribute = Attribute(
@@ -767,30 +842,41 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "habitants",
             "integer",
             """
-            For residential buildings: The amount of inhabitants.
+            **Only supported by residential type drafts.**
+
+            Number of habitants in the building.
+
+            **By default**, the value will be inferred from building size.
             """
         )
         self.workers: Attribute = Attribute(
             "workers",
             "integer",
             """
-            For commercial and industrial buildings: The amount of workers.
+            **Only supported by commercial and industrial type drafts.**
+
+            Number of workers in the building.
+
+            **By default**, the value will be inferred from building size.
             """
         )
         self.people: Attribute = Attribute(
             "people",
             "integer",
             """
-            Unified type that provides habitants or workers depending on the RCI type.
+            **Only supported by RCI type drafts.**
+            Unified type that specifies [habitants](#habitants) or [workers](#workers) depending on the RCI type.
             """
         )
         self.autoBuild: Attribute = Attribute(
             "auto build",
             "boolean",
             """
-            For RCI buildings only.
+            **Only supported by RCI drafts.**
 
             Determines whether the building can be built automatically by the game on corresponding zones and given demand.
+
+            **By default**, the value will be true.
             """
         )
         self.autoBuildFactor: Attribute = Attribute(
@@ -805,10 +891,27 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.rebuild: Attribute = Attribute(
             "rebuild",
             "boolean",
+            """
+            Whether the RCI building will rebuild instead of being replaced by another.
+            Useful if your population drops suddenly, but you want the city to remain looking the same.
+
+            **By default**, the value will be true.
+            """
         )
         self.upgrades: Attribute = Attribute(
             "upgrades",
-            " Upgrade[]",
+            "Upgrade[]",
+            """
+            Defines the upgrades the building can have.
+            
+            Some additional notes:
+            - price, monthly price, water, power and influences will be
+            added to corresponding values of the building when the upgrade is applied
+            
+            - You can also provide animations as for regular buildings, but not smoke
+            - You can set "only one":true in an upgrade to state that no other upgrade may be active at the same time.
+                We use this for example for the radio station were you can have selected only one program at the same time.
+            """
         )
         self.influencePreview: Attribute = Attribute(
             "influence preview",
@@ -940,6 +1043,13 @@ class DecorationDraft(BuildingDraft):
 
     def __init__(self):
         super().__init__()
+        self.autoBuild.description = """
+        **Only supported by RCI drafts.**
+
+        Determines whether the building can be built automatically by the game on corresponding zones and given demand.
+
+        **By default**, the value will be false.        
+        """
 
 class DestroyedDraft(BuildingDraft):
         
