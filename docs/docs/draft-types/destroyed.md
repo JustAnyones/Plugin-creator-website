@@ -80,9 +80,9 @@ The student capacity of a school.
 The patient capacity of a hospital.
 
 ### aspect waste disposal capacity
-::: type: The garbage capacity of a garbage processing facility.
+::: type: integer
 
-
+The garbage capacity of a garbage processing facility.
 
 ### author
 ::: type: string
@@ -897,9 +897,9 @@ The student capacity of a school.
 The patient capacity of a hospital.
 
 ### provide aspect waste disposal
-::: type: The garbage capacity of a garbage processing facility.
+::: type: integer
 
-
+The garbage capacity of a garbage processing facility.
 
 ### random frame
 ::: type: boolean
