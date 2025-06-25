@@ -3,6 +3,7 @@ from base import Attribute, AttributeChange, ChangeType
 from spawnable import SpawnableDraft
 from stubs import Aspect, CarFlag, Influence
 from viewport import ViewportDraft
+from typing import override
 
 class BuildingBasedDraft(ViewportDraft):
     
@@ -34,6 +35,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
     __name__ = "Building"
     __file__ = "building.md"
+
+    def generate_influences(self):
+        """Generates influence attributes for the draft."""
+        for inf in Influence:
+            self.generated[inf.name] = inf.copy()
 
     def __init__(self):
         super().__init__()
@@ -922,9 +928,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             **By default**, the value will be true.
             """
         )
-        # Generate influence attributes
-        for inf in Influence:
-            self.generated[inf.name] = inf.copy()
+        self.generate_influences()
         
         # Generate aspects
         for asp in Aspect:
@@ -951,6 +955,28 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
         )
 
+
+class RCIDraft(BuildingDraft):
+    """
+    Stub implementation to be used as a base for RCI drafts.
+    """
+
+    @override
+    def generate_influences(self):
+        for inf in Influence:
+            self.generated[inf.name] = inf.copy()
+            self.generated[inf.name].description += """
+            Has no effect unless the draft is privileged.
+            """
+            self.generated[inf.name].changes = [
+                AttributeChange(
+                    ChangeType.CHANGED, "1.12.26",
+                    "Ignore the definition if the draft is not privileged."
+                )
+            ]
+
+    def __init__(self):
+        super().__init__()
 
 """
 The following are concrete drafts for buildings.
@@ -1016,7 +1042,7 @@ class BusDepotDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class CommercialDraft(BuildingDraft):
+class CommercialDraft(RCIDraft):
         
     """
     Commercial drafts have the type of `commercial` and belong to the `$cat_commercial00` category by default.
@@ -1028,7 +1054,7 @@ class CommercialDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class DecorationDraft(BuildingDraft):
+class DecorationDraft(RCIDraft):
         
     """
     Decoration drafts have the type of `decoration` and belong to the `$cat_decoration00` category by default.
@@ -1087,7 +1113,7 @@ class EnergyDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class FarmDraft(BuildingDraft):
+class FarmDraft(RCIDraft):
 
     """
     Farm drafts have the type of `farm` and belong to the `$cat_industrial00` category by default.
@@ -1113,7 +1139,7 @@ class FireBrigadeDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class HarborIndDraft(BuildingDraft):
+class HarborIndDraft(RCIDraft):
 
     """
     Harbor ind drafts have the type of `harbor ind` and belong to the `$cat_industrial00` category by default.
@@ -1127,7 +1153,7 @@ class HarborIndDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class HarborPierDraft(BuildingDraft):
+class HarborPierDraft(RCIDraft):
 
     """
     Harbor pier drafts have the type of `harbor pier` and belong to the `$cat_industrial00` category by default.
@@ -1141,7 +1167,7 @@ class HarborPierDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class IndustrialDraft(BuildingDraft):
+class IndustrialDraft(RCIDraft):
         
     """
     Industrial drafts have the type of `industrial` and belong to the `$cat_industrial00` category by default.
@@ -1249,7 +1275,7 @@ class ReligionDraft(BuildingDraft):
     def __init__(self):
         super().__init__()
 
-class ResidentialDraft(BuildingDraft):
+class ResidentialDraft(RCIDraft):
     
     """
     Residential drafts have the type of `residential` and belong to the `$cat_residential00` category by default.

@@ -474,103 +474,123 @@ May only be used with a [composition](#composition) attribute.
 
 ### influence body disposal
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence commercial
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence culture
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence density
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence education high
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence education low
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence fire department
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence health
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence industrial
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence level0
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence level1
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence level2
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence management
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence nature
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence noise
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence park
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence passenger bus
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence passenger train
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence police
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence pollution
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence preview
 ::: type: boolean
@@ -581,33 +601,39 @@ Whether a preview of the building's influences should be rendered.
 
 ### influence radioactive
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence religion
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence residential
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence sport
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence traffic
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### influence waste disposal
 ::: type: integer
+::: version-changed: 1.12.26
 
-
+Has no effect unless the draft is privileged.
 
 ### inherit
 ::: type: boolean
