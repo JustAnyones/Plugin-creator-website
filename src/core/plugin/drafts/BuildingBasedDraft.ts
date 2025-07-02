@@ -173,13 +173,13 @@ export abstract class BuildingBasedDraft extends ViewportDraft implements Buildi
             plugin: this.plugin, id: "power",
             name: "Power",
             description: "Amount of power used. Use negative values to produce power instead.",
-            validation: {minValue: -10_000_000, maxValue: 10_000_000}
+            validation: {minValue: -10_000_000, maxValue: 250_000}
         })
         this.water = new NumberAttribute({
             plugin: this.plugin, id: "water",
             name: "Water",
             description: "Amount of water used. Use negative values to produce water instead.",
-            validation: {minValue: -10_000_000, maxValue: 10_000_000}
+            validation: {minValue: -10_000_000, maxValue: 250_000}
         })
 
 
