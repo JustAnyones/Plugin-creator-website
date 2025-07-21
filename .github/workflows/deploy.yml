@@ -16,21 +16,23 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Build the web project
         run: |
           npm install
           npm run build
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+
       - name: Build the docs
         run: |
-          pip install poetry
-          poetry install
-          poetry run mkdocs build
+          uv run generate
+          uv run mkdocs build
           mv ./site/ ../dist/docs
         working-directory: ./docs
 
