@@ -165,6 +165,24 @@ Capacity for passenger related calculations.
 
 **By default**, the value will be 0.
 
+### car max level
+::: type: integer
+::: version-added: 1.12.26
+
+Describes the maximum relative level on which this building can spawn cars.
+This attribute is crucial to support stuff like metro and monorail.
+
+**By default**, the value will be 0, so that buildings can spawn cars on the same level.
+
+### car min level
+::: type: integer
+::: version-added: 1.12.26
+
+Describes the minimum relative level on which this building can spawn cars.
+This attribute is crucial to support stuff like metro and monorail.
+
+**By default**, the value will be -1, so that buildings can spawn cars on a level below (ie tunnels).
+
 ### car spawner
 ::: type: CarSpawner
 

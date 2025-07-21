@@ -76,6 +76,7 @@ def main():
     ]
 
     for draft in drafts:
+        print(f"Generating {draft.__name__} draft documentation...")
         with open(f"../docs/draft-types/{draft.__file__}", "w+") as f:
             draft.to_md_page(f)
 
