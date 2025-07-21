@@ -1,5 +1,7 @@
 # Texture space
 
+Texture space type frames are frames used from the game texture space.
+
 ## Attributes
 
 ::: inherit-h2 Attributes attribute-types/frame/.shared.md

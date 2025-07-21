@@ -1,6 +1,6 @@
 # Image
 
-The most commonly used method of defining a frame.
+Image type frames are frames used from an image file. This is the most commonly used method of defining a frame.
 
 ## Example
 
@@ -43,14 +43,20 @@ Only available for privileged drafts.
 ### x
 ::: type: int
 
-The horizontal position of the frame in the graphic.
+The horizontal coordinate of the frame in the graphic.
+
+For example:
+```json
+{"bmp": "frame.png", "x": 32}
+```
+Will display only the left 32 pixels of the image.
 
 **By default**, the value will be 0.
 
 ### y
 ::: type: int
 
-The vertical position of the frame in the graphic.
+The vertical coordinate of the frame in the graphic.
 
 **By default**, the value will be 0.
 
@@ -61,9 +67,9 @@ Sets the width of the frame to be selected.
 
 For example:
 ```json
-{"bmp": "jssj.png", "w": 32}
+{"bmp": "frame.png", "w": 32}
 ```
-Will display only the left 32 pixels of the image .
+Will define the frame to be 32 pixels wide.
 
 **By default**, the value will be the width of the frame.
 
