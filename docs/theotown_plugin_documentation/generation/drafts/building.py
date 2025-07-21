@@ -1,9 +1,10 @@
-# pyright: reportImplicitRelativeImport=false
-from base import Attribute, AttributeChange, ChangeType
-from spawnable import SpawnableDraft
-from stubs import Aspect, CarFlag, Influence
-from viewport import ViewportDraft
-from typing import override
+from typing_extensions import override
+
+from ..types import ChangeType
+from .base import Attribute, AttributeChange
+from .spawnable import SpawnableDraft
+from .stubs import Aspect, CarFlag, Influence
+from .viewport import ViewportDraft
 
 class BuildingBasedDraft(ViewportDraft):
     

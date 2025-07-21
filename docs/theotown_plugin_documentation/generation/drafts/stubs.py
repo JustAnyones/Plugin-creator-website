@@ -1,9 +1,8 @@
-# pyright: reportImplicitRelativeImport=false
 import copy
 
 from enum import Enum
 
-from base import Attribute
+from .base import Attribute
 
 class CustomEnum(Enum):
     def copy(self) -> Attribute:

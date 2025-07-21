@@ -1,5 +1,4 @@
-# pyright: reportImplicitRelativeImport=false
-from base import Attribute, BaseDraft
+from .base import Attribute, BaseDraft
 
 class ViewportDraft(BaseDraft):
 

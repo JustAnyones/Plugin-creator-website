@@ -1,14 +1,10 @@
-import enum
 import textwrap
 import sys
 
 from collections import Counter
 from dataclasses import dataclass
 
-class ChangeType(enum.Enum):
-    ADDED = "version-added"
-    REMOVED = "version-removed"
-    CHANGED = "version-changed"
+from ..types import ChangeType
 
 @dataclass
 class AttributeChange:
@@ -493,7 +489,8 @@ class BaseDraft:
 
             # Notify about deprecation first
             if attr.deprecated:
-                print(f"::: deprecated: {textwrap.dedent(attr.deprecated).strip().replace("\n", " ")}", file=f)
+                dedented_deprecation = textwrap.dedent(attr.deprecated).strip().replace("\n", " ")
+                print(f"::: deprecated: {dedented_deprecation}", file=f)
 
             # Then list all the changes over time
             if attr.changes and len(attr.changes) > 0:

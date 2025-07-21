@@ -1,5 +1,4 @@
-# pyright: reportImplicitRelativeImport=false
-from base import BaseDraft
+from .base import BaseDraft
 
 class DataDraft(BaseDraft):
 

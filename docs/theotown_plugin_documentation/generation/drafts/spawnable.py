@@ -1,5 +1,4 @@
-# pyright: reportImplicitRelativeImport=false
-from base import BaseDraft, Attribute
+from .base import BaseDraft, Attribute
 
 class SpawnableDraft(BaseDraft):
 

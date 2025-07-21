@@ -7,3 +7,12 @@
 
 - /drafts
   Contains custom code for generation
+
+
+```bash
+uv pip install -e .
+```
+
+```bash
+uv run generate
+```

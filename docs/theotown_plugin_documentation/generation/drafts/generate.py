@@ -1,5 +1,7 @@
-# pyright: reportImplicitRelativeImport=false
-from building import (
+import os
+
+from theotown_plugin_documentation.generation.drafts.base import BaseDraft
+from theotown_plugin_documentation.generation.drafts.building import (
     AirportDraft,
     AwardDraft,
     BodyDisposalDraft,
@@ -31,12 +33,13 @@ from building import (
     WasteDisposalDraft,
     WaterDraft,
 )
-from category import CategoryDraft
-from data import DataDraft
-from template import TemplateDraft
+from theotown_plugin_documentation.generation.paths import GENERATED_DRAFTS_DIR
+from theotown_plugin_documentation.generation.drafts.category import CategoryDraft
+from theotown_plugin_documentation.generation.drafts.data import DataDraft
+from theotown_plugin_documentation.generation.drafts.template import TemplateDraft
 
-def main():
-    drafts = [
+def generate():
+    drafts: list[BaseDraft] = [
         # Building-based drafts
         AirportDraft(),
         AwardDraft(),
@@ -74,11 +77,7 @@ def main():
         DataDraft(),
         TemplateDraft(),
     ]
-
     for draft in drafts:
         print(f"Generating {draft.__name__} draft documentation...")
-        with open(f"../docs/draft-types/{draft.__file__}", "w+") as f:
+        with open(os.path.join(GENERATED_DRAFTS_DIR, draft.__file__), "w+") as f:
             draft.to_md_page(f)
-
-if __name__ == "__main__":
-    main()

@@ -110,9 +110,9 @@ In this example we limit our plugin to iOS and PC platforms.
 
 ```json
 {
-    "id": "$my_amazing_plugin_manifest00",
-    "title": "My amazing plugin",
-    "platforms": ["desktop", "ios"]
+  "id": "$my_amazing_plugin_manifest00",
+  "title": "My amazing plugin",
+  "platforms": ["desktop", "ios"]
 }
 ```
 

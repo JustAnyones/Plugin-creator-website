@@ -1,17 +1,25 @@
-[tool.poetry]
-name = "mkdocs-custom"
-version = "0.1.0"
+[project]
+name = "theotown-plugin-documentation"
+version = "0.2.0"
 description = ""
-authors = ["Dominykas Svetikas <dominykas@svetikas.lt>"]
+authors = [{name="Dominykas Svetikas", email="dominykas@svetikas.lt"}]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "markdown-include~=0.8.1",
+    "mkdocs~=1.6.0",
+    "mkdocs-awesome-pages-plugin~=2.10.1",
+    "mkdocs-material~=9.5.28",
+    "typing-extensions>=4.14.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-mkdocs = "^1.6.0"
-typing-extensions = "^4.12.2"
-mkdocs-material = "^9.5.28"
-mkdocs-awesome-pages-plugin = "^2.9.2"
-markdown-include = "^0.8.1"
+[project.scripts]
+generate = "theotown_plugin_documentation.main:generate"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["theotown_plugin_documentation"]
+
