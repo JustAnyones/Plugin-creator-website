@@ -43,6 +43,11 @@
 
 ### user8
 ::: type: boolean
+::: version-removed: 1.12.26
+
+### elevated train
+::: type: boolean
+::: version-added: 1.12.26
 
 ### native pedestrian
 ::: type: boolean

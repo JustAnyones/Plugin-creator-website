@@ -1,10 +1,10 @@
 import copy
+import enum
 
-from enum import Enum
+from docs.theotown_plugin_documentation.generation.drafts.base import Attribute, AttributeChange
+from docs.theotown_plugin_documentation.generation.types import ChangeType
 
-from .base import Attribute
-
-class CustomEnum(Enum):
+class CustomEnum(enum.Enum):
     def copy(self) -> Attribute:
         """Returns a copy of the attribute."""
         return copy.copy(self.value)
@@ -72,4 +72,9 @@ class CarFlag(CustomEnum):
     USER5 = Attribute("user5", "boolean")
     USER6 = Attribute("user6", "boolean")
     USER7 = Attribute("user7", "boolean")
-    USER8 = Attribute("user8", "boolean")
+    USER8 = Attribute("user8", "boolean", changes=[
+        AttributeChange(ChangeType.REMOVED, "1.12.26", "Removed to make space for elevated train")
+    ])
+    ELEVATED_TRAIN = Attribute("elevated train", "boolean", changes=[
+        AttributeChange(ChangeType.ADDED, "1.12.26")
+    ])
