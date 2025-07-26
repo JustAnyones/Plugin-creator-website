@@ -1,8 +1,8 @@
 import copy
 import enum
 
-from docs.theotown_plugin_documentation.generation.drafts.base import Attribute, AttributeChange
-from docs.theotown_plugin_documentation.generation.types import ChangeType
+from theotown_plugin_documentation.generation.drafts.base import Attribute, AttributeChange
+from theotown_plugin_documentation.generation.types import ChangeType
 
 class CustomEnum(enum.Enum):
     def copy(self) -> Attribute:
