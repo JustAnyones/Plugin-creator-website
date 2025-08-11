@@ -52,7 +52,6 @@ export class DraftFactory implements AttributeOwnerFactory {
 }
 
 export interface DefaultAttributes {
-    privileged: StringAttribute
     id: StringAttribute
     inherit: BooleanAttribute
     override: BooleanAttribute
@@ -98,7 +97,6 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
     premium: BooleanAttribute
     once: BooleanAttribute
     mute: BooleanAttribute
-    privileged: StringAttribute
     requirePrivileges: BooleanAttribute
     requireSuperPrivileges: BooleanAttribute
     inherit: BooleanAttribute
@@ -170,11 +168,6 @@ export class Draft extends AttributeOwner implements DefaultAttributes {
             plugin: this.plugin, id : "override",
             name : "Override", description : "Whether to override an already defined draft by the specified ID.",
             required : false, defaultValue : false
-        })
-        this.privileged = new StringAttribute({
-            plugin: this.plugin, id: "privileged",
-            name: "Privileged key", description: "Privileged key for your draft. Allows to use special features, which " +
-                "are restricted to trusted plugin creators only."
         })
         this.requirePrivileges = new BooleanAttribute({
             plugin: this.plugin, id: "require privileges",
