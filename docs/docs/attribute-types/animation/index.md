@@ -3,6 +3,7 @@
 Animation drafts are used to define an animation. To actually attach an animation to a building, you need to use [animation](../../draft-types/award.md#animation) tag with an animation object.
 
 ## Attributes
+::: attribute-list-start
 
 ### id
 ::: type: string
@@ -86,3 +87,5 @@ If defined, will be prioritized over [frame](#frame) tag.
 ::: type: boolean
 
 **By default**, the value will be false.
+
+::: attribute-list-end

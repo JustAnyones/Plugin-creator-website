@@ -16,6 +16,7 @@ The following example requires `_custom_fun_var` Fun variable to be set to `5`.
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### condition
@@ -40,3 +41,5 @@ Text to show if the condition is fulfilled.
 ::: type: string
 
 ID of text to show if the condition is fulfilled.
+
+::: attribute-list-end

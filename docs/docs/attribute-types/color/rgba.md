@@ -3,6 +3,7 @@
 This allows you to set color using red, green, blue and alpha components.
 
 ## Attributes
+::: attribute-list-start
 
 ### r
 ::: type: integer
@@ -25,3 +26,5 @@ The blue component of a color.
 The alpha component of a color.
 
 Defaults to 255.
+
+::: attribute-list-end

@@ -3,6 +3,7 @@
 Texture space type frames are frames used from the game texture space.
 
 ## Attributes
+::: attribute-list-start
 
 ::: inherit-h2 Attributes attribute-types/frame/.shared.md
 
@@ -35,3 +36,5 @@ Texture space type frames are frames used from the game texture space.
 ::: type: int
 
 **By default**, the value will be 0.
+
+::: attribute-list-end

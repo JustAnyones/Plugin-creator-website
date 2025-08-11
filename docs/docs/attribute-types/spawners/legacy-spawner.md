@@ -10,6 +10,7 @@ radius * 1000 -> height radius
 ```
 
 ## Attributes
+::: attribute-list-start
 
 ### p
 ::: type: float
@@ -19,3 +20,5 @@ radius * 1000 -> height radius
 
 ### radius
 ::: type: float
+
+::: attribute-list-end

@@ -3,6 +3,7 @@
 Steal type frames are frames reused from a specific draft that's already defined.
 
 ## Attributes
+::: attribute-list-start
 
 ### steal
 ::: type: string
@@ -60,3 +61,5 @@ If the value is negative, then the frame will be shifted to the down.
 Only if moveX and moveY == 0
 
 **By default**, the value will be true.
+
+::: attribute-list-end

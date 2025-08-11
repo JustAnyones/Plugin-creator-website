@@ -1,6 +1,7 @@
 # Car flags
 
 ## Attributes
+::: attribute-list-start
 
 ### normal
 ::: type: boolean
@@ -104,3 +105,5 @@ Attribute name in this case is your custom flag.
     "flag my_great_flag": true
 }
 ```
+
+::: attribute-list-end

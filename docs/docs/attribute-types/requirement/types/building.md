@@ -16,6 +16,7 @@ The following example requires DSA Research building to be built.
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### id
@@ -27,3 +28,5 @@ ID of the building.
 ::: type: integer
 
 **By default**, the value will be 1.
+
+::: attribute-list-end

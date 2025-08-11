@@ -1,6 +1,7 @@
 # Car spawner
 
 ## Attributes
+::: attribute-list-start
 
 ### cars
 ::: type: string[]
@@ -52,3 +53,5 @@ An array of building and bus stop draft tags that should be targeted by spawned 
     "level": 5 // default is 0
 }]
 ```
+
+::: attribute-list-end

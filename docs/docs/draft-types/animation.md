@@ -5,6 +5,7 @@ Animation drafts allow you to create custom night lights.
 Animation drafts have the type of `animation`.
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes draft-types/.viewport.md
 
 ### frames
@@ -103,3 +104,5 @@ If true, the animation will loop back-and-forth to create the "ping pong" effect
 ::: type: int[][]
 
 Must be used together with the [animation](#animation) attribute.
+
+::: attribute-list-end

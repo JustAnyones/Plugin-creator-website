@@ -16,6 +16,7 @@ The following example requires the city to be at level 23.
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### id
@@ -28,3 +29,5 @@ ID of the required rank draft.
 ::: type: integer
 
 Required rank integer value.
+
+::: attribute-list-end

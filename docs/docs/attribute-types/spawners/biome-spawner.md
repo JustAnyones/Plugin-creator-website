@@ -75,7 +75,7 @@ For example:
 ```
 
 ## Attributes
-
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/.biome-spawn-params.md
 
 
@@ -84,3 +84,5 @@ For example:
 
 ID of a biome draft or a spawnable draft to override the spawning parameters for.
 
+
+::: attribute-list-end

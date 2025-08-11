@@ -3,6 +3,7 @@
 Reference frame is identified by the [`ref`](#ref) attribute.
 
 ## Attributes
+::: attribute-list-start
 
 ### ref
 ::: type: int
@@ -35,3 +36,5 @@ If true, frames will be referenced from the silent frames.
 Only if moveX and moveY == 0
 
 **By default**, the value will be true.
+
+::: attribute-list-end

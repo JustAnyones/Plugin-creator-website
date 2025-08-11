@@ -1,6 +1,7 @@
 # Animation date
 
 ## Attributes
+::: attribute-list-start
 
 ### start day
 ::: type: int
@@ -34,3 +35,4 @@ Supported values:
 Overwrites the value of [repeat](#repeat).
 
 **By default**, the value will be inferred from [repeat](#repeat).
+::: attribute-list-end

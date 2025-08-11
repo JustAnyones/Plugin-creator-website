@@ -22,6 +22,7 @@ The following example requires the current building to have `$building_upgrade_0
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### id
@@ -33,3 +34,5 @@ ID of the current building upgrade.
 ::: type: boolean
 
 **By default**, the value will be false.
+
+::: attribute-list-end

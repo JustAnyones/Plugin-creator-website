@@ -18,6 +18,7 @@ GOOD EXAMPLE: https://forum.theotown.com/viewtopic.php?p=134195#p134195
 
 
 ## Attributes
+::: attribute-list-start
 
 ::: inherit-h2 Attributes attribute-types/frame/.shared.md
 
@@ -79,3 +80,4 @@ Will define the frame to be 32 pixels wide.
 Sets the height of the frame to be selected.
 
 **By default**, the value will be the height of the frame.
+::: attribute-list-end

@@ -12,8 +12,10 @@ This allows you to specify color by specifying a draft that already implements t
 ```
 
 ## Attributes
+::: attribute-list-start
 
 ### id
 ::: type: string
 
 ID of the color draft.
+::: attribute-list-end

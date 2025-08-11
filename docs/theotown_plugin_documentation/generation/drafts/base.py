@@ -4,6 +4,8 @@ import sys
 from collections import Counter
 from dataclasses import dataclass
 
+from theotown_plugin_documentation.extension.attribute import ATTRIBUTE_LIST_END, ATTRIBUTE_LIST_START
+
 from ..types import ChangeType
 
 @dataclass
@@ -483,6 +485,7 @@ class BaseDraft:
         print(textwrap.dedent(self.__doc__ or "").strip(), file=f)
         print(file=f)
         print("## Attributes", file=f)
+        print(f"{ATTRIBUTE_LIST_START}", file=f)
         for attr in sorted(attributes, key=lambda x: x.name):
             print(f"### {attr.name}", file=f)
             print(f"::: type: {attr.type}", file=f)
@@ -496,9 +499,13 @@ class BaseDraft:
             if attr.changes and len(attr.changes) > 0:
                 sorted_changes = sorted(attr.changes, key=lambda x: x.version)
                 for change in sorted_changes:
-                    print(f"::: {change.type.value}: {change.version}", file=f)
+                    if change.change is not None:
+                        print(f"::: {change.type.value}: {change.version} {change.change}", file=f)
+                    else:
+                        print(f"::: {change.type.value}: {change.version}", file=f)
             
             # And only then provide the description
             print(file=f)
             print(textwrap.dedent(attr.description).strip(), file=f)
             print(file=f)
+        print(f"{ATTRIBUTE_LIST_END}", file=f)

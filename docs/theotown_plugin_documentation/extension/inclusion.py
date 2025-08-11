@@ -7,8 +7,6 @@ from typing_extensions import override
 
 from markdown.preprocessors import Preprocessor
 
-from .types import DataDict
-
 PATTERN = re.compile(r"::: inherit-h(\d) (?:\"([^\"]+)\"|(\S+)) (\S+) *(\S*)")
 
 ROOT_PATH = "docs"
@@ -109,7 +107,7 @@ def include_header_from_file(ctx: InclusionContext, file_path: str) -> list[str]
 class InclusionPreprocessor(Preprocessor):
     """This preprocessor deals with header inclusion from other files."""
 
-    def __init__(self, md: Markdown, data: DataDict):
+    def __init__(self, md: Markdown):
         super().__init__(md)
 
     @override

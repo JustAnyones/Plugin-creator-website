@@ -50,6 +50,7 @@ $$
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### count
@@ -80,3 +81,5 @@ The factor by which the rich class inhabitant count is multiplied.
 In practise, it means if the value is 0, they will NOT be considered in the count.
 
 **By default**, the value will be 1.
+
+::: attribute-list-end

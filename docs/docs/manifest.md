@@ -26,6 +26,7 @@ An example manifest file could look like this:
 The `iap.png` is an image included together with the manifest file.
 
 ## Attributes
+::: attribute-list-start
 
 Manifest file support the following attributes:
 
@@ -122,3 +123,5 @@ In this example we limit our plugin to iOS and PC platforms.
 ::: version-added: 1.11.72
 
 Whether the plugin should show up in the plugins category.
+
+::: attribute-list-end

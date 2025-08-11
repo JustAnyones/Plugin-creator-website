@@ -16,9 +16,12 @@ The following example requires the player to own the Christmas feature.
 ```
 
 ## Attributes
+::: attribute-list-start
 ::: inherit-h2 Attributes attribute-types/requirement/types/.base.md
 
 ### id
 ::: type: string
 
 ID of the required feature draft.
+
+::: attribute-list-end

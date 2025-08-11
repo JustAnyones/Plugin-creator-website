@@ -16,3 +16,7 @@ uv pip install -e .
 ```bash
 uv run generate
 ```
+
+```bash
+uv run mkdocs serve
+```
