@@ -50,7 +50,7 @@ class CustomExtension(Extension):
     def extendMarkdown(self, md: Markdown):
         md.preprocessors.register(InclusionPreprocessor(md), "inclusion-preprocessor", 100)
         md.preprocessors.register(AttributePreprocessor(md, self.data), "attribute-preprocessing", 90)
-        #md.treeprocessors.register(CustomTreeprocessor(md, self.data), "attribute-sorting2", -999)
+        md.treeprocessors.register(CustomTreeprocessor(md, self.data), "attribute-sorting2", -999)
 
 
 def makeExtension(**kwargs): # pyright: ignore[reportUnknownParameterType, reportMissingParameterType]

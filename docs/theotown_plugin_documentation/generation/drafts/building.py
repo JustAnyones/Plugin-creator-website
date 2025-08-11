@@ -50,8 +50,15 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             Tile width of the base of the building.
 
-            Must be of equal value to the [height](#height) attribute unless it's a composition.
+            Unless the building is a [composition](../guides/compositions.md),
+            the value must be either:
+
+            - equal to the value of the [height](#height) attribute, or
+            - half or double the value of the [height](#height) attribute.
             """,
+            changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.26", "Added support for non-square buildings at ratios of 1:2 and 2:1.")
+            ],
             required=True
         )
         self.height: Attribute = Attribute(
@@ -59,9 +66,16 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "integer",
             """
             Tile height of the base of the building.
-            
-            Must be of equal value to the [width](#width) attribute unless it's a composition.
+
+            Unless the building is a [composition](../guides/compositions.md),
+            the value must be either:
+
+            - equal to the value of the [width](#width) attribute, or
+            - half or double the value of the [width](#width) attribute.
             """,
+            changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.26", "Added support for non-square buildings at ratios of 1:2 and 2:1.")
+            ],
             required=True
         )
         self.composition: Attribute = Attribute(

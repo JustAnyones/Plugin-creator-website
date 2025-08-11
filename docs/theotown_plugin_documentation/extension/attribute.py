@@ -4,6 +4,8 @@ from typing_extensions import override
 
 from markdown.preprocessors import Preprocessor
 
+from theotown_plugin_documentation.generation.types import ChangeType
+
 from .mapping import AttributeCollection, type_to_link
 from .types import DataDict
 
@@ -58,7 +60,7 @@ class AttributeLineFormatter:
                 continue
             
             # If it uses the ::: separator, but does not contain key/value pair, skip the line as content
-            split = line[4:].split(":", 2)
+            split = line[4:].split(":", 1)
             if len(split) != 2:
                 self.__content_lines.append(line)
                 continue
@@ -81,11 +83,11 @@ class AttributeLineFormatter:
             return self.format_deprecated(value)
         if key == "type":
             return self.format_type(value)
-        if key == "version-added":
+        if key == ChangeType.ADDED.value:
             return self.format_version_added(value)
-        if key == "version-changed":
+        if key == ChangeType.CHANGED.value:
             return self.format_version_changed(value)
-        if key == "version-removed":
+        if key == ChangeType.REMOVED.value:
             return self.format_version_removed(value)
         if key == "required":
             self.values["required"] = bool(value)
