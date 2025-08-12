@@ -1,5 +1,6 @@
 import os
 
+from theotown_plugin_documentation.generation.drafts.animation import AnimationDraft
 from theotown_plugin_documentation.generation.drafts.base import BaseDraft
 from theotown_plugin_documentation.generation.drafts.building import (
     AirportDraft,
@@ -40,6 +41,9 @@ from theotown_plugin_documentation.generation.drafts.template import TemplateDra
 
 def generate():
     drafts: list[BaseDraft] = [
+
+        AnimationDraft(),
+
         # Building-based drafts
         AirportDraft(),
         AwardDraft(),
