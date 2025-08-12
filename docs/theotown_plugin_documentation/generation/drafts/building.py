@@ -447,8 +447,17 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             If true the building will dedicate frames for use in rotation.
             In this case you have to provide a multiple of 4 frames.
 
-            **By default**, the value will be true, if the draft is [alignable](#alignable) and has at least 4 frames or it is a composition building.
-            """
+            **By default**, the value will be true, if:
+            - the draft is [alignable](#alignable) and has at least 4 frames, or
+            - the draft is non-square (ie width != height), or
+            - it is a composition building.
+            """,
+            changes=[
+                AttributeChange(
+                    ChangeType.CHANGED, "1.12.26",
+                    "Added support for non-square buildings at ratios of 1:2 and 2:1 that require rotation awareness."
+                )
+            ],
         )
         self.extRotationAware: Attribute = Attribute(
             "ext rotation aware",
