@@ -236,13 +236,13 @@ class BaseDraft:
             "ID of the draft to grab ordinal from. Must be used in combination with the ordinal attribute."
         )
 
-        self.meta = Attribute(
+        self.meta: Attribute = Attribute(
             "meta",
             "Meta",
             """
             A special attribute that allows you to store additional metadata about the draft.
 
-            Read more about it in the [Meta documentation](../guides/drafts/meta.md).
+            Read more about it in the [Meta documentation](../attribute-types/meta/index.md).
             """
         )
 

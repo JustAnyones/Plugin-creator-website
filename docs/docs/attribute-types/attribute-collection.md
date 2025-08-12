@@ -5,8 +5,8 @@ that the referenced attributes have the collection name prefixed to them.
 
 ## Example
 
-For example, we'll use the [`road flags *`](../draft-types/residential.md#road_flags)
-attribute of a residential draft.
+For example, we'll use the [`road flags *`](../draft-types/car.md#flag)
+attribute of a car draft.
 
 The actual attributes are defined in the [car flags](car-flags.md) attribute type.
 
