@@ -55,6 +55,9 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             - equal to the value of the [height](#height) attribute, or
             - half or double the value of the [height](#height) attribute.
+
+            If the building is non-square, you must provide at least 2 frames
+            as they are rotation aware.
             """,
             changes=[
                 AttributeChange(ChangeType.CHANGED, "1.12.26", "Added support for non-square buildings at ratios of 1:2 and 2:1.")
@@ -72,6 +75,9 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             - equal to the value of the [width](#width) attribute, or
             - half or double the value of the [width](#width) attribute.
+
+            If the building is non-square, you must provide at least 2 frames
+            as they are rotation aware.
             """,
             changes=[
                 AttributeChange(ChangeType.CHANGED, "1.12.26", "Added support for non-square buildings at ratios of 1:2 and 2:1.")
@@ -445,7 +451,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "boolean",
             """
             If true the building will dedicate frames for use in rotation.
-            In this case you have to provide a multiple of 4 frames.
+            In this case you have to provide a multiple of 2 frames.
 
             **By default**, the value will be true, if:
             - the draft is [alignable](#alignable) and has at least 4 frames, or
