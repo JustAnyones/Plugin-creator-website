@@ -284,7 +284,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             
             You can define your own type of budget, called budget item.
             That is a data object that will be used to provide a name for the item.
-            """
+
+            Transport system associated buildings will automatically use the budget item from the owning transport system draft.
+            """, changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.26", "Automatically set budget item for transport system associated buildings.")
+            ]
         )
         self.bulldozePrice: Attribute = Attribute(
             "bulldoze price",
