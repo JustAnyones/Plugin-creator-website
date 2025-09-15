@@ -44,7 +44,7 @@ An object consists of multiple `"key": "value"` pairs that are used to define th
 * **type** - States the type of the plugin. See [the advanced topic](https://www.theotown.com/forum/viewtopic.php?f=41&t=1355) for more types. We will call objects that have types _drafts_.
 * **author** - Here you state your name as author of the plugin.
 * **width** - Tile width of the base of the building. Each tile has a pixel size of 32x16.
-* **height** - Has to be the same as **width**. Therefore, only square buildings are possible.
+* **height** - In the past this had to be the same as width unless you were defining a composition building. Recently, support for [non square buildings](../guides/non-square-buildings.md) was added.
 * **frames** - This is the most important part of our definition. The frames (graphics) that are associated to our building. As this property expects an list (array) of frames we have to start with **[** and end with **]**. In that we can define a frame object using the property **bmp** which references to an image file in the same directory. Here it's the file *sample_bmp.png*. The option to provide multiple frames can be used for animations or different building variants.
 * **smoke** - If you want to you can use this property to define a list of smoke spots on the building. Some smoke types like **$smoke07** are already defined by TheoTown and may be reused.
 Have a look at the [listing of defined smoke types](https://forum.theotown.com/viewtopic.php?p=6653#6653) for more information.
