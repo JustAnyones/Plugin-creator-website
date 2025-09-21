@@ -514,7 +514,11 @@ export class BuildingDraft extends BuildingBasedDraft implements BuildingDraftAt
             plugin: this.plugin, id: "people",
             name: "People",
             description: "Amount of inhabitants or workers the building has. " +
-                "Only applies for RCI buildings."
+                "Only applies for RCI buildings.",
+            validation: {
+                minValue: 1,
+                maxValue: 40_000,
+            }
         })
 
         this.autoBuild = new BooleanAttribute({
