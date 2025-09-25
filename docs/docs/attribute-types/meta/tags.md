@@ -102,9 +102,23 @@ Used to prebuild rails and metro lines for elevated trains and metro.
 }
 ```
 
+### elevated_train_platform
+::: version-added: 1.12.28
+
+### elevated_train_station
+::: version-added: 1.12.28
+
+### bus_platform
+::: version-added: 1.12.28
+
+### bus_station
+::: version-added: 1.12.28
+
+Whether a building is considered as a station that can spawn buses in the new bus system.
+
 ### bus depot
 
-Whether a building is considered a bus depot.
+Whether a building is considered a bus depot for the idle game (old bus system).
 
 ```json
 {
@@ -115,6 +129,23 @@ Whether a building is considered a bus depot.
   }
 }
 ```
+
+### bus_depot
+::: version-added: 1.12.28
+
+Whether a building is considered a bus depot in the new bus system.
+
+```json
+{
+  "meta": {
+    "tags": {
+      "bus_depot": {}
+    }
+  }
+}
+```
+
+
 
 ### decorator
 
@@ -270,7 +301,7 @@ Whether the building is considered a rocket supplier and should spawn supply tru
 
 ### metro
 
-Whether to consider the building as a metro station.
+Whether to consider the building as a metro station. This will the rendering in the UI.
 
 ```json
 {
@@ -282,12 +313,11 @@ Whether to consider the building as a metro station.
 }
 ```
 
+### metro_platform
+::: version-added: 1.12.28
+
 ### metro_station
-
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 Whether to consider the building as a metro station.
 
@@ -302,11 +332,7 @@ Whether to consider the building as a metro station.
 ```
 
 ### metro_depot
-
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 Whether to consider the building as a metro depot where metro cars are dispatched from.
 
@@ -320,12 +346,23 @@ Whether to consider the building as a metro depot where metro cars are dispatche
 }
 ```
 
+### freight_train_station
+::: version-added: 1.12.28
+
+### heavy_freight_train_station
+::: version-added: 1.12.28
+
+### short_distance_passenger_train_station
+::: version-added: 1.12.28
+
+### long_distance_passenger_train_station
+::: version-added: 1.12.28
+
+### passenger_train_platform
+::: version-added: 1.12.28
+
 ### freight_train_platform
-
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 Whether to consider the building as a freight train platform.
 
@@ -394,12 +431,16 @@ ID of a train to spawn at this station. `$train00` by default.
 
 These are tags that are only supported by bus stop drafts.
 
+### elevated_train_busstop
+::: version-added: 1.12.28
+
+### passenger_train_busstop
+::: version-added: 1.12.28
+
 ### default_busstop
+::: version-added: 1.12.28
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+Whether to consider the bus stop as a station that is used in the new bus system.
 
 ```json
 {
@@ -598,6 +639,8 @@ Used to mark a car draft as a garbage truck.
 
 ### idle bus
 
+Whether the bus is a bus that can be used in the idle game (old bus system).
+
 ```json
 {
   "meta": {
@@ -609,13 +652,9 @@ Used to mark a car draft as a garbage truck.
 ```
 
 ### ts_normal_bus
+::: version-added: 1.12.28
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
-
-Whether to consider the vehicle as a bus that is used in the bus system.
+Whether to consider the vehicle as a bus that is used in the new bus system.
 
 ```json
 {
@@ -722,6 +761,7 @@ These are tags that are only supported by road drafts.
 ### metro
 
 Whether to consider the road as a metro line.
+This will affect the budget accounting and rendering in the UI.
 
 ```json
 {
@@ -763,10 +803,7 @@ These are tags that are only supported by train car drafts.
 
 ### short_distance_passenger_train
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 ```json
 {
@@ -780,10 +817,7 @@ These are tags that are only supported by train car drafts.
 
 ### long_distance_passenger_train
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 ```json
 {
@@ -797,10 +831,7 @@ These are tags that are only supported by train car drafts.
 
 ### freight_train
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 ```json
 {
@@ -814,10 +845,7 @@ These are tags that are only supported by train car drafts.
 
 ### heavy_freight_train
 
-!!! warning "Unstable"
-
-    This feature is part of the ongoing transport update
-    and may be subject to change in the future.
+::: version-added: 1.12.28
 
 ```json
 {
@@ -828,6 +856,12 @@ These are tags that are only supported by train car drafts.
   }
 }
 ```
+
+### metro_train
+::: version-added: 1.12.28
+
+### elevated_train
+::: version-added: 1.12.28
 
 ## Tree tags
 
