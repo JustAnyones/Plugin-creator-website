@@ -70,6 +70,8 @@ nav:
   - Guides:
     - guides/index.md
     - ... | flat | guides/*
+    - Transport System:
+      - ... | flat | guides/transport-system/*
     - Graphics:
       - ... | flat | guides/graphics/*
     - Fun:
@@ -119,6 +121,9 @@ markdown_extensions:
 plugins:
   - search
   - awesome-pages
+  - redirects:
+      redirect_maps:
+          'guides/transport-system-extension.md': 'guides/transport-system/extending-transportation-systems.md'
 
 extra_javascript:
   - javascripts/mathjax.js

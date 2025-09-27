@@ -20,7 +20,7 @@ You can define your airplane draft like so:
 ```
 
 An airplane draft consists of four frames for each direction.
-Orientation for each frame works as for [cars (v2)](cars.md).
+Orientation for each frame works as for [cars (v2)](transport-system/cars.md).
 
 About the handle, we recommend to move it to a point where you would say that's the center of the airplane on the ground:
 

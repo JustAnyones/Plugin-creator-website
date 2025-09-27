@@ -1,6 +1,6 @@
 # Car identification
 
-In the past you had to override one of the cars `"$carres00"`, ..., `"$carind00"`, ...
+In the past you had to override one of the cars `"$carres00"`, `...`, `"$carind00"`, `...`
 in order to get your own RCI or service cars into the game. As an alternative,
 game allows you to specify car tags that the game can use to identify such cars.
 
@@ -49,7 +49,7 @@ Service cars can also be tagged the same way. So you can just add new medic cars
 
 These changes were made in order to add more RCI cars without tampering with the existing ones.
 
-You can find a full list of car tags [here](../attribute-types/meta/tags.md#car_tags).
+You can find a full list of car tags [here](../../attribute-types/meta/tags.md#car_tags).
 
 <sub>
 This page has been adapted from

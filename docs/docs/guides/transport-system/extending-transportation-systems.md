@@ -2,7 +2,7 @@
 
 !!! info "Added in version 1.12.26"
 
-![](../assets/guides/transport-system-extension/preview.png){: style="width:100%;"}
+![](../../assets/guides/transport-system-extension/preview.png){: style="width:100%;"}
 
 The newly introduced transportation update features the following built-in transportation systems:
 
@@ -187,7 +187,7 @@ For simplicity the default categories and (rank) requirements in the code listin
   ```
 
 ## Caveats
-![](../assets/guides/transport-system-extension/legacy.png){: style="width:100%;"}
+![](../../assets/guides/transport-system-extension/legacy.png){: style="width:100%;"}
 
 The player may disable the new transportation system for buses to keep using the old, level based system. In this case your custom buses won't be used.
 
