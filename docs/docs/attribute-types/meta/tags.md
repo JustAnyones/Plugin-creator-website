@@ -80,6 +80,8 @@ The ID of the particle(s) that should spawn after the lifetime of the current pa
 
 These are tags that are only supported by building drafts.
 
+::: attribute-list-start
+
 ### build rail
 
 Used to prebuild rails and metro lines for elevated trains and metro. 
@@ -424,12 +426,13 @@ ID of a train to spawn at this station. `$train00` by default.
 }
 ```
 
-
-
+::: attribute-list-end
 
 ## Bus stop tags
 
 These are tags that are only supported by bus stop drafts.
+
+::: attribute-list-start
 
 ### elevated_train_busstop
 ::: version-added: 1.12.28
@@ -452,10 +455,13 @@ Whether to consider the bus stop as a station that is used in the new bus system
 }
 ```
 
+::: attribute-list-end
 
 ## Car tags
 
 These are tags that are only supported by car drafts.
+
+::: attribute-list-start
 
 ### airport taxi
 
@@ -723,7 +729,7 @@ Used to mark a car draft as a swat car.
 ```
 
 
-
+::: attribute-list-end
 
 ## Feature tags
 
