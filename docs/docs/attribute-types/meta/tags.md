@@ -807,6 +807,8 @@ Whether the road decoration is considered to be a car accident.
 
 These are tags that are only supported by train car drafts.
 
+::: attribute-list-start
+
 ### short_distance_passenger_train
 
 ::: version-added: 1.12.28
@@ -868,6 +870,8 @@ These are tags that are only supported by train car drafts.
 
 ### elevated_train
 ::: version-added: 1.12.28
+
+::: attribute-list-end
 
 ## Tree tags
 
