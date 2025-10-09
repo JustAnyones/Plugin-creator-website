@@ -227,12 +227,14 @@ class AttributePreprocessor(Preprocessor):
         # List of new lines to return after parsing
         new_lines: list[str] = []
 
-        # Whether we are currently in the attribute list section
-        # If we are in the attribute list section, we will parse it
-        currently_in_attribute_list = False
+        # This is the current depth of the attribute list,
+        # -1 if we haven't found one yet or are not in one
+        current_attribute_list_depth = -1
 
         # This stores the list of lines for each attribute
-        attribute_lines: dict[str, list[str]] = {}
+        # The dictionaries themselves are stored in a stack-like manner to allow
+        # for nested attribute lists in the future
+        attribute_lines: list[dict[str, list[str]]] = []
 
         # This is the depth of the attribute header, 0 if we haven't found one yet
         attribute_header_depth = 0
@@ -241,23 +243,31 @@ class AttributePreprocessor(Preprocessor):
         current_attribute_name = None
 
 
-        for line in lines:
+        for i, line in enumerate(lines):
             # Check if we're at the start of the attribute list
             is_attribute_start = line.startswith(ATTRIBUTE_LIST_START)
             if is_attribute_start:
                 # If we are, skip the line and begin parsing the next lines
-                currently_in_attribute_list = True
+                #print("Entering attribute list at line", i + 1, line)
+                current_attribute_list_depth += 1
+                attribute_lines.append({})
+                # TODO: move to stack when nested attribute lists are supported
+                current_attribute_name = None
+                attribute_header_depth = 0
                 continue
 
             # If we encounter the end of the attribute list, we stop parsing and add the lines
-            if currently_in_attribute_list and line.startswith(ATTRIBUTE_LIST_END):
-                currently_in_attribute_list = False
-                for attr_name in sorted(attribute_lines.keys()):
-                    new_lines.extend(self.parse_attribute(attr_name, attribute_lines[attr_name]))
+            if current_attribute_list_depth > -1 and line.startswith(ATTRIBUTE_LIST_END):
+                #print("Exiting attribute list at line", i + 1, line)
+                attr_lines = attribute_lines[current_attribute_list_depth]
+                for attr_name in sorted(attr_lines.keys()):
+                    new_lines.extend(self.parse_attribute(attr_name, attr_lines[attr_name]))
+                current_attribute_list_depth -= 1
+                _ = attribute_lines.pop()
                 continue
 
             # If we're not in attributes, copy over the line
-            if not currently_in_attribute_list:
+            if current_attribute_list_depth == -1:
                 new_lines.append(line)
                 continue
             
@@ -273,7 +283,7 @@ class AttributePreprocessor(Preprocessor):
             # and create a new list for it
             if line.startswith(f"{'#'*attribute_header_depth} "):
                 current_attribute_name = line[attribute_header_depth:].strip()
-                attribute_lines[current_attribute_name] = []
+                attribute_lines[current_attribute_list_depth][current_attribute_name] = []
 
             # If we are not analysing an attribute yet, just copy over the line
             if current_attribute_name is None:
@@ -281,6 +291,6 @@ class AttributePreprocessor(Preprocessor):
                 continue
             
             # Otherwise, it's attribute related and slap it into the attribute container
-            attribute_lines[current_attribute_name].append(line)
+            attribute_lines[current_attribute_list_depth][current_attribute_name].append(line)
 
         return new_lines

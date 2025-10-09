@@ -59,7 +59,7 @@ def include_header_from_lines(ctx: InclusionContext, lines: list[str]) -> list[s
                 in_header = False
                 break
         
-        # If we're currently analyzing header lines
+        # If we're currently analysing header lines
         if in_header:
 
             # Is it another include statement?
