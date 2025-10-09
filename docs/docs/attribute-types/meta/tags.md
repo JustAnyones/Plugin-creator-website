@@ -147,6 +147,11 @@ Whether a building is considered a bus depot in the new bus system.
 }
 ```
 
+### monorail_station
+::: version-added: 1.12.29
+
+### monorail_platform
+::: version-added: 1.12.29
 
 
 ### decorator
@@ -437,23 +442,33 @@ These are tags that are only supported by bus stop drafts.
 ### elevated_train_busstop
 ::: version-added: 1.12.28
 
+Whether to consider the bus stop as a station that is used in the elevated train system.
+
 ### passenger_train_busstop
 ::: version-added: 1.12.28
 
+Whether to consider the bus stop as a station that is used in the passenger train system.
+
 ### default_busstop
 ::: version-added: 1.12.28
+::: deprecated: Superseded by bus_busstop.
 
 Whether to consider the bus stop as a station that is used in the new bus system.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "default_busstop": {}
-    }
-  }
-}
-```
+### bus_busstop
+::: version-added: 1.12.29
+
+Whether to consider the bus stop as a station that is used in the new bus system.
+
+### metro_busstop
+::: version-added: 1.12.29
+
+Whether to consider the bus stop as a station that is used in the metro system.
+
+### monorail_busstop
+::: version-added: 1.12.29
+
+Whether to consider the bus stop as a station that is used in the monorail system.
 
 ::: attribute-list-end
 
@@ -733,6 +748,8 @@ Used to mark a car draft as a swat car.
 
 ## Feature tags
 
+These are tags that are only supported by feature drafts.
+
 ### consumable
 
 ```json
@@ -810,66 +827,39 @@ These are tags that are only supported by train car drafts.
 ::: attribute-list-start
 
 ### short_distance_passenger_train
-
 ::: version-added: 1.12.28
 
-```json
-{
-  "meta": {
-    "tags": {
-      "short_distance_passenger_train": {}
-    }
-  }
-}
-```
+Identifies the train car as a short distance passenger train.
 
 ### long_distance_passenger_train
-
 ::: version-added: 1.12.28
 
-```json
-{
-  "meta": {
-    "tags": {
-      "long_distance_passenger_train": {}
-    }
-  }
-}
-```
+Identifies the train car as a long distance passenger train.
 
 ### freight_train
-
 ::: version-added: 1.12.28
 
-```json
-{
-  "meta": {
-    "tags": {
-      "freight_train": {}
-    }
-  }
-}
-```
+Identifies the train car as a freight train.
 
 ### heavy_freight_train
-
 ::: version-added: 1.12.28
 
-```json
-{
-  "meta": {
-    "tags": {
-      "heavy_freight_train": {}
-    }
-  }
-}
-```
+Identifies the train car as a heavy freight train.
 
 ### metro_train
 ::: version-added: 1.12.28
 
+Identifies the train car as a metro train.
+
 ### elevated_train
 ::: version-added: 1.12.28
+
+Identifies the train car as an elevated train.
+
+### monorail_train
+::: version-added: 1.12.29
+
+Identifies the train car as an monorail train.
 
 ::: attribute-list-end
 
