@@ -107,52 +107,41 @@ Used to prebuild rails and metro lines for elevated trains and metro.
 ### elevated_train_platform
 ::: version-added: 1.12.28
 
+Whether to consider the building as an elevated train platform.
+
 ### elevated_train_station
 ::: version-added: 1.12.28
+
+Whether to consider the building as an elevated train station.
 
 ### bus_platform
 ::: version-added: 1.12.28
 
+Whether to consider the building as a bus platform.
+
 ### bus_station
 ::: version-added: 1.12.28
 
-Whether a building is considered as a station that can spawn buses in the new bus system.
+Whether to consider the building as bus station in the new bus system.
 
 ### bus depot
 
-Whether a building is considered a bus depot for the idle game (old bus system).
-
-```json
-{
-  "meta": {
-    "tags": {
-      "bus depot": {}
-    }
-  }
-}
-```
+Whether to consider the building as bus depot for the idle game (old bus system).
 
 ### bus_depot
 ::: version-added: 1.12.28
 
 Whether a building is considered a bus depot in the new bus system.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "bus_depot": {}
-    }
-  }
-}
-```
-
 ### monorail_station
 ::: version-added: 1.12.29
+
+Whether to consider the building as a monorail station.
 
 ### monorail_platform
 ::: version-added: 1.12.29
 
+Whether to consider the building as a monorail platform.
 
 ### decorator
 
@@ -172,216 +161,87 @@ Whether a building is considered a bus depot in the new bus system.
 
 Whether to consider this building as a replacement for destroyed buildings. If no such drafts are defined, `$destroyedtile` will be used instead.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed building": {}
-    }
-  }
-}
-```
-
 ### destroyed building radioactive
 
 Whether to consider this building as a replacement for radioactive destroyed buildings. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed building radioactive": {}
-    }
-  }
-}
-```
 
 ### destroyed tree
 
 Whether to consider this building as a replacement for destroyed trees. If no such drafts are defined, `$destroyedtile` will be used instead.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed tree": {}
-    }
-  }
-}
-```
-
 ### destroyed tree radioactive
 
 Whether to consider this building as a replacement for radioactive destroyed trees. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed tree radioactive": {}
-    }
-  }
-}
-```
 
 ### destroyed road
 
 Whether to consider this building as a replacement for destroyed roads. If no such drafts are defined, `$destroyedtile` will be used instead.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed road": {}
-    }
-  }
-}
-```
-
 ### destroyed road radioactive
 
 Whether to consider this building as a replacement for radioactive destroyed roads. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed road radioactive": {}
-    }
-  }
-}
-```
 
 ### destroyed plain
 
 Whether to consider this building as a replacement for destroyed wires, rail and fences. If no such drafts are defined, `$destroyedtile` will be used instead.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed plain": {}
-    }
-  }
-}
-```
-
 ### destroyed plain radioactive
 
 Whether to consider this building as a replacement for radioactive destroyed wires, rail and fences. If no such drafts are defined, `$destroyedtileradioactive00` will be used instead.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "destroyed plain radioactive": {}
-    }
-  }
-}
-```
-
 ### dsa rocket supplier
 
-Whether the building is considered a rocket supplier and should spawn supply trucks for the launchpad.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "dsa rocket supplier": {}
-    }
-  }
-}
-```
+Whether the building is considered a rocket supplier and should spawn supply trucks for the DSA launchpad.
 
 ### farm field
 
-```json
-{
-  "meta": {
-    "tags": {
-      "farm field": {}
-    }
-  }
-}
-```
-
 ### metro
-
-Whether to consider the building as a metro station. This will the rendering in the UI.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "metro": {}
-    }
-  }
-}
-```
+Whether to consider the building as a metro station. This will affect the rendering in the UI.
 
 ### metro_platform
 ::: version-added: 1.12.28
+
+Whether to consider the building as a metro platform.
 
 ### metro_station
 ::: version-added: 1.12.28
 
 Whether to consider the building as a metro station.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "metro_station": {}
-    }
-  }
-}
-```
-
 ### metro_depot
 ::: version-added: 1.12.28
 
 Whether to consider the building as a metro depot where metro cars are dispatched from.
 
-```json
-{
-  "meta": {
-    "tags": {
-      "metro_depot": {}
-    }
-  }
-}
-```
-
 ### freight_train_station
 ::: version-added: 1.12.28
+
+Whether to consider the building as a freight train station.
 
 ### heavy_freight_train_station
 ::: version-added: 1.12.28
 
+Whether to consider the building as a heavy freight train station.
+
 ### short_distance_passenger_train_station
 ::: version-added: 1.12.28
+
+Whether to consider the building as a short distance passenger train station.
 
 ### long_distance_passenger_train_station
 ::: version-added: 1.12.28
 
+Whether to consider the building as a long distance passenger train station.
+
 ### passenger_train_platform
 ::: version-added: 1.12.28
+
+Whether to consider the building as a passenger train platform.
 
 ### freight_train_platform
 ::: version-added: 1.12.28
 
 Whether to consider the building as a freight train platform.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "freight_train_platform": {}
-    }
-  }
-}
-```
 
 ### policehelicopter
 
@@ -480,269 +340,80 @@ These are tags that are only supported by car drafts.
 
 ### airport taxi
 
-```json
-{
-  "meta": {
-    "tags": {
-      "airport taxi": {}
-    }
-  }
-}
-```
+Identifies the car as an airport taxi car.
 
 ### carres0
 
-Used to mark a car draft as a level 1 residential car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carres0": {}
-    }
-  }
-}
-```
+Identifies the car as a level 1 residential car.
 
 ### carres1
 
-Used to mark a car draft as a level 2 residential car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carres1": {}
-    }
-  }
-}
-```
+Identifies the car as a level 2 residential car.
 
 ### carres2
 
-Used to mark a car draft as a level 3 residential car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carres2": {}
-    }
-  }
-}
-```
+Identifies the car as a level 3 residential car.
 
 ### carcom0
 
-Used to mark a car draft as a level 1 commercial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carcom0": {}
-    }
-  }
-}
-```
+Identifies the car as a level 1 commercial car.
 
 ### carcom1
 
-Used to mark a car draft as a level 2 commercial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carcom1": {}
-    }
-  }
-}
-```
+Identifies the car as a level 2 commercial car.
 
 ### carcom2
 
-Used to mark a car draft as a level 3 commercial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carcom2": {}
-    }
-  }
-}
-```
+Identifies the car as a level 3 commercial car.
 
 ### carind0
 
-Used to mark a car draft as a level 1 industrial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carind0": {}
-    }
-  }
-}
-```
+Identifies the car as a level 1 industrial car.
 
 ### carind1
 
-Used to mark a car draft as a level 2 industrial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carind1": {}
-    }
-  }
-}
-```
+Identifies the car as a level 2 industrial car.
 
 ### carind2
 
-Used to mark a car draft as a level 3 industrial car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "carind2": {}
-    }
-  }
-}
-```
+Identifies the car as a level 3 industrial car.
 
 ### car hearse
 
-Used to mark a car draft as a hearse car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "car hearse": {}
-    }
-  }
-}
-```
+Identifies the car as a hearse car.
 
 ### fire brigade
 
-Used to mark a car draft as a fire brigade car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "fire brigade": {}
-    }
-  }
-}
-```
+Identifies the car as a fire brigade car.
 
 ### garbage
 
-Used to mark a car draft as a garbage truck.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "garbage": {}
-    }
-  }
-}
-```
+Identifies the car as a garbage truck car.
 
 ### idle bus
 
-Whether the bus is a bus that can be used in the idle game (old bus system).
-
-```json
-{
-  "meta": {
-    "tags": {
-      "idle bus": {}
-    }
-  }
-}
-```
+Identifies the car as a bus car that can be used in the idle game (old bus system).
 
 ### ts_normal_bus
 ::: version-added: 1.12.28
 
-Whether to consider the vehicle as a bus that is used in the new bus system.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "ts_normal_bus": {}
-    }
-  }
-}
-```
+Identifies the car as a bus car that is used in the new bus system.
 
 ### medic
 
-Used to mark a car draft as a medic car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "medic": {}
-    }
-  }
-}
-```
+Identifies the car as a medic car.
 
 ### military truck
 
-Used to mark a car draft as a military truck.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "military truck": {}
-    }
-  }
-}
-```
+Identifies the car as a military truck car.
 
 ### police
 
-Used to mark a car draft as a police car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "police": {}
-    }
-  }
-}
-```
+Identifies the car as a police car.
 
 ### swat
 
-Used to mark a car draft as a swat car.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "swat": {}
-    }
-  }
-}
-```
-
+Identifies the car as a swat car.
 
 ::: attribute-list-end
 
@@ -806,18 +477,6 @@ These are tags that are only supported by road decoration drafts.
 ### car accident
 
 Whether the road decoration is considered to be a car accident.
-
-```json
-{
-  "meta": {
-    "tags": {
-      "car accident": {}
-    }
-  }
-}
-```
-
-
 
 
 ## Train car tags
