@@ -305,10 +305,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             Produced amount of energy by this building in kWh. Positive values produce and negative values consume the resource.
 
-            Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+            The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
 
-            **By default**, the value will be inferred from building size.
-            """
+            **By default**, the value will be inferred from building size and height.
+            """,
+            changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
         )
         self.water: Attribute = Attribute(
             "water",
@@ -316,10 +317,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             Produced amount of water by this building in L/h. Positive values produce and negative values consume the resource.
 
-            Maximum possible value is determined by $\text{width} \times \text{height} \times 10000$, unless you're using privileges.
+            The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
             
-            **By default**, the value will be inferred from building size.
-            """
+            **By default**, the value will be inferred from building size and height.
+            """,
+            changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
         )
         self.capacity: Attribute = Attribute(
             "capacity",
@@ -897,8 +899,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             Number of workers in the building.
 
+            The max value will be limited based on building size. Privileged drafts may circumvent this value cap.
+
             **By default**, the value will be inferred from building size.
-            """
+            """,
+            changes=[AttributeChange(ChangeType.CHANGED, "1.12.28", "Add a limit for unprivileged drafts.")]
         )
         self.people: Attribute = Attribute(
             "people",
@@ -906,7 +911,10 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             **Only supported by RCI type drafts.**
             Unified type that specifies [habitants](#habitants) or [workers](#workers) depending on the RCI type.
-            """
+
+            The max value will be limited based on building size. Privileged drafts may circumvent this value cap.
+            """,
+            changes=[AttributeChange(ChangeType.CHANGED, "1.12.28", "Add a limit for unprivileged drafts.")]
         )
         self.autoBuild: Attribute = Attribute(
             "auto build",

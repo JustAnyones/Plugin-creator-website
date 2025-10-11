@@ -10,25 +10,149 @@ class CustomEnum(enum.Enum):
         return copy.copy(self.value)
 
 class Aspect(CustomEnum):
-    EDUCATION_LOW = Attribute("education low", "integer", "The student capacity of a school.")
-    EDUCATION_HIGH = Attribute("education high", "integer", "The student capacity of a high school.")
-    HEALTH_CARE = Attribute("health care", "integer", "The patient capacity of a hospital.")
+    EDUCATION_LOW = Attribute(
+        "education low", "integer",
+        description="""
+        The student capacity of a school.
+
+        Privileged drafts may set it for drafts other than education.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    EDUCATION_HIGH = Attribute(
+        "education high", "integer",
+        description="""
+        The student capacity of a high school.
+
+        Privileged drafts may set it for drafts other than education.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    HEALTH_CARE = Attribute(
+        "health care", "integer",
+        description="""
+        The patient capacity of a hospital.
+
+        Privileged drafts may set it for drafts other than medic.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
     WASTE_DISPOSAL = Attribute("waste disposal", "integer", "The garbage capacity of a garbage processing facility.")
     BODY_DISPOSAL = Attribute("body disposal", "integer", "The body capacity of a deceased processing facility.")
 
 class Influence(CustomEnum):
     POLLUTION = Attribute("influence pollution", "integer")
     NOISE = Attribute("influence noise", "integer")
-    HEALTH = Attribute("influence health", "integer")
-    POLICE = Attribute("influence police", "integer")
-    FIRE_DEPARTMENT = Attribute("influence fire department", "integer")
-    PARK = Attribute("influence park", "integer")
-    SPORT = Attribute("influence sport", "integer")
-    EDUCATION_LOW = Attribute("influence education low", "integer")
-    EDUCATION_HIGH = Attribute("influence education high", "integer")
-    CULTURE = Attribute("influence culture", "integer")
-    MANAGEMENT = Attribute("influence management", "integer")
-    RELIGION = Attribute("influence religion", "integer")
+    HEALTH = Attribute(
+        "influence health", "integer",
+        description="""
+        The health influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than medic.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    POLICE = Attribute(
+        "influence police", "integer",
+        description="""
+        The police influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than police or swat.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    FIRE_DEPARTMENT = Attribute(
+        "influence fire department", "integer",
+        description="""
+        The fire department influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than fire department.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    PARK = Attribute(
+        "influence park", "integer",
+        description="""
+        The park influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than park.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    SPORT = Attribute(
+        "influence sport", "integer",
+        description="""
+        The sport influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than sport.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    EDUCATION_LOW = Attribute(
+        "influence education low", "integer",
+        description="""
+        The education low influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than education.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    EDUCATION_HIGH = Attribute(
+        "influence education high", "integer",
+        description="""
+        The education high influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than education.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    CULTURE = Attribute(
+        "influence culture", "integer",
+        description="""
+        The culture influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than public, award, decoration and landmark.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    MANAGEMENT = Attribute(
+        "influence management", "integer",
+        description="""
+        The management influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than public, award and landmark.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    RELIGION = Attribute(
+        "influence religion", "integer",
+        description="""
+        The religion influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than religion, award and landmark.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
     PASSENGER_BUS = Attribute("influence passenger bus", "integer")
     PASSENGER_TRAIN = Attribute("influence passenger train", "integer")
     RESIDENTIAL = Attribute("influence residential", "integer")
@@ -39,9 +163,39 @@ class Influence(CustomEnum):
     LEVEL2 = Attribute("influence level2", "integer")
     DENSITY = Attribute("influence density", "integer")
     RADIOACTIVE = Attribute("influence radioactive", "integer")
-    NATURE = Attribute("influence nature", "integer")
-    WASTE_DISPOSAL = Attribute("influence waste disposal", "integer")
-    BODY_DISPOSAL = Attribute("influence body disposal", "integer")
+    NATURE = Attribute(
+        "influence nature", "integer",
+        description="""
+        The nature influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than park, award, decoration and landmark.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    WASTE_DISPOSAL = Attribute(
+        "influence waste disposal", "integer",
+        description="""
+        The waste disposal influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than waste disposal.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
+    BODY_DISPOSAL = Attribute(
+        "influence body disposal", "integer",
+        description="""
+        The body disposal influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than body disposal.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+    )
     TRAFFIC = Attribute("influence traffic", "integer")
 
 class CarFlag(CustomEnum):
