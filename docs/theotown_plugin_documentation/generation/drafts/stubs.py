@@ -127,7 +127,7 @@ class Influence(CustomEnum):
 
         The max value will be limited based on building size and monthly price.
 
-        Privileged drafts may circumvent influence value cap and set it for drafts other than public, award, decoration and landmark.
+        Privileged drafts may circumvent influence value cap and set it for drafts other than religion, public, award, decoration and landmark.
         """,
         changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
     )
