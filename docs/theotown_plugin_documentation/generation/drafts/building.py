@@ -307,6 +307,10 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
 
+            $$
+            \\text{actual value} = \\min(\\text{power}, \\min(10000 \\times \\text{area}, \\min(20 \\times \\text{monthly price, 10000000})))))
+            $$
+            
             **By default**, the value will be inferred from building size and height.
             """,
             changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
@@ -319,6 +323,10 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
             
+            $$
+            \\text{actual value} = \\min(\\text{water}, \\min(10000 \\times \\text{area}, \\min(200 \\times \\text{monthly price, 10000000})))))
+            $$
+
             **By default**, the value will be inferred from building size and height.
             """,
             changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
