@@ -11,8 +11,9 @@ If you're want to check the draft and attribute reference, see [here](draft-type
 
 
 This page is currently work-in-progress. In the future it will hold documentation for all draft types.
+You are welcome to contribute [here](https://github.com/JustAnyones/Plugin-creator-website/tree/master/docs).
 
-Work left to do:
+Some of the work left to do:
 
 - [ ] Link to the documentation from PCA starting page
 - [ ] Add links to specific attribute documentation from PCA

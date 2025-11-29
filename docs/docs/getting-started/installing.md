@@ -9,15 +9,15 @@ very simple. You would grab the plugin file and place it in the TheoTown plugins
 
 Depending on the platform, folder can be found at these directories:
 
-- Windows
+- Windows:
 
     `C:\Users\(insert username)\TheoTown\plugins` or `%USERPROFILE%\TheoTown\plugins`
 
-- Linux
+- Linux:
 
     `~/TheoTown/plugins`
 
-- MacOS
+- MacOS:
 
     `/user/TheoTown/plugins`
 
