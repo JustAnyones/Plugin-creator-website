@@ -55,6 +55,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -78,6 +79,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -101,6 +103,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -124,6 +127,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -147,6 +151,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -170,6 +175,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -193,6 +199,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -216,6 +223,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -239,6 +247,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -262,6 +271,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -285,6 +295,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -305,6 +316,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -333,6 +345,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -356,6 +369,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)
@@ -379,6 +393,7 @@ class Influence(CustomEnum):
         $$
 
         Where:
+
         - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
         - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
         - MAX_INFLUENCE_OFFSET = 100 (target is 0)

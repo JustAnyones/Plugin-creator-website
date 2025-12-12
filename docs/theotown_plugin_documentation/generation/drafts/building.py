@@ -312,6 +312,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             $$
 
             Where:
+
             - MAX_POWER_PER_AREA = 10000
             - MAX_POWER_PER_MONTHLY_PRICE = 200 (target is 20)
             - MAX_POWER_OFFSET = 10000 (target is 0)
@@ -338,6 +339,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             $$
 
             Where:
+
             - MAX_WATER_PER_AREA = 1000
             - MAX_WATER_PER_MONTHLY_PRICE = 200 (target is 20)
             - MAX_WATER_OFFSET = 1000 (target is 0)
@@ -754,6 +756,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             The build time of the building in days.
 
             The default build time is calculated as follows:
+
             $$
             \\text{default build time} = \\text{round} \\left((9 \\times \\text{build height} - 1 + R) \\times \\text{build time factor} \\right) \\
             \\text{where } R \\in \\{0, 1, 2\\}
@@ -994,12 +997,10 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             Defines the upgrades the building can have.
             
             Some additional notes:
-            - price, monthly price, water, power and influences will be
-            added to corresponding values of the building when the upgrade is applied
-            
+    
+            - Price, monthly price, water, power and influences will be added to corresponding values of the building when the upgrade is applied   
             - You can also provide animations as for regular buildings, but not smoke
             - You can set "only one":true in an upgrade to state that no other upgrade may be active at the same time.
-                We use this for example for the radio station were you can have selected only one program at the same time.
             """
         )
         self.influencePreview: Attribute = Attribute(
