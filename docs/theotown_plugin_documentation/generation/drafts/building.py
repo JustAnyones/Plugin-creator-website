@@ -308,12 +308,22 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
 
             $$
-            \\text{actual value} = \\min(\\text{power}, \\min(10000 \\times \\text{area}, \\min(20 \\times \\text{monthly price, 10000000})))))
+            \\text{actual value} = \\min(\\text{MAX_POWER_PER_AREA} \\times \\text{area}, \\min(\\text{MAX_POWER_PER_MONTHLY_PRICE} \\times \\text{monthly price} + \\text{MAX_POWER_OFFSET}, \\text{MAX_POWER}))
             $$
+
+            Where:
+            - MAX_POWER_PER_AREA = 10000
+            - MAX_POWER_PER_MONTHLY_PRICE = 200 (target is 20)
+            - MAX_POWER_OFFSET = 10000 (target is 0)
+            - MAX_POWER = 10000000
             
             **By default**, the value will be inferred from building size and height.
             """,
-            changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
+            changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts."),
+                AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts."),
+                AttributeChange(ChangeType.CHANGED, "1.12.32", "Relaxed limits for unprivileged drafts.")
+            ]
         )
         self.water: Attribute = Attribute(
             "water",
@@ -324,12 +334,22 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             The max value will be limited based on building size and monthly price. Privileged drafts may circumvent this value cap.
             
             $$
-            \\text{actual value} = \\min(\\text{water}, \\min(10000 \\times \\text{area}, \\min(200 \\times \\text{monthly price, 10000000})))))
+            \\text{actual value} = \\min(\\text{MAX_WATER_PER_AREA} \\times \\text{area}, \\min(\\text{MAX_WATER_PER_MONTHLY_PRICE} \\times \\text{monthly price} + \\text{MAX_WATER_OFFSET}, \\text{MAX_WATER}))
             $$
+
+            Where:
+            - MAX_WATER_PER_AREA = 1000
+            - MAX_WATER_PER_MONTHLY_PRICE = 200 (target is 20)
+            - MAX_WATER_OFFSET = 1000 (target is 0)
+            - MAX_WATER = 10000000
 
             **By default**, the value will be inferred from building size and height.
             """,
-            changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts.")]
+            changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.30", "Add a limit for unprivileged drafts."),
+                AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts."),
+                AttributeChange(ChangeType.CHANGED, "1.12.32", "Relaxed limits for unprivileged drafts.")
+            ]
         )
         self.capacity: Attribute = Attribute(
             "capacity",
@@ -732,7 +752,20 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             "integer",
             """
             The build time of the building in days.
-            """
+
+            The default build time is calculated as follows:
+            $$
+            \\text{default build time} = \\text{round} \\left((9 \\times \\text{build height} - 1 + R) \\times \\text{build time factor} \\right) \\
+            \\text{where } R \\in \\{0, 1, 2\\}
+            $$
+
+            For RCI, this value is further multiplied by 2/3.
+
+            The max value will be limited based on default build time. Privileged drafts may circumvent this value cap.
+            """,
+            changes=[
+                AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")
+            ]
         )
         self.buildTimeFactor: Attribute = Attribute(
             "build time factor",

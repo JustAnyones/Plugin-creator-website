@@ -51,12 +51,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than medic.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     POLICE = Attribute(
         "influence police", "integer",
@@ -66,12 +74,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than police or swat.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     FIRE_DEPARTMENT = Attribute(
         "influence fire department", "integer",
@@ -81,12 +97,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than fire department.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     PARK = Attribute(
         "influence park", "integer",
@@ -96,12 +120,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than park.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     SPORT = Attribute(
         "influence sport", "integer",
@@ -111,12 +143,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than sport.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     EDUCATION_LOW = Attribute(
         "influence education low", "integer",
@@ -126,12 +166,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than education.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     EDUCATION_HIGH = Attribute(
         "influence education high", "integer",
@@ -141,12 +189,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than education.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     CULTURE = Attribute(
         "influence culture", "integer",
@@ -156,14 +212,19 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than religion, public, park, award, decoration and landmark.
         """,
         changes=[
             AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
-            AttributeChange(ChangeType.CHANGED, "1.12.31", "Allow park drafts to have culture influence.")
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relax limits, allow park drafts to have culture influence.")
         ]
     )
     MANAGEMENT = Attribute(
@@ -174,12 +235,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than public, award and landmark.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     RELIGION = Attribute(
         "influence religion", "integer",
@@ -189,15 +258,61 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than religion, award and landmark.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
-    PASSENGER_BUS = Attribute("influence passenger bus", "integer")
-    PASSENGER_TRAIN = Attribute("influence passenger train", "integer")
+    PASSENGER_BUS = Attribute(
+        "influence passenger bus", "integer",
+        description="""
+        The passenger bus influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        $$
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
+        $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than decoration, bus depot, railway station and other.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.31", "Restrictions for unprivileged drafts.")]
+    )
+    PASSENGER_TRAIN = Attribute(
+        "influence passenger train", "integer",
+        description="""
+        The passenger train influence of a building.
+
+        The max value will be limited based on building size and monthly price.
+
+        $$
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
+        $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
+
+        Privileged drafts may circumvent influence value cap and set it for drafts other than decoration, bus depot, railway station and other.
+        """,
+        changes=[AttributeChange(ChangeType.CHANGED, "1.12.31", "Restrictions for unprivileged drafts.")]
+    )
     RESIDENTIAL = Attribute("influence residential", "integer")
     COMMERCIAL = Attribute("influence commercial", "integer")
     INDUSTRIAL = Attribute("influence industrial", "integer")
@@ -214,12 +329,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than park, award, decoration and landmark.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     WASTE_DISPOSAL = Attribute(
         "influence waste disposal", "integer",
@@ -229,12 +352,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than waste disposal.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     BODY_DISPOSAL = Attribute(
         "influence body disposal", "integer",
@@ -244,12 +375,20 @@ class Influence(CustomEnum):
         The max value will be limited based on building size and monthly price.
 
         $$
-        \\text{max value} = \\min(10 \\times \\frac{\\min(\\text{monthly price}, 10000)}{\\text{area}}, 100)
+        \\text{max value} = \\min(\\text{MAX_INFLUENCE_PER_MONTHLY_PRICE} \\times \\frac{\\min(\\text{monthly price}, 100000)}{\\text{area} + \\text{MAX_INFLUENCE_OFFSET}}, \\text{MAX_INFLUENCE_PER_TILE})
         $$
+
+        Where:
+        - MAX_INFLUENCE_PER_MONTHLY_PRICE = 10
+        - MAX_INFLUENCE_PER_TILE = 10000 (target is 100)
+        - MAX_INFLUENCE_OFFSET = 100 (target is 0)
 
         Privileged drafts may circumvent influence value cap and set it for drafts other than body disposal.
         """,
-        changes=[AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")]
+        changes=[
+            AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts."),
+            AttributeChange(ChangeType.CHANGED, "1.12.31", "Relaxed limits for unprivileged drafts.")
+        ]
     )
     TRAFFIC = Attribute("influence traffic", "integer")
 
