@@ -408,7 +408,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
             """
             Whether the building can be set on fire.
 
-            By default will inherit the value of the [destroyable](#destroyable) attribute.
+            **By default**, the value will be inherited from [destroyable](#destroyable) attribute.
             """
         )
         self.useFireFrames: Attribute = Attribute(
@@ -764,7 +764,7 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
 
             For RCI, this value is further multiplied by 2/3.
 
-            The max value will be limited based on default build time. Privileged drafts may circumvent this value cap.
+            The max value will be limited based on half the default build time. Privileged drafts may circumvent this value cap.
             """,
             changes=[
                 AttributeChange(ChangeType.CHANGED, "1.12.30", "Restrictions for unprivileged drafts.")
@@ -773,6 +773,11 @@ class BuildingDraft(BuildingBasedDraft, SpawnableDraft):
         self.buildTimeFactor: Attribute = Attribute(
             "build time factor",
             "float",
+            """
+            Factor by which the default build time is multiplied by.
+
+            **By default**, the value will be 1.
+            """
         )
         self.freeBuildTimeSkip: Attribute = Attribute(
             "free build time skip",
