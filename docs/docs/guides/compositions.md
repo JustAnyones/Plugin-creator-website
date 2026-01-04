@@ -31,7 +31,69 @@ Basic structure (here for the train station as an example):
 
 To understand how it's built up let's try to make a composition of the following:
 
-![](../assets/guides/compositions/draft.png)
+<script type="text/tikz">
+\usetikzlibrary{arrows.meta, positioning}
+\definecolor{customBlue}{HTML}{00BFFF} % Deep Sky Blue % can't just use cyan
+\begin{document}
+\begin{tikzpicture}[
+  % Isometric projection
+  x={(0.866cm, -0.5cm)}, 
+  y={(0.866cm, 0.5cm)}, 
+  z={(0cm, 1cm)},
+  font=\sffamily\small
+]
+  % THE GRID (4x2)
+  \draw[thick] (0,0,0) -- (4,0,0) -- (4,2,0) -- (0,2,0) -- cycle;
+  \foreach \x in {1,2,3} \draw[gray!40] (\x,0,0) -- (\x,2,0);
+  \foreach \y in {1} \draw[gray!40] (0,\y,0) -- (4,\y,0);
+
+  % THE ROAD, just a dashed line
+  \draw[dashed, gray, thick] (0,0.5,0) -- (4,0.5,0);
+  
+  % THE CROSSWALK, more lines across the single tile
+  \begin{scope}[shift={(1,0,0)}]
+    \foreach \i in {0.1, 0.3, 0.5, 0.7, 0.9}
+      \draw[blue, thick] (0.2,\i,0) -- (0.8,\i,0);
+  \end{scope}
+
+  % THE AXES (draw it before the tree)
+  \draw[customBlue, thick, ->] (0,0,0) -- (5,0,0) node[right] {x};
+  \draw[customBlue, thick, ->] (0,0,0) -- (0,3,0) node[above] {y};
+  \node[customBlue, left=5pt] at (0,0,0) {O};
+
+  % THE PARK, draw a simple tree
+  \draw[green!60!black, ultra thick] (0.5, 1.5, 0) -- (0.5, 1.5, 0.4);
+  \fill[green!70!black] (0.5, 1.5, 0.4) circle (0.2);
+
+  % Road Label
+  \node (L_Road) at (3, -1, 0) {Road};
+  \draw[->] (L_Road) to (2.5, 0.2, 0);
+
+  % Crosswalk Label
+  \node (L_Cross) at (2, -0.8, 0) [blue] {Crosswalk};
+  \draw[->, blue] (L_Cross) to (1.5, 0.3, 0);
+
+  % Park Label
+  \node (L_Park) at (-1, 2, 0) [green!40!black] {Park};
+  \draw[->, green!40!black] (L_Park) to (0.35, 1.5, 0);
+
+  % Empty Tiles
+  \node (L_Empty) at (2, 3, 0) [orange] {Empty};
+  \draw[->, orange] (L_Empty) to (1.5, 1.5, 0);
+  \draw[->, orange] (L_Empty) to (2.5, 1.5, 0);
+  \draw[->, orange] (L_Empty) to (3.5, 1.5, 0);
+
+  % DIMENSIONS
+  % Width
+  \draw[red, thick, |<->|] (0, -1.5, 0) -- (4, -1.5, 0) 
+    node[midway, below, sloped] {width = 4};
+      
+  % Height
+  \draw[red, thick, |<->|] (5.5, 0, 0) -- (5.5, 2, 0) 
+    node[midway, below, sloped] {height = 2};
+\end{tikzpicture}
+\end{document}
+</script>
 
 So basically a road with a crossing on it and a park. The size of the building is 4x2. The basic structure of the building might look like:
 ```json
