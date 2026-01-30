@@ -1,5 +1,7 @@
 # Home
 
+!!! danger "No longer updated as of version 1.12.42"
+
 Welcome to the documentation page for TheoTown plugin system.
 
 Using plugins you can add your own buildings to the game without modifying the apk (don't do the latter one, we really don't like it).
