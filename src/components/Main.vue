@@ -280,6 +280,10 @@ window.onerror = function (msg, url, line, col, error) {
       <div class="generator-panel">
         <h2>Plugin Creator for TheoTown</h2>
 
+        <p class="maintenance-message">
+          As of 2026, this site is in maintenance mode and will not receive new features.
+        </p>
+        
         <div class="generator-header">
 
           <Collapsable title="Manifest">
@@ -395,7 +399,7 @@ window.onerror = function (msg, url, line, col, error) {
 
     <div class="footer">
       <a href="https://github.com/JustAnyones/Plugin-creator-website">
-        &copy; Plugin creator website {{version}} by JustAnyone 2025
+        &copy; Plugin creator website {{version}} by JustAnyone, 2026
       </a>
     </div>
   </div>
@@ -431,6 +435,17 @@ window.onerror = function (msg, url, line, col, error) {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+}
+
+.maintenance-message {
+  margin: 6px 0 14px;
+  color: #a15d00;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #fff4e5;
+  border: 1px solid #ffd7a1;
+  border-radius: 6px;
+  padding: 6px 10px;
 }
 
 .generator-header {
