@@ -35,6 +35,8 @@ Value of `null` will represent the building in which the car spawner is defined 
 
 An array of building and bus stop draft tags that should be targeted by spawned cars.
 
+::: attribute-list-end
+
 ## Example
 
 ```json
@@ -54,4 +56,3 @@ An array of building and bus stop draft tags that should be targeted by spawned 
 }]
 ```
 
-::: attribute-list-end
